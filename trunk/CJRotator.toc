@@ -1,0 +1,11 @@
+## Interface: 40100
+## Title: CJ Rotator
+## Author: CptJesus
+
+helpers.lua
+
+rotations\paladin.lua
+rotations\shaman.lua
+
+rotationTable.lua
+core.lua
