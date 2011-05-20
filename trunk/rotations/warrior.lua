@@ -102,6 +102,21 @@ function CJTitansRotation()
 		return;
 	end
 	
+	if CJCooldown("Colossus Smash") == 0 then
+		CastSpell("Colossus Smash");
+		return;
+	end
+	
+	if CJCooldown("Bloodthirst") == 0 then
+		CastSpell("Bloodthirst");
+		return;
+	end
+	
+	if CJCooldown("Raging Blow") == 0 then
+		CastSpell("Raging Blow");
+		return;
+	end
+	
 	if CJCooldown("Heroic Strike") == 0 then
 		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
 		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
@@ -111,16 +126,13 @@ function CJTitansRotation()
 		end
 	end
 	
-	if (CJHealthPercent("target") < 20 and select(CJ_BuffInfo("player","Executioner")) < 1.5) then
-		CastSpell("Execute");
-		return;
+	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
+		if select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
+			CastSpell("Execute");
+			return;
+		end
 	end
 	
-	if CJCooldown("Colossus Smash") == 0 then
-		CastSpell("Colossus Smash");
-		return;
-	end
-		
 	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
 		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
 			CastSpell("Execute");
@@ -128,19 +140,9 @@ function CJTitansRotation()
 		end
 	end
 	
-	if CJCooldown("Bloodthirst") == 0 then
-		CastSpell("Bloodthirst");
-		return;
-	end
-	
 	if not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
 	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
 		CastSpell("Berserker Rage");
-		return;
-	end
-	
-	if CJCooldown("Raging Blow") == 0 then
-		CastSpell("Raging Blow");
 		return;
 	end
 	
