@@ -17,6 +17,18 @@ function CJ_FuryWarSelectShout()
 	return;			
 end
 
+function CJ_WarriorCanUse(spell)
+	if cj_interruptmode then
+		if CJ_HasBuff("Battle Trance") then
+			return true;
+		else
+			return UnitPower("player") > (select(4,GetSpellInfo("Pummel")) + select(4,GetSpellInfo(spell))) then
+		end
+	else
+		return select(2,IsUsableSpell(spell)) == nil;
+	end
+end
+
 function CJSMFRotation()
 	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
@@ -28,7 +40,7 @@ function CJSMFRotation()
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 and CJ_WarriorCanUse("Whirlwind") then
 		CastSpell("Whirlwind");
 		return;
 	end
@@ -37,32 +49,32 @@ function CJSMFRotation()
 		return;
 	end
 	
-	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 then
+	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 and CJ_WarriorCanUse("Shattering Throw") then
 		CastShapeshiftForm("1");
 		CastSpell("Shattering Throw");
 		return;
 	end
 	
-	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) then
+	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) and CJ_WarriorCanUse("Execute") then
 		if (select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
 			CastSpell("Execute");
 			return;
 		end
 	end
 	
-	if CJCooldown("Colossus Smash") == 0 then
+	if CJCooldown("Colossus Smash") == 0 and CJ_WarriorCanUse("Colossus Smash") then
 		CastSpell("Colossus Smash");
 		return;
 	end
 	
-	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
+	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") and CJ_WarriorCanUse("Execute") then
 		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
 			CastSpell("Execute");
 			return;
 		end
 	end
 	
-	if CJCooldown("Bloodthirst") == 0 then
+	if CJCooldown("Bloodthirst") == 0 and CJ_WarriorCanUse("Bloodthirst") then
 		CastSpell("Bloodthirst");
 		return;
 	end
@@ -83,7 +95,7 @@ function CJSMFRotation()
 		return;
 	end
 	
-	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
+	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") and CJ_WarriorCanUse("Raging Blow") then
 		CastSpell("Raging Blow");
 		return;
 	end
@@ -104,7 +116,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 and CJ_WarriorCanUse("Whirlwind") then
 		CastSpell("Whirlwind");
 		return;
 	end
@@ -113,32 +125,32 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 then
+	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 and CJ_WarriorCanUse("Shattering Throw") then
 		CastShapeshiftForm("1");
 		CastSpell("Shattering Throw");
 		return;
 	end
 	
-	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) then
+	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) and CJ_WarriorCanUse("Execute") then
 		if (select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
 			CastSpell("Execute");
 			return;
 		end
 	end
 	
-	if CJCooldown("Colossus Smash") == 0 then
+	if CJCooldown("Colossus Smash") == 0 and CJ_WarriorCanUse("Colossus Smash") then
 		CastSpell("Colossus Smash");
 		return;
 	end
 	
-	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
+	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") and CJ_WarriorCanUse("Execute") then
 		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
 			CastSpell("Execute");
 			return;
 		end
 	end
 	
-	if CJCooldown("Bloodthirst") == 0 then
+	if CJCooldown("Bloodthirst") == 0 and CJ_WarriorCanUse("Bloodthirst") then
 		CastSpell("Bloodthirst");
 		return;
 	end
@@ -149,7 +161,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
+	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") and CJ_WarriorCanUse("Raging Blow") then
 		CastSpell("Raging Blow");
 		return;
 	end
@@ -193,9 +205,8 @@ function CJFuryWarRot()
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Cleave") == 0 then
+	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 then
 		CastSpell("Cleave")
-		return;
 	end
 	
 	if CJCooldown("Heroic Strike") == 0 then

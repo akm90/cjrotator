@@ -61,6 +61,11 @@ function CJEnhShamRot()
 		end
 		
 		if CJ_BuffInfo("player","Maelstrom Weapon") == 5 then
+			if CJHealthPercent("player") < 30 then
+				CastSpell("Greater Healing Wave");
+				return;
+			end
+			
 			if cj_aoemode and CJCooldown("Chain Lightning") == 0 then
 				CastSpell("Chain Lightning");
 				return;
