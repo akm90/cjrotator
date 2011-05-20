@@ -6,13 +6,11 @@
 
 function CJ_FuryWarSelectShout()
 	if not (CJCooldown("Battle Shout") == 0 or CJCooldown("Commanding Shout") == 0) then return end;
-	if (CJ_HasBuff("player","Power Word: Fortitude") or CJ_HasBuff("player","Blood Pact")) then
-		if not (CJ_HasBuff("player","Horn of Winter") or CJ_HasBuff("player","Roar of Courage") or CJ_HasBuff("player","Strength of Earth Totem")) then
-			CastSpell("Batle Shout");
-			return;
-		end	
-	else
+	if (CJ_HasBuff("player","Horn of Winter") or CJ_HasBuff("player","Strength of Earth Totem") or CJ_HasBuff("player","Roar of Courage")) then
 		CastSpell("Commanding Shout");
+		return;
+	else
+		CastSpell("Battle Shout");
 		return;
 	end
 	CastSpell("Battle Shout");
@@ -23,20 +21,7 @@ function CJTitansRotation()
 	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
 		return;
-	end
-	
-	if not IsSpellInRange("Heroic Strike") then
-		if CJCooldown("Intercept") == 0 then
-			CastSpell("Intercept");
-			return;
-		elseif CJCooldown("Heroic Fury") == 0 then
-			CastSpell("Heroic Fury");
-			CastSpell("Intercept");
-			return			
-		end
-		return;
-	end
-	
+	end	
 	
 	if GetShapeshiftForm() ~= 3 then
 		CastShapeshiftForm(3);
@@ -120,6 +105,18 @@ function CJFuryWarRot()
 	end
 
 	if AmIFacing == "false" then return end;
+	
+	if not IsSpellInRange("Heroic Strike") then
+		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") ~= 0 then
+			CastSpell("Intercept");
+			return;
+		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") then
+			CastSpell("Heroic Fury");
+			CastSpell("Intercept");
+			return			
+		end
+		return;
+	end
 	
 	if CJCooldown("Heroic Strike") == 0 then
 		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
