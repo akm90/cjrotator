@@ -5,7 +5,6 @@
 -----------------------------
 
 local function CJCheckDiscBuffs()
-	--Only doing Seal...letting players handle Blessing
 	if not CJ_HasBuff("player","Prayer of Fortitude") then
 		CastSpell("Prayer of Fortitude");
 		return true;
