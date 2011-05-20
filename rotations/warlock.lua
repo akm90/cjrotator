@@ -8,14 +8,18 @@ local function CJCheckAffBuffs()
 	--Cast Dark Intent yourself!
 	if not CJ_HasBuff("player","Fel Armor") then
 		CastSpell("Fel Armor");
-		return;
+		return true;
 	end
 	
 	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" then
 		CastSpell("Summon Felhunter");
-		return;
+		return true;
 	end
+	
+	return false;
 end
+
+
 local lastspell;
 local function CJAC(spell)
 	lastspell = spell;
