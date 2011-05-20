@@ -20,7 +20,7 @@ end
 
 function CJ_DebuffInfo(unit,debuff)
 	local name,_,_,count,_,_,expiration = UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER");
-	if not name then return false end
+	if not name then return 0 end
 	return count,(expiration - GetTime())
 end
 
