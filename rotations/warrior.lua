@@ -121,7 +121,7 @@ function CJTitansRotation()
 		return;
 	end
 		
-	if CJHealthPercent("target") < 20 then
+	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
 		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
 			CastSpell("Execute");
 			return;
