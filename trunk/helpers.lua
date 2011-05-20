@@ -14,14 +14,14 @@ function CJ_HasBuff(unit,buff)
 end
 
 function CJ_HasDebuff(unit,debuff)
-	local name = UnitDebuff(unit,debuff);
+	local name = UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER");
 	if not name then return false else return true end;
 end
 
 function CJ_DebuffInfo(unit,debuff)
-	local name,_,_,count,_,_,expiration,source,_,_,_ = UnitDebuff(unit,debuff);
+	local name,_,_,count,_,_,expiration = UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER");
 	if not name then return false end
-	if source == "player" then return count,(expiration - GetTime()) end		
+	return count,(expiration - GetTime())	
 end
 
 function CJHealthPercent(unit)

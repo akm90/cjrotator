@@ -88,7 +88,7 @@ function CJEnhShamRot()
 				CastSpell("Lava Lash");
 				return;
 			else
-				if CJ_DebuffInfo("target","Searing Flames") == 5 or select(2,GetTotemInfo(1)) == "Fire Elemental Totem"  then
+				if CJ_DebuffInfo("target","Searing Flames") >= 2 or select(2,GetTotemInfo(1)) == "Fire Elemental Totem"  then
 					CastSpell("Lava Lash");
 					return;
 				end

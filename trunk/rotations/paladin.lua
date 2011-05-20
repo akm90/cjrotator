@@ -63,7 +63,7 @@ function CJRetPallyRot()
 		--Check for the Undead/Demon rotation first
 		if not ud then
 			if (CJHolyPower() == 3 or CJ_HasBuff("player","Divine Purpose")) and 
-			(not CJ_BuffInfo("player","Inquisition") or select(2,CJ_BuffInfo("player","Inquisition") < 3)) then
+			(not CJ_BuffInfo("player","Inquisition") or select(2,CJ_BuffInfo("player","Inquisition") < 7)) then
 				CastSpell("Inquisition");
 				return;
 			end
