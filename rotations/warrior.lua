@@ -7,10 +7,10 @@
 function CJ_FuryWarSelectShout()
 	if not (CJCooldown("Battle Shout") == 0 or CJCooldown("Commanding Shout") == 0) then return end;
 	if (CJ_HasBuff("player","Power Word: Fortitude") or CJ_HasBuff("player","Blood Pact")) then
-		if not (CJ_HasBuff("player","Horn of Winter") or CJ_HasBuff("player","Roar of Courage") 
-		or CJ_HasBuff("player","Strength of Earth Totem")) then
-		CastSpell("Batle Shout");
-		return;
+		if not (CJ_HasBuff("player","Horn of Winter") or CJ_HasBuff("player","Roar of Courage") or CJ_HasBuff("player","Strength of Earth Totem")) then
+			CastSpell("Batle Shout");
+			return;
+		end	
 	else
 		CastSpell("Commanding Shout");
 		return;
