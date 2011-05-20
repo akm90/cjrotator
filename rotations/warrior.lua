@@ -19,8 +19,85 @@ function CJ_FuryWarSelectShout()
 	return;			
 end
 
+function CJTitansRotation()
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return;
+	end
+	
+	if not IsSpellInRange("Heroic Strike") then return end;
+	
+	if cj_aoemode and CJCooldown("Cleave") == 0 then
+		CastSpell("Cleave")
+		return;
+	end
+	
+	if cj_aoemoed and CJCooldown("Whirlwind") == 0 then
+		CastSpell("Whirlwind");
+		return;
+	end
+	
+	if CJCooldown("Heroic Strike") == 0 then
+		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
+		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
+		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20)) then
+			CastSpell("Heroic Strike");
+			return;
+		end
+	end
+	
+	if (CJHealthPercent("target") < 20 and select(CJ_BuffInfo("player","Executioner")) < 1.5) then
+		CastSpell("Execute");
+		return;
+	end
+	
+	if CJCooldown("Colossus Smash") == 0 then
+		CastSpell("Colossus Smash");
+		return;
+	end
+	
+	if not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
+	and UnitPower("player") > 15 and CJCooldown("Raging Blow")) < 1 then
+		CastSpell("Berserker Rage");
+		return;
+	end
+	
+	if CJCooldown("Raging Blow") == 0 then
+		CastSpell("Raging Blow");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Incite") then
+		CastSpell("Slam");
+		return;
+	end
+	
+	if CJHealthPercent("target") < 20 and UnitPower("player") >= 50 then
+		CastSpell("Execute");
+		return;
+	end
+	
+	if UnitPower("player") < 70 then
+		CJ_FuryWarSelectShout();
+	end
+end
+
 function CJFuryWarRot()
+	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Rebuke",thing) and AmIFacing == "true" then
+				CastSpellByName("Rebuke",thing);
+			end
+		end
+	end
+
 	if not CJ_GCD() then return end; -- Check for GCD
-	if CJ_FuryWarSelectShout() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
+	
+	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
+		CJTitansRotation();
+	else
+		CJSMFRotation();
+	end
 end
