@@ -19,6 +19,49 @@ function CJ_FuryWarSelectShout()
 	return;			
 end
 
+function CJSMFRotation()
+	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
+		CJ_FuryWarSelectShout();
+		return;
+	end
+	
+	if not IsSpellInRange("Heroic Strike") then
+		if CJCooldown("Intercept") == 0 then
+			CastSpell("Intercept");
+			return;
+		elseif CJCooldown("Heroic Fury") == 0 then
+			CastSpell("Heroic Fury");
+			CastSpell("Intercept");
+			return			
+		end
+		return;
+	end
+	
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return;
+	end
+	
+	if cj_aoemode and CJCooldown("Cleave") == 0 then
+		CastSpell("Cleave")
+		return;
+	end
+	
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
+		CastSpell("Whirlwind");
+		return;
+	end
+	
+	if CJCooldown("Heroic Strike") == 0 then
+		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
+		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
+		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20))) then
+			CastSpell("Heroic Strike");
+			return;
+		end
+	end
+end
+
 function CJTitansRotation()
 	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
@@ -53,7 +96,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if not cj_aoemode and CJ_DetectHero and CJCooldown("Shattering Throw") == 0 then
+	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 then
 		CastSpell("Shattering Throw");
 		return;
 	end
