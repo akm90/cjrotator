@@ -15,17 +15,37 @@ function CJ_FuryWarSelectShout()
 		CastSpell("Commanding Shout");
 		return;
 	end
-	CastSpell("Commanding Shout");
+	CastSpell("Battle Shout");
 	return;			
 end
 
 function CJTitansRotation()
+	
+	
+	if not CJ_HasBuff("player","Battle Shout") or not CJ_HasBuff("player","Commanding Shout") then
+		CJ_FuryWarSelectShout();
+		return;
+	end
+	
+	if not IsSpellInRange("Heroic Strike") then
+		if CJCooldown("Intercept") == 0 then
+			CastSpell("Intercept");
+			return;
+		else
+			if CJCooldown("Charge") == 0 then
+				CastShapeshiftForm(1);
+				CastSpell("Charge");
+				return;
+			end
+		end
+		return;
+	end
+	
+	
 	if GetShapeshiftForm() ~= 3 then
 		CastShapeshiftForm(3);
 		return;
 	end
-	
-	if not IsSpellInRange("Heroic Strike") then return end;
 	
 	if cj_aoemode and CJCooldown("Cleave") == 0 then
 		CastSpell("Cleave")
@@ -34,6 +54,11 @@ function CJTitansRotation()
 	
 	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
 		CastSpell("Whirlwind");
+		return;
+	end
+	
+	if not cj_aoemode and CJ_DetectHero and CJCooldown("Shattering Throw") == 0 then
+		CastSpell("Shattering Throw");
 		return;
 	end
 	
@@ -57,7 +82,7 @@ function CJTitansRotation()
 	end
 	
 	if not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
-	and UnitPower("player") > 15 and CJCooldown("Raging Blow")) < 1 then
+	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
 		CastSpell("Berserker Rage");
 		return;
 	end

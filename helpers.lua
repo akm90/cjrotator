@@ -36,6 +36,14 @@ function CastSpell(spell)
 	CastSpellByName(spell);
 end
 
+function CJ_DetectHero()
+	if CJ_HasBuff("player","Heroism") or CJ_HasBuff("player","Time Warp") or CJ_HasBuff("player","Ancient Hysteria") then
+		return true;
+	else
+		return false;
+	end
+return
+
 function CJCooldown(spell)
 	local start,duration,enable = GetSpellCooldown(spell);
 	
