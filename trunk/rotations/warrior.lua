@@ -112,7 +112,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Raging Blow") == 0 then
+	if CJCooldown("Raging Blow") == 0 and IsSpellUsable("Raging Blow") then
 		CastSpell("Raging Blow");
 		return;
 	end
@@ -140,7 +140,7 @@ function CJTitansRotation()
 		end
 	end
 	
-	if not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
+	if CJCooldown("Berserker Rage") == 0 and not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
 	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
 		CastSpell("Berserker Rage");
 		return;
