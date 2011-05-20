@@ -21,7 +21,7 @@ end
 function CJ_DebuffInfo(unit,debuff)
 	local name,_,_,count,_,_,expiration = UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER");
 	if not name then return false end
-	return count,(expiration - GetTime())	
+	return count,(expiration - GetTime())
 end
 
 function CJHealthPercent(unit)
@@ -42,7 +42,7 @@ function CJ_DetectHero()
 	else
 		return false;
 	end
-return
+end
 
 function CJCooldown(spell)
 	local start,duration,enable = GetSpellCooldown(spell);
