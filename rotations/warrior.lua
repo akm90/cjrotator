@@ -98,6 +98,6 @@ function CJFuryWarRot()
 	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
 		CJTitansRotation();
 	else
-		CJSMFRotation();
+		--CJSMFRotation();
 	end
 end
