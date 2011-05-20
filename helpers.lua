@@ -266,7 +266,7 @@ function CJ_GCD()
 	elseif class == "Shaman" then
 		if GetSpellCooldown("Flametongue Weapon") == 0 then return true end;
 	elseif class == "Warlock" then
-		if GetSpellCooldown("Demon Skin") == 0 then return true end;
+		if GetSpellCooldown("Fel Armor") == 0 then return true end;
 	elseif class == "Warrior" then
 		if GetSpellCooldown("Slam") == 0 then return true end;
 	end
