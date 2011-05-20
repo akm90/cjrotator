@@ -120,10 +120,12 @@ function CJTitansRotation()
 		CastSpell("Colossus Smash");
 		return;
 	end
-	
-	if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
-		CastSpell("Execute");
-		return;
+		
+	if CJHealthPercent("target") < 20 then
+		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
+			CastSpell("Execute");
+			return;
+		end
 	end
 	
 	if CJCooldown("Bloodthirst") == 0 then
