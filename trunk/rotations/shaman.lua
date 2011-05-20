@@ -180,6 +180,7 @@ local function CJEleShamRot()
 		if CJ_CheckMyCast() then
 			if CJ_UpdateTotems() then return end;
 			if CJCooldown("Thunderstorm") == 0 then CastSpell("Thunderstorm"); return; end;
+			if not IsSpellInRange("Unleash Elements") then return end;
 			if CJCooldown("Unleash Elements") == 0 then CastSpell("Unleash Elements"); return; end;
 			if CJCooldown("Flame Shock") == 0 then
 			

@@ -36,6 +36,7 @@ local function CJArcMageRot()
 	if AmIFacing == "false" then return end;
 	
 	if GetUnitSpeed("player") > 0 then
+		if not IsSpellInRange("Arcane Barrage") then return end;
 		if CJCooldown("Arcane Barrage") == 0 then
 			CastSpell("Arcane Barrage");
 			return;
@@ -54,7 +55,7 @@ local function CJArcMageRot()
 	end
 	
 	if not CJ_CheckMyCast() then return end;
-	
+	if not IsSpellInRange("Arcane Blast") then return end;
 	if (GetItemCount("Mana Gem",false,false) == 0 and CJCooldown("Evocation") < 44 
 		and (CJ_IsBossMob() and CJHealthPercent("target") > 10)) then
 		CastSpell("Conjure Mana Gem");
