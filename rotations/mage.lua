@@ -108,7 +108,7 @@ function CJArcMageRot()
 		return
 	end
 	
-	if CJ_BuffInfo("player","Arcane Blast") < 4 then
+	if CJ_DebuffInfo("player","Arcane Blast") < 4 then
 		CastSpell("Arcane Blast");
 		return;
 	end
