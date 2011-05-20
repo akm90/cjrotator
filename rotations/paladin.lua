@@ -1,4 +1,9 @@
 --Paladin Rotations
+
+-------------------------------------------
+-----------Retribution---------------------
+-------------------------------------------
+
 local ud = false;
 local function CJCheckRetBuffs()
 	--Only doing Seal...letting players handle Blessing

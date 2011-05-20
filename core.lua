@@ -73,8 +73,8 @@ local function OnEvent(self,event)
 	if event ~= "PLAYER_REGEN_ENABLED" then
 		CJ_SelectSpec();
 	else
-		if action then
-			action = false;
+		if cj_action then
+			cj_action = false;
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
 		end
 	end
