@@ -21,6 +21,7 @@ local function CJCheckRetBuffs()
 	
 	return false;
 end
+
 local function CJHolyPower()
 	return UnitPower("player",9);
 end
