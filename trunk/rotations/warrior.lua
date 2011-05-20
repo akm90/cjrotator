@@ -146,7 +146,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJ_HasBuff("player","Incite") then
+	if CJ_HasBuff("player","Bloodsurge") then
 		CastSpell("Slam");
 		return;
 	end
