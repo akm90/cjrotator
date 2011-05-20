@@ -26,11 +26,11 @@ local function CJHolyPower()
 end
 
 function CJRetPallyRot()
-	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
+	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
-				CastSpellByName("Wind Shear",thing);
+			if IsSpellInRange("Rebuke",thing) and AmIFacing == "true" then
+				CastSpellByName("Rebuke",thing);
 			end
 		end
 	end
@@ -62,10 +62,15 @@ function CJRetPallyRot()
 		--We're in melee range, lets blow crap up!
 		--Check for the Undead/Demon rotation first
 		if not ud then
-			if (CJHolyPower() == 3 or CJ_HasBuff("player","Divine Purpose")) and 
-			(not CJ_BuffInfo("player","Inquisition") or select(2,CJ_BuffInfo("player","Inquisition") < 7)) then
-				CastSpell("Inquisition");
-				return;
+			if (CJHolyPower() == 3 or CJ_HasBuff("player","Divine Purpose")) then
+				if not CJ_HasBuff("player","Inquisition") then
+					CastSpell("Inquisition");
+					return
+				else
+					if select(2,CJ_BuffInfo("player","Inquisition")) < 7 then
+						CastSpell("Inquisition");
+					end
+				end
 			end
 			
 			if not cj_aoemode and CJCooldown("Crusader Strike") == 0 and CJHolyPower() < 3 then
@@ -130,9 +135,9 @@ function CJRetPallyRot()
 				CastSpell("Consecration");
 				return;
 			end
-		else
+		else			
 			if (CJHolyPower() == 3 or CJ_HasBuff("Divine Purpose")) and 
-			(not CJ_HasBuff("player","Inquisition") or select(2,CJ_BuffInfo("player","Inquisition") < 3)) then
+			(not CJ_HasBuff("player","Inquisition") or (select(2,CJ_BuffInfo("player","Inquisition") < 7))) then
 				CastSpell("Inquisition");
 				return;
 			end
