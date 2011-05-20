@@ -21,7 +21,7 @@ local function CJ_CheckArcaneBuffs()
 	return false;
 end
 
-local function CJArcMageRot()
+function CJArcMageRot()
 	if cj_interruptmode and CJCooldown("Counterspell") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
@@ -72,7 +72,7 @@ local function CJArcMageRot()
 		UseItemByName("Mana Gem");
 	end
 	
-	if CJCooldown("Mirror Image") == 0
+	if CJCooldown("Mirror Image") == 0 then
 		if CJ_HasBuff("player","Arcane Power") or (CJCooldown("Arcane Power") > 20 and CJ_IsBossMob() and CJHealthPercent("target") > 5) then
 			CastSpell("Mirror Image");
 		end

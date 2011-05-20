@@ -55,7 +55,7 @@ function CJCooldown(spell)
 end
 
 function CJ_CheckMyCast()
-	return (not UnitChannelInfo("player") and not UnitCastingInfo("player"));
+	if UnitChannelInfo("player") or UnitCastingInfo("player") then return false else return true end;
 end
 
 function CJ_Interrupt()
@@ -259,7 +259,7 @@ function CJ_GCD()
 	elseif class == "Priest" then
 		if GetSpellCooldown("Inner Will") == 0 then return true end;
 	elseif class == "Rogue" then
-		if GetSpellCooldown("Sinister Strike") then return true end;
+		if GetSpellCooldown("Sinister Strike") == 0 then return true end;
 	elseif class == "Shaman" then
 		if GetSpellCooldown("Flametongue Weapon") == 0 then return true end;
 	elseif class == "Warlock" then
@@ -267,6 +267,8 @@ function CJ_GCD()
 	elseif class == "Warrior" then
 		if GetSpellCooldown("Slam") == 0 then return true end;
 	end
+	
+	return false;
 end
 
 function printf(message)

@@ -5,11 +5,11 @@
 -----------------------------
 
 local function CJCheckDiscBuffs()
-	if not CJ_HasBuff("player","Prayer of Fortitude") then
-		CastSpell("Prayer of Fortitude");
+	if not CJ_HasBuff("player","Power Word: Fortitude") then
+		CastSpell("Power Word: Fortitude");
 		return true;
 	end
-
+	
 	if not CJ_HasBuff("player","Inner Fire") then
 		CastSpell("Inner Fire");
 		return true;
@@ -25,17 +25,16 @@ end
 
 function CJDiscPriestRot()
 	if not CJ_GCD() then return end; -- Check for GCD
-	if CJCheckDiscBuffs() then return end; -- Check our buffs
+	if CJCheckDiscBuffs() then return end; -- Check our buff
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
-	
 	if CJCooldown("Holy Fire") == 0 then
 		CastSpell("Holy Fire");
 		return;
 	end
 	
-	if (not CJ_HasDebuff("target","Shadow Word: Pain") or not CJ_HasDebuff("target","Devouring Plague")) and not CJ_HasDebuff("player","Weakened Soul") then
+	if (not CJ_HasDebuff("target","Shadow Word: Pain")) and not CJ_HasDebuff("player","Weakened Soul") then
 		CastSpell("Power Word: Shield");
 		return
 	end
@@ -43,11 +42,6 @@ function CJDiscPriestRot()
 	if CJ_HasBuff("player","Borrowed Time") then
 		if not CJ_HasDebuff("target","Shadow Word: Pain") then
 			CastSpell("Shadow Word: Pain");
-			return;
-		end
-		
-		if not CJ_HasDebuff("target","Devouring Plague") then
-			CastSpell("Devouring Plague");
 			return;
 		end
 	end
