@@ -28,8 +28,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Cleave") == 0 then
-		CastSpell("Cleave")
+	if CJ_Cooldown("Bloodthirst") < .3 then
 		return;
 	end
 	
@@ -115,6 +114,11 @@ function CJFuryWarRot()
 			CastSpell("Intercept");
 			return			
 		end
+		return;
+	end
+	
+	if cj_aoemode and CJCooldown("Cleave") == 0 then
+		CastSpell("Cleave")
 		return;
 	end
 	
