@@ -68,8 +68,10 @@ function CJArcMageRot()
 		end
 	end
 	
-	if CJManaPercent("player") < 70 and GetItemCooldown("Mana Gem") == 0 then
-		UseItemByName("Mana Gem");
+	if CJManaPercent("player") < 70 and GetItemCount("Mana Gem",false,false) ~= 0 then
+		if GetItemCooldown("Mana Gem") == 0 then
+			UseItemByName("Mana Gem");
+		end
 	end
 	
 	if CJCooldown("Mirror Image") == 0 then
