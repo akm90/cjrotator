@@ -136,10 +136,15 @@ function CJRetPallyRot()
 				return;
 			end
 		else			
-			if (CJHolyPower() == 3 or CJ_HasBuff("Divine Purpose")) and 
-			(not CJ_HasBuff("player","Inquisition") or (select(2,CJ_BuffInfo("player","Inquisition") < 7))) then
-				CastSpell("Inquisition");
-				return;
+			if (CJHolyPower() == 3 or CJ_HasBuff("player","Divine Purpose")) then
+				if not CJ_HasBuff("player","Inquisition") then
+					CastSpell("Inquisition");
+					return
+				else
+					if select(2,CJ_BuffInfo("player","Inquisition")) < 7 then
+						CastSpell("Inquisition");
+					end
+				end
 			end
 			
 			if not cj_aoemode and CJCooldown("Crusader Strike") == 0 and CJHolyPower() < 3 then
