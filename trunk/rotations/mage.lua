@@ -56,11 +56,12 @@ function CJArcMageRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	if not IsSpellInRange("Arcane Blast") then return end;
-	if (GetItemCount("Mana Gem",false,false) == 0 and CJCooldown("Evocation") < 44 
+	
+--[[	if (GetItemCount("Mana Gem",false,false) == 0 and CJCooldown("Evocation") < 44 
 		and (CJ_IsBossMob() and CJHealthPercent("target") > 10)) then
 		CastSpell("Conjure Mana Gem");
 		return;
-	end
+	end --]]
 	
 	if CJCooldown("Arcane Power") == 0 and CJ_IsBossMob() then
 		if CJHealthPercent("target") <= 12 then
@@ -68,9 +69,9 @@ function CJArcMageRot()
 		end
 	end
 	
-	if CJManaPercent("player") < 70 and GetItemCount("Mana Gem",false,false) ~= 0 then
-		if GetItemCooldown("Mana Gem") == 0 then
-			UseItemByName("Mana Gem");
+	if CJManaPercent("player") < 70 and GetItemCount(36799,false,true) > 0 then
+		if GetItemCooldown(36799) == 0 then
+			UseItemByName(36799);
 		end
 	end
 	
@@ -92,7 +93,7 @@ function CJArcMageRot()
 	end
 	
 	if (CJ_IsBossMob() and CJHealthPercent("target") < 20 and CJManaPercent("player") > 4) or 
-		(not CJ_IsBossMob("target") and CJHealthPercent("target") < 40) then
+		(not CJ_IsBossMob() and CJHealthPercent("target") < 40) then
 		CastSpell("Arcane Blast");
 		return;
 	end
