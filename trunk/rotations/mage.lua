@@ -4,7 +4,7 @@
 -----------Arcane--------------------------
 -------------------------------------------
 function CJ_IsBossMob()
-	return ((UnitLevel("target") >= 87 or UnitLevel("target") < 0) and (UnitClassification("target") == "worldboss" or UnitClassification("target") == "elite"));	
+	return (UnitClassification("target") == "worldboss");	
 end
 
 local function CJ_CheckArcaneBuffs()
@@ -15,6 +15,11 @@ local function CJ_CheckArcaneBuffs()
 	
 	if not CJ_HasBuff("player","Mage Armor") then
 		CastSpell("Mage Armor");
+		return true;
+	end
+	
+	if GetItemCount(36799,false,true) == 0 then
+		CastSpell("Conjure Mana Gem");
 		return true;
 	end
 	
@@ -57,12 +62,6 @@ function CJArcMageRot()
 	if not CJ_CheckMyCast() then return end;
 	if not IsSpellInRange("Arcane Blast") then return end;
 	
---[[	if (GetItemCount("Mana Gem",false,false) == 0 and CJCooldown("Evocation") < 44 
-		and (CJ_IsBossMob() and CJHealthPercent("target") > 10)) then
-		CastSpell("Conjure Mana Gem");
-		return;
-	end --]]
-	
 	if CJCooldown("Arcane Power") == 0 and CJ_IsBossMob() then
 		if CJHealthPercent("target") <= 12 then
 			CastSpell("Arcane Power");
@@ -98,7 +97,7 @@ function CJArcMageRot()
 		return;
 	end
 	
-	if CJCooldown("Evocation") < 40 and CJManaPercent("player") > 26 then
+	if CJCooldown("Evocation") < 40 and CJManaPercent("player") > 26 and CJ_IsBossMob() then
 		CastSpell("Arcane Blast");
 		return;
 	end
