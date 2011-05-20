@@ -103,7 +103,7 @@ function CJArcMageRot()
 		return;
 	end
 	
-	if CJManaPercent("player") <= 40 and (CJ_IsBossMob() and CJHealthPercent("target") > 10) and CJCooldown("Evocation") == 0 then
+	if CJManaPercent("player") <= 40 and CJCooldown("Evocation") == 0 then
 		CastSpell("Evocation");
 		return
 	end
