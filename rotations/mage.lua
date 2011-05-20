@@ -3,8 +3,8 @@
 -------------------------------------------
 -----------Arcane--------------------------
 -------------------------------------------
-local function CJ_IsBossMob()
-	return ((UnitLevel("target") >= 87 or UnitLevel("target") < 0) and UnitIsPlusMob("target"));	
+function CJ_IsBossMob()
+	return ((UnitLevel("target") >= 87 or UnitLevel("target") < 0) and (UnitClassification("target") == "worldboss" or UnitClassification("target") == "elite"));	
 end
 
 local function CJ_CheckArcaneBuffs()
