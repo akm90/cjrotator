@@ -24,6 +24,7 @@
 };--]]
 
 cj_rotationTable = {
+[41] = "CJArcMageRot",
 [53] = "CJRetPallyRot",
 [81] = "CJEleShamRot",
 [82] = "CJEnhShamRot",
