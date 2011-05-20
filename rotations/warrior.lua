@@ -28,7 +28,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJ_Cooldown("Bloodthirst") < .3 then
+	if CJCooldown("Bloodthirst") < .3 then
 		return;
 	end
 	
