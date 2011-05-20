@@ -5,7 +5,7 @@ currentRotation = 0;
 function CJ_BuffInfo(unit,buff)
 	local name,_,_,count,_,_,expiration,_,_,_,_ = UnitBuff(unit,buff);
 	if not name then return false end
-	return count,expiration;
+	return count,(expiration - GetTime());
 end
 
 function CJ_HasBuff(unit,buff)
