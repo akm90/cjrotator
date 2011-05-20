@@ -19,49 +19,6 @@ function CJ_FuryWarSelectShout()
 	return;			
 end
 
-function CJSMFRotation()
-	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
-		CJ_FuryWarSelectShout();
-		return;
-	end
-	
-	if not IsSpellInRange("Heroic Strike") then
-		if CJCooldown("Intercept") == 0 then
-			CastSpell("Intercept");
-			return;
-		elseif CJCooldown("Heroic Fury") == 0 then
-			CastSpell("Heroic Fury");
-			CastSpell("Intercept");
-			return			
-		end
-		return;
-	end
-	
-	if GetShapeshiftForm() ~= 3 then
-		CastShapeshiftForm(3);
-		return;
-	end
-	
-	if cj_aoemode and CJCooldown("Cleave") == 0 then
-		CastSpell("Cleave")
-		return;
-	end
-	
-	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
-		CastSpell("Whirlwind");
-		return;
-	end
-	
-	if CJCooldown("Heroic Strike") == 0 then
-		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
-		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
-		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20))) then
-			CastSpell("Heroic Strike");
-			return;
-		end
-	end
-end
-
 function CJTitansRotation()
 	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
@@ -102,34 +59,16 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Colossus Smash") == 0 then
-		CastSpell("Colossus Smash");
-		return;
-	end
-	
-	if CJCooldown("Bloodthirst") == 0 then
-		CastSpell("Bloodthirst");
-		return;
-	end
-	
-	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
-		CastSpell("Raging Blow");
-		return;
-	end
-	
-	if CJCooldown("Heroic Strike") == 0 then
-		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
-		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
-		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20))) then
-			CastSpell("Heroic Strike");
-		end
-	end
-	
 	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) then
 		if (select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
 			CastSpell("Execute");
 			return;
 		end
+	end
+	
+	if CJCooldown("Colossus Smash") == 0 then
+		CastSpell("Colossus Smash");
+		return;
 	end
 	
 	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
@@ -139,9 +78,19 @@ function CJTitansRotation()
 		end
 	end
 	
+	if CJCooldown("Bloodthirst") == 0 then
+		CastSpell("Bloodthirst");
+		return;
+	end
+	
 	if CJCooldown("Berserker Rage") == 0 and not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
 	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
 		CastSpell("Berserker Rage");
+		return;
+	end
+	
+	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
+		CastSpell("Raging Blow");
 		return;
 	end
 	
@@ -170,8 +119,17 @@ function CJFuryWarRot()
 		end
 	end
 
-	if not CJ_GCD() then return end; -- Check for GCD
 	if AmIFacing == "false" then return end;
+	
+	if CJCooldown("Heroic Strike") == 0 then
+		if (UnitPower("player") > 85 and CJHealthPercent("target") > 20) or (CJ_HasBuff("player","Battle Trance")) or
+		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
+		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20))) then
+			CastSpell("Heroic Strike");
+		end
+	end
+	
+	if not CJ_GCD() then return end; -- Check for GCD
 	
 	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
 		CJTitansRotation();
