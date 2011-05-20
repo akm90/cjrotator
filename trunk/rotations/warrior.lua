@@ -17,6 +17,82 @@ function CJ_FuryWarSelectShout()
 	return;			
 end
 
+function CJSMFRotation()
+	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
+		CJ_FuryWarSelectShout();
+		return;
+	end	
+	
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return;
+	end
+	
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
+		CastSpell("Whirlwind");
+		return;
+	end
+	
+	if CJCooldown("Bloodthirst") < .3 and CJCooldown("Bloodthirst") > 0 then
+		return;
+	end
+	
+	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 then
+		CastShapeshiftForm("1");
+		CastSpell("Shattering Throw");
+		return;
+	end
+	
+	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) then
+		if (select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
+			CastSpell("Execute");
+			return;
+		end
+	end
+	
+	if CJCooldown("Colossus Smash") == 0 then
+		CastSpell("Colossus Smash");
+		return;
+	end
+	
+	if CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner") then
+		if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
+			CastSpell("Execute");
+			return;
+		end
+	end
+	
+	if CJCooldown("Bloodthirst") == 0 then
+		CastSpell("Bloodthirst");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Bloodsurge") then
+		CastSpell("Slam");
+		return;
+	end
+	
+	if CJHealthPercent("target") < 20 and UnitPower("player") >= 50 then
+		CastSpell("Execute");
+		return;
+	end
+	
+	if CJCooldown("Berserker Rage") == 0 and not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
+	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
+		CastSpell("Berserker Rage");
+		return;
+	end
+	
+	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
+		CastSpell("Raging Blow");
+		return;
+	end
+	
+	if UnitPower("player") < 70 then
+		CJ_FuryWarSelectShout();
+	end
+end
+
 function CJTitansRotation()
 	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
@@ -28,12 +104,12 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Bloodthirst") < .3 and CJCooldown("Bloodthirst") > 0 then
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
+		CastSpell("Whirlwind");
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
-		CastSpell("Whirlwind");
+	if CJCooldown("Bloodthirst") < .3 and CJCooldown("Bloodthirst") > 0 then
 		return;
 	end
 	
@@ -135,6 +211,6 @@ function CJFuryWarRot()
 	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
 		CJTitansRotation();
 	else
-		--CJSMFRotation();
+		CJSMFRotation();
 	end
 end
