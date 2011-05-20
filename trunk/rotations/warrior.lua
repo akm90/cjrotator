@@ -32,7 +32,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if cj_aoemoed and CJCooldown("Whirlwind") == 0 then
+	if cj_aoemode and CJCooldown("Whirlwind") == 0 then
 		CastSpell("Whirlwind");
 		return;
 	end
