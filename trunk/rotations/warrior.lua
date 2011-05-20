@@ -122,7 +122,6 @@ function CJTitansRotation()
 		((CJ_HasBuff("player","Incite") or CJ_HasDebuff("target","Colossus Smash")) and 
 		((UnitPower("player") >= 50 and CJHealthPercent("target") >= 20) or (UnitPower("player")  >= 75 and CJHealthPercent("target") < 20))) then
 			CastSpell("Heroic Strike");
-			return;
 		end
 	end
 	
