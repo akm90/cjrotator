@@ -7,6 +7,7 @@ helpers.lua
 rotations\paladin.lua
 rotations\shaman.lua
 rotations\warrior.lua
+rotations\mage.lua
 
 rotationTable.lua
 core.lua
