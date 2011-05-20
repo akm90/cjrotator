@@ -25,11 +25,11 @@ function CJ_DebuffInfo(unit,debuff)
 end
 
 function CJHealthPercent(unit)
-	return (((UnitHealth("player") / UnitHealthMax("player")) * 100));
+	return (((UnitHealth(unit) / UnitHealthMax(unit)) * 100));
 end
 
 function CJManaPercent(unit)
-	return (((UnitPower("player") / UnitPowerMax("player")) * 100));
+	return (((UnitPower(unit) / UnitPowerMax(unit)) * 100));
 end
 
 function CastSpell(spell)
