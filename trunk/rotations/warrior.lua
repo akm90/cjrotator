@@ -97,6 +97,7 @@ function CJTitansRotation()
 	end
 	
 	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 then
+		CastShapeshiftForm("1");
 		CastSpell("Shattering Throw");
 		return;
 	end
@@ -117,6 +118,16 @@ function CJTitansRotation()
 	
 	if CJCooldown("Colossus Smash") == 0 then
 		CastSpell("Colossus Smash");
+		return;
+	end
+	
+	if CJ_BuffInfo("player","Executioner") < 5 and CJCooldown("Execute") == 0 then
+		CastSpell("Execute");
+		return;
+	end
+	
+	if CJCooldown("Bloodthirst") == 0 then
+		CastSpell("Bloodthirst");
 		return;
 	end
 	
