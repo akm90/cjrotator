@@ -30,6 +30,7 @@ cj_rotationTable = {
 [63] = "CJSpriestRot",
 [81] = "CJEleShamRot",
 [82] = "CJEnhShamRot",
+[91] = "CJAffLockRot",
 [102]= "CJFuryWarRot"
 };
 
