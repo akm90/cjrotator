@@ -31,5 +31,6 @@ cj_rotationTable = {
 };
 
 cj_interruptBlacklist = {
-	["High Priestess Kilnara"] = {[1] = "Shadow Bolt"}
+	["High Priestess Kilnara"] = {[1] = "Shadow Bolt"},
+	["Venomancer Mauri"] = {[1] = "Poison Bolt"}
 };

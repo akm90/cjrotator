@@ -58,7 +58,7 @@ function CJ_Interrupt()
 		
 		if (not name1 or name2) or (interrupt1 or interrupt2) then return false end;
 		if tableContains(cj_interruptBlacklist[un],name1) or tableContains(cj_interruptBlacklist[un],name2) then return false end;
-		return true;
+		return "target";
 	else
 		local un = UnitName("focus");
 		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("focus");
@@ -66,8 +66,9 @@ function CJ_Interrupt()
 		
 		if (not name1 or name2) or (interrupt1 or interrupt2) then return false end;
 		if tableContains(cj_interruptBlacklist[un],name1) or tableContains(cj_interruptBlacklist[un],name2) then return false end;
-		return true;
+		return "focus";
 	end
+	return false;
 end
 
 function tableContains(table,element)

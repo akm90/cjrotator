@@ -26,13 +26,12 @@ local function CJ_CheckEnhanceBuffs()
 end
 
 function CJEnhShamRot()
-	if (IsSpellInRange("Wind Shear") or IsSpellInRange("Wind Shear","focus")) and cj_interruptmode and CJCooldown("Wind Shear") == 0 and CJ_Interrupt() then
-		if UnitExists("focus") and UnitCanAttack("player","focus") then
-			TargetUnit("focus");
-			CastSpell("Wind Shear");
-			TargetLastTarget();
-		else
-			CastSpell("Wind Shear");
+	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
+				CastSpellByName("Wind Shear",thing);
+			end
 		end
 	end
 
@@ -154,13 +153,12 @@ local function CJ_CheckEleBuffs()
 end
 
 local function CJEleShamRot()
-	if (IsSpellInRange("Wind Shear") or IsSpellInRange("Wind Shear","focus")) and cj_interruptmode and CJCooldown("Wind Shear") == 0 and CJ_Interrupt() then
-		if UnitExists("focus") and UnitCanAttack("player","focus") then
-			TargetUnit("focus");
-			CastSpell("Wind Shear");
-			TargetLastTarget();
-		else
-			CastSpell("Wind Shear");
+	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
+				CastSpellByName("Wind Shear",thing);
+			end
 		end
 	end
 

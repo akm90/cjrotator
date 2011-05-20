@@ -26,8 +26,13 @@ local function CJHolyPower()
 end
 
 function CJRetPallyRot()
-	if cj_interruptmode and CJCooldown("Rebuke") == 0 and IsSpellInRange("Rebuke") and CJ_Interrupt() then
-		CastSpell("Rebuke");
+	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
+				CastSpellByName("Wind Shear",thing);
+			end
+		end
 	end
 	
 	if not CJ_GCD() then return end; -- Check for GCD
