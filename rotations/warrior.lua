@@ -127,7 +127,7 @@ function CJTitansRotation()
 	end
 	
 	if (CJHealthPercent("target") < 20 and CJ_HasBuff("player","Executioner")) then
-		if select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
+		if (select(2,CJ_BuffInfo("player","Executioner")) < 1.5) then
 			CastSpell("Execute");
 			return;
 		end
