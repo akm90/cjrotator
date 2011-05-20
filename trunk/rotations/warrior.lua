@@ -112,7 +112,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Raging Blow") == 0 and IsSpellUsable("Raging Blow") then
+	if CJCooldown("Raging Blow") == 0 and IsUsableSpell("Raging Blow") then
 		CastSpell("Raging Blow");
 		return;
 	end
