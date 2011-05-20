@@ -20,9 +20,7 @@ function CJ_FuryWarSelectShout()
 end
 
 function CJTitansRotation()
-	
-	
-	if not CJ_HasBuff("player","Battle Shout") or not CJ_HasBuff("player","Commanding Shout") then
+	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
 		CJ_FuryWarSelectShout();
 		return;
 	end
@@ -31,12 +29,10 @@ function CJTitansRotation()
 		if CJCooldown("Intercept") == 0 then
 			CastSpell("Intercept");
 			return;
-		else
-			if CJCooldown("Charge") == 0 then
-				CastShapeshiftForm(1);
-				CastSpell("Charge");
-				return;
-			end
+		elseif CJCooldown("Heroic Fury") == 0 then
+			CastSpell("Heroic Fury");
+			CastSpell("Intercept");
+			return			
 		end
 		return;
 	end
