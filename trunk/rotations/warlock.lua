@@ -46,6 +46,11 @@ function CJAffLockRot()
 		return
 	end
 	
+	if not CJ_HasDebuff("target","Curse of the Elements") then
+		CastSpell("Curse of the Elements");
+		return;
+	end
+	
 	if select(2,CJ_DebuffInfo("target","Corruption")) > 0 and select(2,CJ_DebuffInfo("target","Unstable Affliction")) > 0 
 		and select(2,CJ_DebuffInfo("target","Bane of Doom")) > 0 and select(2,CJ_DebuffInfo("target","Haunt")) > 0 then
 		CJAC("Demon Soul");
