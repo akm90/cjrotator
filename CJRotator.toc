@@ -9,6 +9,7 @@ rotations\shaman.lua
 rotations\warrior.lua
 rotations\mage.lua
 rotations\priest.lua
+rotations\warlock.lua
 
 rotationTable.lua
 core.lua
