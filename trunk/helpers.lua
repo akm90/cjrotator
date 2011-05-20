@@ -4,7 +4,7 @@ currentRotation = 0;
 
 function CJ_BuffInfo(unit,buff)
 	local name,_,_,count,_,_,expiration,_,_,_,_ = UnitBuff(unit,buff);
-	if not name then return 0 end
+	if not name then return 0,0 end
 	return count,(expiration - GetTime());
 end
 
@@ -19,8 +19,10 @@ function CJ_HasDebuff(unit,debuff)
 end
 
 function CJ_DebuffInfo(unit,debuff)
-	local name,_,_,count,_,_,expiration = UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER");
-	if not name then return 0 end
+	local rank = select(2,UnitDebuff(unit,debuff));
+	if not rank then return 0,0 end
+	local name,_,_,count,_,_,expiration = UnitDebuff(unit,debuff,rank,"PLAYER");
+	if not name then return 0,0 end
 	return count,(expiration - GetTime())
 end
 
@@ -222,6 +224,7 @@ function CJ_SelectSpec()
 	c = class;
 	printf("Class detected as "..class);
 	local tt = GetPrimaryTalentTree();
+	if tt == nil then printf("No primary talent tree") return end;
 	if c == "Death Knight" then
 		currentRotation = 10 + tt;
 	elseif c == "Druid" then

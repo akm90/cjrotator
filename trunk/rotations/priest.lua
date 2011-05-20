@@ -65,7 +65,7 @@ local function CJSPCast(spell)
 end
 
 local function CJCheckShadowBuffs()
-	if not CJ_HasBuff("player","Prayer of Fortitude") then
+	if not CJ_HasBuff("player","Power Word: Fortitude") then
 		CastSpell("Prayer of Fortitude");
 		return true;
 	end
