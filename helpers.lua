@@ -248,6 +248,10 @@ function CJ_SelectSpec()
 	end
 end
 
+function CJ_PurgeableBuff()
+	
+end
+
 function CJ_GCD()
 	if class == "Death Knight" then
 		if GetSpellCooldown("Acherus Deathcharger") == 0 then return true end
