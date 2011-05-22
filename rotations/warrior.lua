@@ -280,11 +280,11 @@ function CJArmsWarRot()
 		CastSpell("Berserker Rage");
 	end
 	
-	if cj_aoemode and CJCooldown("Sweeping Strike") == 0 and CJ_WarriorCanUse("Sweeping Strikes") then
+	if cj_aoemode and CJCooldown("Sweeping Strikes") == 0 and CJ_WarriorCanUse("Sweeping Strikes") then
 		CastSpell("Sweeping Strikes")
 	end
 	
-	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 and CJ_WarriorCanUse("Cleave") then
+	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 40 and CJ_WarriorCanUse("Cleave") then
 		CastSpell("Cleave")
 	end
 	
@@ -294,7 +294,7 @@ function CJArmsWarRot()
 	
 	if not CJ_GCD() then return end;
 	
-	if cj_aoemode and GetShapeshiftForm() == 1 and CJCooldown("Thunder Clap") == 0 and CJ_HasDebuff("target","Rend") then
+	if cj_aoemode and GetShapeshiftForm() == 1 and CJCooldown("Thunder Clap") == 0 and CJ_HasDebuff("target","Rend") and CJ_WarriorCanUse("Thunder Clap") then
 		CastSpell("Thunder Clap");
 		return;
 	end
