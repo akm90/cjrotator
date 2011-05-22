@@ -81,7 +81,7 @@ local function OnUpdate(...)
 	_G[cj_rotationTable[currentRotation]]();
 end
 
-local function OnEvent(self,event)
+local function OnEvent(self,event,...)
 	if event == "PLAYER_REGEN_ENABLED" then
 		if cj_action then
 			cj_action = false;
