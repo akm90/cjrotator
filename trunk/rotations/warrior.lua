@@ -294,6 +294,11 @@ function CJArmsWarRot()
 	
 	if not CJ_GCD() then return end;
 	
+	if cj_aoemode and GetShapeshiftForm() == 1 and CJCooldown("Thunder Clap") == 0 and CJ_HasDebuff("target","Rend") then
+		CastSpell("Thunder Clap");
+		return;
+	end
+	
 	if CJHealthPercent("player") < 75 and IsUsableSpell("Victory Rush") then
 		CastSpell("Victory Rush");
 		return;
