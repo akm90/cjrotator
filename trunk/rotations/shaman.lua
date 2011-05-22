@@ -39,6 +39,13 @@ function CJEnhShamRot()
 	if CJ_CheckEnhanceBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Purge");
+			return;
+		end
+	end
+	
 	if IsSpellInRange("Lava Lash") == 0 and IsSpellInRange("Earth Shock") == 1 then
 		if CJCooldown("Unleash Elements") == 0 then
 			CastSpell("Unleash Elements");
