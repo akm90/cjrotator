@@ -108,9 +108,7 @@ local function OnEvent(self,event)
 				cj_watertotem = nil;
 				cj_airtotem = nil;
 			end
-		end
-	end
-				
+		end				
 	else
 		CJ_SelectSpec();
 	end
