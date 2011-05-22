@@ -87,28 +87,30 @@ local function OnEvent(self,event)
 			cj_action = false;
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
 		end
-	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
-		if (class == "Shaman") then
-			if arg2 == "Call of the Elements" or arg2 == "Call of the Ancestors" then
-				for i =1,4 do
-					local a,b,c,d = GetTotemInfo(i);
-					if i == 1 then
-						cj_firetotem = b;
-					elseif i == 2 then
-						cj_earthtotem = b;
-					elseif i == 3 then
-						cj_watertotem = b;
-					else
-						cj_airtotem = b;
+	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" ) then
+		if arg1 == "player") then
+			if (class == "Shaman") then
+				if arg2 == "Call of the Elements" or arg2 == "Call of the Ancestors" then
+					for i =1,4 do
+						local a,b,c,d = GetTotemInfo(i);
+						if i == 1 then
+							cj_firetotem = b;
+						elseif i == 2 then
+							cj_earthtotem = b;
+						elseif i == 3 then
+							cj_watertotem = b;
+						else
+							cj_airtotem = b;
+						end
 					end
+				elseif arg2 == "Totemic Recall" then
+					cj_firetotem = nil;
+					cj_earthtotem = nil
+					cj_watertotem = nil;
+					cj_airtotem = nil;
 				end
-			elseif arg2 == "Totemic Recall" then
-				cj_firetotem = nil;
-				cj_earthtotem = nil
-				cj_watertotem = nil;
-				cj_airtotem = nil;
-			end
-		end				
+			end				
+		end
 	else
 		CJ_SelectSpec();
 	end
@@ -132,7 +134,7 @@ local function CJToggleInterrupt()
 	if cj_interruptmode then printf("CJ Rotator: Interrupting") else printf("CJ Rotator: Not Interrupting") end
 end
 
-local function CJPurgeInterrupt()
+local function CJPurgeToggle()
 	cj_purgemode = not cj_purgemode;
 	
 	if cj_purgemode then printf("CJ Rotator: Purging") else printf("CJ Rotator: Not Purging") end
@@ -162,6 +164,6 @@ SLASH_CJTOGGLE1 = "/cjaoetoggle";
 SlashCmdList["CJTOGGLE"] = CJToggleAoE;
 SLASH_CJINTERRUPT1 = "/cjinterrupttoggle";
 SlashCmdList["CJINTERRUPT"] = CJToggleInterrupt;
-SLASH_CJPURGE1 = "/cjaoetoggle"
+SLASH_CJPURGE1 = "/cjpurgetoggle"
 SlashCmdList["CJPURGE"] = CJPurgeToggle;
 OnLoad();
