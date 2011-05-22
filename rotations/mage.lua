@@ -122,3 +122,84 @@ function CJArcMageRot()
 		return;
 	end
 end
+
+-------------------------------------------
+-----------Fire----------------------------
+-------------------------------------------
+local function CJ_CheckFireBuffs()
+	if not CJ_HasBuff("player","Arcane Brilliance") then
+		CastSpell("Arcane Brilliance");
+		return true;
+	end
+	
+	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("Molten Armor") then
+		CastSpell("Molten Armor");
+		return true;
+	end
+	
+	if CJ_HasBuff("player","Mage Armor") and CJManaPercent("player") > 60 then
+		CastSpell("Molten Armor");
+		return true;
+	end
+	
+	if CJManaPercent("player") < 5 and not CJ_HasBuff("player","Mage Armor") then
+		CastSpell("Mage Armor");
+		return true;
+	end
+	
+	if GetItemCount(36799,false,true) == 0 then
+		CastSpell("Conjure Mana Gem");
+		return true;
+	end
+	
+	return false;
+end
+
+function CJFireMageRot()
+	if cj_interruptmode and CJCooldown("Counterspell") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Counterspell",thing) then
+				CastSpellByName("Counterspell",thing);
+			end
+		end
+	end
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if CJ_CheckFireBuffs() then return end; -- Check our buffs
+	if AmIFacing == "false" then return end;
+	
+	if not CJ_CheckMyCast() then return end;
+	
+	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
+		UseItemByName(36799);
+	end
+	
+	if not CJ_HasOtherDebuff("Shadow and Flames") and select(2,CJ_Debuff("target","Critical Mass") < 6) then
+		CastSpell("Scorch");
+		return;
+	end
+	
+	if not CJ_HasDebuff("target","Living Bomb")then
+		CastSpell("Living Bomb");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Hot Streak") then
+		CastSpell("Pyroblast!");
+		return;
+	end
+	
+	if CJ_Cooldown("Flame Orb") == 0 then
+		CastSpell("Flame Orb");
+		return;
+	end
+	
+	if GetUnitSpeed("player") > 0 then
+		CastSpell("Scorch");
+		return;
+	else
+		CastSpell("Fireball");
+		return;
+	end
+end
