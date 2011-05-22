@@ -244,11 +244,12 @@ function CJArmsWarRot()
 	if not IsSpellInRange("Heroic Strike") then
 		if CJCooldown("Charge") == 0 and IsSpellInRange("Charge") then
 			CastSpell("Charge");
+			
+			if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
+				CJ_WarriorSelectShout();
+				return;
+			end
 		end
-		
-		if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
-			CJ_WarriorSelectShout();
-		return;
 	end	
 		return;
 	end
