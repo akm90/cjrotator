@@ -287,7 +287,7 @@ function CJArmsWarRot()
 	
 	if CJCooldown("Inner Rage") == 0 and not CJ_HasBuff("Deadly Calm") and UnitPower("player") > 80  and CJCooldown("Deadly Calm") > 15 then
 		CastSpell("Inner Rage");
-	return
+	end
 	
 	if not CJ_GCD() then return end;
 	
