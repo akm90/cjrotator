@@ -166,7 +166,7 @@ local function CJ_CheckEleBuffs()
 	return false;
 end
 
-local function CJEleShamRot()
+function CJEleShamRot()
 	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
