@@ -19,6 +19,11 @@ function CJ_HasDebuff(unit,debuff)
 	if not name then return false else return true end;
 end
 
+function CJ_HasOtherDebuff(unit,debuff)
+	local name = UnitDebuff(unit,debuff)
+	if not name then return false else return true end;
+end
+
 function CJ_DebuffInfo(unit,debuff)
 	local rank = select(2,UnitDebuff(unit,debuff));
 	if not rank then return 0,0 end
@@ -88,6 +93,7 @@ function tableContains(table,element)
 	if table == nil then return false end;
 	for _, value in pairs(table) do
 		if value == element then
+			printf(value.." found!");
 			return true
 		end
 	end
