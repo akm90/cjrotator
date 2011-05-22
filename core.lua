@@ -88,7 +88,7 @@ local function OnEvent(self,event)
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
 		end
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" ) then
-		if arg1 == "player") then
+		if (arg1 == "player") then
 			if (class == "Shaman") then
 				if arg2 == "Call of the Elements" or arg2 == "Call of the Ancestors" then
 					for i =1,4 do
