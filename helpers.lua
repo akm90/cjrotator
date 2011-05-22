@@ -1,6 +1,7 @@
 --Helpers File
 class = "";
 currentRotation = 0;
+local tempOverride = false;
 
 function CJ_BuffInfo(unit,buff)
 	local name,_,_,count,_,_,expiration,_,_,_,_ = UnitBuff(unit,buff);
@@ -94,6 +95,34 @@ function tableContains(table,element)
 end
 
 function CJ_UpdateTotems()
+	if cj_lastcall == nil then
+		if cj_aoemode then
+			CastSpell("Call of the Ancestors");
+			return true;
+		else
+			CastSpell("Call of the Elements");
+			return true;
+		end
+	end
+	
+	
+	if GetTime() - cj_lastcall > 2 and GetTime() - cj_lastcall < 4.5 then
+		for i =1,4 do
+			local a,b,c,d = GetTotemInfo(i);
+			if i == 1 then
+				cj_firetotem = b;
+			elseif i == 2 then
+				cj_earthtotem = b;
+			elseif i == 3 then
+				cj_watertotem = b;
+			else
+				cj_airtotem = b;
+			end
+		end
+	elseif GetTime() - cj_lastcall < 4.5 then
+		return false
+	end
+	
 	local countTotem = 0;
 	local updateFire = false;
 	local updateEarth = false;
@@ -105,47 +134,59 @@ function CJ_UpdateTotems()
 	local _,waterTotem = GetTotemInfo(3);
 	local _,airTotem = GetTotemInfo(4);
 	
-	if fireTotem ~= "Fire Elemental Totem" or fireTotem ~= cj_firetotem then
-		updateFire = true;
-		countTotem = countTotem + 1;
+	if fireTotem ~= cj_firetotem then
+		if fireTotem ~= "Fire Elemental Totem" then
+			updateFire = true;
+			countTotem = countTotem + 1;
+		end
 	end
 	
-	if earthTotem ~= "Earth Elemental Totem" or earthTotem ~= "Earthbind Totem" or earthTotem ~= cj_earthtotem then
-		updateEarth = true;
-		countTotem = countTotem + 1;
+	if earthTotem ~= cj_earthtotem then
+		if earthTotem ~= "Earthbind Totem" and earthTotem ~= "Earth Elemental Totem" then
+			updateEarth = true;
+			countTotem = countTotem + 1;
+		end
 	end
 	
-	if waterTotem ~= "Mana Tide Totem" or waterTotem ~= cj_watertotem then
-		updateWater = true;
-		countTotem = countTotem + 1;
+	if waterTotem ~= cj_watertotem then
+		if waterTotem ~= "Mana Tide Totem" then
+			updateWater = true;
+			countTotem = countTotem + 1;
+		end
 	end
 	
-	if airTotem ~= "Spirit Link Totem" or airTotem ~= cj_airtotem then
-		updateAir = true;
-		countTotem = countTotem + 1;
+	if airTotem ~= cj_airtotem then
+		if airTotem ~= "Spirit Link Totem" then
+			updateAir = true;
+			countTotem = countTotem + 1;
+		end
 	end
 	
-	if countTotem == 1 then
-		if updateFire then CastSpell(cj_firetotem) return end;
-		if updateWater then CastSpell(cj_watertotem) return end;
-		if updateEarth then CastSpell(cj_earthtotem) return end;
-		if updateAir then CastSpell(cj_airtotem) return end;
+	if countTotem == 0 then 
+		return false;
+	elseif countTotem == 1 then
+		if updateFire then CastSpell(cj_firetotem) return true end;
+		if updateWater then CastSpell(cj_watertotem) return true end;
+		if updateEarth then CastSpell(cj_earthtotem) return true end;
+		if updateAir then CastSpell(cj_airtotem) return true end;
 	else
 		if fireTotem ~= "Fire Elemental Totem" and earthTotem ~= "Earth Elemental Totem" and earthTotem ~= "Earthbind Totem" and waterTotem ~= "Mana Tide Totem" and airTotem ~= "Spirit Link Totem" then
 			if cj_aoemode then
 				CastSpell("Call of the Ancestors")
-				return;
+				return true;
 			else
 				CastSpell("Call of the Elements");
-				return;
+				return true;
 			end
 		else
-			if updateFire then CastSpell(cj_firetotem) return end;
-			if updateWater then CastSpell(cj_watertotem) return end;
-			if updateEarth then CastSpell(cj_earthtotem) return end;
-			if updateAir then CastSpell(cj_airtotem) return end;
+			if updateFire then CastSpell(cj_firetotem) return true end;
+			if updateWater then CastSpell(cj_watertotem) return true end;
+			if updateEarth then CastSpell(cj_earthtotem) return true end;
+			if updateAir then CastSpell(cj_airtotem) return true end;
 		end
 	end
+	
+	return false;
 end
 
 function CJ_SelectSpec()
