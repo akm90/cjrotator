@@ -106,7 +106,7 @@ function CJSpriestRot()
 		if cj_interruptmode and CJCooldown("Silence") == 0 then
 			local thing = CJ_Interrupt();
 			if (thing ~= false) then
-				if IsSpellInRange("Silence",thing) and AmIFacing == "true" then
+				if IsSpellInRange("Silence",thing)then
 					CastSpellByName("Silence",thing);
 				end
 			end

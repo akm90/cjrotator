@@ -37,7 +37,7 @@ function CJ_FeralDruidRot()
 	if cj_interruptmode and CJCooldown("Skull Bash(Cat Form)") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Skull Bash(Cat Form)",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Skull Bash(Cat Form)",thing) then
 				CastSpellByName("Skull Bash(Cat Form)",thing);
 			end
 		end
