@@ -182,11 +182,11 @@ function CJTitansRotation()
 end
 
 function CJFuryWarRot()
-	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
+	if cj_interruptmode and CJCooldown("Pummel") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Rebuke",thing) then
-				CastSpellByName("Rebuke",thing);
+			if IsSpellInRange("Pummel",thing) then
+				CastSpellByName("Pummel",thing);
 			end
 		end
 	end
@@ -230,11 +230,11 @@ end
 
 function CJArmsWarRot()
 	if CJ_HasBuff("player","Bladestorm") then return end;
-	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
+	if cj_interruptmode and CJCooldown("Pummel") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Rebuke",thing) then
-				CastSpellByName("Rebuke",thing);
+			if IsSpellInRange("Pummel",thing) then
+				CastSpellByName("Pummel",thing);
 			end
 		end
 	end
@@ -288,6 +288,11 @@ function CJArmsWarRot()
 	end
 	
 	if not CJ_GCD() then return end;
+	
+	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
+		CJ_WarriorSelectShout();
+		return;
+	end	
 	
 	if GetShapeshiftForm() == 3 and cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
 		CastSpell("Bladestorm");
