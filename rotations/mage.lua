@@ -203,3 +203,90 @@ function CJFireMageRot()
 		return;
 	end
 end
+
+-------------------------------------------
+-----------Frost----------------------------
+-------------------------------------------
+local function CJ_CheckFrostBuffs()
+	if not CJ_HasBuff("player","Arcane Brilliance") then
+		CastSpell("Arcane Brilliance");
+		return true;
+	end
+	
+	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("Molten Armor") then
+		CastSpell("Molten Armor");
+		return true;
+	end
+	
+	if CJ_HasBuff("player","Mage Armor") and CJManaPercent("player") > 60 then
+		CastSpell("Molten Armor");
+		return true;
+	end
+	
+	if CJManaPercent("player") < 5 and not CJ_HasBuff("player","Mage Armor") then
+		CastSpell("Mage Armor");
+		return true;
+	end
+	
+	if GetItemCount(36799,false,true) == 0 then
+		CastSpell("Conjure Mana Gem");
+		return true;
+	end
+	
+	return false;
+end
+
+function CJFrostMageRot()
+	if cj_interruptmode and CJCooldown("Counterspell") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Counterspell",thing) then
+				CastSpellByName("Counterspell",thing);
+			end
+		end
+	end
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if CJ_CheckFireBuffs() then return end; -- Check our buffs
+	if AmIFacing == "false" then return end;
+	
+	if not CJ_CheckMyCast() then return end;
+	
+	if GetUnitSpeed("player") > 0 then
+		if CJCooldown("Fire Blast") == 0 then
+			CastSpell("Fire Blast");
+			return;
+		end
+		
+		CastSpell("Ice Lance");
+		return;
+	end
+	
+	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
+		UseItemByName(36799);
+	end
+	
+	if CJCooldown("Frostfire Orb") == 0 then
+		CastSpell("Frostfire Orb");
+		return;
+	end
+	
+	if CJCooldown("Deep Freeze") == 0 and IsUsableSpell("Deep Freeze") then
+		CastSpell("Deep Freeze");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Brain Freeze") and CJ_HasBuff("Fingers of Frost") then
+		CastSpell("Frostfire Bolt");
+		return;
+	end
+	
+	if CJ_BuffInfo("player","Fingers of Frost") > 1 then
+		CastSpell("Ice Lance");
+		return;
+	end
+	
+	CastSpell("Frostbolt");
+	return;
+end
+
