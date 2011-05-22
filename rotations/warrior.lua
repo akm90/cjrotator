@@ -273,7 +273,7 @@ function CJArmsWarRot()
 		CastSpell("Charge");
 	end
 	
-	if UnitPower("player") < 70 and not CJ_HasBuff("Deadly Calm") then
+	if UnitPower("player") < 70 and not CJ_HasBuff("player","Deadly Calm") then
 		CastSpell("Berserker Rage");
 	end
 	
@@ -285,7 +285,7 @@ function CJArmsWarRot()
 		CastSpell("Cleave")
 	end
 	
-	if CJCooldown("Inner Rage") == 0 and not CJ_HasBuff("Deadly Calm") and UnitPower("player") > 80  and CJCooldown("Deadly Calm") > 15 then
+	if CJCooldown("Inner Rage") == 0 and not CJ_HasBuff("player","Deadly Calm") and UnitPower("player") > 80  and CJCooldown("Deadly Calm") > 15 then
 		CastSpell("Inner Rage");
 	end
 	
@@ -311,7 +311,7 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if not CJ_HasDebuff("Rend") and GetShapeshiftForm() == 1 and CJ_WarriorCanUse("Rend") then
+	if not CJ_HasDebuff("target","Rend") and GetShapeshiftForm() == 1 and CJ_WarriorCanUse("Rend") then
 		CastSpell("Rend");
 		return;
 	end
