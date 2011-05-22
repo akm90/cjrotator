@@ -195,8 +195,16 @@ function CJFuryWarRot()
 	
 	if not IsSpellInRange("Heroic Strike") then
 		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") then
+			if UnitPower("player") < 10 and CJCooldown("Battle Shout") == 0 then
+				CJ_WarriorSelectShout();
+				return;
+			end
 			CastSpell("Intercept");
 		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") then
+			if UnitPower("player") < 10 and CJCooldown("Battle Shout") == 0 then
+				CJ_WarriorSelectShout();
+				return;
+			end
 			CastSpell("Heroic Fury");
 			CastSpell("Intercept");	
 		end
