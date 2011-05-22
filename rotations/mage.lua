@@ -247,7 +247,7 @@ function CJFrostMageRot()
 	end
 	
 	if not CJ_GCD() then return end; -- Check for GCD
-	if CJ_CheckFireBuffs() then return end; -- Check our buffs
+	if CJ_CheckFrostBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
