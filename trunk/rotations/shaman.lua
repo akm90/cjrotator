@@ -29,7 +29,7 @@ function CJEnhShamRot()
 	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Wind Shear",thing) then
 				CastSpellByName("Wind Shear",thing);
 			end
 		end
@@ -120,6 +120,11 @@ function CJEnhShamRot()
 		end
 		
 		if CJ_BuffInfo("player","Maelstrom Weapon") == 5 then
+			if CJHealthPercent("player") < 30 then
+				CastSpell("Greater Healing Wave")
+				return;
+			end
+		
 			if cj_aoemode and CJCooldown("Chain Lightning") == 0 then
 				CastSpell("Chain Lightning");
 				return;
