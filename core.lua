@@ -82,7 +82,7 @@ local function OnUpdate(...)
 end
 
 local function OnEvent(self,event)
-	if event ~= "PLAYER_REGEN_ENABLED" then
+	if event == "PLAYER_REGEN_ENABLED" then
 		if cj_action then
 			cj_action = false;
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
