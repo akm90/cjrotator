@@ -5,6 +5,7 @@
 local ACTIONKEY = "F";
 local AOETOGGLEKEY = "G";
 local INTERRUPTTOGGLEKEY = "`";
+local PURGEKEY = "Z";
 local HOLDDOWN = false;-- If this is true, you have to hold the key down.  If it is false, just press it to turn it on, press again to turn off.
 local STOPAFTERCOMBAT = true;-- Disable after combat
 local DEBUGMODE = false;-- debugmode
@@ -22,7 +23,11 @@ local f = CreateFrame("Frame");
 currentRotation = 0;
 local _G = getfenv();
 local loaded = false;
-
+cj_earthtotem = nil;
+cj_firetotem = nil;
+cj_waterttotem = nil;
+cj_airtotem = nil;
+cj_purgemode = false;
 
 f:SetFrameStrata("TOOLTIP");
 f:Show();
@@ -54,6 +59,12 @@ d:SetAttribute("downbutton", true);
 d:SetAttribute("type","macro");
 d:SetAttribute("macrotext","/cjinterrupttoggle");
 
+local e = CreateFrame("CheckButton","NAPurgeButton",nil,"SecureActionButtonTemplate, ActionButtonTemplate");
+e:RegisterForClicks("AnyUp");
+e:SetAttribute("downbutton", true);
+e:SetAttribute("type","macro");
+e:SetAttribute("macrotext","/cjpurgetoggle");
+
 local function OnUpdate(...)
 	if currentRotation == 0 then CJ_SelectSpec() return end;
 	if not cj_action then return end;
@@ -72,12 +83,36 @@ end
 
 local function OnEvent(self,event)
 	if event ~= "PLAYER_REGEN_ENABLED" then
-		CJ_SelectSpec();
-	else
 		if cj_action then
 			cj_action = false;
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
 		end
+	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" and arg1 == "player") then
+		if (class == "Shaman") then
+			if arg2 == "Call of the Elements" or arg2 == "Call of the Ancestors" then
+				for i =1,4 do
+					local a,b,c,d = GetTotemInfo(i);
+					if i == 1 then
+						cj_firetotem = b;
+					elseif i == 2 then
+						cj_earthtotem = b;
+					elseif i == 3 then
+						cj_watertotem = b;
+					else
+						cj_airtotem = b;
+					end
+				end
+			elseif arg2 == "Totemic Recall" then
+				cj_firetotem = nil;
+				cj_earthtotem = nil
+				cj_watertotem = nil;
+				cj_airtotem = nil;
+			end
+		end
+	end
+				
+	else
+		CJ_SelectSpec();
 	end
 end
 
@@ -99,6 +134,13 @@ local function CJToggleInterrupt()
 	if cj_interruptmode then printf("CJ Rotator: Interrupting") else printf("CJ Rotator: Not Interrupting") end
 end
 
+local function CJPurgeInterrupt()
+	cj_purgemode = not cj_purgemode;
+	
+	if cj_purgemode then printf("CJ Rotator: Purging") else printf("CJ Rotator: Not Purging") end
+end
+
+
 local function OnLoad()
 	f:RegisterEvent("PLAYER_ENTERING_WORLD");
 	f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
@@ -106,10 +148,12 @@ local function OnLoad()
 	if STOPAFTERCOMBAT then
 		f:RegisterEvent("PLAYER_REGEN_ENABLED");
 	end
+	f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
 	f:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(f, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
 	SetOverrideBinding(f, true, AOETOGGLEKEY, "CLICK NAAoEButton:LeftClick");
 	SetOverrideBinding(f, true, INTERRUPTTOGGLEKEY, "CLICK NAInterruptButton:LeftClick");
+	SetOverrideBinding(f, true, PURGEKEY, "CLICK NAPurgeButton:LeftClick");
 	f:SetScript("OnUpdate", OnUpdate);
 	DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Loaded");
 end
@@ -120,4 +164,6 @@ SLASH_CJTOGGLE1 = "/cjaoetoggle";
 SlashCmdList["CJTOGGLE"] = CJToggleAoE;
 SLASH_CJINTERRUPT1 = "/cjinterrupttoggle";
 SlashCmdList["CJINTERRUPT"] = CJToggleInterrupt;
+SLASH_CJPURGE1 = "/cjaoetoggle"
+SlashCmdList["CJPURGE"] = CJPurgeToggle;
 OnLoad();

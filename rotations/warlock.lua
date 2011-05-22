@@ -36,6 +36,8 @@ function CJAffLockRot()
 		end
 	end
 	
+	PetAttack();
+	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
 	if CJCheckAffBuffs() then return end; -- Check our buffs

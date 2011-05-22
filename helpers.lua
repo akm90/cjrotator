@@ -92,131 +92,51 @@ function tableContains(table,element)
 end
 
 function CJ_UpdateTotems()
-	local countTotems = 0;
+	local countTotem = 0;
 	local updateFire = false;
 	local updateEarth = false;
 	local updateAir = false;
 	local updateWater = false;
-	local earthTotem = "";
-	local fireTotem = "";
-	local waterTotem = "";
-	local airTotem = "";
 	
-	local f = CreateFrame('GameTooltip', 'MyTooltip', UIParent, 'GameTooltipTemplate')
+	local _,fireTotem = GetTotemInfo(1);
+	local _,earthTotem = GetTotemInfo(2);
+	local _,waterTotem = GetTotemInfo(3);
+	local _,airTotem = GetTotemInfo(4);
 	
-	if cj_aoemode then
-		--Earth Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton5.action);
-		earthTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(2);
-		if totemName ~= "Earth Elemental Totem" and earthTotem ~= totemName then
-			updateEarth = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Fire Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton6.action);
-		fireTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(1);
-		if totemName ~= "Fire Elemental Totem" and fireTotem ~= totemName then
-			updateFire = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Water Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton7.action);
-		waterTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(3);
-		if waterTotem ~= totemName then
-			updateWater = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Air Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton8.action);
-		airTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(4);
-		if airTotem ~= totemName then
-			updateWater = true;
-			countTotems = countTotems + 1;
-		end
-	else
-		--Earth Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton1.action);
-		earthTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(2);
-		if totemName ~= "Earth Elemental Totem" and earthTotem ~= totemName then
-			updateEarth = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Fire Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton2.action);
-		fireTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(1);
-		if totemName ~= "Fire Elemental Totem" and fireTotem ~= totemName then
-			updateFire = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Water Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton3.action);
-		waterTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(3);
-		if waterTotem ~= totemName then
-			updateWater = true;
-			countTotems = countTotems + 1;
-		end
-
-		--Air Totem
-		f:SetOwner(UIParent,'ANCHOR_NONE')
-		f:SetAction(MultiCastActionButton4.action);
-		airTotem = f:GetSpell();
-		local _,totemName = GetTotemInfo(4);
-		if airTotem ~= totemName then
-			updateWater = true;
-			countTotems = countTotems + 1;
-		end
+	if fireTotem ~= "Fire Elemental Totem" or fireTotem ~= cj_firetotem then
+		updateFire = true;
+		countTotem = countTotem + 1;
 	end
 	
-	f:Hide();
-	if countTotems >= 3 then
+	if earthTotem ~= "Earth Elemental Totem" or earthTotem ~= "Earthbind Totem" or earthTotem ~= cj_earthtotem then
+		updateEarth = true;
+		countTotem = countTotem + 1;
+	end
+	
+	if waterTotem ~= "Mana Tide Totem" or waterTotem ~= cj_watertotem then
+		updateWater = true;
+		countTotem = countTotem + 1;
+	end
+	
+	if airTotem ~= "Spirit Link Totem" or airTotem ~= cj_airtotem then
+		updateAir = true;
+		countTotem = countTotem + 1;
+	end
+	
+	if countTotem == 1 then
+		if updateFire then CastSpell(cj_firetotem) return end;
+		if updateWater then CastSpell(cj_watertotem) return end;
+		if updateEarth then CastSpell(cj_earthtotem) return end;
+		if updateAir then CastSpell(cj_airtotem) return end;
+	else
 		if cj_aoemode then
-			CastSpell("Call of the Ancestors");
-			return true;
+			CastSpell("Call of the Ancestors")
+			return;
 		else
 			CastSpell("Call of the Elements");
-			return true;
-		end
-	else
-		if updateFire then
-			CastSpell(fireTotem);
-			return true;
-		end
-		
-		if updateEarth then
-			CastSpell(earthTotem);
-			return true;
-		end
-		
-		if updateWater then
-			CastSpell(waterTotem);
-			return true;
-		end
-		
-		if updateAir then
-			CastSpell(airTotem);
-			return true;
+			return;
 		end
 	end
-	return false;
 end
 
 function CJ_SelectSpec()
@@ -248,8 +168,34 @@ function CJ_SelectSpec()
 	end
 end
 
-function CJ_PurgeableBuff()
+function CJ_OffensiveDispel()
+	if class == "Shaman" then
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			
+			if dispelType == "Magic" then
+				return true;
+			end
+		end
+	elseif class == "Priest" then
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			
+			if dispelType == "Magic" then
+				return true;
+			end
+		end
+	elseif class == "Hunter" then
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			
+			if dispelType == "Magic" then
+				return true;
+			end
+		end
+	end
 	
+	return false;
 end
 
 function CJ_GCD()

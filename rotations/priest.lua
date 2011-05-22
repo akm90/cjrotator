@@ -29,6 +29,14 @@ function CJDiscPriestRot()
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
+	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Dispel Magic");
+			return;
+		end
+	end
+	
 	if CJCooldown("Holy Fire") == 0 then
 		CastSpell("Holy Fire");
 		return;
@@ -110,6 +118,13 @@ function CJSpriestRot()
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
+	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Dispel Magic");
+			return;
+		end
+	end
 	
 	if GetUnitSpeed("player") > 0 then
 		if not IsSpellInRange("Devouring Plague") then return end;
