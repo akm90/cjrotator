@@ -256,7 +256,7 @@ function CJArmsWarRot()
 	StartAttack();
 	
 	if CJCooldown("Heroic Strike") == 0 then
-		if UnitPower("player") > 85 or CJ_HasBuff("player","Deadly Calm") or CJ_HasBuff("player","Incite") or CJ_HasBuff("Battle Trance") then
+		if UnitPower("player") > 85 or CJ_HasBuff("player","Deadly Calm") or CJ_HasBuff("player","Incite") or CJ_HasBuff("player","Battle Trance") then
 			CastSpell("Heroic Strike");
 		end
 	end
