@@ -245,6 +245,7 @@ function CJArmsWarRot()
 		if CJCooldown("Charge") == 0 and IsSpellInRange("Charge") then
 			CastSpell("Charge");
 		end
+		return;
 	end
 	
 	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 then
@@ -297,6 +298,11 @@ function CJArmsWarRot()
 		return
 	end
 	
+	if not CJ_HasDebuff("target","Rend") and GetShapeshiftForm() == 1 and CJ_WarriorCanUse("Rend") then
+		CastSpell("Rend");
+		return;
+	end
+	
 	if GetShapeshiftForm() == 1 and CJCooldown("Overpower") == 0 and CJ_WarriorCanUse("Overpower") then
 		CastSpell("Overpower");
 		return;
@@ -309,11 +315,6 @@ function CJArmsWarRot()
 	
 	if GetShapeshiftForm() == 3 and  CJCooldown("Execute") == 0 and CJHealthPercent("target") < 20 and CJ_HasBuff("player","Deadly Calm") and CJ_WarriorCanUse("Execute") then
 		CastSpell("Execute");
-		return;
-	end
-	
-	if not CJ_HasDebuff("target","Rend") and GetShapeshiftForm() == 1 and CJ_WarriorCanUse("Rend") then
-		CastSpell("Rend");
 		return;
 	end
 	
