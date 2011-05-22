@@ -185,7 +185,7 @@ function CJFuryWarRot()
 	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Rebuke",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Rebuke",thing) then
 				CastSpellByName("Rebuke",thing);
 			end
 		end
@@ -233,7 +233,7 @@ function CJArmsWarRot()
 	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Rebuke",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Rebuke",thing) then
 				CastSpellByName("Rebuke",thing);
 			end
 		end

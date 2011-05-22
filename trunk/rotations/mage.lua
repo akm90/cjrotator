@@ -30,7 +30,7 @@ function CJArcMageRot()
 	if cj_interruptmode and CJCooldown("Counterspell") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Counterspell",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Counterspell",thing) then
 				CastSpellByName("Counterspell",thing);
 			end
 		end

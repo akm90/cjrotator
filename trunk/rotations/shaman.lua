@@ -175,7 +175,7 @@ function CJEleShamRot()
 	if cj_interruptmode and CJCooldown("Wind Shear") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Wind Shear",thing) and AmIFacing == "true" then
+			if IsSpellInRange("Wind Shear",thing) then
 				CastSpellByName("Wind Shear",thing);
 			end
 		end
