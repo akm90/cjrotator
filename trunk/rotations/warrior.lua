@@ -194,7 +194,7 @@ function CJFuryWarRot()
 	if AmIFacing == "false" then return end;
 	
 	if not IsSpellInRange("Heroic Strike") then
-		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") ~= 0 then
+		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") then
 			CastSpell("Intercept");
 			return;
 		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") then
