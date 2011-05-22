@@ -261,7 +261,7 @@ function CJArmsWarRot()
 		end
 	end
 	
-	if GetShapeShiftForm() ~= 1 and CJCooldown("Battle Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend"))<.2 or (CJ_HasBuff("player","Taste for Blood") and CJCooldown("Mortal Strike") > 1 and UnitPower("player") <= 75) then
+	if GetShapeshiftForm() ~= 1 and CJCooldown("Battle Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend"))<.2 or (CJ_HasBuff("player","Taste for Blood") and CJCooldown("Mortal Strike") > 1 and UnitPower("player") <= 75) then
 		CastShapeshiftForm(1);
 		return;
 	elseif UnitPower("player") < 75 and not CJ_HasBuff("player","Taste for Blood") and GetShapeshiftForm() ~= 3 and CJ_Cooldown("Berserker Stance") == 0 then
