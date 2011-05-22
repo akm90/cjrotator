@@ -1,5 +1,5 @@
 --Warrior Rotations
-local hamstring = false;
+cj_warriorhamstring = false
 --------------------------------
 ------------Fury----------------
 --------------------------------
@@ -293,7 +293,7 @@ function CJArmsWarRot()
 	
 	if not CJ_GCD() then return end;
 	
-	if hamstring and not CJ_HasDebuff("target","Hamstring") and CJ_WarriorCanUse("Hamstring") then
+	if cj_warriorhamstring and not CJ_HasDebuff("target","Hamstring") and CJ_WarriorCanUse("Hamstring") then
 		CastSpell("Hamstring");
 		return;
 	end
