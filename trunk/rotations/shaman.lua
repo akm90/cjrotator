@@ -35,6 +35,8 @@ function CJEnhShamRot()
 		end
 	end
 
+	StartAttack();
+	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJ_CheckEnhanceBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
@@ -177,6 +179,13 @@ local function CJEleShamRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJ_CheckEleBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
+	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Purge");
+			return;
+		end
+	end
 	
 	if CJManaPercent("player") < 50 and CJCooldown("Thunderstorm") == 0 then
 		CastSpell("Thunderstorm");

@@ -174,7 +174,7 @@ function CJSpriestRot()
 	end
 	
 	if CJ_BuffInfo("player","Dark Evangelism") == 5 and select(2,CJ_DebuffInfo("target","Vampiric Touch")) > 5 
-		and select(2,CJ_DebuffInfo("target","Devouring Plague")) > 5 and CJManaPercent("player") < 75 then
+		and select(2,CJ_DebuffInfo("target","Devouring Plague")) > 5 and CJManaPercent("player") < 70 then
 		CJSPCast("Dark Archangel");
 	end
 	

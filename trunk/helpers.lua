@@ -35,7 +35,9 @@ function CJManaPercent(unit)
 end
 
 function CastSpell(spell)
-	CastSpellByName(spell);
+	if select(2,IsUsableSpell(spell)) == nil then
+		CastSpellByName(spell);
+	end
 end
 
 function CJ_DetectHero()
@@ -129,12 +131,19 @@ function CJ_UpdateTotems()
 		if updateEarth then CastSpell(cj_earthtotem) return end;
 		if updateAir then CastSpell(cj_airtotem) return end;
 	else
-		if cj_aoemode then
-			CastSpell("Call of the Ancestors")
-			return;
+		if fireTotem ~= "Fire Elemental Totem" and earthTotem ~= "Earth Elemental Totem" and earthTotem ~= "Earthbind Totem" and waterTotem ~= "Mana Tide Totem" and airTotem ~= "Spirit Link Totem" then
+			if cj_aoemode then
+				CastSpell("Call of the Ancestors")
+				return;
+			else
+				CastSpell("Call of the Elements");
+				return;
+			end
 		else
-			CastSpell("Call of the Elements");
-			return;
+			if updateFire then CastSpell(cj_firetotem) return end;
+			if updateWater then CastSpell(cj_watertotem) return end;
+			if updateEarth then CastSpell(cj_earthtotem) return end;
+			if updateAir then CastSpell(cj_airtotem) return end;
 		end
 	end
 end
