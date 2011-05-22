@@ -253,7 +253,7 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 then
+	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 40 then
 		CastSpell("Cleave")
 	end
 	
@@ -265,7 +265,8 @@ function CJArmsWarRot()
 		end
 	end
 	
-	if GetShapeshiftForm() ~= 1 and CJCooldown("Battle Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend"))<.2 or (CJ_HasBuff("player","Taste for Blood") and CJCooldown("Mortal Strike") > 1 and UnitPower("player") <= 75) then
+	if GetShapeshiftForm() ~= 1 and CJCooldown("Battle Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend"))<.2 or (CJ_HasBuff("player","Taste for Blood") and CJCooldown("Mortal Strike") > 1 and UnitPower("player") <= 75)
+	or (cj_aoemode and CJ_HasDebuff("target","Rend") and CJCooldown("Thunder Clap") == 0) then
 		CastShapeshiftForm(1);
 	elseif UnitPower("player") < 75 and not CJ_HasBuff("player","Taste for Blood") and GetShapeshiftForm() ~= 3 and CJCooldown("Berserker Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend")) > .2 then
 		CastShapeshiftForm(3);	
@@ -292,6 +293,11 @@ function CJArmsWarRot()
 	end
 	
 	if not CJ_GCD() then return end;
+	
+	if CJHealthPercent("player") < 75 and IsUsableSpell("Victory Rush") then
+		CastSpell("Victory Rush");
+		return;
+	end
 	
 	if cj_warriorhamstring and not CJ_HasDebuff("target","Hamstring") and CJ_WarriorCanUse("Hamstring") then
 		CastSpell("Hamstring");
