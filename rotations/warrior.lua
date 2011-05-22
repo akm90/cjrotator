@@ -348,7 +348,7 @@ function CJArmsWarRot()
 	end
 	
 	if UnitPower("player") < 20 then
-		CJWarriorSelectShout();
+		CJ_WarriorSelectShout();
 		return;
 	end	
 end
