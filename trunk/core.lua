@@ -18,16 +18,19 @@ local DEBUGMODE = false;-- debugmode
 
 cj_action = false;
 cj_aoemode = false;
+cj_purgemode = false;
 cj_interruptmode = false;
 local f = CreateFrame("Frame");
 currentRotation = 0;
 local _G = getfenv();
 local loaded = false;
+
+--Shaman Specific Crap
 cj_earthtotem = nil;
 cj_firetotem = nil;
 cj_waterttotem = nil;
 cj_airtotem = nil;
-cj_purgemode = false;
+cj_lastcall = nil;
 
 f:SetFrameStrata("TOOLTIP");
 f:Show();
@@ -87,23 +90,14 @@ local function OnEvent(self,event,...)
 			cj_action = false;
 			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
 		end
-	elseif (event == "UNIT_SPELLCAST_SUCCEEDED" ) then
-		if (arg1 == "player") then
+	elseif (event == "UNIT_SPELLCAST_SUCCEEDED") then
+		local unit,spell = ...;
+		if (unit == "player") then
 			if (class == "Shaman") then
-				if arg2 == "Call of the Elements" or arg2 == "Call of the Ancestors" then
-					for i =1,4 do
-						local a,b,c,d = GetTotemInfo(i);
-						if i == 1 then
-							cj_firetotem = b;
-						elseif i == 2 then
-							cj_earthtotem = b;
-						elseif i == 3 then
-							cj_watertotem = b;
-						else
-							cj_airtotem = b;
-						end
-					end
-				elseif arg2 == "Totemic Recall" then
+				if spell == "Call of the Elements" or spell == "Call of the Ancestors" then
+					cj_lastcall = GetTime();
+				elseif spell == "Totemic Recall" then
+					cj_lastcall = nil;
 					cj_firetotem = nil;
 					cj_earthtotem = nil
 					cj_watertotem = nil;
@@ -124,7 +118,7 @@ end
 
 local function CJToggleAoE()
 	cj_aoemode = not cj_aoemode;
-	
+	cj_lastcall = nil
 	if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
 end
 
@@ -145,10 +139,10 @@ local function OnLoad()
 	f:RegisterEvent("PLAYER_ENTERING_WORLD");
 	f:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
 	f:RegisterEvent("CHARACTER_POINTS_CHANGED");
+	f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
 	if STOPAFTERCOMBAT then
 		f:RegisterEvent("PLAYER_REGEN_ENABLED");
 	end
-	f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
 	f:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(f, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
 	SetOverrideBinding(f, true, AOETOGGLEKEY, "CLICK NAAoEButton:LeftClick");
