@@ -291,7 +291,7 @@ function CJArmsWarRot()
 	
 	if not CJ_GCD() then return end;
 	
-	if cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
+	if GetShapeshiftForm() == 3 and cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
 		CastSpell("Bladestorm");
 		return
 	end
@@ -301,12 +301,12 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if CJCooldown("Mortal Strike") == 0 and (CJHealthPercent("target") > 20 or UnitPower("player") >= 30) and CJ_WarriorCanUse("Mortal Strike") then
+	if GetShapeshiftForm() == 3 and  CJCooldown("Mortal Strike") == 0 and (CJHealthPercent("target") > 20 or UnitPower("player") >= 30) and CJ_WarriorCanUse("Mortal Strike") then
 		CastSpell("Mortal Strike");
 		return;
 	end
 	
-	if CJCooldown("Execute") == 0 and CJHealthPercent("target") < 20 and CJ_HasBuff("player","Deadly Calm") and CJ_WarriorCanUse("Execute") then
+	if GetShapeshiftForm() == 3 and  CJCooldown("Execute") == 0 and CJHealthPercent("target") < 20 and CJ_HasBuff("player","Deadly Calm") and CJ_WarriorCanUse("Execute") then
 		CastSpell("Execute");
 		return;
 	end
@@ -316,17 +316,17 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if CJCooldown("Colossus Smash") == 0 and select(2,CJ_DebuffInfo("target","Colossus Smash")) < .5 and CJ_WarriorCanUse("Colossus Smash") then
+	if GetShapeshiftForm() == 3 and  CJCooldown("Colossus Smash") == 0 and select(2,CJ_DebuffInfo("target","Colossus Smash")) < .5 and CJ_WarriorCanUse("Colossus Smash") then
 		CastSpell("Colossus Smash");
 		return;
 	end
 	
-	if CJHealthPercent("target") < 20 and (CJ_HasBuff("player","Deadly Calm") or CJ_HasBuff("player","Recklessness")) and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute")  then
+	if GetShapeshiftForm() == 3 and  CJHealthPercent("target") < 20 and (CJ_HasBuff("player","Deadly Calm") or CJ_HasBuff("player","Recklessness")) and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute")  then
 		CastSpell("Execute");
 		return;
 	end
 	
-	if CJCooldown("Mortal Strike") == 0 and CJ_WarriorCanUse("Mortal Strike") then
+	if GetShapeshiftForm() == 3 and  CJCooldown("Mortal Strike") == 0 and CJ_WarriorCanUse("Mortal Strike") then
 		CastSpell("Mortal Strike");
 		return;
 	end
@@ -336,7 +336,7 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if CJHealthPercent("target") < 20 and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute") then
+	if GetShapeshiftForm() == 3 and  CJHealthPercent("target") < 20 and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute") then
 		CastSpell("Execute");
 		return;
 	end
