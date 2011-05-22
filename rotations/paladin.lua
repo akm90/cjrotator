@@ -134,7 +134,7 @@ function CJRetPallyRot()
 				return;
 			end
 			
-			if AoE and CJManaPercent("player") > 70 then
+			if cj_aoemode and CJManaPercent("player") > 80 then
 				CastSpell("Consecration");
 				return;
 			end
@@ -208,7 +208,7 @@ function CJRetPallyRot()
 				return;
 			end
 			
-			if AoE and CJManaPercent("player") > 70 then
+			if cj_aoemode and CJManaPercent("player") > 80 then
 				CastSpell("Consecration");
 				return;
 			end
