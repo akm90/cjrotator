@@ -244,9 +244,7 @@ function CJArmsWarRot()
 	if not IsSpellInRange("Heroic Strike") then
 		if CJCooldown("Charge") == 0 and IsSpellInRange("Charge") then
 			CastSpell("Charge");
-			return;
 		end
-		return;
 	end
 	
 	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 then
