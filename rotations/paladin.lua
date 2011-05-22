@@ -36,6 +36,8 @@ function CJRetPallyRot()
 		end
 	end
 	
+	StartAttack("target");
+	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckRetBuffs() then return end; -- Check our buffs
 	if UnitCreatureType("target") == "Demon" or UnitCreatureType("target") == "Undead" then ud = true end;
