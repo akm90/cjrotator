@@ -309,10 +309,10 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if GetShapeshiftForm() == 3 and cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
+	--[[if GetShapeshiftForm() == 3 and cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
 		CastSpell("Bladestorm");
 		return
-	end
+	end --]]
 	
 	if GetShapeshiftForm() == 1 and CJCooldown("Overpower") == 0 and CJ_WarriorCanUse("Overpower") and IsUsableSpell("Overpower") then
 		CastSpell("Overpower");
