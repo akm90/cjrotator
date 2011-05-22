@@ -296,7 +296,7 @@ function CJArmsWarRot()
 		return
 	end
 	
-	if GetShapeshiftForm() == 1 and CJCooldown("Overpower") == 0 and select(2,CJ_BuffInfo("player","Taste for Blood") < 1.5) and CJ_WarriorCanUse("Overpower") then
+	if GetShapeshiftForm() == 1 and CJCooldown("Overpower") == 0 and CJ_WarriorCanUse("Overpower") then
 		CastSpell("Overpower");
 		return;
 	end
