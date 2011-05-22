@@ -57,8 +57,6 @@ end
 function CJCooldown(spell)
 	local start,duration,enable = GetSpellCooldown(spell);
 	
-	if start == nil then return 999999 end;
-	
 	if start == 0 then
 		return 0;
 	else
