@@ -196,11 +196,9 @@ function CJFuryWarRot()
 	if not IsSpellInRange("Heroic Strike") then
 		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") then
 			CastSpell("Intercept");
-			return;
 		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") then
 			CastSpell("Heroic Fury");
-			CastSpell("Intercept");
-			return			
+			CastSpell("Intercept");	
 		end
 		return;
 	end
