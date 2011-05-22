@@ -245,6 +245,11 @@ function CJArmsWarRot()
 		if CJCooldown("Charge") == 0 and IsSpellInRange("Charge") then
 			CastSpell("Charge");
 		end
+		
+		if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
+			CJ_WarriorSelectShout();
+		return;
+	end	
 		return;
 	end
 	
@@ -287,11 +292,6 @@ function CJArmsWarRot()
 	end
 	
 	if not CJ_GCD() then return end;
-	
-	if not CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Commanding Shout") then
-		CJ_WarriorSelectShout();
-		return;
-	end	
 	
 	if GetShapeshiftForm() == 3 and cj_aoemode and not CJ_HasBuff("player","Deadly Calm") and not CJ_HasBuff("player","Sweeping Strikes") and CJCooldown("Bladestorm") == 0 and CJ_WarriorCanUse("Bladestorm") then
 		CastSpell("Bladestorm");
