@@ -41,7 +41,7 @@ function CJArcMageRot()
 	if AmIFacing == "false" then return end;
 	
 	if GetUnitSpeed("player") > 0 then
-		if not IsSpellInRange("Arcane Barrage") then return end;
+		if IsSpellInRange("Arcane Barrage") == 0 then return end;
 		if CJCooldown("Arcane Barrage") == 0 then
 			CastSpell("Arcane Barrage");
 			return;
@@ -60,7 +60,7 @@ function CJArcMageRot()
 	end
 	
 	if not CJ_CheckMyCast() then return end;
-	if not IsSpellInRange("Arcane Blast") then return end;
+	if IsSpellInRange("Arcane Blast") == 0 then return end;
 	
 	if CJCooldown("Arcane Power") == 0 and CJ_IsBossMob() then
 		if CJHealthPercent("target") <= 12 then
@@ -171,6 +171,8 @@ function CJFireMageRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	
+	if IsSpellInRange("Fireball") == 0 then return end;
+	
 	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
 		UseItemByName(36799);
 	end
@@ -251,6 +253,8 @@ function CJFrostMageRot()
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
+	
+	if IsSpellInRange("Frostbolt") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
 		if CJCooldown("Fire Blast") == 0 then

@@ -54,6 +54,11 @@ function CJFeralDruidRot()
 			CastSpell("Feral Charge(Cat Form)");
 			return;
 		end
+		
+		if IsSpellInRange("Faerie Fire(Feral)") and CJ_DebuffInfo("target","Faerie Fire") == 0 then
+			CastSpell("Faerie Fire(Feral)");
+			return;
+		end
 		return;
 	end
 			

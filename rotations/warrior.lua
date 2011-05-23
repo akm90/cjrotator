@@ -193,7 +193,7 @@ function CJFuryWarRot()
 
 	if AmIFacing == "false" then return end;
 	
-	if not IsSpellInRange("Heroic Strike") then
+	if IsSpellInRange("Heroic Strike") == 0 then
 		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") then
 			if UnitPower("player") < 10 and CJCooldown("Battle Shout") == 0 then
 				CJ_WarriorSelectShout();
@@ -247,7 +247,7 @@ function CJArmsWarRot()
 	
 	if AmIFacing == "false" then return end;
 	
-	if not IsSpellInRange("Heroic Strike") then
+	if IsSpellInRange("Heroic Strike") == 0 then
 		if CJCooldown("Charge") == 0 and IsSpellInRange("Charge") then
 			CastSpell("Charge");
 			
