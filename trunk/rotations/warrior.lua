@@ -194,13 +194,13 @@ function CJFuryWarRot()
 	if AmIFacing == "false" then return end;
 	
 	if IsSpellInRange("Heroic Strike") == 0 then
-		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") then
+		if CJCooldown("Intercept") == 0 and IsSpellInRange("Intercept") == 1 then
 			if UnitPower("player") < 10 and CJCooldown("Battle Shout") == 0 then
 				CJ_WarriorSelectShout();
 				return;
 			end
 			CastSpell("Intercept");
-		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") then
+		elseif CJCooldown("Heroic Fury") == 0 and IsSpellInRange("Intercept") == 1 then
 			if UnitPower("player") < 10 and CJCooldown("Battle Shout") == 0 then
 				CJ_WarriorSelectShout();
 				return;
