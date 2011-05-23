@@ -22,7 +22,7 @@ function CJ_WarriorCanUse(spell)
 		if CJ_HasBuff("Battle Trance") then
 			return true;
 		else
-			if UnitPower("player") >= (select(4,GetSpellInfo("Pummel")) + select(4,GetSpellInfo(spell))) then
+			if UnitPower("player") >= 10 + select(4,GetSpellInfo(spell))) then
 				return true;
 			else
 				return false;
