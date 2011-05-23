@@ -30,6 +30,8 @@ function CJDiscPriestRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	
+	if IsSpellInRange("Smite") == 0 then return end;
+	
 	if cj_purgemode == true then
 		if CJ_OffensiveDispel() then
 			CastSpell("Dispel Magic");
@@ -127,7 +129,7 @@ function CJSpriestRot()
 	end
 	
 	if GetUnitSpeed("player") > 0 then
-		if not IsSpellInRange("Devouring Plague") then return end;
+		if IsSpellInRange("Devouring Plague") == 0 then return end;
 		
 		if select(2,CJ_DebuffInfo("target","Shadow Word: Pain")) < 2 then
 			CJSPCast("Shadow Word: Pain");
