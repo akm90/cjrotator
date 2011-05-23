@@ -74,11 +74,11 @@ function CJ_Interrupt()
 		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("target");
 		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("target");
 		
-		if name1 and interrupt1=="false" then
+		if UnitCastingInfo("target") and select(9,UnitCastingInfo("target")) == false then
 			if not tableContains(cj_interruptBlacklist[un],name1) then return "target" else return false end;
 		end
 		
-		if name2 and interrupt2=="false" then
+		if UnitChannelInfo("target") and select(9,UnitChannelInfo("target")) == false then
 			if not tableContains(cj_interruptBlacklist[un],name2) then return "target" else return false end;
 		end
 		
@@ -88,11 +88,11 @@ function CJ_Interrupt()
 		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("focus");
 		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("focus");
 		
-		if name1 and interrupt1=="false" then
+		if UnitCastingInfo("focus") and select(9,UnitCastingInfo("focus")) == false then
 			if not tableContains(cj_interruptBlacklist[un],name1) then return "focus" else return false end;
 		end
 		
-		if name2 and interrupt2=="false" then
+		if UnitChannelInfo("focus") and select(9,UnitChannelInfo("focus")) == false then
 			if not tableContains(cj_interruptBlacklist[un],name2) then return "focus" else return false end;
 		end
 		
