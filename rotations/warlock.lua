@@ -43,6 +43,8 @@ function CJAffLockRot()
 	if CJCheckAffBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
+	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
 	if GetUnitSpeed("player") > 0 then
 		CJAC("Fel Flame");
 		return
