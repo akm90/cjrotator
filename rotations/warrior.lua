@@ -185,7 +185,7 @@ function CJFuryWarRot()
 	if cj_interruptmode and CJCooldown("Pummel") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Pummel",thing) then
+			if IsSpellInRange("Pummel",thing) == 1 then
 				CastSpellByName("Pummel",thing);
 			end
 		end
@@ -239,7 +239,7 @@ function CJArmsWarRot()
 	if cj_interruptmode and CJCooldown("Pummel") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Pummel",thing) then
+			if IsSpellInRange("Pummel",thing) == 1 then
 				CastSpellByName("Pummel",thing);
 			end
 		end
