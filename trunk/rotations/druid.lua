@@ -81,7 +81,7 @@ function CJFeralDruidRot()
 	end
 	
 	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") then
-		CastSpell("Ravage(Cat Form)");
+		CastSpell("Ravage!");
 		return;
 	end
 	
