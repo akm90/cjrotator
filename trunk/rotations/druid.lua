@@ -76,6 +76,7 @@ function CJFeralDruidRot()
 	
 	if AmIBehind == "true" and CJCooldown("Ravage") == 0 and CJ_HasBuff("player","Prowl") and not CJ_HasBuff("player","Stampede") then
 		CastSpell("Ravage");
+		CastSpell("Ravage!");
 		return;
 	end
 	
@@ -96,6 +97,7 @@ function CJFeralDruidRot()
 	end
 	
 	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") and IsUsableSpell("Ravage") then
+		CastSpell("Ravage");
 		CastSpell("Ravage!");
 		return;
 	end
