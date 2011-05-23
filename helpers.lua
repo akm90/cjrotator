@@ -43,6 +43,7 @@ end
 function CastSpell(spell)
 	if select(2,IsUsableSpell(spell)) == nil then
 		CastSpellByName(spell);
+		printf("Casting "..spell);
 	end
 end
 
