@@ -74,19 +74,30 @@ function CJ_Interrupt()
 		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("target");
 		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("target");
 		
-		if (not name1 or name2) or (interrupt1 or interrupt2) then return false end;
-		if tableContains(cj_interruptBlacklist[un],name1) or tableContains(cj_interruptBlacklist[un],name2) then return false end;
-		return "target";
+		if name1 and interrupt1=="false" then
+			if not tableContains(cj_interruptBlacklist[un],name1) then return "target" else return false end;
+		end
+		
+		if name2 and interrupt2=="false" then
+			if not tableContains(cj_interruptBlacklist[un],name2) then return "target" else return false end;
+		end
+		
+		return false;
 	else
 		local un = UnitName("focus");
 		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("focus");
 		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("focus");
 		
-		if (not name1 or name2) or (interrupt1 or interrupt2) then return false end;
-		if tableContains(cj_interruptBlacklist[un],name1) or tableContains(cj_interruptBlacklist[un],name2) then return false end;
-		return "focus";
+		if name1 and interrupt1=="false" then
+			if not tableContains(cj_interruptBlacklist[un],name1) then return "focus" else return false end;
+		end
+		
+		if name2 and interrupt2=="false" then
+			if not tableContains(cj_interruptBlacklist[un],name2) then return "focus" else return false end;
+		end
+		
+		return false;
 	end
-	return false;
 end
 
 function tableContains(table,element)
