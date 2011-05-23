@@ -7,7 +7,7 @@
 local T114Set = false;
 
 local function CJCheckFeralBuffs()
-	if not CJ_HasBuff("player","Mark of the Wild") then
+	if not CJ_HasBuff("player","Mark of the Wild") and not CJ_HasBuff("player","Blessing of Kings") then
 		CastSpell("Mark of the Wild");
 		return true;
 	end
@@ -41,7 +41,7 @@ function CJFeralDruidRot()
 	if cj_interruptmode and CJCooldown("Skull Bash(Cat Form)") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Skull Bash(Cat Form)",thing) then
+			if IsSpellInRange("Skull Bash(Cat Form)",thing) == 1 then
 				CastSpellByName("Skull Bash(Cat Form)",thing);
 			end
 		end
@@ -69,7 +69,12 @@ function CJFeralDruidRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckFeralBuffs() then return end; -- Check our buffs
 	
-	if AmIBehind == "true" and CJCooldown("Ravage") == 0 and CJ_HasBuff("player","Prowl") then
+	if cj_aoemode and CJCooldown("Swipe(Cat Form)") == 0 and IsUsableSpell(2,"Swipe(Cat Form)") == nil then
+		CastSpell("Swipe(Cat Form)")
+		return;
+	end
+	
+	if AmIBehind == "true" and CJCooldown("Ravage") == 0 and CJ_HasBuff("player","Prowl") and not CJ_HasBuff("player","Stampede") then
 		CastSpell("Ravage");
 		return;
 	end
@@ -90,7 +95,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") then
+	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") and IsUsableSpell("Ravage") then
 		CastSpell("Ravage!");
 		return;
 	end
