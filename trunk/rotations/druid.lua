@@ -55,7 +55,7 @@ function CJFeralDruidRot()
 			return;
 		end
 		
-		if IsSpellInRange("Faerie Fire(Feral)") and CJ_DebuffInfo("target","Faerie Fire") == 0 then
+		if IsSpellInRange("Faerie Fire(Feral)") and CJ_DebuffInfo("target","Faerie Fire") == 0 and not CJ_HasBuff("player","Prowl") then
 			CastSpell("Faerie Fire(Feral)");
 			return;
 		end
@@ -68,7 +68,12 @@ function CJFeralDruidRot()
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckFeralBuffs() then return end; -- Check our buffs
-		
+	
+	if AmIBehind == "true" and CJCooldown("Ravage") == 0 and CJ_HasBuff("player","Prowl") then
+		CastSpell("Ravage");
+		return;
+	end
+	
 	if T114Set and CJ_BuffInfo("Strength of the Panther") < 3 and CJCooldown("Mangle(Cat Form)") == 0 and facing() >= 1  then
 		CastSpell("Mangle(Cat Form)");
 		return
