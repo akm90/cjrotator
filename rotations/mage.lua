@@ -212,6 +212,11 @@ function CJFireMageRot()
 		return;
 	end
 	
+	if CJManaPercent("player") <= 40 and CJCooldown("Evocation") == 0 then
+		CastSpell("Evocation");
+		return
+	end
+	
 	if GetUnitSpeed("player") > 0 then
 		CastSpell("Scorch");
 		return;
@@ -221,6 +226,7 @@ function CJFireMageRot()
 	end
 end
 
+local lastpetcast = 0;
 -------------------------------------------
 -----------Frost----------------------------
 -------------------------------------------
@@ -250,6 +256,12 @@ local function CJ_CheckFrostBuffs()
 		return true;
 	end
 	
+	if not UnitExists("pet")  and GetTime() - lastpetcast > 5 and CJCooldown("Summon Water Elemental") == 0 then
+		CastSpell("Summon Water Elemental");
+		lastpetcast = GetTime();
+		return true;
+	end
+	
 	return false;
 end
 
@@ -266,6 +278,8 @@ function CJFrostMageRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJ_CheckFrostBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
+	
+	if not IsPetAttackActive() == nil then PetAttack() return end
 	
 	if not CJ_CheckMyCast() then return end;
 	
@@ -310,6 +324,11 @@ function CJFrostMageRot()
 	if CJ_BuffInfo("player","Fingers of Frost") > 1 then
 		CastSpell("Ice Lance");
 		return;
+	end
+	
+	if CJManaPercent("player") <= 40 and CJCooldown("Evocation") == 0 then
+		CastSpell("Evocation");
+		return
 	end
 	
 	CastSpell("Frostbolt");

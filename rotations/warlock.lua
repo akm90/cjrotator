@@ -151,7 +151,7 @@ function CJDestLockRot()
 		end
 	end
 	
-	PetAttack();
+	if not IsPetAttackActive() == nil then PetAttack() return end
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;

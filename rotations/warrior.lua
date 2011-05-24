@@ -83,6 +83,12 @@ function CJSMFRotation()
 		return;
 	end
 	
+	if CJCooldown("Sunder Armor") == 0 and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
+		CastSpell("Sunder Armor");
+		return;
+	end
+	
 	if CJ_HasBuff("player","Bloodsurge") then
 		CastSpell("Slam");
 		return;
@@ -130,7 +136,7 @@ function CJTitansRotation()
 	end
 	
 	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 and CJ_WarriorCanUse("Shattering Throw") then
-		CastShapeshiftForm("1");
+		CastShapeshiftForm(1);
 		CastSpell("Shattering Throw");
 		return;
 	end
@@ -156,6 +162,12 @@ function CJTitansRotation()
 	
 	if CJCooldown("Bloodthirst") == 0 and CJ_WarriorCanUse("Bloodthirst") then
 		CastSpell("Bloodthirst");
+		return;
+	end
+	
+	if CJCooldown("Sunder Armor") == 0 and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
+		CastSpell("Sunder Armor");
 		return;
 	end
 	
@@ -280,6 +292,12 @@ function CJArmsWarRot()
 		CastShapeshiftForm(1);
 	elseif UnitPower("player") < 75 and not CJ_HasBuff("player","Taste for Blood") and GetShapeshiftForm() ~= 3 and CJCooldown("Berserker Stance") == 0 and select(2,CJ_DebuffInfo("target","Rend")) > .2 then
 		CastShapeshiftForm(3);	
+	end
+	
+	if not cj_aoemode and not GetShapeshiftForm() == 1 and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 and CJ_WarriorCanUse("Shattering Throw") then
+		CastShapeshiftForm(1);
+		CastSpell("Shattering Throw");
+		return;
 	end
 	
 	if CJCooldown("Charge") == 0 and IsUsableSpell("Charge") then
