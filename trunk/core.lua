@@ -9,6 +9,7 @@ local PURGEKEY = "Z";
 local HOLDDOWN = false;-- If this is true, you have to hold the key down.  If it is false, just press it to turn it on, press again to turn off.
 local STOPAFTERCOMBAT = true;-- Disable after combat
 local DEBUGMODE = false;-- debugmode
+CJ_PURGEPLAYERS = false;
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
