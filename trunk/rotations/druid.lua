@@ -7,7 +7,11 @@
 local T114Set = false;
 
 local function CJCheckFeralBuffs()
-	if not CJ_HasBuff("player","Mark of the Wild") and not CJ_HasBuff("player","Blessing of Kings") then
+	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
+		if GetShapeshiftForm() ~= 0 then
+			CastShapeshiftForm(3);
+			return;
+		end
 		CastSpell("Mark of the Wild");
 		return true;
 	end
@@ -69,7 +73,7 @@ function CJFeralDruidRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckFeralBuffs() then return end; -- Check our buffs
 	
-	if cj_aoemode and CJCooldown("Swipe(Cat Form)") == 0 and IsUsableSpell(2,"Swipe(Cat Form)") == nil then
+	if cj_aoemode and CJCooldown("Swipe") == 0 and IsUsableSpell(2,"Swipe(Cat Form)") == nil then
 		CastSpell("Swipe(Cat Form)")
 		return;
 	end
@@ -91,7 +95,8 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if select(2,CJ_DebuffInfo("target","Mangle")) <= 2 and CJCooldown("Mangle") == 0 then
+	if select(2,CJ_DebuffInfo("target","Mangle")) <= 2 and CJCooldown("Mangle") == 0 
+	and not CJ_HasOtherDebuff("target","Trauma") and not CJ_HasOtherDebuff("target","Hemorrhage") then
 		CastSpell("Mangle(Cat Form)");
 		return;
 	end
@@ -133,7 +138,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if CJ_Combo() >= 1 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 then
+	if CJ_Combo() <= 2 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 then
 		CastSpell("Savage Roar(Cat Form)");
 		return;
 	end
