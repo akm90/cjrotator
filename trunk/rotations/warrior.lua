@@ -223,6 +223,10 @@ function CJFuryWarRot()
 		return;
 	end
 	
+	if cj_aoemode and CJCooldown("Inner Rage") == 0 then
+		CastSpell("Inner Rage");
+	end
+	
 	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 30 then
 		CastSpell("Cleave")
 	end
@@ -243,6 +247,11 @@ function CJFuryWarRot()
 	or select(2,CJ_DebuffInfo("target","Sunder Armor")) < 5.5) and not 
 	(CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
+		return;
+	end
+	
+	if cj_aoemode and CJHealthPercent("player") < 50 and CJCooldown("Enraged Regeneration") == 0 then
+		CastSpell("Enraged Regeneration");
 		return;
 	end
 	
