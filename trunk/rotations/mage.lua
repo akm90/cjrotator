@@ -293,7 +293,7 @@ function CJFrostMageRot()
 	end
 	
 	if CJCooldown(92283) == 0 then
-		CastSpell(92283);
+		CastSpell("Flame Orb");
 		return;
 	end
 	
