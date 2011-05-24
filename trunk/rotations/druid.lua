@@ -4,13 +4,13 @@
 --------Feral Kitty----------------
 -----------------------------------
 
-local T114Set = false;
+local fourset = false;
 
 local function CJCheckFeralBuffs()
 	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
 		if GetShapeshiftForm() ~= 0 then
-			CastShapeshiftForm(3);
-			return;
+			RunMacroText("/cancelform");
+			return true;
 		end
 		CastSpell("Mark of the Wild");
 		return true;
@@ -84,12 +84,12 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if T114Set and CJ_BuffInfo("Strength of the Panther") < 3 and CJCooldown("Mangle(Cat Form)") == 0 and facing() >= 1  then
+	if fourset and CJ_BuffInfo("Strength of the Panther") < 3 and CJCooldown("Mangle(Cat Form)") == 0 and facing() >= 1  then
 		CastSpell("Mangle(Cat Form)");
 		return
 	end
 	
-	if CJCooldown("Faerie Fire") == 0 and CJ_DebuffInfo("target","Faerie Fire") < 3 
+	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
 	and not (CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) and facing() >= 1 then
 		CastSpell("Faerie Fire (Feral)");
 		return;
@@ -173,4 +173,159 @@ function CJFeralDruidRot()
 		CastSpell("Mangle(Cat Form)");
 		return;
 	end
+end
+
+-----------------------------------
+--------Boomkin -------------------
+-----------------------------------
+local lastSwap = "";
+
+local function CJ_Eclipse()
+	return UnitPower("player",8);
+end
+
+local function CJCheckBalanceBuffs()
+	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
+		if GetShapeshiftForm() ~= 0 then
+			RunMacroText("/cancelform");
+			return;
+		end
+		CastSpell("Mark of the Wild");
+		return true;
+	end
+	
+	if GetShapeshiftForm() ~= 5 then
+		CastShapeshiftForm(5);
+		return true;
+	end
+	return false;
+end
+
+function CJBalanceDruidRot()
+	if not CJ_GCD() then return end; -- Check for GCD
+	if not CJ_CheckMyCast() then return end;
+	if CJCheckBalanceBuffs() then return end; -- Check our buffs
+	if AmIFacing == "false" then return end;
+	
+	
+	if IsSpellInRange("Wrath") == 0 then return end;
+	
+	if GetUnitSpeed("player") > 0 then
+		if select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 or (select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 and
+		CJ_HasBuff("Eclipse (Solar)") and CJ_Eclipse() < 15) then
+			CastSpell("Insect Swarm");
+			return;
+		end
+		
+		if CJ_HasBuff("player","Eclipse (Solar)") then
+			CastSpell("Sunfire");
+			return;
+		end
+		
+		CastSpell("Moonfire");
+		return;
+	end
+	
+	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
+	and not (CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) then
+		CastSpell("Faerie Fire");
+		return;
+	end
+	
+	if select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 or (select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 and
+	CJ_HasBuff("Eclipse (Solar)") and CJ_Eclipse() < 15) then
+		CastSpell("Insect Swarm");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Astral Alignment") and CJCooldown("Starsurge") == 0 then
+		CastSpell("Starsurge");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Astral Alignment") and CJ_HasBuff("player","Eclipse (Lunar") then
+		CastSpell("Starfire");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Astral Alignment") then
+		CastSpell("Wrath");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Eclipse (Lunar)") and CJCooldown("Starfall") == 0 and  foruset and not CJ_HasBuff("player","Astral Alignment") then
+		CastSpell("Starfall");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Eclipse (Solar)") then
+		if (fourset and not CJ_HasBuff("player","Astral Alignment")) or (not fourset) then
+			if ((select(2,CJ_DebuffInfo("target","Sunfire")) < 3) or (select(2,CJ_DebuffInfo("target","Sunfire")) < 4 and 
+			CJ_HasBuff("player","Eclipse (Solar)") and CJ_Eclipse() < 15)) and not CJ_HasDebuff("target","Moonfire") then
+				CastSpell("Sunfire");
+				return
+			end
+		end
+	end
+	
+	if not CJ_HasBuff("player","Eclipse (Solar)") then
+		if (fourset and not CJ_HasBuff("player","Astral Alignment")) or (not fourset) and not CJ_HasDebuff("target","Sunfire") then
+			if not CJ_HasBuff("player","Eclipse (Lunar)") then
+				if select(2,CJ_DebuffInfo("target","Moonfire")) < 3 then
+					CastSpell("Moonfire");
+					return;
+				end
+			else
+				if select(2,CJ_DebuffInfo("target","Moonfire")) < 4 and CJ_Eclipse() < 20 then
+					CastSpell("Moonfire");
+					return;
+				end
+			end
+		end
+	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() < 80 and CJCooldown("Starsurge") == 0 then
+		CastSpell("Starsurge");
+		return;
+	elseif GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 and CJCooldown("Starsurge") == 0 then
+		CastSpell("Starsurge");
+		return;
+	end
+	
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 and lastSwap == "Wrath" then
+		CastSpell("Starfire");
+		lastSwap = "";
+		return;
+	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80 and lastSwap == "Starfire" then
+		CastSpell("Wrath");
+		lastSwap = "";
+		return;
+	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() < 80 then
+		CastSpell("Starfire");
+		lastSwap = "Starfire";
+		return;
+	end
+	
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 then
+		CastSpell("Wrath")
+		lastSwap = "Wrath";
+		return;
+	end
+	
+	if GetEclipseDirection() == "sun" then
+		CastSpell("Starfire");
+		return
+	end
+	
+	if GetEclipseDirection() == "moon" then
+		CastSpell("Wrath");
+		return;
+	end
+	
+	CastSpell("Starfire");
+	return;
 end
