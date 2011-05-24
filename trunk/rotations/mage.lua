@@ -192,7 +192,7 @@ function CJFireMageRot()
 		UseItemByName(36799);
 	end
 	
-	if not CJ_HasOtherDebuff("Shadow and Flames") and select(2,CJ_Debuff("target","Critical Mass") < 6) then
+	if not CJ_HasOtherDebuff("target","Shadow and Flames") and select(2,CJ_DebuffInfo("target","Critical Mass") < 6) then
 		CastSpell("Scorch");
 		return;
 	end
