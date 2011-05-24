@@ -203,10 +203,15 @@ function CJ_DestroLockRotation()
 			CastSpell("Soul Fire");
 			return;
 		else
-			if select(2,CJ_BuffInfo("player","Empowered Imp") < (select(2,CJ_BuffInfo("player","Improved Soul Fire")) + .75) then
+			if select(2,CJ_BuffInfo("player","Empowered Imp")) < (select(2,CJ_BuffInfo("player","Improved Soul Fire")) + .75) then
 				CastSpell("Soul Fire");
 				return;
 			end
 		end
+	end
+	
+	if CJCooldown("Chaos Bolt") == 0 then
+		CastSpell("Chaos Bolt");
+		return;
 	end
 end
