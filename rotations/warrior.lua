@@ -62,7 +62,7 @@ function CJSMFRotation()
 	end
 	
 	if not cj_aoemode and CJ_DetectHero() and CJCooldown("Shattering Throw") == 0 and CJ_WarriorCanUse("Shattering Throw") then
-		CastShapeshiftForm("1");
+		CastShapeshiftForm(1);
 		CastSpell("Shattering Throw");
 		return;
 	end
@@ -88,13 +88,6 @@ function CJSMFRotation()
 	
 	if CJCooldown("Bloodthirst") == 0 and CJ_WarriorCanUse("Bloodthirst") then
 		CastSpell("Bloodthirst");
-		return;
-	end
-	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7
-	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
-	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
-		CastSpell("Sunder Armor");
 		return;
 	end
 	
@@ -174,13 +167,6 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3
-	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
-	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10	then
-		CastSpell("Sunder Armor");
-		return;
-	end
-	
 	if CJCooldown("Berserker Rage") == 0 and not ((CJ_HasBuff("player","Death Wish") or CJ_HasBuff("player","Enrage") or CJ_HasBuff("player","Unholy Frenzy")) 
 	and UnitPower("player") > 15 and CJCooldown("Raging Blow") < 1) then
 		CastSpell("Berserker Rage");
@@ -252,6 +238,13 @@ function CJFuryWarRot()
 	end
 	
 	if not CJ_GCD() then return end; -- Check for GCD
+	
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
+	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
+		CastSpell("Sunder Armor");
+		return;
+	end
 	
 	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
 		CJTitansRotation();
@@ -342,6 +335,13 @@ function CJArmsWarRot()
 		return;
 	end
 	
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
+	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
+		CastSpell("Sunder Armor");
+		return;
+	end
+	
 	if cj_warriorhamstring and not CJ_HasDebuff("target","Hamstring") and CJ_WarriorCanUse("Hamstring") then
 		CastSpell("Hamstring");
 		return;
@@ -394,13 +394,6 @@ function CJArmsWarRot()
 	
 	if GetShapeshiftForm() == 3 and  CJHealthPercent("target") < 20 and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute") then
 		CastSpell("Execute");
-		return;
-	end
-	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
-	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
-	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
-		CastSpell("Sunder Armor");
 		return;
 	end
 	
