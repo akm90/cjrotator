@@ -5,7 +5,7 @@
 -----------------------------
 
 local lastuacast = 0;
-local lastfelhuntercast = 0;
+local lastpetcast = 0;
 
 local function CJCheckAffBuffs()
 	--Cast Dark Intent yourself!
@@ -14,9 +14,9 @@ local function CJCheckAffBuffs()
 		return true;
 	end
 	
-	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" and GetTime() - lastfelhuntercast > 3 then
+	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" and GetTime() - lastpetcast > 15 then
 		CastSpell("Summon Felhunter");
-		lastfelhuntercast = GetTime();
+		lastpetcast = GetTime();
 		return true;
 	end
 	
@@ -33,7 +33,7 @@ function CJAffLockRot()
 		end
 	end
 	
-	PetAttack();
+	if not IsPetAttackActive() == nil then PetAttack() return end
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
@@ -110,4 +110,103 @@ function CJAffLockRot()
 	
 	CastSpell("Shadow Bolt");
 	return;
+end
+
+-----------------------------
+---------Destruction----------
+-----------------------------
+
+local function CJ_CheckDestroBuffs()
+	if not CJ_HasBuff("player","Fel Armor") then
+		CastSpell("Fel Armor");
+		return true;
+	end
+	
+	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Imp" and GetTime() - lastpetcast > 15 then
+		CastSpell("Summon Felhunter");
+		lastpetcast = GetTime();
+		return true;
+	end
+	
+	return false;
+end
+
+function CJ_DestroLockRotation()
+	if cj_interruptmode and GetSpellCooldown("Spell Lock","BOOKTYPE_PET") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Spell Lock",thing) and AmIFacing == "true" then
+				CastSpellByName("Spell Lock",thing);
+			end
+		end
+	end
+	
+	PetAttack();
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if not CJ_CheckMyCast() then return end;
+	if CJCheckDestroBuffs() then return end; -- Check our buffs
+	if AmIFacing == "false" then return end;
+	
+	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
+	if GetUnitSpeed("player") > 0 then
+		CastSpell("Fel Flame");
+		return
+	end
+	
+	if CJCooldown("Demon Soul") == 0 then
+		CastSpell("Demon Soul");
+	end
+	
+	if CJCooldown("Soulburn") == 0 then
+		CastSpell("SoulBurn");
+	end
+	
+	if CJCooldown("Soul Fire") == 0 and CJ_HasBuff("player","Soulburn") then
+		CastSpell("Soul Fire");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Fel Spark") and select(2,CJ_DebuffInfo("target","Immolate")) < 8 and CJ_HasDebuff("target","Immolate") then
+		CastSpell("Fel Flame");
+		return;
+	end
+	
+	if select(2,CJ_DebuffInfo("target","Immolate")) < 3.5 then
+		CastSpell("Immolate");
+		return;
+	end
+	
+	if CJCooldown("Conflagrate") == 0 then
+		CastSpell("Conflagrate");
+		return;
+	end
+	
+	if not CJ_HasDebuff("target","Bane of Doom") then
+		CastSpell("Bane of Doom");
+		return;
+	end 
+	
+	if not select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
+		CastSpell("Corruption");
+		return;
+	end
+	
+	if CJCooldown("Shadowflame") == 0 then
+		CastSpell("Shadowflame");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Empowered Imp") then
+		if not CJ_HasBuff("player","Improved Soul Fire") then
+			CastSpell("Soul Fire");
+			return;
+		else
+			if select(2,CJ_BuffInfo("player","Empowered Imp") < (select(2,CJ_BuffInfo("player","Improved Soul Fire")) + .75) then
+				CastSpell("Soul Fire");
+				return;
+			end
+		end
+	end
 end

@@ -140,7 +140,7 @@ local function CJ_CheckFireBuffs()
 		return true;
 	end
 	
-	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("Molten Armor") then
+	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("player","Molten Armor") then
 		CastSpell("Molten Armor");
 		return true;
 	end
