@@ -273,6 +273,7 @@ function CJFrostMageRot()
 	if cj_purgemode == true then
 		if CJ_OffensiveDispel() then
 			CastSpell("Spellsteal");
+			return;
 		end
 	end
 	if IsSpellInRange("Frostbolt") == 0 then return end;
