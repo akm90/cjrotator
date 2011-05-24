@@ -6,6 +6,7 @@
 
 local lastuacast = 0;
 local lastpetcast = 0;
+local lastimmolatecast = 0;
 
 local function CJCheckAffBuffs()
 	--Cast Dark Intent yourself!
@@ -203,8 +204,9 @@ function CJDestLockRot()
 		return;
 	end
 	
-	if select(2,CJ_DebuffInfo("target","Immolate")) < 3.5 then
+	if select(2,CJ_DebuffInfo("target","Immolate")) < 3.5 and GetTime() - lastimmolatecast > 4 then
 		CastSpell("Immolate");
+		lastimmolatecast = GetTime();
 		return;
 	end
 	
@@ -282,5 +284,57 @@ local function CJCheckDemoBuffs()
 end
 
 function CJDemoLockRot()
+	if cj_interruptmode and GetSpellCooldown("Spell Lock","BOOKTYPE_PET") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Spell Lock",thing) and AmIFacing == "true" then
+				CastSpellByName("Spell Lock",thing);
+			end
+		end
+	end
 	
+	if not IsPetAttackActive() == nil then PetAttack() return end
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if not CJ_CheckMyCast() then return end;
+	if CJCheckDestroBuffs() then return end; -- Check our buffs
+	if AmIFacing == "false" then return end;
+
+	if IsSpellInRange("Shadow Bolt") == 0 then return end;
+
+	if select(2,CJ_BuffInfo("player","Metamorphosis")) > 10 and CJCooldown("Immolation Aura") == 0 then
+		CastSpell("Immolation Aura");
+		return;
+	end
+	
+	if not CJ_HasDebuff("Curse of the Elements") then
+		CastSpell("Curse of the Elements");
+		return;
+	end
+	
+	if not CJ_HasDebuff("target","Bane of Doom") then
+		CastSpell("Bane of Doom");
+		return;
+	end
+	
+	if not CJ_HasDebuff("target","Immolate") and GetTime() - lastimmolatecast > 4 then
+		CastSpell("Immolate");
+		lastimmolatecast = GetTime();
+		return;
+	end
+	
+	if select(2,CJ_DebuffInfo("target","Corruption")) < 3 then
+		CastSpell("Corruption");
+		return;
+	end
+	
+	if CJ_HasBuff("Fel Spark") then
+		CastSpell("Fel Flame");
+		return;
+	end
+	
+	if CJCooldown("Shadowflame") == 0 then
+		CastSpell("Shadowflame");
+		return;
+	end
 end

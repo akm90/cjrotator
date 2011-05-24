@@ -315,6 +315,10 @@ function CJArmsWarRot()
 		CastSpell("Sweeping Strikes")
 	end
 	
+	if cj_aoemode and CJCooldown("Inner Rage") == 0 then
+		CastSpell("Inner Rage");
+	end
+	
 	if cj_aoemode and CJCooldown("Cleave") == 0 and UnitPower("player") >= 40 and CJ_WarriorCanUse("Cleave") then
 		CastSpell("Cleave")
 	end
