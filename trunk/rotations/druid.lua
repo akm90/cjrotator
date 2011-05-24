@@ -163,4 +163,9 @@ function CJFeralDruidRot()
 		CastSpell("Shred(Cat Form)");
 		return;
 	end
+	
+	if AmIBehind == "false" then
+		CastSpell("Mangle(Cat Form)");
+		return;
+	end
 end
