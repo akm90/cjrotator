@@ -4,7 +4,8 @@
 --------Feral Kitty----------------
 -----------------------------------
 
-local fourset = false;
+local balancefourset = false;
+local feralfourset = false;
 
 local function CJCheckFeralBuffs()
 	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
@@ -84,7 +85,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if fourset and CJ_BuffInfo("Strength of the Panther") < 3 and CJCooldown("Mangle(Cat Form)") == 0 and facing() >= 1  then
+	if feralfourset and CJ_BuffInfo("Strength of the Panther") < 3 and CJCooldown("Mangle(Cat Form)") == 0 and facing() >= 1  then
 		CastSpell("Mangle(Cat Form)");
 		return
 	end
@@ -259,7 +260,7 @@ function CJBalanceDruidRot()
 	end
 	
 	if CJ_HasBuff("player","Eclipse (Solar)") then
-		if (fourset and not CJ_HasBuff("player","Astral Alignment")) or (not fourset) then
+		if (balancefourset and not CJ_HasBuff("player","Astral Alignment")) or (not balancefourset) then
 			if ((select(2,CJ_DebuffInfo("target","Sunfire")) < 3) or (select(2,CJ_DebuffInfo("target","Sunfire")) < 4 and 
 			CJ_HasBuff("player","Eclipse (Solar)") and CJ_Eclipse() < 15)) and not CJ_HasDebuff("target","Moonfire") then
 				CastSpell("Sunfire");
@@ -269,7 +270,7 @@ function CJBalanceDruidRot()
 	end
 	
 	if not CJ_HasBuff("player","Eclipse (Solar)") then
-		if (fourset and not CJ_HasBuff("player","Astral Alignment")) or (not fourset) and not CJ_HasDebuff("target","Sunfire") then
+		if (balancefourset and not CJ_HasBuff("player","Astral Alignment")) or (not balancefourset) and not CJ_HasDebuff("target","Sunfire") then
 			if not CJ_HasBuff("player","Eclipse (Lunar)") then
 				if select(2,CJ_DebuffInfo("target","Moonfire")) < 3 then
 					CastSpell("Moonfire");
