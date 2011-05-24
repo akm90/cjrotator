@@ -170,9 +170,19 @@ function CJDestLockRot()
 			CastSpell("Bane of Doom");
 			return;
 		end
+		
+		if not CJ_HasDebuff("target","Curse of the Elements") then
+			CastSpell("Curse of the Elements");
+			return;
+		end
 	
 		CastSpell("Fel Flame");
 		return
+	end
+	
+	if not CJ_HasDebuff("target","Curse of the Elements") then
+		CastSpell("Curse of the Elements");
+		return;
 	end
 	
 	if CJCooldown("Demon Soul") == 0 then
