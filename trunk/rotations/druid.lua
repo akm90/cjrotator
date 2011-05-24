@@ -8,7 +8,7 @@ local balancefourset = false;
 local feralfourset = false;
 
 local function CJCheckFeralBuffs()
-	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
+	if (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
 		if GetShapeshiftForm() ~= 0 then
 			RunMacroText("/cancelform");
 			return true;
@@ -186,7 +186,7 @@ local function CJ_Eclipse()
 end
 
 local function CJCheckBalanceBuffs()
-	if not CJ_HasBuff("player","Mark of the Wild") or not CJ_HasBuff("player","Blessing of Kings") then
+	if (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
 		if GetShapeshiftForm() ~= 0 then
 			RunMacroText("/cancelform");
 			return;
@@ -205,7 +205,7 @@ end
 function CJBalanceDruidRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
-	--if CJCheckBalanceBuffs() then return end; -- Check our buffs
+	if CJCheckBalanceBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
 	
