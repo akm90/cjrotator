@@ -302,6 +302,26 @@ function CJDemoLockRot()
 
 	if IsSpellInRange("Shadow Bolt") == 0 then return end;
 
+	if GetUnitSpeed("player") > 0 then
+		if not CJ_HasDebuff("Curse of the Elements") then
+			CastSpell("Curse of the Elements");
+			return;
+		end
+		
+		if not CJ_HasDebuff("target","Bane of Doom") then
+			CastSpell("Bane of Doom");
+			return;
+		end
+		
+		if select(2,CJ_DebuffInfo("target","Corruption")) < 3 then
+			CastSpell("Corruption");
+			return;
+		end
+		
+		CastSpell("Fel Flame");
+		return
+	end
+	
 	if select(2,CJ_BuffInfo("player","Metamorphosis")) > 10 and CJCooldown("Immolation Aura") == 0 then
 		CastSpell("Immolation Aura");
 		return;
@@ -337,4 +357,27 @@ function CJDemoLockRot()
 		CastSpell("Shadowflame");
 		return;
 	end
+	
+	if CJCooldown("Hand of Guldan") == 0 then
+		CastSpell("Hand of Guldan");
+		return;
+	end
+	
+	if CJ_HasBuff("player","Molten Core") then
+		CastSpell("Incinerate");
+		return;
+	end
+	
+	if CJCooldown("Soulburn") == 0 then
+		CastSpell("Soulburn");
+		return;
+	end
+	
+	if CJCooldown("Soul Fire") == 0 and (CJ_HasBuff("player","Decimation") or CJ_HasBuff("player","Soulburn")) then
+		CastSpell("Soul Fire");
+		return;
+	end
+	
+	CastSpell("Shadowbolt");
+	return;
 end
