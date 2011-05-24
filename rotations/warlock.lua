@@ -133,7 +133,7 @@ local function CJCheckDestroBuffs()
 	end
 	
 	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Imp" and GetTime() - lastpetcast > 15 then
-		CastSpell("Summon Felhunter");
+		CastSpell("Summon Imp");
 		lastpetcast = GetTime();
 		return true;
 	end
@@ -260,4 +260,27 @@ function CJDestLockRot()
 	
 	CastSpell("Incinerate");
 	return;
+end
+
+-----------------------------
+---------Demonology----------
+-----------------------------
+
+local function CJCheckDemoBuffs()
+	if not CJ_HasBuff("player","Fel Armor") then
+		CastSpell("Fel Armor");
+		return true;
+	end
+	
+	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" and GetTime() - lastpetcast > 15 then
+		CastSpell("Summon Felhunter");
+		lastpetcast = GetTime();
+		return true;
+	end
+	
+	return false;
+end
+
+function CJDemoLockRot()
+	
 end
