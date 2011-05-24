@@ -91,7 +91,7 @@ function CJSMFRotation()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
 		return;
@@ -173,7 +173,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
 		return;
@@ -395,7 +395,7 @@ function CJArmsWarRot()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7 
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
 		return;
