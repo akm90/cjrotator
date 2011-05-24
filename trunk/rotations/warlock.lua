@@ -4,6 +4,9 @@
 ---------Affliction----------
 -----------------------------
 
+local lastuacast = 0;
+local lastfelhuntercast = 0;
+
 local function CJCheckAffBuffs()
 	--Cast Dark Intent yourself!
 	if not CJ_HasBuff("player","Fel Armor") then
@@ -11,19 +14,13 @@ local function CJCheckAffBuffs()
 		return true;
 	end
 	
-	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" then
+	if not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter" and GetTime() - lastfelhuntercast > 3 then
 		CastSpell("Summon Felhunter");
+		lastfelhuntercast = GetTime();
 		return true;
 	end
 	
 	return false;
-end
-
-
-local lastspell;
-local function CJAC(spell)
-	lastspell = spell;
-	CastSpell(spell);
 end
 
 function CJAffLockRot()
@@ -46,7 +43,7 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
-		CJAC("Fel Flame");
+		CastSpell("Fel Flame");
 		return
 	end
 	
@@ -57,59 +54,60 @@ function CJAffLockRot()
 	
 	if select(2,CJ_DebuffInfo("target","Corruption")) > 0 and select(2,CJ_DebuffInfo("target","Unstable Affliction")) > 0 
 		and select(2,CJ_DebuffInfo("target","Bane of Doom")) > 0 and select(2,CJ_DebuffInfo("target","Haunt")) > 0 then
-		CJAC("Demon Soul");
+		CastSpell("Demon Soul");
 	end
 	
 	if select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
-		CJAC("Corruption");
+		CastSpell("Corruption");
 		return;
 	end
 	
-	if select(2,CJ_DebuffInfo("target","Unstable Affliction")) < 2.5 and lastspell ~= "Unstable Affliction" then
-		CJAC("Unstable Affliction");
+	if select(2,CJ_DebuffInfo("target","Unstable Affliction")) < 2.5 and GetTime() - lastuacast > 2.5 then
+		CastSpell("Unstable Affliction");
+		lastuacast = GetTime();
 		return;
 	end
 	
 	if not CJ_HasDebuff("target","Bane of Doom") then
-		CJAC("Bane of Doom");
+		CastSpell("Bane of Doom");
 		return;
 	end
 	
 	if select(2,CJ_DebuffInfo("target","Haunt")) < 2.5 and lastspell ~= "Haunt" then
-		CJAC("Haunt");
+		CastSpell("Haunt");
 		return;
 	end
 	
 	if select(2,CJ_DebuffInfo("target","Unstable Affliction")) < 8 and CJ_HasBuff("player","Fel Spark") then
-		CJAC("Fel Flame")
+		CastSpell("Fel Flame")
 		return;
 	end
 	
 	if CJHealthPercent("target") <= 25 then
-		CJAC("Drain Soul");
+		CastSpell("Drain Soul");
 		return;
 	end
 	
 	if CJCooldown("Shadowflame") == 0 then
-		CJAC("Shadowflame");
+		CastSpell("Shadowflame");
 		return;
 	end
 	
 	if CJManaPercent("player") <= 35 then
-		CJAC("Life Tap");
+		CastSpell("Life Tap");
 		return;
 	end
 	
 	if CJCooldown("Soulburn") == 0 and not CJ_HasBuff("player","Demon Soul") then
-		CJAC("Soulburn");
+		CastSpell("Soulburn");
 		return;
 	end
 	
 	if CJ_HasBuff("player","Soulburn") and CJCooldown("Soul Fire") == 0 then
-		CJAC("Soul Fire");
+		CastSpell("Soul Fire");
 		return;
 	end
 	
-	CJAC("Shadow Bolt");
+	CastSpell("Shadow Bolt");
 	return;
 end
