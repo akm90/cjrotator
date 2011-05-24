@@ -4,6 +4,14 @@ cj_warriorhamstring = false
 ------------Fury----------------
 --------------------------------
 
+local function CJ_WarriorSunder()
+	if (UnitLevel("target") >= 87 and UnitClassification("target") == "elite") or UnitClassification("target") == "worldboss" then
+		return true;
+	else
+		return false;
+	end
+end
+
 function CJ_WarriorSelectShout()
 	if not (CJCooldown("Battle Shout") == 0 or CJCooldown("Commanding Shout") == 0) then return end;
 	if (CJ_HasBuff("player","Horn of Winter") or CJ_HasBuff("player","Strength of Earth Totem") or CJ_HasBuff("player","Roar of Courage")) then
@@ -83,7 +91,7 @@ function CJSMFRotation()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
 		return;
@@ -165,7 +173,7 @@ function CJTitansRotation()
 		return;
 	end
 	
-	if CJCooldown("Sunder Armor") == 0 and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Sunder Armor");
 		return;
@@ -384,6 +392,12 @@ function CJArmsWarRot()
 	
 	if GetShapeshiftForm() == 3 and  CJHealthPercent("target") < 20 and CJCooldown("Execute") == 0 and CJ_WarriorCanUse("Execute") then
 		CastSpell("Execute");
+		return;
+	end
+	
+	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor")) then
+		CastSpell("Sunder Armor");
 		return;
 	end
 	
