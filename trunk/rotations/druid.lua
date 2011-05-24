@@ -138,7 +138,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if CJ_Combo() <= 2 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 then
+	if CJ_Combo() <= 2 and CJ_Combo() >= 1 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 then
 		CastSpell("Savage Roar(Cat Form)");
 		return;
 	end
