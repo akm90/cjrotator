@@ -11,6 +11,7 @@ rotations\mage.lua
 rotations\priest.lua
 rotations\warlock.lua
 rotations\druid.lua
+rotations\deathknight.lua
 
 rotationTable.lua
 core.lua
