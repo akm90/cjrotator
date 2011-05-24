@@ -236,6 +236,7 @@ function CJ_SelectSpec()
 end
 
 function CJ_OffensiveDispel()
+	if UnitIsPlayer("target") and not CJ_PURGEPLAYERS then return false end;
 	if class == "Shaman" then
 		for i = 1,40 do
 			local _,_,_,_,dispelType = UnitBuff("target",i);
@@ -252,11 +253,9 @@ function CJ_OffensiveDispel()
 				return true;
 			end
 		end
-	elseif class == "Hunter" then
+	elseif class == "Mage" then
 		for i = 1,40 do
-			local _,_,_,_,dispelType = UnitBuff("target",i);
-			
-			if dispelType == "Magic" then
+			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
 				return true;
 			end
 		end

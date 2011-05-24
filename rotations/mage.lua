@@ -40,6 +40,7 @@ function CJArcMageRot()
 	if CJ_CheckArcaneBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
+	
 	if GetUnitSpeed("player") > 0 then
 		if IsSpellInRange("Arcane Barrage") == 0 then return end;
 		if CJCooldown("Arcane Barrage") == 0 then
@@ -61,6 +62,13 @@ function CJArcMageRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	if IsSpellInRange("Arcane Blast") == 0 then return end;
+	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Spellsteal");
+			return;
+		end
+	end
 	
 	if CJCooldown("Arcane Power") == 0 and CJ_IsBossMob() then
 		if CJHealthPercent("target") <= 12 then
@@ -171,6 +179,13 @@ function CJFireMageRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Spellsteal");
+			return;
+		end
+	end
+	
 	if IsSpellInRange("Fireball") == 0 then return end;
 	
 	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
@@ -254,6 +269,13 @@ function CJFrostMageRot()
 	
 	if not CJ_CheckMyCast() then return end;
 	
+	
+	if cj_purgemode == true then
+		if CJ_OffensiveDispel() then
+			CastSpell("Spellsteal");
+			return;
+		end
+	end
 	if IsSpellInRange("Frostbolt") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
