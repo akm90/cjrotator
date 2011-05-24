@@ -105,7 +105,7 @@ function CJAffLockRot()
 		return;
 	end
 	
-	if CJ_HasBuff("player","Demon Soul") and CJCooldown("Soulfire") == 0 then
+	if CJ_HasBuff("player","Soulburn") and CJCooldown("Soulfire") == 0 then
 		CJAC("Soul Fire");
 		return;
 	end
