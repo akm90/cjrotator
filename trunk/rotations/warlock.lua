@@ -43,6 +43,16 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
+		if select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
+			CastSpell("Corruption");
+			return;
+		end
+	
+		if not CJ_HasDebuff("target","Bane of Doom") then
+			CastSpell("Bane of Doom");
+			return;
+		end
+	
 		CastSpell("Fel Flame");
 		return
 	end
@@ -116,7 +126,7 @@ end
 ---------Destruction----------
 -----------------------------
 
-local function CJ_CheckDestroBuffs()
+local function CJCheckDestroBuffs()
 	if not CJ_HasBuff("player","Fel Armor") then
 		CastSpell("Fel Armor");
 		return true;
@@ -131,7 +141,7 @@ local function CJ_CheckDestroBuffs()
 	return false;
 end
 
-function CJ_DestroLockRotation()
+function CJDestLockRot()
 	if cj_interruptmode and GetSpellCooldown("Spell Lock","BOOKTYPE_PET") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
@@ -151,6 +161,16 @@ function CJ_DestroLockRotation()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
+		if select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
+			CastSpell("Corruption");
+			return;
+		end
+		
+		if not CJ_HasDebuff("target","Bane of Doom") then
+			CastSpell("Bane of Doom");
+			return;
+		end
+	
 		CastSpell("Fel Flame");
 		return
 	end
@@ -188,7 +208,7 @@ function CJ_DestroLockRotation()
 		return;
 	end 
 	
-	if not select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
+	if select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
 		CastSpell("Corruption");
 		return;
 	end
@@ -214,4 +234,20 @@ function CJ_DestroLockRotation()
 		CastSpell("Chaos Bolt");
 		return;
 	end
+	
+	if CJCooldown("Soul Fire") == 0 then
+		if select(2,CJ_BuffInfo("player","Improved Soul Fire")) < (select(7,GetSpellInfo("Soul Fire")) + .75 
+		+ select(7,GetSpellInfo("Incinerate")) + 1.3) then
+			CastSpell("Soul Fire");
+			return;
+		end
+	end
+	
+	if CJHealthPercent("target") < 20 and CJCooldown("Shadowburn") == 0 then
+		CastSpell("Shadowburn");
+		return;
+	end
+	
+	CastSpell("Incinerate");
+	return;
 end
