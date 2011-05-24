@@ -292,8 +292,8 @@ function CJFrostMageRot()
 		UseItemByName(36799);
 	end
 	
-	if CJCooldown("Frostfire Orb") == 0 then
-		CastSpell("Frostfire Orb");
+	if CJCooldown(92283) == 0 then
+		CastSpell(92283);
 		return;
 	end
 	
