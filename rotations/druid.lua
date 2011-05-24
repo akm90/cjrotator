@@ -204,7 +204,7 @@ end
 function CJBalanceDruidRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
-	if CJCheckBalanceBuffs() then return end; -- Check our buffs
+	--if CJCheckBalanceBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
 	
@@ -276,7 +276,7 @@ function CJBalanceDruidRot()
 					return;
 				end
 			else
-				if select(2,CJ_DebuffInfo("target","Moonfire")) < 4 and CJ_Eclipse() < 20 then
+				if select(2,CJ_DebuffInfo("target","Moonfire")) < 4 and CJ_Eclipse() > -20 then
 					CastSpell("Moonfire");
 					return;
 				end
@@ -284,23 +284,9 @@ function CJBalanceDruidRot()
 		end
 	end
 	
-	if GetEclipseDirection() == "sun" and CJ_Eclipse() < 80 and CJCooldown("Starsurge") == 0 then
+	if CJCooldown("Starsurge") == 0 and 
+	not ((GetEclipseDirection() == "moon" and CJ_Eclipse() <= -87) or (GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80)) then
 		CastSpell("Starsurge");
-		return;
-	elseif GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 and CJCooldown("Starsurge") == 0 then
-		CastSpell("Starsurge");
-		return;
-	end
-	
-	if GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 and lastSwap == "Wrath" then
-		CastSpell("Starfire");
-		lastSwap = "";
-		return;
-	end
-	
-	if GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80 and lastSwap == "Starfire" then
-		CastSpell("Wrath");
-		lastSwap = "";
 		return;
 	end
 	
@@ -310,11 +296,23 @@ function CJBalanceDruidRot()
 		return;
 	end
 	
-	if GetEclipseDirection() == "moon" and CJ_Eclipse() < 87 then
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() < -87 and lastSwap == "Wrath" then
+		CastSpell("Starfire");
+		lastSwap = "";
+		return;
+	end
+	
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() >= -87 then
 		CastSpell("Wrath")
 		lastSwap = "Wrath";
 		return;
 	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80 and lastSwap == "Starfire" then
+		CastSpell("Wrath");
+		lastSwap = "";
+		return;
+	end	
 	
 	if GetEclipseDirection() == "sun" then
 		CastSpell("Starfire");
