@@ -241,7 +241,7 @@ function CJFuryWarRot()
 	
 	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 7
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
-	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
+	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 5.5 then
 		CastSpell("Sunder Armor");
 		return;
 	end
@@ -337,7 +337,7 @@ function CJArmsWarRot()
 	
 	if CJCooldown("Sunder Armor") == 0 and CJ_WarriorSunder() and CJ_DebuffInfo("target","Sunder Armor") < 3 
 	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Expose Armor"))
-	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 10 then
+	and select(2,CJ_DebuffInfo("target","Sunder Armor")) < 5.5 then
 		CastSpell("Sunder Armor");
 		return;
 	end

@@ -211,7 +211,7 @@ function CJ_SelectSpec()
 	c = class;
 	printf("Class detected as "..class);
 	local tt = GetPrimaryTalentTree();
-	if tt == nil then printf("No primary talent tree") return end;
+	if tt == nil then cj_action = false; printf("No primary talent tree") return end;
 	if c == "Death Knight" then
 		currentRotation = 10 + tt;
 	elseif c == "Druid" then
