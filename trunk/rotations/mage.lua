@@ -188,7 +188,7 @@ function CJFireMageRot()
 	
 	if IsSpellInRange("Fireball") == 0 then return end;
 	
-	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
+	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCount(36799,false,true) > 0 and GetItemCooldown(36799) == 0  then
 		UseItemByName(36799);
 	end
 	
@@ -288,7 +288,7 @@ function CJFrostMageRot()
 		return;
 	end
 	
-	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCooldown(36799) == 0  then
+	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCount(36799,false,true) > 0 and GetItemCooldown(36799) == 0  then
 		UseItemByName(36799);
 	end
 	
