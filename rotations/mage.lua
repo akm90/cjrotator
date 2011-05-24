@@ -207,7 +207,7 @@ function CJFireMageRot()
 		return;
 	end
 	
-	if CJ_Cooldown("Flame Orb") == 0 then
+	if CJCooldown("Flame Orb") == 0 then
 		CastSpell("Flame Orb");
 		return;
 	end
@@ -230,7 +230,7 @@ local function CJ_CheckFrostBuffs()
 		return true;
 	end
 	
-	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("Molten Armor") then
+	if not CJ_HasBuff("player","Mage Armor") and not CJ_HasBuff("player","Molten Armor") then
 		CastSpell("Molten Armor");
 		return true;
 	end
@@ -302,7 +302,7 @@ function CJFrostMageRot()
 		return;
 	end
 	
-	if CJ_HasBuff("player","Brain Freeze") and CJ_HasBuff("Fingers of Frost") then
+	if CJ_HasBuff("player","Brain Freeze") and CJ_HasBuff("player","Fingers of Frost") then
 		CastSpell("Frostfire Bolt");
 		return;
 	end
