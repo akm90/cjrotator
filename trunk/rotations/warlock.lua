@@ -129,7 +129,6 @@ function CJAffLockRot()
 	
 	if CJCooldown("Soulburn") == 0 and GetItemCount(6265,false,true) > 0 and not CJ_HasBuff("player","Demon Soul") then
 		CastSpell("Soulburn");
-		return;
 	end
 	
 	if CJ_HasBuff("player","Soulburn") and CJCooldown("Soul Fire") == 0 then
@@ -391,7 +390,6 @@ function CJDemoLockRot()
 	
 	if CJCooldown("Soulburn") == 0 and GetItemCount(6265,false,true) > 0 then
 		CastSpell("Soulburn");
-		return;
 	end
 	
 	if CJCooldown("Soul Fire") == 0 and (CJ_HasBuff("player","Decimation") or CJ_HasBuff("player","Soulburn")) then
