@@ -21,7 +21,6 @@ cj_aoemode = false;
 cj_purgemode = false;
 cj_interruptmode = false;
 local f = CreateFrame("Frame");
-currentRotation = 0;
 local _G = getfenv();
 local loaded = false;
 
@@ -81,7 +80,7 @@ local function OnUpdate(...)
 	if (not UnitExists("target") or not UnitCanAttack("player","target") or UnitIsDead("target")) and 
 	(not UnitExists("focus") or not UnitCanAttack("player","focus") or UnitIsDead("focus")) then return end;
 	
-	_G[cj_rotationTable[currentRotation]]();
+	_G[cj_rotationTable[cj_currentRotation]]();
 end
 
 local function OnEvent(self,event,...)
@@ -93,7 +92,7 @@ local function OnEvent(self,event,...)
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED") then
 		local unit,spell = ...;
 		if (unit == "player") then
-			if (class == "Shaman") then
+			if (cj_class == "Shaman") then
 				if spell == "Call of the Elements" or spell == "Call of the Ancestors" then
 					cj_lastcall = GetTime();
 				elseif spell == "Totemic Recall" then

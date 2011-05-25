@@ -38,6 +38,8 @@ function CJRetPallyRot()
 	
 	StartAttack("target");
 	
+	if CJ_HasDebuff("player","Caustic Slime") then return end;
+	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckRetBuffs() then return end; -- Check our buffs
 	if UnitCreatureType("target") == "Demon" or UnitCreatureType("target") == "Undead" then ud = true end;

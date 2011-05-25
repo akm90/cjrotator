@@ -4,6 +4,21 @@
 ---------Affliction----------
 -----------------------------
 
+local function cj_petspell(name)
+   for i = 1, MAX_SKILLLINE_TABS do
+      local n, _, o, num = GetSpellTabInfo(i);
+      if not n then break; end
+      for s = o + 1, o + num do
+         if (name == GetSpellBookItemName(s,BOOKTYPE_PET)) then
+            return s;
+         end
+      end
+   end
+   return 0;
+end
+
+local spelllock = cj_petspell("Spell Lock");
+
 local lastuacast = 0;
 local lastpetcast = 0;
 local lastimmolatecast = 0;
@@ -25,11 +40,14 @@ local function CJCheckAffBuffs()
 end
 
 function CJAffLockRot()
-	if cj_interruptmode and GetSpellCooldown("Spell Lock","BOOKTYPE_PET") == 0 then
+	if cj_interruptmode then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Spell Lock",thing) and AmIFacing == "true" then
-				CastSpellByName("Spell Lock",thing);
+			spelllock = cj_petspell("Spell Lock");
+			if GetSpellCooldown(spelllock,"pet") == 0 then
+				if IsSpellInRange(spelllock,"pet",thing) and AmIFacing == "true" then
+					CastSpellByName(spelllock,"pet",thing);
+				end
 			end
 		end
 	end
@@ -284,11 +302,14 @@ local function CJCheckDemoBuffs()
 end
 
 function CJDemoLockRot()
-	if cj_interruptmode and GetSpellCooldown("Spell Lock","BOOKTYPE_PET") == 0 then
+	if cj_interruptmode then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
-			if IsSpellInRange("Spell Lock",thing) and AmIFacing == "true" then
-				CastSpellByName("Spell Lock",thing);
+			spelllock = cj_petspell("Spell Lock");
+			if GetSpellCooldown(spelllock,"pet") == 0 then
+				if IsSpellInRange(spelllock,"pet",thing) and AmIFacing == "true" then
+					CastSpellByName(spelllock,"pet",thing);
+				end
 			end
 		end
 	end
