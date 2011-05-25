@@ -368,7 +368,7 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if CJCooldown("Soulburn") == 0 then
+	if CJCooldown("Soulburn") == 0 and CJCooldown("Soul Fire") == 0 then
 		CastSpell("Soulburn");
 		return;
 	end
