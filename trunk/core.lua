@@ -68,9 +68,9 @@ e:SetAttribute("type","macro");
 e:SetAttribute("macrotext","/cjpurgetoggle");
 
 local function OnUpdate(...)
-	if currentRotation == 0 then CJ_SelectSpec() return end;
+	if ck_currentRotation == 0 then CJ_SelectSpec() return end;
 	if not cj_action then return end;
-	if cj_rotationTable[currentRotation] == nil then
+	if cj_rotationTable[cj_currentRotation] == nil then
 		printf("Your spec is currently not supported!");
 		cj_action = false;
 		printf("CJ Rotator Finished");
