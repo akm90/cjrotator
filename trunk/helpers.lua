@@ -104,7 +104,6 @@ function tableContains(table,element)
 	if table == nil then return false end;
 	for _, value in pairs(table) do
 		if value == element then
-			printf(value.." found!");
 			return true
 		end
 	end
