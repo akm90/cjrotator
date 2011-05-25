@@ -276,7 +276,7 @@ function CJ_GCD()
 	elseif class == "Paladin" then
 		if GetSpellCooldown("Seal of Truth") == 0 then return true end;
 	elseif class == "Priest" then
-		if GetSpellCooldown("Inner Will") == 0 then return true end;
+		if GetSpellCooldown("Inner Fire") == 0 then return true end;
 	elseif class == "Rogue" then
 		if GetSpellCooldown("Sinister Strike") == 0 then return true end;
 	elseif class == "Shaman" then
