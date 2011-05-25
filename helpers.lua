@@ -213,25 +213,25 @@ function CJ_SelectSpec()
 	local tt = GetPrimaryTalentTree();
 	if tt == nil then cj_action = false; printf("No primary talent tree") return end;
 	if c == "Death Knight" then
-		currentRotation = 10 + tt;
+		cj_currentRotation = 10 + tt;
 	elseif c == "Druid" then
-		currentRotation = 20 + tt;
+		cj_currentRotation = 20 + tt;
 	elseif c == "Hunter" then
-		currentRotation = 30 + tt;
+		cj_currentRotation = 30 + tt;
 	elseif c == "Mage" then
-		currentRotation = 40 + tt;
+		cj_currentRotation = 40 + tt;
 	elseif c == "Paladin" then
-		currentRotation = 50 + tt;
+		cj_currentRotation = 50 + tt;
 	elseif c == "Priest" then
-		currentRotation = 60 + tt;
+		cj_currentRotation = 60 + tt;
 	elseif c == "Rogue" then
-		currentRotation = 70 + tt;
+		cj_currentRotation = 70 + tt;
 	elseif c == "Shaman" then
-		currentRotation = 80 + tt;
+		cj_currentRotation = 80 + tt;
 	elseif c == "Warlock" then
-		currentRotation = 90 + tt;
+		cj_currentRotation = 90 + tt;
 	elseif c == "Warrior" then
-		currentRotation = 100 + tt;
+		cj_currentRotation = 100 + tt;
 	end
 end
 
