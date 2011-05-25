@@ -23,6 +23,8 @@ local function CJCheckDiscBuffs()
 	return false;
 end
 
+local healonly = true;
+
 function CJDiscPriestRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckDiscBuffs() then return end; -- Check our buff
@@ -39,24 +41,29 @@ function CJDiscPriestRot()
 		end
 	end
 	
+	if cj_aoemode then
+		CastSpell("Mind Sear");
+		return;
+	end
+	
 	if CJCooldown("Holy Fire") == 0 then
 		CastSpell("Holy Fire");
 		return;
 	end
 	
-	if (not CJ_HasDebuff("target","Shadow Word: Pain")) and not CJ_HasDebuff("player","Weakened Soul") then
+	if not healonly and (not CJ_HasDebuff("target","Shadow Word: Pain")) and not CJ_HasDebuff("player","Weakened Soul") then
 		CastSpell("Power Word: Shield");
 		return
 	end
 	
-	if CJ_HasBuff("player","Borrowed Time") then
+	if not healonly and CJ_HasBuff("player","Borrowed Time") then
 		if not CJ_HasDebuff("target","Shadow Word: Pain") then
 			CastSpell("Shadow Word: Pain");
 			return;
 		end
 	end
 	
-	if CJCooldown("Penance")  == 0 then
+	if not healonly and CJCooldown("Penance")  == 0 then
 		CastSpell("Penance");
 		return;
 	end
