@@ -40,5 +40,7 @@ cj_interruptBlacklist = {
 	["Hex Lord Malacrass"] = {[1] = "Chain Lightning",[2] = "Mind Blast"},
 	["Maloriak"] = {[1] = "Release Aberrations"},
 	["Naz'jar Spiritmender"] = {[1] = "Wrath"},
+	["Stonecore Rift Conjurer"] = {[1] = "Shadow Bolt"},
+	["Temple Adept"] = {[1] = "Holy Smite"},
 	["Stonecore Earthshaper"] = {[1] = "Lava Burst",[2] = "Ground Shock"}
 };

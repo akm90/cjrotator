@@ -91,7 +91,7 @@ function CJFeralDruidRot()
 	end
 	
 	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
-	and not (CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) and facing() >= 1 then
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) and facing() >= 1 then
 		CastSpell("Faerie Fire (Feral)");
 		return;
 	end
@@ -227,11 +227,11 @@ function CJBalanceDruidRot()
 		return;
 	end
 	
-	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
+--[[	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
 	and not (CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) then
 		CastSpell("Faerie Fire");
 		return;
-	end
+	end --]]
 	
 	if select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 or (select(2,CJ_DebuffInfo("target","Insect Swarm")) < 4 and
 	CJ_HasBuff("Eclipse (Solar)") and CJ_Eclipse() < 15) then
