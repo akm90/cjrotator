@@ -6,7 +6,7 @@
 
 local function CJCheckFrostBuffs()
 	--Only doing Seal...letting players handle Blessing
-	if CJCooldown("Horn of Winter") == 0 and not CJ_HasBuff("Horn of Winter") and not (CJ_HasBuff("Battle Shout") or CJ_HasBuff("Strength of Earth Totem")) then
+	if CJCooldown("Horn of Winter") == 0 and (not CJ_HasBuff("Horn of Winter") and not (CJ_HasBuff("Battle Shout") or CJ_HasBuff("Strength of Earth Totem"))) then
 		CastSpell("Horn of Winter");
 		return
 	end

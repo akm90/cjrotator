@@ -203,21 +203,21 @@ function CJEleShamRot()
 			if CJCooldown("Thunderstorm") == 0 then CastSpell("Thunderstorm"); return; end;
 			if not IsSpellInRange("Unleash Elements") then return end;
 			if CJCooldown("Unleash Elements") == 0 then CastSpell("Unleash Elements"); return; end;
-			if CJCooldown("Flame Shock") == 0 then
-			
+			if CJCooldown("Flame Shock") == 0 then CastSpell("Flame Shock"); return; end;
+				
 			if cj_aoemode and CJCooldown("Fire Nova") == 0 and CJ_HasDebuff("target","Flame Shock") then
 				CastSpell("Fire Nova");
 				return;
 			end
 			
 			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") then
-					CastSpell("Flame Shock");
-					return;
-				elseif not cj_aoemode and CJ_HasBuff("player","Unleash Flame") then
-					CastSpell("Flame Shock");
-					return;
-				end
+				CastSpell("Flame Shock");
+				return;
+			elseif not cj_aoemode and CJ_HasBuff("player","Unleash Flame") then
+				CastSpell("Flame Shock");
+				return;
 			end
+			
 			
 			if CJCooldown("Earth Shock") == 0 and CJ_BuffInfo("player","Lightning Shield") >= 7 then
 				CastSpell("Earth Shock");
@@ -244,12 +244,11 @@ function CJEleShamRot()
 			end
 			
 			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") then
-					CastSpell("Flame Shock");
-					return;
-				elseif not cj_aoemode and CJ_HasBuff("player","Unleash Flame") then
-					CastSpell("Flame Shock");
-					return;
-				end
+				CastSpell("Flame Shock");
+				return;
+			elseif not cj_aoemode and CJ_HasBuff("player","Unleash Flame") then
+				CastSpell("Flame Shock");
+				return;
 			end
 			
 			if CJCooldown("Lava Burst") == 0 then
@@ -259,4 +258,5 @@ function CJEleShamRot()
 			
 			CastSpell("Lightning Bolt");
 		end
+	end
 end

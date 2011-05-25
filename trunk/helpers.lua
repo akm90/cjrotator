@@ -1,6 +1,6 @@
 --Helpers File
-class = "";
-currentRotation = 0;
+cj_class = "";
+cj_currentRotation = 0;
 local tempOverride = false;
 
 function CJ_BuffInfo(unit,buff)
@@ -207,9 +207,9 @@ function CJ_UpdateTotems()
 end
 
 function CJ_SelectSpec()
-	class = UnitClass("player");
-	c = class;
-	printf("Class detected as "..class);
+	cj_class = UnitClass("player");
+	c = cj_class;
+	printf("cj_class detected as "..cj_class);
 	local tt = GetPrimaryTalentTree();
 	if tt == nil then cj_action = false; printf("No primary talent tree") return end;
 	if c == "Death Knight" then
@@ -237,7 +237,7 @@ end
 
 function CJ_OffensiveDispel()
 	if UnitIsPlayer("target") and not CJ_PURGEPLAYERS then return false end;
-	if class == "Shaman" then
+	if cj_class == "Shaman" then
 		for i = 1,40 do
 			local _,_,_,_,dispelType = UnitBuff("target",i);
 			
@@ -245,7 +245,7 @@ function CJ_OffensiveDispel()
 				return true;
 			end
 		end
-	elseif class == "Priest" then
+	elseif cj_class == "Priest" then
 		for i = 1,40 do
 			local _,_,_,_,dispelType = UnitBuff("target",i);
 			
@@ -253,7 +253,7 @@ function CJ_OffensiveDispel()
 				return true;
 			end
 		end
-	elseif class == "Mage" then
+	elseif cj_class == "Mage" then
 		for i = 1,40 do
 			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
 				return true;
@@ -265,25 +265,25 @@ function CJ_OffensiveDispel()
 end
 
 function CJ_GCD()
-	if class == "Death Knight" then
+	if cj_class == "Death Knight" then
 		if GetSpellCooldown("Acherus Deathcharger") == 0 then return true end
-	elseif class == "Druid" then
+	elseif cj_class == "Druid" then
 		if GetSpellCooldown("Mark of the Wild") == 0 then return true end;
-	elseif class == "Hunter" then
+	elseif cj_class == "Hunter" then
 		if GetSpellCooldown("Eagle Eye") == 0 then return true end;
-	elseif class == "Mage" then
+	elseif cj_class == "Mage" then
 		if GetSpellCooldown("Ice Lance") == 0 then return true end;
-	elseif class == "Paladin" then
+	elseif cj_class == "Paladin" then
 		if GetSpellCooldown("Seal of Truth") == 0 then return true end;
-	elseif class == "Priest" then
+	elseif cj_class == "Priest" then
 		if GetSpellCooldown("Inner Fire") == 0 then return true end;
-	elseif class == "Rogue" then
+	elseif cj_class == "Rogue" then
 		if GetSpellCooldown("Sinister Strike") == 0 then return true end;
-	elseif class == "Shaman" then
+	elseif cj_class == "Shaman" then
 		if GetSpellCooldown("Flametongue Weapon") == 0 then return true end;
-	elseif class == "Warlock" then
+	elseif cj_class == "Warlock" then
 		if GetSpellCooldown("Fel Armor") == 0 then return true end;
-	elseif class == "Warrior" then
+	elseif cj_class == "Warrior" then
 		if GetSpellCooldown("Slam") == 0 then return true end;
 	end
 	

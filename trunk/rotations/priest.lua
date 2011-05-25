@@ -1,5 +1,5 @@
 -- Priest Rotations
-
+local healonly = true;
 -----------------------------
 --------Disc-----------------
 -----------------------------
@@ -22,8 +22,6 @@ local function CJCheckDiscBuffs()
 
 	return false;
 end
-
-local healonly = true;
 
 function CJDiscPriestRot()
 	if not CJ_GCD() then return end; -- Check for GCD
