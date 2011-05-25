@@ -100,9 +100,9 @@ function CJ_Interrupt()
 	end
 end
 
-function tableContains(table,element)
-	if table == nil then return false end;
-	for _, value in pairs(table) do
+function tableContains(t,element)
+	if t == nil then return false end;
+	for key, value in pairs(t) do
 		if value == element then
 			return true
 		end
