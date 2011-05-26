@@ -81,7 +81,7 @@ end
 
 local function CJCheckShadowBuffs()
 	if not CJ_HasBuff("player","Power Word: Fortitude") then
-		CastSpell("Prayer of Fortitude");
+		CastSpell("Power Word: Fortitude");
 		return true;
 	end
 
@@ -102,7 +102,7 @@ local function CJCheckShadowBuffs()
 	
 	if GetShapeshiftForm() ~= 1 then
 		CastShapeshiftForm(1);
-		return;
+		return true;
 	end
 
 	return false;
