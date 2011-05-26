@@ -28,6 +28,7 @@ cj_rotationTable = {
 [61] = "CJDiscPriestRot",
 [63] = "CJSpriestRot",
 [71] = "CJAssRogueRot",
+[72] = "CJCombatRogueRot",
 [81] = "CJEleShamRot",
 [82] = "CJEnhShamRot",
 [91] = "CJAffLockRot",

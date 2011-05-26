@@ -50,20 +50,8 @@ function CJAssRogueRot()
 	
 	if AmIBehind == "true" and CJ_HasBuff("player","Stealth") then
 		CastSpell("Garrote");
-		opener = true;
 		return;
 	end
-	
-	if opener and CJ_Combo() == 3 then
-		opener = false;
-	end
-	
-	if opener then
-		CastSpell("Mutilate");
-		return;
-	end
-	
-	
 	
 	if CJ_Combo() >= 1 and not CJ_HasBuff("player","Slice and Dice") then
 		CastSpell("Slice and Dice");
@@ -197,5 +185,21 @@ local function CJ_CheckSubtletyBuffs()
 end
 
 function CJSubRogueRot()
+	if cj_interruptmode and CJCooldown("Kick") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Kick",thing) then
+				CastSpellByName("Kick",thing);
+			end
+		end
+	end
+	
+	if CJ_HasBuff("player","Stealth") then StopAttack() else StartAttack() end;
+	
+	if not CJ_GCD then return end;
+	
+	if CJ_CheckSubtletyBuffs() then return end;
+	if AmIFacing == "false" then return end;
+	
 	
 end
