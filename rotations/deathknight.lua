@@ -68,8 +68,6 @@ function CJFrostDKRot()
 		end
 	end
 	
-	if CJ_Cooldown("
-	
 	if select(2,CJ_DebuffInfo("target","Frost Fever")) <= 2 or select(2,CJ_DebuffInfo("target","Blood Plague")) <= 2 and
 		CJCooldown("Outbreak") == 0 then
 		CastSpell("Outbreak");
