@@ -74,8 +74,8 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if select(2,CJ_DebuffInfo("target","Frost Fever")) < 2 and CJCooldown("Howling Blast") == 0  then
-		CastSpell("Howling Blast");
+	if select(2,CJ_DebuffInfo("target","Frost Fever")) < 2 and CJCooldown(49184) == 0  then
+		CastSpell(49184);
 		return;
 	end
 	
@@ -104,13 +104,13 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown("Howling Blast") == 0 and CJ_HasBuff("player","Rime") then
-		CastSpell("Howling Blast");
+	if CJCooldown(49184) == 0 and CJ_HasBuff("player","Rime") then
+		CastSpell(49184);
 		return;
 	end
 	
-	if CJCooldown("Howling Blast") == 0 and (CJNumRune(4) + CJNumRune(2) == 0) then
-		CastSpell("Howling Blast");
+	if CJCooldown(49184) == 0 and (CJNumRune(4) + CJNumRune(2) == 0) then
+		CastSpell(49184);
 		return;
 	end
 	
@@ -124,8 +124,8 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown("Howling Blast") == 0 then
-		CastSpell("Howling Blast");
+	if CJCooldown(49184) == 0 then
+		CastSpell(49184);
 		return;
 	end
 	
