@@ -134,3 +134,21 @@ function CJFrostDKRot()
 		return;
 	end
 end
+
+------------------------------------------
+-----------Unholy-------------------------
+------------------------------------------
+
+local function CJCheckUnholyBuffs()
+	--Only doing Seal...letting players handle Blessing
+	if CJCooldown("Horn of Winter") == 0 and (not CJ_HasBuff("player","Horn of Winter") and not (CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Strength of Earth Totem"))) then
+		CastSpell("Horn of Winter");
+		return
+	end
+	
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return;
+	end
+	return false;
+end

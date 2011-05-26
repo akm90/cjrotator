@@ -374,7 +374,7 @@ function CJBalanceDruidRot()
 		return;
 	end
 	
-	if CJ_HasBuff("player","Eclipse (Lunar)") and CJCooldown("Starfall") == 0 and  foruset and not CJ_HasBuff("player","Astral Alignment") then
+	if CJ_HasBuff("player","Eclipse (Lunar)") and CJCooldown("Starfall") == 0 and (balancefourset and not CJ_HasBuff("player","Astral Alignment")) or not balancefourset then
 		CastSpell("Starfall");
 		return;
 	end
