@@ -15,18 +15,20 @@ local function CJ_CheckAssasinationBuffs()
 	
 	if not hasMainHandEnchant then
 		RunMacroText("/cast Instant Poison;/use 16");
-		return
+		return true;
 	end
 	
 	if not hasOffHandEnchant then
 		RunMacroText("/cast Deadly Poison;/use 17");
-		return;
+		return true;
 	end
 	
 	if not hasThrownEnchant then
 		RunMacroText("/cast Deadly Poison;/use 18");
-		return;
+		return true;
 	end
+	
+	return false
 end
 
 function CJAssRogueRot()
@@ -43,6 +45,7 @@ function CJAssRogueRot()
 	
 	if not CJ_GCD then return end;
 	
+	if CJ_CheckAssassinationBuffs() then return end;
 	if AmIFacing == "false" then return end;
 	
 	if AmIBehind == "true" and CJ_HasBuff("player","Stealth") then
@@ -97,3 +100,7 @@ function CJAssRogueRot()
 		return;
 	end
 end
+
+---------------------------------
+---------Combat------------------
+---------------------------------
