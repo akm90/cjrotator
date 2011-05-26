@@ -317,7 +317,7 @@ function CJDemoLockRot()
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
-	if CJCheckDestroBuffs() then return end; -- Check our buffs
+	if CJCheckDemoBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 
 	if IsSpellInRange("Shadow Bolt") == 0 then return end;
