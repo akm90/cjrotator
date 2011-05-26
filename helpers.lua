@@ -265,7 +265,7 @@ function CJ_OffensiveDispel()
 end
 
 function CJ_GCD()
-	if cj_class == "Death Knight" then
+	--[[if cj_class == "Death Knight" then
 		if GetSpellCooldown("Acherus Deathcharger") == 0 then return true end
 	elseif cj_class == "Druid" then
 		if GetSpellCooldown("Mark of the Wild") == 0 then return true end;
@@ -285,6 +285,9 @@ function CJ_GCD()
 		if GetSpellCooldown("Fel Armor") == 0 then return true end;
 	elseif cj_class == "Warrior" then
 		if GetSpellCooldown("Slam") == 0 then return true end;
+	end--]]
+	if GetSpellCooldown(61304) == 0 then
+		return true;
 	end
 	
 	return false;
