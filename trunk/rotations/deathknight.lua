@@ -68,8 +68,7 @@ function CJFrostDKRot()
 		end
 	end
 	
-	if select(2,CJ_DebuffInfo("target","Frost Fever")) <= 2 or select(2,CJ_DebuffInfo("target","Blood Plague")) <= 2 and
-		CJCooldown("Outbreak") == 0 then
+	if select(2,CJ_DebuffInfo("target","Frost Fever")) <= 2 or select(2,CJ_DebuffInfo("target","Blood Plague")) <= 2 and CJCooldown("Outbreak") == 0 then
 		CastSpell("Outbreak");
 		return;
 	end
@@ -140,7 +139,6 @@ end
 ------------------------------------------
 
 local function CJCheckUnholyBuffs()
-	--Only doing Seal...letting players handle Blessing
 	if CJCooldown("Horn of Winter") == 0 and (not CJ_HasBuff("player","Horn of Winter") and not (CJ_HasBuff("player","Battle Shout") and not CJ_HasBuff("player","Strength of Earth Totem"))) then
 		CastSpell("Horn of Winter");
 		return
@@ -151,4 +149,34 @@ local function CJCheckUnholyBuffs()
 		return;
 	end
 	return false;
+end
+
+function CJUnholyDKRot()
+	if cj_interruptmode and CJCooldown("Mind Freeze") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Mind Freeze",thing) == 1 then
+				CastSpellByName("Mind Freeze",thing);
+			end
+		end
+	end
+	
+	StartAttack("target");
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if CJCheckUnholyBuffs() then return end; -- Check our buffs
+	
+	if AmIFacing == "false" then return end;
+	
+	if cj_interruptmode and CJCooldown("Strangulate") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Strangulate",thing) == 1 then
+				CastSpellByName("Strangulate",thing);
+				return;
+			end
+		end
+	end
+	
+	
 end
