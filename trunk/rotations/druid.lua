@@ -1,13 +1,11 @@
 ---- Druid Rotations
 
------------------------------------
---------Feral Kitty----------------
------------------------------------
+
 
 local balancefourset = false;
 local feralfourset = false;
 
-local function CJCheckFeralBuffs()
+local function CJCheckFeralTankBuffs()
 	if (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
 		if GetShapeshiftForm() ~= 0 then
 			RunMacroText("/cancelform");
@@ -17,8 +15,8 @@ local function CJCheckFeralBuffs()
 		return true;
 	end
 	
-	if GetShapeshiftForm() ~= 3 then
-		CastShapeshiftForm(3);
+	if GetShapeshiftForm() ~= 1 then
+		CastShapeshiftForm(1);
 		return true;
 	end
 	return false;
@@ -40,6 +38,121 @@ local function facing()
 	else
 		return 0;
 	end
+end
+
+-----------------------------------
+--------Bare Tank------------------
+-----------------------------------
+
+function CJFeralTankRot()
+	if cj_interruptmode and CJCooldown("Skull Bash(Bear Form)") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Skull Bash(Bear Form)",thing) == 1 then
+				CastSpellByName("Skull Bash(Bear Form)",thing);
+			end
+		end
+	end
+	
+	StartAttack("target");
+	
+	if IsSpellInRange("Mangle(Cat Form)") == 0 then
+		if IsSpellInRange("Feral Charge(Bear Form)") and CJCooldown("Feral Charge(Bear Form)") == 0 then
+			CastSpell("Feral Charge(Bear Form)");
+			return;
+		end
+		
+		if IsSpellInRange("Faerie Fire(Feral)") and CJ_DebuffInfo("target","Faerie Fire") == 0 and not CJ_HasBuff("player","Prowl") then
+			CastSpell("Faerie Fire(Feral)");
+			return;
+		end
+		return;
+	end
+	
+	if UnitPower("player",1) > 50 and CJCooldown("Maul(Bear Form)") == 0 then
+		CastSpell("Maul")
+	end
+	
+	if not CJ_GCD() then return end;
+	
+	if CJCheckFeralTankBuffs() then return end; -- Check our buffs
+	
+	if cj_aoemode then
+		if CJCooldown("Demoralizing Roar(Bear Form)") == 0 and not CJ_HasDebuff("target","Demoralizing Roar") then
+			CastSpell("Demoralizing Roar(Bear Form)");
+			return;
+		end
+	
+		if CJCooldown("Swipe(Bear Form)") == 0 then
+			CastSpell("Swipe(Bear Form)");
+			return;
+		end
+		
+		if CJCooldown("Thrash(Bear Form)") == 0 then
+			CastSpell("Thrash(Bear Form)");
+			return
+		end
+	end
+	
+	if CJCooldown("Mangle(Bear Form)") == 0 then
+		CastSpell("Mangle(Bear Form)");
+		return;
+	end
+	
+	if CJCooldown("Demoralizing Roar(Bear Form)") == 0 and not CJ_HasDebuff("target","Demoralizing Roar") then
+		CastSpell("Demoralizing Roar(Bear Form)");
+		return;
+	end
+	
+	if not CJ_HasDebuff("target","Lacerate") then
+		CastSpell("Lacerate(Bear Form)");
+		return;
+	end
+	
+	if CJCooldown("Thrash(Bear Form)") == 0 then
+		CastSpell("Thrash(Bear Form)");
+		return;
+	end
+	
+	if CJ_DebuffInfo("target","Lacerate") < 3 then
+		CastSpell("Lacerate");
+		return;
+	end
+	
+	if (not CJ_HasBuff("player","Pulverize") or select(2,CJ_BuffInfo("player","Pulverize")) < 3) and CJ_DebuffInfo("target","Lacerate") == 3 then
+		CastSpell("Pulverize(Bear Form)");
+		return;
+	end
+	
+	if CJCooldown("Faerie Fire") == 0 and (CJ_DebuffInfo("target","Faerie Fire") < 3 or select(2,CJ_DebuffInfo("target","Faerie Fire")) < 4)
+	and not (CJ_HasOtherDebuff("target","Faerie Fire") or CJ_HasOtherDebuff("target","Sunder Armor") or CJ_HasOtherDebuff("target","Expose Armor")) and facing() >= 1 then
+		CastSpell("Faerie Fire (Feral)");
+		return;
+	end
+	
+	CastSpell("Lacerate");
+	return;	
+end
+
+----------------------------------
+----------Kitty DPS---------------
+-----------------------------------
+
+local function CJCheckFeralBuffs()
+	if (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
+		if GetShapeshiftForm() ~= 0 then
+			RunMacroText("/cancelform");
+			return true;
+		end
+		CastSpell("Mark of the Wild");
+		return true;
+	end
+	
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return true;
+	end
+	return false;
 end
 
 function CJFeralDruidRot()
