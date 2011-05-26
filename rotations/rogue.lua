@@ -51,11 +51,16 @@ function CJAssRogueRot()
 		return;
 	end
 	
+	if opener and CJ_Combo() == 3
+		opener = false;
+	end
+	
 	if opener then
 		CastSpell("Mutilate");
-		opener = false;
 		return;
 	end
+	
+	
 	
 	if CJ_Combo() >= 1 and not CJ_HasBuff("player","Slice and Dice") then
 		CastSpell("Slice and Dice");
