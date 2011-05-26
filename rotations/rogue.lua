@@ -45,7 +45,7 @@ function CJAssRogueRot()
 	
 	if not CJ_GCD then return end;
 	
-	if CJ_CheckAssassinationBuffs() then return end;
+	if CJ_CheckAssasinationBuffs() then return end;
 	if AmIFacing == "false" then return end;
 	
 	if AmIBehind == "true" and CJ_HasBuff("player","Stealth") then
