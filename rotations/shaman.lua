@@ -210,10 +210,10 @@ function CJEleShamRot()
 				return;
 			end
 			
-			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") then
+			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") and CJCooldown("Flame Shock") == 0 then
 				CastSpell("Flame Shock");
 				return;
-			elseif not cj_aoemode then
+			elseif not cj_aoemode and CJCooldown("Flame Shock") == 0 then
 				CastSpell("Flame Shock");
 				return;
 			end
@@ -243,10 +243,10 @@ function CJEleShamRot()
 				return;
 			end
 			
-			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") then
+			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") and CJCooldown("Flame Shock") == 0 then
 				CastSpell("Flame Shock");
 				return;
-			elseif not cj_aoemode then
+			elseif not cj_aoemode and CJCooldown("Flame Shock") == 0 then
 				CastSpell("Flame Shock");
 				return;
 			end
