@@ -215,6 +215,7 @@ function CJ_SelectSpec()
 		cj_currentRotation = 10 + tt;
 	elseif c == "Druid" then
 		cj_currentRotation = 20 + tt;
+		if select(5,GetTalentInfo(2,11,false,false,nil)) > 0 then cj_currentRotation = 24 end;
 	elseif c == "Hunter" then
 		cj_currentRotation = 30 + tt;
 	elseif c == "Mage" then
