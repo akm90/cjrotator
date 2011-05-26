@@ -213,7 +213,7 @@ function CJEleShamRot()
 			if cj_aoemode and not CJ_HasDebuff("target","Flame Shock") then
 				CastSpell("Flame Shock");
 				return;
-			elseif not cj_aoemode and CJ_HasBuff("player","Unleash Flame") then
+			elseif not cj_aoemode then
 				CastSpell("Flame Shock");
 				return;
 			end
