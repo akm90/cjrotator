@@ -125,7 +125,7 @@ function CJFrostDKRot()
 	end
 	
 	if CJCooldown("Howling Blast") == 0 then
-		CastSpellNyName("Howling Blast");
+		CastSpell("Howling Blast");
 		return;
 	end
 	
