@@ -105,12 +105,12 @@ function CJFrostDKRot()
 	end
 	
 	if CJCooldown(49184) == 0 and CJ_HasBuff("player","Rime") then
-		CastSpell("Howling Blast");
+		CastSpellByName("Howling Blast");
 		return;
 	end
 	
 	if CJCooldown(49184) == 0 and (CJNumRune(4) + CJNumRune(2) == 0) then
-		CastSpell("Howling Blast");
+		CastSpellByName("Howling Blast");
 		return;
 	end
 	
@@ -125,7 +125,7 @@ function CJFrostDKRot()
 	end
 	
 	if CJCooldown(49184) == 0 then
-		CastSpell("Howling Blast");
+		CastSpellNyName("Howling Blast");
 		return;
 	end
 	
