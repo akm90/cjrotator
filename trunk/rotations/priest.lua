@@ -121,7 +121,7 @@ function CJSpriestRot()
 	end
 
 	if not CJ_GCD() then return end; -- Check for GCD
-	if CJCheckDiscBuffs() then return end; -- Check our buffs
+	if CJCheckShadowBuffs() then return end; -- Check our buffs
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_CheckMyCast() then return end;
