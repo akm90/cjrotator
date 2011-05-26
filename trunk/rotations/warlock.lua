@@ -52,7 +52,7 @@ function CJAffLockRot()
 		end
 	end
 	
-	if not IsPetAttackActive() == nil then PetAttack() return end
+	RunMacroText("/petattack");
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
@@ -169,7 +169,7 @@ function CJDestLockRot()
 		end
 	end
 	
-	if not IsPetAttackActive() == nil then PetAttack() return end
+	RunMacroText("/petattack");
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
@@ -313,7 +313,7 @@ function CJDemoLockRot()
 		end
 	end
 	
-	if not IsPetAttackActive() == nil then PetAttack() return end
+	RunMacroText("/petattack");
 	
 	if not CJ_GCD() then return end; -- Check for GCD
 	if not CJ_CheckMyCast() then return end;
@@ -378,8 +378,8 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if CJCooldown("Hand of Guldan") == 0 then
-		CastSpell("Hand of Guldan");
+	if CJCooldown("Hand of Gul'dan") == 0 then
+		CastSpell("Hand of Gul'dan");
 		return;
 	end
 	
