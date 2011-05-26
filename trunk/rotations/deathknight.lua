@@ -84,17 +84,17 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJNumRune(3) == 2 and CJNumRune(2) == 2 then
+	if CJNumRune(3) == 2 and CJNumRune(2) == 2 and CJCooldown("Obliterate") == 0 then
 		CastSpell("Obliterate");
 		return;
 	end
 	
-	if CJNumRune(4) == 2 then
+	if CJNumRune(4) == 2 and CJCooldown("Obliterate") == 0  then
 		CastSpell("Obliterate");
 		return;
 	end
 	
-	if CJ_HasBuff("player","Killing Machine") then
+	if CJ_HasBuff("player","Killing Machine") and CJCooldown("Obliterate") == 0  then
 		CastSpell("Obliterate");
 		return;
 	end
