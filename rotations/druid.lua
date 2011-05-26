@@ -165,7 +165,7 @@ function CJFeralDruidRot()
 		end
 	end
 	
-	StartAttack("target");
+	if CJ_HasBuff("player","Prowl") then StopAttack() else StartAttack() end;
 	
 	if IsSpellInRange("Mangle(Cat Form)") == 0 then
 		if GetShapeshiftForm() ~= 3 then

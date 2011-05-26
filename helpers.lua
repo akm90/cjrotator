@@ -257,27 +257,6 @@ function CJ_OffensiveDispel()
 end
 
 function CJ_GCD()
-	--[[if cj_class == "Death Knight" then
-		if GetSpellCooldown("Acherus Deathcharger") == 0 then return true end
-	elseif cj_class == "Druid" then
-		if GetSpellCooldown("Mark of the Wild") == 0 then return true end;
-	elseif cj_class == "Hunter" then
-		if GetSpellCooldown("Eagle Eye") == 0 then return true end;
-	elseif cj_class == "Mage" then
-		if GetSpellCooldown("Ice Lance") == 0 then return true end;
-	elseif cj_class == "Paladin" then
-		if GetSpellCooldown("Seal of Truth") == 0 then return true end;
-	elseif cj_class == "Priest" then
-		if GetSpellCooldown("Inner Fire") == 0 then return true end;
-	elseif cj_class == "Rogue" then
-		if GetSpellCooldown("Sinister Strike") == 0 then return true end;
-	elseif cj_class == "Shaman" then
-		if GetSpellCooldown("Flametongue Weapon") == 0 then return true end;
-	elseif cj_class == "Warlock" then
-		if GetSpellCooldown("Fel Armor") == 0 then return true end;
-	elseif cj_class == "Warrior" then
-		if GetSpellCooldown("Slam") == 0 then return true end;
-	end--]]
 	if GetSpellCooldown(61304) == 0 then
 		return true;
 	end
