@@ -54,10 +54,6 @@ function CJFrostDKRot()
 	
 	if AmIFacing == "false" then return end;
 	
-	if CJCooldown("Pillar of Frost") == 0 then
-		CastSpell("Pillar of Frost")
-	end
-	
 	if cj_interruptmode and CJCooldown("Strangulate") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
