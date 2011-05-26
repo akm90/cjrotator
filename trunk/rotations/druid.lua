@@ -168,6 +168,11 @@ function CJFeralDruidRot()
 	StartAttack("target");
 	
 	if IsSpellInRange("Mangle(Cat Form)") == 0 then
+		if GetShapeshiftForm() ~= 3 then
+			CastShapeshiftForm(3);
+			return true;
+		end
+		
 		if IsSpellInRange("Feral Charge(Cat Form)") and CJCooldown("Feral Charge(Cat Form)") == 0 then
 			CastSpell("Feral Charge(Cat Form)");
 			return;
