@@ -74,6 +74,8 @@ function CJFeralDruidRot()
 	if not CJ_GCD() then return end; -- Check for GCD
 	if CJCheckFeralBuffs() then return end; -- Check our buffs
 	
+	if cj_aoemode and CJ_Energy() < 50 then return end;
+	
 	if cj_aoemode and CJCooldown("Swipe") == 0 and IsUsableSpell(2,"Swipe(Cat Form)") == nil then
 		CastSpell("Swipe(Cat Form)")
 		return;
@@ -102,7 +104,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") and IsUsableSpell("Ravage") then
+	if select(2,CJ_BuffInfo("player","Stampede")) <  2 and CJ_HasBuff("player","Stampede") then
 		CastSpell("Ravage");
 		CastSpell("Ravage!");
 		return;
@@ -139,7 +141,7 @@ function CJFeralDruidRot()
 		return;
 	end
 	
-	if CJ_Combo() <= 2 and CJ_Combo() >= 1 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 then
+	if CJ_Combo() <= 2 and CJ_Combo() >= 1 and select(2,CJ_BuffInfo("player","Savage Roar")) < 1.5 and CJ_HasBuff("player","Savage Roar") then
 		CastSpell("Savage Roar(Cat Form)");
 		return;
 	end

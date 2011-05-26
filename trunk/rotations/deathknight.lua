@@ -104,7 +104,7 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown("Howling Blast") == 0 and CJ_HasBuff("Rime") then
+	if CJCooldown("Howling Blast") == 0 and CJ_HasBuff("player","Rime") then
 		CastSpell("Howling Blast");
 		return;
 	end
