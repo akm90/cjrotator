@@ -43,6 +43,11 @@ end
 -------------------------------------------
 
 local function CJCheckProtBuffs()
+	if not CJ_HasBuff("player","Righteous Fury") then
+		CastSpell("Righteous Fury");
+		return;
+	end
+
 	if CJHealthPercent("target") > 80 and not CJ_HasBuff("player","Seal of Truth") then
 		CastSpell("Seal of Truth");
 		return;
@@ -99,6 +104,10 @@ function CJProtPallyRot()
 			return;
 		end
 		return;
+	end
+	
+	if CJCooldown("Crusader Strike") > 0 and CJCooldown("Crusader Strike") < .45 then
+		return
 	end
 	
 	if CJManaPercent("player") < 50 and CJCooldown("Judgement") == 0 then

@@ -69,31 +69,23 @@ function CJ_CheckMyCast()
 end
 
 function CJ_Interrupt()
-	if not UnitExists("focus") or not UnitCanAttack("player","focus") then
-		local un = UnitName("target");
-		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("target");
-		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("target");
-		
+	if not UnitExists("focus") or not UnitCanAttack("player","focus") then		
 		if UnitCastingInfo("target") and select(9,UnitCastingInfo("target")) == false then
-			if not tableContains(cj_interruptBlacklist[un],name1) then return "target" else return false end;
+			if not tableContains(cj_interruptBlacklist[UnitName("target")],UnitCastingInfo("target")) then return "target" else return false end;
 		end
 		
-		if UnitChannelInfo("target") and select(9,UnitChannelInfo("target")) == false then
-			if not tableContains(cj_interruptBlacklist[un],name2) then return "target" else return false end;
+		if UnitChannelInfo("target") and select(8,UnitChannelInfo("target")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("target")],UnitChannelInfo("target")) then return "target" else return false end;
 		end
 		
 		return false;
 	else
-		local un = UnitName("focus");
-		local name1,_,_,_,_,_,_,_,interrupt1 = UnitCastingInfo("focus");
-		local name2,_,_,_,_,_,_,_,interrupt2 = UnitChannelInfo("focus");
-		
 		if UnitCastingInfo("focus") and select(9,UnitCastingInfo("focus")) == false then
-			if not tableContains(cj_interruptBlacklist[un],name1) then return "focus" else return false end;
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitCastingInfo("focus")) then return "focus" else return false end;
 		end
 		
-		if UnitChannelInfo("focus") and select(9,UnitChannelInfo("focus")) == false then
-			if not tableContains(cj_interruptBlacklist[un],name2) then return "focus" else return false end;
+		if UnitChannelInfo("focus") and select(8,UnitChannelInfo("focus")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitChannelInfo("focus")) then return "focus" else return false end;
 		end
 		
 		return false;
