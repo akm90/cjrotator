@@ -160,6 +160,11 @@ function CJSpriestRot()
 	
 	if not IsSpellInRange("Mind Blast") then return end;
 	
+	if cj_aoemode then
+		CastSpell("Mind Sear");
+		return;
+	end
+	
 	if CJCooldown("Mind Blast") == 0 and CJ_BuffInfo("player","Shadow Orb") > 0 then
 		CJSPCast("Mind Blast");
 		return;
