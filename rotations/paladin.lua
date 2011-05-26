@@ -1,5 +1,167 @@
 --Paladin Rotations
 
+local function CJHolyPower()
+	return UnitPower("player",9);
+end
+
+local function CJGetNextThreat()
+	local highestThreat = 0;
+	if GetNumPartyMembers() == 0 then
+		return 100;
+	end
+	
+	if UnitDetailedThreatSituation("player","target") == nil then
+		return 100;
+	end
+	
+	if GetNumRaidMembers() == 0 then
+		for i = 1,GetNumPartyMembers() do
+			isTanking, status, scaledPercent, rawPercent, threatValue = UnitDetailedThreatSituation("party"..i, "target");
+			if scaledPercent ~= nil then
+				if scaledPercent > highestThreat then
+					highestThreat = scaledPercent;
+				end
+			end
+		end
+	else
+		for i = 1, GetNumRaidMembers() do
+			isTanking, status, scaledPercent, rawPercent, threatValue = UnitDetailedThreatSituation("raid"..i, "target");
+			if scaledPercent ~= nil then
+				if scaledPercent > highestThreat then
+					highestThreat = scaledPercent;
+				end
+			end
+		end
+	end
+	
+	
+	return highestThreat;
+end
+
+-------------------------------------------
+--------------Protection-------------------
+-------------------------------------------
+
+local function CJCheckProtBuffs()
+	if CJHealthPercent("target") > 80 and not CJ_HasBuff("player","Seal of Truth") then
+		CastSpell("Seal of Truth");
+		return;
+	end
+	
+	if cj_aoemode and not CJ_HasBuff("player","Seal of Truth") then
+		CastSpell("Seal of Truth");
+		return;
+	end
+	
+	if CJGetNextThreat() < 70 and not cj_aoemode and not CJ_HasBuff("player","Seal of Insight") and CJHealthPercent("target") < 80 then
+		CastSpell("Seal of Insight");
+		return;
+	end
+	
+	if CJGetNextThreat() >= 70 and not CJ_HasBuff("player","Seal of Truth") then
+		CastSpell("Seal of Truth");
+		return;
+	end
+	
+	if not (CJ_HasBuff("player","Devotion Aura") or CJ_HasBuff("player","Retribution Aura") 
+	or CJ_HasBuff("player","Concentration Aura") or CJ_HasBuff("player","Resistance Aura") 
+	or CJ_HasBuff("player","Crusader Aura")) then
+		CastSpell("Devotion Aura");
+		return true;
+	end
+	
+	return false;
+end
+
+function CJProtPallyRot()
+	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
+		local thing = CJ_Interrupt();
+		if (thing ~= false) then
+			if IsSpellInRange("Rebuke",thing) then
+				CastSpellByName("Rebuke",thing);
+			end
+		end
+	end
+	
+	StartAttack("target");
+	
+	if not CJ_GCD() then return end; -- Check for GCD
+	if CJCheckProtBuffs() then return end; -- Check our buffs
+	
+	if IsSpellInRange("Crusader Strike") == 0 and IsSpellInRange("Avenger's Shield") == 1 then
+		if CJCooldown("Avenger's Shield") == 0 then
+			CastSpell("Avenger's Shield");
+			return;
+		end
+		
+		if CJCooldown("Judgement") == 0 then
+			CastSpell("Judgement");
+			return;
+		end
+		return;
+	end
+	
+	if CJManaPercent("player") < 50 and CJCooldown("Judgement") == 0 then
+		CastSpell("Judgement")
+		return;
+	end
+	
+	if CJHealthPercent("player") < 40 and select(5,GetTalentInfo(2,16,false,false,nil)) == 1 and CJCooldown("Word of Glory") == 0 and CJHolyPower() == 3 then
+		CastSpell("Word of Glory");
+		return;
+	end
+	
+	if CJHolyPower() == 3 and (CJ_HasBuff("player","Sacred Duty") or CJ_HasBuff("player","Inquisition")) then
+		CastSpell("Shield of the Righteous");
+		return;
+	end
+	
+	if CJHolyPower() == 3 and not CJ_HasBuff("player","Inquisition") then
+		CastSpell("Inquisition");
+		return;
+	end
+	
+	if CJHolyPower() == 3 and not CJ_HasBuff("player","Sacred Duty") then
+		CastSpell("Inquisition");
+		return;
+	end
+	
+	if CJCooldown("Crusader Strike") == 0 then
+		if cj_aoemode then
+			CastSpell("Hammer of the Righteous");
+			return;
+		else
+			CastSpell("Crusader Strike");
+			return
+		end
+	end
+	
+	if IsUsableSpell("Hammer of Wrath") and CJCooldown("Hammer of Wrath") == 0 then
+		CastSpell("Hammer of Wrath");
+		return
+	end
+	
+	if cj_aoemode and CJCooldown("Consecration") == 0 then
+		CastSpell("Consecration");
+		return;
+	end
+	
+	if cj_aoemode and CJCooldown("Holy Wrath") == 0 then
+		CastSpell("Holy Wrath");
+		return;
+	end
+	
+	if CJCooldown("Avenger's Shield") == 0 then
+		CastSpell("Avenger's Shield");
+		return;
+	end
+	
+	if CJCooldown("Judgement") == 0 then
+		CastSpell("Judgement");
+		return;
+	end
+	
+end
 -------------------------------------------
 -----------Retribution---------------------
 -------------------------------------------
@@ -22,9 +184,6 @@ local function CJCheckRetBuffs()
 	return false;
 end
 
-local function CJHolyPower()
-	return UnitPower("player",9);
-end
 
 function CJRetPallyRot()
 	if cj_interruptmode and CJCooldown("Rebuke") == 0 then
