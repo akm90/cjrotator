@@ -23,6 +23,7 @@ cj_rotationTable = {
 [41] = "CJArcMageRot",
 [42] = "CJFireMageRot",
 [43] = "CJFrostMageRot",
+[52] = "CJProtPallyRot",
 [53] = "CJRetPallyRot",
 [61] = "CJDiscPriestRot",
 [63] = "CJSpriestRot",

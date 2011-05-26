@@ -189,7 +189,7 @@ function CJFeralDruidRot()
 	
 	if cj_aoemode and CJ_Energy() < 50 then return end;
 	
-	if cj_aoemode and CJCooldown("Swipe") == 0 and IsUsableSpell(2,"Swipe(Cat Form)") == nil then
+	if cj_aoemode and CJCooldown("Swipe(Cat Form)") == 0 then
 		CastSpell("Swipe(Cat Form)")
 		return;
 	end
