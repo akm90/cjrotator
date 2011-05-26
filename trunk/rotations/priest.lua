@@ -100,9 +100,9 @@ local function CJCheckShadowBuffs()
 		return true;
 	end
 	
-	if not CJ_HasBuff("player","Shadowform") then
-		CastSpell("Shadowform");
-		return true
+	if GetShapeshiftForm() ~= 1 then
+		CastShapeshiftForm(1);
+		return;
 	end
 
 	return false;
