@@ -29,7 +29,7 @@ end
 local function CJNumRune(rune)
 	local count = 0;
 	for i = 1, 6 do
-		if GetRuneType(i) == rune then
+		if GetRuneType(i) == rune and select(3,GetRuneCooldown(i)) == true then
 			count = count + 1;
 		end
 	end
@@ -104,12 +104,12 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown(49184) == 0 and CJ_HasBuff("player","Rime") then
+	if CJCooldown("Howling Blast") == 0 and CJ_HasBuff("player","Rime") then
 		CastSpell("Howling Blast");
 		return;
 	end
 	
-	if CJCooldown(49184) == 0 and (CJNumRune(4) + CJNumRune(2) == 0) then
+	if CJCooldown("Howling Blast") == 0 and (CJNumRune(4) + CJNumRune(2) == 0) then
 		CastSpell("Howling Blast");
 		return;
 	end
@@ -124,7 +124,7 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown(49184) == 0 then
+	if CJCooldown("Howling Blast") == 0 then
 		CastSpellNyName("Howling Blast");
 		return;
 	end
