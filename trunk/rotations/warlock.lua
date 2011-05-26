@@ -323,7 +323,7 @@ function CJDemoLockRot()
 	if IsSpellInRange("Shadow Bolt") == 0 then return end;
 
 	if GetUnitSpeed("player") > 0 then
-		if not CJ_HasDebuff("Curse of the Elements") then
+		if not CJ_HasDebuff("target","Curse of the Elements") then
 			CastSpell("Curse of the Elements");
 			return;
 		end
@@ -347,7 +347,7 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if not CJ_HasDebuff("Curse of the Elements") then
+	if not CJ_HasDebuff("target","Curse of the Elements") then
 		CastSpell("Curse of the Elements");
 		return;
 	end
