@@ -368,7 +368,7 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if CJ_HasBuff("Fel Spark") then
+	if CJ_HasBuff("player","Fel Spark") then
 		CastSpell("Fel Flame");
 		return;
 	end
