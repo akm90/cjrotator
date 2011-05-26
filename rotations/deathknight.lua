@@ -119,7 +119,7 @@ function CJFrostDKRot()
 		return;
 	end
 	
-	if CJCooldown("Frost Strike") == 0 then
+	if CJCooldown("Frost Strike") == 0 and select(2,IsUsableSpell("Frost Strike")) == nil then
 		CastSpell("Frost Strike");
 		return;
 	end
