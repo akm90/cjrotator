@@ -63,7 +63,7 @@ local function CJCheckProtBuffs()
 		return;
 	end
 	
-	if CJGetNextThreat() >= 70 and not CJ_HasBuff("player","Seal of Truth") then
+	if CJGetNextThreat() >= 80 and not CJ_HasBuff("player","Seal of Truth") then
 		CastSpell("Seal of Truth");
 		return;
 	end
@@ -115,7 +115,7 @@ function CJProtPallyRot()
 		return;
 	end
 	
-	if CJHealthPercent("player") < 40 and select(5,GetTalentInfo(2,16,false,false,nil)) == 1 and CJCooldown("Word of Glory") == 0 and CJHolyPower() == 3 then
+	if CJHealthPercent("player") < 40 and CJCooldown("Word of Glory") == 0 and CJHolyPower() == 3 then
 		CastSpell("Word of Glory");
 		return;
 	end
