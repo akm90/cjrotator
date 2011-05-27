@@ -65,7 +65,12 @@ function CJCooldown(spell)
 end
 
 function CJ_CheckMyCast()
-	if UnitChannelInfo("player") or UnitCastingInfo("player") then return false else return true end;
+	if UnitCastingInfo("player") then
+		if GetTime() - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
+	elseif UnitChannelInfo("player") then
+		if GetTime() - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
+	end
+	return true;
 end
 
 function CJ_Interrupt()
