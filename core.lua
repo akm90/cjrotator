@@ -140,7 +140,7 @@ local function CJPurgeToggle()
 	end
 end
 
-local function CJSlashHandler(args)
+--[[local function CJSlashHandler(args)
 	if args == "stopaftercombat" then
 		STOPAFTERCOMBAT = not STOPAFTERCOMBAT;
 		if STOPAFTERCOMBAT then printf("CJ Rotator: Stopping After Combat") else printf("CJ Rotator: Not Stopping after Combat") end
@@ -148,7 +148,7 @@ local function CJSlashHandler(args)
 		HOLDDOWN = not HOLDDOWN;
 		if HOLDDOWN then printf("CJ Rotator: Stopping After Combat") else printf("CJ Rotator: Not Stopping after Combat") end
 	end	
-end
+end--]]
 
 
 local function OnLoad()
@@ -176,6 +176,6 @@ SLASH_CJINTERRUPT1 = "/cjinterrupttoggle";
 SlashCmdList["CJINTERRUPT"] = CJToggleInterrupt;
 SLASH_CJPURGE1 = "/cjpurgetoggle"
 SlashCmdList["CJPURGE"] = CJPurgeToggle;
-SLASH_CJSLASH1 = "/cj"
-SlashCmdList["CJSLASH"} = CJSlashHandler;
+--[[SLASH_CJSLASH1 = "/cj"
+SlashCmdList["CJSLASH"} = CJSlashHandler;--]]
 OnLoad();
