@@ -6,7 +6,7 @@ local balancefourset = false;
 local feralfourset = false;
 
 local function CJCheckFeralTankBuffs()
-	if (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
+	if not UnitAffectingCombat("player")==1 and (not CJ_HasBuff("player","Mark of the Wild")) and not CJ_HasBuff("player","Blessing of Kings") then
 		if GetShapeshiftForm() ~= 0 then
 			RunMacroText("/cancelform");
 			return true;
