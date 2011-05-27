@@ -88,11 +88,6 @@ function CJArcMageRot()
 		end
 	end
 	
-	if CJCooldown("Flame Orb") == 0 then
-		CastSpell("Flame Orb");
-		return;
-	end
-	
 	if CJCooldown("Presence of Mind") == 0 then
 		CastSpell("Presence of Mind");
 		CastSpell("Arcane Blast");
@@ -207,11 +202,6 @@ function CJFireMageRot()
 		return;
 	end
 	
-	if CJCooldown("Flame Orb") == 0 then
-		CastSpell("Flame Orb");
-		return;
-	end
-	
 	if CJManaPercent("player") <= 40 and CJCooldown("Evocation") == 0 then
 		CastSpell("Evocation");
 		return
@@ -306,10 +296,10 @@ function CJFrostMageRot()
 		UseItemByName(36799);
 	end
 	
-	if CJCooldown(92283) == 0 then
+	--[[if CJCooldown(92283) == 0 then
 		CastSpell("Flame Orb");
 		return;
-	end
+	end--]]
 	
 	if CJCooldown("Deep Freeze") == 0 and IsUsableSpell("Deep Freeze") then
 		CastSpell("Deep Freeze");
