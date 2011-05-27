@@ -20,6 +20,7 @@ cj_action = false;
 cj_aoemode = false;
 cj_purgemode = false;
 cj_interruptmode = false;
+cj_feraltank = false;
 local f = CreateFrame("Frame");
 local _G = getfenv();
 local loaded = false;
@@ -128,9 +129,15 @@ local function CJToggleInterrupt()
 end
 
 local function CJPurgeToggle()
-	cj_purgemode = not cj_purgemode;
-	
-	if cj_purgemode then printf("CJ Rotator: Purging") else printf("CJ Rotator: Not Purging") end
+	if not cj_class == "Druid" then
+		cj_purgemode = not cj_purgemode;
+		
+		if cj_purgemode then printf("CJ Rotator: Purging") else printf("CJ Rotator: Not Purging") end
+	else
+		cj_feraltank = not cj_feraltank;
+		
+		if cj_feraltank then printf("CJ Rotator: Bare Tank") else printf("CJ Rotator: Kitty Mode!") end
+	end
 end
 
 

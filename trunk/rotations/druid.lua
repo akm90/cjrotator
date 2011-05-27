@@ -16,6 +16,7 @@ local function CJCheckFeralTankBuffs()
 	end
 	
 	if GetShapeshiftForm() ~= 1 then
+		RunMacroText("/cancelform");
 		CastShapeshiftForm(1);
 		return true;
 	end
@@ -149,13 +150,14 @@ local function CJCheckFeralBuffs()
 	end
 	
 	if GetShapeshiftForm() ~= 3 then
+		RunMacroText("/cancelform");
 		CastShapeshiftForm(3);
 		return true;
 	end
 	return false;
 end
 
-function CJFeralDruidRot()
+function CJFeralKittyRot()
 	if cj_interruptmode and CJCooldown("Skull Bash(Cat Form)") == 0 then
 		local thing = CJ_Interrupt();
 		if (thing ~= false) then
@@ -293,6 +295,14 @@ function CJFeralDruidRot()
 	if AmIBehind == "false" then
 		CastSpell("Mangle(Cat Form)");
 		return;
+	end
+end
+
+function CJFeralDruidRot()
+	if cj_feraltank then
+		CJFeralTankRot();
+	else
+		CJFeralKittyRot();
 	end
 end
 
