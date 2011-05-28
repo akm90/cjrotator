@@ -1,40 +1,6 @@
---[[local rotationTable = {
-[12] = CJFrostDKRot(),
-[13] = CJUnholyDKRot(),
-[21] = CJBalanceDruidRot(),
-[22] = CJFeralDruidRot(),
-[31] = CJBMHunterRot(),
-[32] = CJMMHunterRot(),
-[33] = CJSVHunterRot(),
-[42] = CJFireMageRot(),
-[43] = CJFrostMageRot(),
-[71] = CJAssRogueRot(),
-[72] = CJCombRogueRot(),
-[73] = CJSubRogueRot(),
-[92] = CJDemoLockRot(),
-[93] = CJDestLockRot(),
-};--]]
-
 cj_rotationTable = {
-[12] = "CJFrostDKRot",
-[21] = "CJBalanceDruidRot",
-[22] = "CJFeralDruidRot",
-[41] = "CJArcMageRot",
-[42] = "CJFireMageRot",
-[43] = "CJFrostMageRot",
 [52] = "CJProtPallyRot",
 [53] = "CJRetPallyRot",
-[61] = "CJDiscPriestRot",
-[63] = "CJSpriestRot",
-[71] = "CJAssRogueRot",
-[72] = "CJCombatRogueRot",
-[81] = "CJEleShamRot",
-[82] = "CJEnhShamRot",
-[91] = "CJAffLockRot",
-[92] = "CJDemoLockRot",
-[93] = "CJDestLockRot",
-[101] = "CJArmsWarRot",
-[102]= "CJFuryWarRot"
 };
 
 cj_interruptBlacklist = {
