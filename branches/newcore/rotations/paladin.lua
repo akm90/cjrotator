@@ -51,10 +51,10 @@ local function CJ_ProtBuffs()
 		if CJ_Cast("Righteous Fury") then return true end
 	end
 	
-	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) and not CJ_HB("Blessing of Might") then
-		if CJ_Cast("Blessing of Might") then return end;
-	elseif not CJ_HB("Blessing of Might") and not (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings")) == "player") then
+	if (not CJ_HB("Mark of the Wild") and not CJ_HB("Blessing of Kings")) then
 		if CJ_Cast("Blessing of Kings") then return end;
+	elseif not CJ_HB("Blessing of Might") and (CJ_HB("Mark of the Wild") or (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings") ~= "player")) then
+		if CJ_Cast("Blessing of Might") then return end;
 	end
 
 	if CJ_HP("target") > 80 and not CJ_HB("Seal of Truth") then
@@ -178,10 +178,10 @@ end
 local ud = false
 
 local function CJ_RetBuffs()
-	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) and not CJ_HB("Blessing of Might") then
-		if CJ_Cast("Blessing of Might") then return end;
-	elseif not CJ_HB("Blessing of Might") and not (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings")) == "player") then
+	if (not CJ_HB("Mark of the Wild") and not CJ_HB("Blessing of Kings")) then
 		if CJ_Cast("Blessing of Kings") then return end;
+	elseif not CJ_HB("Blessing of Might") and (CJ_HB("Mark of the Wild") or (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings") ~= "player")) then
+		if CJ_Cast("Blessing of Might") then return end;
 	end
 	
 	if not CJ_HB("Seal of Truth") then

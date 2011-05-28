@@ -53,7 +53,7 @@ end
 
 --Debuff Stacks
 function CJ_DS(debuff)
-	local rank = select(2,UnitDebuff(unit,debuff));
+	local rank = select(2,UnitDebuff("target",debuff));
 	if not rank then return 0 end
 	local name,_,_,count = UnitDebuff("target",debuff,rank,"PLAYER");
 	if not name then return 0 end
@@ -62,7 +62,7 @@ end
 
 --Debuff Time Remaining
 function CJ_DTR(debuff)
-	local rank = select(2,UnitDebuff(unit,debuff));
+	local rank = select(2,UnitDebuff("target",debuff));
 	if not rank then return 0 end
 	local name,_,_,_,_,_,expiration = UnitDebuff("target",debuff,rank,"PLAYER");
 	if not name then return 0 end
@@ -71,12 +71,14 @@ end
 
 --Has Debuff
 function CJ_HD(debuff)
-	if not UnitDebuff("target",debuff,select(2,UnitDebuff("target",debuff)),"PLAYER") then return false else return true end;
+	local rank = select(2,UnitDebuff("target",debuff));
+	if not rank then return false end
+	if not UnitDebuff("target",debuff,rank,"PLAYER") then return false else return true end;
 end
 
 --Has Debuff Override (For Arcane Blast)
-function CJ_HD(unit,debuff)
-	if not UnitDebuff(unit,debuff,select(2,UnitDebuff(unit,debuff)),"PLAYER") then return false else return true end;
+function CJ_HSD(debuff)
+	if not UnitDebuff("player",debuff) then return false else return true end;
 end
 
 -------------
