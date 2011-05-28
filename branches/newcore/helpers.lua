@@ -96,7 +96,6 @@ function CJ_Cast(spell)
 	if usable and mana == nil then
 		if GetSpellCooldown(spell) == 0 then
 			CastSpellByName(spell)
-			printf(spell);
 			return true;
 		else
 			return false;
@@ -289,14 +288,15 @@ function CJ_SelectSpec()
 end
 
 --Offensive Dispels
-function CJ_OffensiveDispel()
+function CJ_OffensiveDispel(spell)
 	if UnitIsPlayer("target") and not CJ_PURGEPLAYERS then return false end;
+	if not cj_purgemode then return false end;
 	if cj_class == "Shaman" then
 		for i = 1,40 do
 			local _,_,_,_,dispelType = UnitBuff("target",i);
 			
 			if dispelType == "Magic" then
-				return true;
+				return CJ_Cast(spell)
 			end
 		end
 	elseif cj_class == "Priest" then
@@ -304,13 +304,13 @@ function CJ_OffensiveDispel()
 			local _,_,_,_,dispelType = UnitBuff("target",i);
 			
 			if dispelType == "Magic" then
-				return true;
+				return CJ_Cast(spell)
 			end
 		end
 	elseif cj_class == "Mage" then
 		for i = 1,40 do
 			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
-				return true;
+				return CJ_Cast(spell)
 			end
 		end
 	end

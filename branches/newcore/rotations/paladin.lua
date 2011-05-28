@@ -51,7 +51,7 @@ local function CJ_ProtBuffs()
 		if CJ_Cast("Righteous Fury") then return true end
 	end
 	
-	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) then
+	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) and not CJ_HB("Blessing of Might") then
 		if CJ_Cast("Blessing of Might") then return end;
 	elseif not CJ_HB("Blessing of Might") and not (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings")) == "player") then
 		if CJ_Cast("Blessing of Kings") then return end;
@@ -65,7 +65,7 @@ local function CJ_ProtBuffs()
 		if CJ_Cast("Seal of Truth") then return true end
 	end
 	
-	if CJ_NextThreat() < 70 and not cj_aoemode and not CJ_HB("Seal of Insight") and CJ_HP("target") < 80 then
+	if CJ_NextThreat() < 70 and not cj_aoemode and not CJ_HB("Seal of Insight") and CJ_HP("target") < 80 and UnitClassification("target") == "worldboss" then
 		if CJ_Cast("Seal of Insight") then return true end
 	end
 	
@@ -95,7 +95,7 @@ function CJProtPallyRot()
 			CJ_Cast("Ardent Defender");
 		end
 		
-		if not CJ_HD("player","Forbearance") and CJ_HP("player") < 10 and CJ_CD("Ardent Defender") > 0 then
+		if not CJ_HD("player","Forbearance") and CJ_HP("player") < 10 and CJ_CD("Ardent Defender") > 0 and not CJ_HB("Ardent Defender") then
 			CJ_Cast("Lay on Hands");
 		end
 		
@@ -169,7 +169,7 @@ end
 local ud = false
 
 local function CJ_RetBuffs()
-	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) then
+	if CJ_HB("Mark of the Wild") or CJ_HB("Embrace of the Shale Spider") or (select(8,UnitBuff("player","Blessing of Kings")) ~= "player" and CJ_HB("Blessing of Kings")) and not CJ_HB("Blessing of Might") then
 		if CJ_Cast("Blessing of Might") then return end;
 	elseif not CJ_HB("Blessing of Might") and not (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings")) == "player") then
 		if CJ_Cast("Blessing of Kings") then return end;
@@ -301,7 +301,7 @@ function CJRetPallyRot()
 	if UnitDebuff("player","Caustic Slime") then return end;
 	
 	
-	if IsSpellInRange("Crusader Strike") == 0 and cj_cooldowns then
+	if IsSpellInRange("Crusader Strike") == 1 and cj_cooldowns then
 		CJ_Cast("Guardian of Ancient Kings");
 		if not CJ_HB("Zealotry") then
 			CJ_Cast("Avenging Wrath");
