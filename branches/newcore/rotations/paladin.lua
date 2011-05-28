@@ -333,7 +333,7 @@ function CJRetPallyRot()
 			if CJ_Cast("Exorcism") then return end;
 		end
 		
-		if GetUnitSpeed("player") == 0 and CJ_MP("player") > 40 and AmIFacing == "true" and CJ_Casting() then
+		if GetUnitSpeed("player") == 0 and CJ_MP("player") > 40 and AmIFacing == "true" and not CJ_Casting() then
 			if CJ_Cast("Exorcism") then return end;
 		end
 		return
