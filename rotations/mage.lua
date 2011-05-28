@@ -18,7 +18,7 @@ local function CJ_CheckArcaneBuffs()
 		return true;
 	end
 	
-	if GetItemCount(36799,false,true) == 0 then
+	if GetItemCount(36799,false,true) == 0 and (UnitAffectingCombat("player") == false or CJ_IsBossMob()) then
 		CastSpell("Conjure Mana Gem");
 		return true;
 	end
@@ -150,7 +150,7 @@ local function CJ_CheckFireBuffs()
 		return true;
 	end
 	
-	if GetItemCount(36799,false,true) == 0 then
+	if GetItemCount(36799,false,true) == 0 and (UnitAffectingCombat("player") == false or CJ_IsBossMob()) then
 		CastSpell("Conjure Mana Gem");
 		return true;
 	end
@@ -241,7 +241,7 @@ local function CJ_CheckFrostBuffs()
 		return true;
 	end
 	
-	if GetItemCount(36799,false,true) == 0 then
+	if GetItemCount(36799,false,true) == 0 and (UnitAffectingCombat("player") == false or CJ_IsBossMob()) then
 		CastSpell("Conjure Mana Gem");
 		return true;
 	end
