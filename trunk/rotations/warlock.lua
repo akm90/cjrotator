@@ -62,6 +62,11 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
+		if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
+			CastSpell("Curse of the Elements");
+			return;
+		end
+	
 		if select(2,CJ_DebuffInfo("target","Corruption")) < 2 then
 			CastSpell("Corruption");
 			return;
@@ -76,7 +81,7 @@ function CJAffLockRot()
 		return
 	end
 	
-	if not CJ_HasDebuff("target","Curse of the Elements") then
+	if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
 		CastSpell("Curse of the Elements");
 		return;
 	end
@@ -127,7 +132,7 @@ function CJAffLockRot()
 		return;
 	end
 	
-	if CJCooldown("Soulburn") == 0 and GetItemCount(6265,false,true) > 0 and not CJ_HasBuff("player","Demon Soul") then
+	if CJCooldown("Soulburn") == 0 and IsUsableSpell("Soulburn") and not CJ_HasBuff("player","Demon Soul") then
 		CastSpell("Soulburn");
 	end
 	
@@ -189,7 +194,7 @@ function CJDestLockRot()
 			return;
 		end
 		
-		if not CJ_HasDebuff("target","Curse of the Elements") then
+		if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
 			CastSpell("Curse of the Elements");
 			return;
 		end
@@ -198,7 +203,7 @@ function CJDestLockRot()
 		return
 	end
 	
-	if not CJ_HasDebuff("target","Curse of the Elements") then
+	if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
 		CastSpell("Curse of the Elements");
 		return;
 	end
@@ -207,7 +212,7 @@ function CJDestLockRot()
 		CastSpell("Demon Soul");
 	end
 	
-	if CJCooldown("Soulburn") == 0 and GetItemCount(6265,false,true) > 0 then
+	if CJCooldown("Soulburn") == 0 and IsUsableSpell("Soulburn") then
 		CastSpell("SoulBurn");
 	end
 	
@@ -323,7 +328,7 @@ function CJDemoLockRot()
 	if IsSpellInRange("Shadow Bolt") == 0 then return end;
 
 	if GetUnitSpeed("player") > 0 then
-		if not CJ_HasDebuff("target","Curse of the Elements") then
+		if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
 			CastSpell("Curse of the Elements");
 			return;
 		end
@@ -347,7 +352,7 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if not CJ_HasDebuff("target","Curse of the Elements") then
+	if not CJ_HasDebuff("target","Curse of the Elements") and not CJ_HasDebuff("target","Jinx: Curse of the Elements") then
 		CastSpell("Curse of the Elements");
 		return;
 	end
@@ -388,7 +393,7 @@ function CJDemoLockRot()
 		return;
 	end
 	
-	if CJCooldown("Soulburn") == 0 and GetItemCount(6265,false,true) > 0 then
+	if CJCooldown("Soulburn") == 0 and IsUsableSpell("Soulburn") > 0 then
 		CastSpell("Soulburn");
 	end
 	
