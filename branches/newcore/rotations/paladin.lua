@@ -86,7 +86,12 @@ local function CJ_ProtBuffs()
 end
 
 function CJProtPallyRot()
-	CJ_Interrupt(is)
+	if CJ_CD("Avenger's Shield") > 0 then
+		CJ_Interrupt(is)
+	else
+		CJ_Interrupt("Avenger's Shield");
+	end
+	
 	
 	StartAttack("target");
 	
