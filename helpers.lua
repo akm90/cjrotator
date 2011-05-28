@@ -3,6 +3,14 @@ cj_class = "";
 cj_currentRotation = 0;
 
 
+function CJ_IsRaidBoss()
+	if UnitClassification("target") == "worldboss" then return true else return false end
+end
+
+function CJ_IsBoss()
+	if tableContains(cj_bosslist,UnitName("target")) then return true else return false end
+end
+
 -------------------
 ----Buff Checks----
 -------------------
@@ -119,9 +127,9 @@ end
 --Already Casting
 function CJ_Casting()
 	if UnitCastingInfo("player") then
-		if GetTime() - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
+		if GetTime() - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return true else return false end;
 	elseif UnitChannelInfo("player") then
-		if GetTime() - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
+		if GetTime() - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return true else return false end;
 	end
 	return true;
 end
