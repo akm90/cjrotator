@@ -1,4 +1,5 @@
 cj_rotationTable = {
+[12] = "CJFrostDKRot",
 [22] = "CJFeralDruidRot",
 [52] = "CJProtPallyRot",
 [53] = "CJRetPallyRot",

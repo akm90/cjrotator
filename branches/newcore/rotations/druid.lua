@@ -267,3 +267,69 @@ function CJFeralDruidRot()
 		CJKittyRotation()
 	end
 end
+
+------------------------
+--------Boomy!----------
+------------------------
+local function CJ_Eclipse()
+	return UnitPower("player",8);
+end
+
+local function CJ_BalanceBuffs()
+	if not (CJ_HB("Mark of the Wild") or CJ_HB("Blessing of Kings")) then
+		if GetShapeshiftForm() ~= 0 then
+			RunMacroText("/cancelform");
+			return true;
+		end
+		if CJ_Cast("Mark of the Wild") then return true end;
+	end
+	
+	if GetShapeshiftForm() ~= 5 then
+		CastShapeshiftForm(5);
+		return true;
+	end
+	return false;
+end
+
+function CJBalanceDruidRot()
+	if AmIFacing == "false" then return end
+	if not CJ_GCD() then return end;
+	if CJ_Casting() then return end;
+	if CJ_BalanceBuffs() then return end;
+	
+	if IsSpellInRange("Wrath") == 0 then return end;
+	
+	if GetUnitSpeed("player") > 0 then
+		if CJ_DTR("Insect Swarm") < 4 then
+			if CJ_Cast("Insect Swarm") then return end;
+		end
+		
+		if CJ_HB("Eclipse (Solar)") then
+			if CJ_Cast("Sunfire") then return end;
+		end
+		
+		if CJ_Cast("Moonfire") then return end;
+		return
+	end
+	
+	if CJ_IsBossMob() and not ((CJ_OD("Faerie Fire") or (CJ_HD("Faerie Fire") and CJ_DS("Faerie Fire") < 3)) or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
+		if CJ_Cast("Faerie Fire") then return end;
+	end
+	
+	if CJ_DTR("Insect Swarm") < 4 then
+		if CJ_Cast("Insect Swarm") then return end;
+	end
+	
+	if CJ_HB("Astral Alignment") then
+		if CJ_Cast("Starsurge") then return end;
+		if CJ_HB("Eclipse (Lunar)") then return end
+	end
+	
+	if CJ_HB("Astral Alignment") then
+		if CJ_Cast("Starsurge") then return end;
+	end
+	
+	if CJ_HB("Astral Alignment") and CJ_HB("Eclipse (Lunar)") then
+		if CJ_Cast("Starfire") then return end;
+	end
+end
