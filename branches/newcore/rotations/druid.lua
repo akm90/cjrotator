@@ -216,12 +216,13 @@ local function CJKittyRotation()
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end
 	
-	if CJ_HB("Berserk") or (CJ_HD("Rake") and (CJ_DTR("Rake") <= CJ_CD("Tiger's Fury") + .8)) and CJ_DTR("Rake") < 3 then
+	if CJ_DTR("Rake") < 3 and (CJ_HB("Berserk") or CJ_Energy() >= 71 or (CJ_DTR("Rake") <= CJ_CD("Tiger's Fury") + .8)) then
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end
 	
+	
 	if not CJ_HD("Rake") or CJ_DTR("Rake") < 3 then
-		if CJ_Cast("Rake") then return end;
+		if CJ_Cast("Rake(Cat Form)") then return end;
 	end;
 	
 	if CJ_HB("Omen of Clarity") and AmIBehind == "true" then
@@ -242,6 +243,10 @@ local function CJKittyRotation()
 	
 	if CJ_HD("Rip") and CJ_DTR("Rip") <= 4 and CJ_HP("target") > 25 and AmIBehind == "true" then
 		if CJ_Cast("Shred(Cat Form)") then return end;
+	end
+	
+	if CJ_DTR("Rip") > 7 and CJ_Combo() >= 4 then
+		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
 	
 	if CJ_HB("Stampede") and not CJ_HB("Omen of Clarity") and CJ_HB("Tiger's Fury") then
@@ -271,6 +276,7 @@ end
 ------------------------
 --------Boomy!----------
 ------------------------
+local lastSwap
 local function CJ_Eclipse()
 	return UnitPower("player",8);
 end
@@ -337,5 +343,57 @@ function CJBalanceDruidRot()
 		end
 	end
 	
+	if CJ_Solar() then
+		if (balancefourset and not CJ_HB("Astral Alignment")) or not balancefourset then
+			if CJ_DTR("Sunfire") < 4 and not CJ_HD("Moonfire") then
+				if CJ_Cast("Sunfire") then return end
+			end
+		end
+	else
+		if (balancefourset and not CJ_HB("Astral Alignment")) or not balancefourset then
+			if not CJ_Lunar() then
+				if CJ_DTR("Moonfire") < 3 then
+					if CJ_Cast("Moonfire") then return end;
+				end
+			else
+				if CJ_DTR("Moonfire") < 4 and CJ_Eclipse() > -20 then
+					if CJ_Cast("Moonfire") then return end;
+				end
+			end
+		end
+	end
 	
+	if not ((GetEclipseDirection() == "moon" and CJ_Eclipse() <= -87) or (GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80)) then
+		if CJ_Cast("Starsurge") then return end;
+	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() < 80 then
+		if CJ_Cast("Starfire") then lastSwap = "Starfire" return end;
+	end
+	
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() < -87 then
+		if lastSwap == "Wrath" then
+			if CJ_Cast("Starfire") then lastSwap = nil return end;
+		end
+	end
+	
+	if GetEclipseDirection() == "moon" and CJ_Eclipse() >= -87 then
+		if CJ_Cast("Wrath") then lastSwap = "Wrath" return end;
+	end
+	
+	if GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80 then
+		if lastSwap == "Starfire" then
+			if CJ_Cast("Wrath") then lastSwap = nil return end;
+		end
+	end
+	
+	if GetEclipseDirection() == "sun" then
+		if CJ_Cast("Starfire") then return end;
+	end
+	
+	if GetEclipseDirection() == "moon" then
+		if CJ_Cast("Wrath") then return end;
+	end
+	
+	if CJ_Cast("Starfire") then return end;
 end
