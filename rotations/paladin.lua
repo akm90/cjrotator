@@ -135,6 +135,14 @@ function CJProtPallyRot()
 	elseif IsSpellInRange("Avenger's Shield") == 0 then return
 	end
 	
+	if CJ_MP("player") < 20 and cj_cooldowns then
+		if CJ_Cast("Divine Plea") then return end;
+	end
+	
+	if cj_cooldowns then
+		CJ_Cast("Avenging Wrath")
+	end
+	
 	if CJ_CD("Crusader Strike") > 0 and CJ_CD("Crusader Strike") < .3 then return end
 	
 	if CJ_MP("player") < 50 then

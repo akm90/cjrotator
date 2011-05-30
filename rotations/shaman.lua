@@ -23,9 +23,16 @@ local function CJ_EnhanceBuffs()
 end
 
 function CJEnhShamRot()
+	if AmIFacing == "false" then return end
 	CJ_Interrupt(is)
 	
 	StartAttack()
+	
+	if cj_cooldowns and UnitAffectingCombat("player") == 1 then
+		if CJ_HP("player") < 50 then
+			CJ_Cast("Shamanistic Rage");
+		end
+	end
 	
 	if not CJ_GCD() then return end;
 	if CJ_EnhanceBuffs() then return end;
@@ -63,6 +70,10 @@ function CJEnhShamRot()
 	end
 	
 	if CJ_Totems() then return end;
+	
+	if cj_cooldowns then
+		if CJ_Cast("Spirit Wolves") then return end;
+	end
 	
 	if cj_aoemode then
 		if CJ_Cast("Lava Lash") then return end;

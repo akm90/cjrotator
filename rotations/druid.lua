@@ -40,24 +40,43 @@ local function CJ_BearBuffs()
 	return false;
 end
 
-local function CJBearRotation()
-	CJ_Interrupt("Skull Bash(Bear Form)");
-	
+local function CJBearRotation()	
 	StartAttack("target");
 	
+	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+		if CJ_HP("player") < 10 then
+			CJ_Cast("Frenzied Regeneration");
+		end
+		
+		if CJ_HP("player") < 30 then
+			CJ_Cast("Survival Instincts");
+		end
+		
+		if CJ_HP("player") < 70 then
+			CJ_Cast("Barkskin");
+		end
+	end
+	
 	if AmIFacing == "false" then return end;
+	
+	CJ_Interrupt("Skull Bash(Bear Form)");
 	
 	if UnitAffectingCombat("player") == 1 and UnitDetailedThreatSituation("player","target") == nil then
 		CJ_Cast("Growl");
 	end
 	
-	if IsSpellInRange("Mangle") == 0 and IsSpellInRange("Feral Charge(Bear Form)") == 1 then
+	if IsSpellInRange("Mangle") == 0 and IsSpellInRange("Faerie Fire (Feral)") == 1 then
 		CJ_Cast("Feral Charge(Bear Form)");
 		
 		if not CJ_HD("Faerie Fire") or CJ_DS("Faerie Fire") < 3 and CJ_GCD() then
 			if CJ_Cast("Faerie Fire") then return end;
 		end
 		return;
+	elseif IsSpellInRange("Faerie Fire (Feral)") == 0 then return
+	end
+	
+	if cj_cooldowns then
+		CJ_Cast("Berserk");
 	end
 	
 	if CJ_Rage() > 50 then
@@ -68,7 +87,7 @@ local function CJBearRotation()
 	
 	if CJ_BearBuffs() then return end;
 	
-	if cj_aoemode then
+	if cj_aoemode and not CJ_HB("Berserk") then
 		if not CJ_HD("Demoralizing Roar") then
 			if CJ_Cast("Demoralizing Roar(Bear Form)") then return end;
 		end
@@ -121,11 +140,17 @@ local function CJ_KittyBuffs()
 end
 
 local function CJKittyRotation()
-	CJ_Interrupt("Skull Bash(Cat Form)");
+	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+		if CJ_HP("player") < 70 then
+			CJ_Cast("Barkskin");
+		end
+	end
 	
 	if not CJ_HB("Prowl") then StartAttack() else StopAttack() end;
 	
 	if AmIFacing == "false" then return end;
+	
+	CJ_Interrupt("Skull Bash(Cat Form)");
 	
 	if IsSpellInRange("Mangle(Cat Form)") == 0 and IsSpellInRange("Feral Charge(Cat Form)") == 1 then
 		if CJ_Cast("Feral Charge(Cat Form)") then return end;

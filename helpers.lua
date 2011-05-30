@@ -295,11 +295,12 @@ function CJ_SelectSpec()
 	elseif c == "Warrior" then
 		cj_currentRotation = 100 + tt;
 	end
+	CJClassTogHandler()
 end
 
 --Offensive Dispels
 function CJ_OffensiveDispel(spell)
-	if UnitIsPlayer("target") and not CJ_PURGEPLAYERS then return false end;
+	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
 	if not cj_purgemode then return false end;
 	if cj_class == "Shaman" then
 		for i = 1,40 do
