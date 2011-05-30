@@ -148,6 +148,10 @@ local function CJKittyRotation()
 		if CJ_HP("player") < 70 then
 			CJ_Cast("Barkskin");
 		end
+		
+		if CJ_HP("player") < 30 then
+			CJ_Cast("Survival Instincts");
+		end
 	end
 	
 	if not CJ_HB("Prowl") then StartAttack() else StopAttack() end;
@@ -311,11 +315,16 @@ end
 
 function CJBalanceDruidRot()
 	if AmIFacing == "false" then return end
+	if UnitAffectingCombat("player") == 1 and CJ_HP("player") < 50 and cj_cooldowns then
+		CJ_Cast("Barkskin")
+	end
+	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end;
 	if CJ_BalanceBuffs() then return end;
 	
 	if IsSpellInRange("Wrath") == 0 then return end;
+	
 	
 	if GetUnitSpeed("player") > 0 then
 		if CJ_DTR("Insect Swarm") < 4 then
@@ -330,8 +339,12 @@ function CJBalanceDruidRot()
 		return
 	end
 	
-	if CJ_IsBoss() and not ((CJ_OD("Faerie Fire") or (CJ_HD("Faerie Fire") and CJ_DS("Faerie Fire") < 3)) or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
+	if CJ_IsBoss() or CJ_IsRaidBoss() and not ((CJ_OD("Faerie Fire") or (CJ_HD("Faerie Fire") and CJ_DS("Faerie Fire") < 3)) or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
 		if CJ_Cast("Faerie Fire") then return end;
+	end
+	
+	if cj_cooldowns then
+		CJ_Cast("Force of Nature");
 	end
 	
 	if CJ_DTR("Insect Swarm") < 4 then
