@@ -212,7 +212,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Rip(Cat Form)") then return end;
 	end
 	
-	if CJ_HB("Tiger's Fury") and (not CJ_HD("Rake") or CJ_DTR("Rake") < 9) then
+	if CJ_HB("Tiger's Fury") and not CJ_HD("Rake") then
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end
 	
