@@ -275,6 +275,14 @@ local function CJ_Eclipse()
 	return UnitPower("player",8);
 end
 
+local function CJ_Solar()
+	return CJ_HB("Eclipse (Solar)");
+end
+
+local function CJ_Lunar()
+	return CJ_HB("Eclipse (Lunar)");
+end
+
 local function CJ_BalanceBuffs()
 	if not (CJ_HB("Mark of the Wild") or CJ_HB("Blessing of Kings")) then
 		if GetShapeshiftForm() ~= 0 then
@@ -322,14 +330,12 @@ function CJBalanceDruidRot()
 	
 	if CJ_HB("Astral Alignment") then
 		if CJ_Cast("Starsurge") then return end;
-		if CJ_HB("Eclipse (Lunar)") then return end
+		if CJ_Lunar() then
+			if CJ_Cast("Starfire") then return end;
+		else
+			if CJ_Cast("Wrath") then return end;
+		end
 	end
 	
-	if CJ_HB("Astral Alignment") then
-		if CJ_Cast("Starsurge") then return end;
-	end
 	
-	if CJ_HB("Astral Alignment") and CJ_HB("Eclipse (Lunar)") then
-		if CJ_Cast("Starfire") then return end;
-	end
 end
