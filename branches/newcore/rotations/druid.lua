@@ -330,7 +330,7 @@ function CJBalanceDruidRot()
 		return
 	end
 	
-	if CJ_IsBossMob() and not ((CJ_OD("Faerie Fire") or (CJ_HD("Faerie Fire") and CJ_DS("Faerie Fire") < 3)) or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
+	if CJ_IsBoss() and not ((CJ_OD("Faerie Fire") or (CJ_HD("Faerie Fire") and CJ_DS("Faerie Fire") < 3)) or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
 		if CJ_Cast("Faerie Fire") then return end;
 	end
 	
