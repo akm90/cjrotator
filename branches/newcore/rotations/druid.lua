@@ -363,7 +363,7 @@ function CJBalanceDruidRot()
 	if CJ_Solar() then
 		if (balancefourset and not CJ_HB("Astral Alignment")) or not balancefourset then
 			if CJ_DTR("Sunfire") < 4 and not CJ_HD("Moonfire") then
-				if CJ_Cast("Sunfire") then return end
+				if CJ_Cast("Moonfire") then return end
 			end
 		end
 	else
