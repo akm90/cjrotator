@@ -9,6 +9,7 @@ rotations\paladin.lua
 rotations\shaman.lua
 rotations\druid.lua
 rotations\deathknight.lua
+rotations\mage.lua
 
 tables.lua
 core.lua

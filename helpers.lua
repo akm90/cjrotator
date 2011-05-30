@@ -81,6 +81,12 @@ function CJ_HSD(debuff)
 	if not UnitDebuff("player",debuff) then return false else return true end;
 end
 
+function CJ_SDS(debuff)
+	local name,_,_,count = UnitDebuff("player",debuff);
+	if not name then return 0 end
+	return count
+end
+
 -------------
 -----HP/MP---
 -------------
