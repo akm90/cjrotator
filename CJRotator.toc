@@ -8,6 +8,7 @@ helpers.lua
 rotations\paladin.lua
 rotations\shaman.lua
 rotations\druid.lua
+rotations\deathknight.lua
 
 tables.lua
 core.lua

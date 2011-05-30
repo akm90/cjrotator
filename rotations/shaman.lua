@@ -128,13 +128,15 @@ end
 function CJEleShamRot()
 	CJ_Interrupt(is)
 	
-	if cj_cooldowns then
+	if cj_cooldowns and UnitAffectingCombat("player") == 1 then
 		CJ_Cast("Elemental Mastery");
 	end
 	
 	if not CJ_GCD() then return end
+	if CJ_EleBuffs() then return end
 	if CJ_Casting() then return end;
 	if CJ_Totems() then return end;
+	
 	
 	CJ_OffensiveDispel("Purge");
 	
@@ -184,7 +186,7 @@ function CJEleShamRot()
 		if CJ_Cast("Flame Shock") then return end;
 	end
 	
-	if CJ_Cast("Lava Bust") then return end;
+	if CJ_Cast("Lava Burst") then return end;
 	
 	if CJ_Cast("Lightning Bolt") then return end;
 		

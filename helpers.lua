@@ -129,11 +129,11 @@ end
 --Already Casting
 function CJ_Casting()
 	if UnitCastingInfo("player") then
-		if GetTime() - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return true else return false end;
+		if GetTime() - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
 	elseif UnitChannelInfo("player") then
-		if GetTime() - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return true else return false end;
+		if GetTime() - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) > 0 then return false else return true end;
 	end
-	return true;
+	return false;
 end
 
 --Interrupt Checks
@@ -176,10 +176,10 @@ end
 function CJ_Totems()
 	if cj_lastcall == nil then
 		if cj_aoemode then
-			CastSpell("Call of the Ancestors");
+			CJ_Cast("Call of the Ancestors");
 			return true;
 		else
-			CastSpell("Call of the Elements");
+			CJ_Cast("Call of the Elements");
 			return true;
 		end
 	end
@@ -244,24 +244,24 @@ function CJ_Totems()
 	if countTotem == 0 then 
 		return false;
 	elseif countTotem == 1 then
-		if updateFire then CastSpell(cj_firetotem) return true end;
-		if updateWater then CastSpell(cj_watertotem) return true end;
-		if updateEarth then CastSpell(cj_earthtotem) return true end;
-		if updateAir then CastSpell(cj_airtotem) return true end;
+		if updateFire then CJ_Cast(cj_firetotem) return true end;
+		if updateWater then CJ_Cast(cj_watertotem) return true end;
+		if updateEarth then CJ_Cast(cj_earthtotem) return true end;
+		if updateAir then CJ_Cast(cj_airtotem) return true end;
 	else
 		if fireTotem ~= "Fire Elemental Totem" and earthTotem ~= "Earth Elemental Totem" and earthTotem ~= "Earthbind Totem" and waterTotem ~= "Mana Tide Totem" and airTotem ~= "Spirit Link Totem" then
 			if cj_aoemode then
-				CastSpell("Call of the Ancestors")
+				CJ_Cast("Call of the Ancestors")
 				return true;
 			else
-				CastSpell("Call of the Elements");
+				CJ_Cast("Call of the Elements");
 				return true;
 			end
 		else
-			if updateFire then CastSpell(cj_firetotem) return true end;
-			if updateWater then CastSpell(cj_watertotem) return true end;
-			if updateEarth then CastSpell(cj_earthtotem) return true end;
-			if updateAir then CastSpell(cj_airtotem) return true end;
+			if updateFire then CJ_Cast(cj_firetotem) return true end;
+			if updateWater then CJ_Cast(cj_watertotem) return true end;
+			if updateEarth then CJ_Cast(cj_earthtotem) return true end;
+			if updateAir then CJ_Cast(cj_airtotem) return true end;
 		end
 	end
 	
