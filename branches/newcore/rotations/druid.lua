@@ -66,6 +66,9 @@ local function CJBearRotation()
 	end
 	
 	if IsSpellInRange("Mangle") == 0 and IsSpellInRange("Faerie Fire (Feral)") == 1 then
+		if cj_cooldowns then
+			CJ_Cast("Enrage")
+		end
 		CJ_Cast("Feral Charge(Bear Form)");
 		
 		if not CJ_HD("Faerie Fire") or CJ_DS("Faerie Fire") < 3 and CJ_GCD() then
@@ -77,6 +80,7 @@ local function CJBearRotation()
 	
 	if cj_cooldowns then
 		CJ_Cast("Berserk");
+		CJ_Cast("Enrage");
 	end
 	
 	if CJ_Rage() > 50 then
@@ -116,7 +120,7 @@ local function CJBearRotation()
 		if CJ_Cast("Pulverize(Bear Form)") then return end;
 	end
 	
-	if not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) and (CJ_DS("Faerie Fire") < 3 or CJ_DTR("Faerie Fire") < 4) then
+	if not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or (CJ_DS("Faerie Fire") < 3 or CJ_DTR("Faerie Fire") < 4) then
 		if CJ_Cast("Faerie Fire (Feral)") then return end;
 	end
 	
@@ -183,8 +187,8 @@ local function CJKittyRotation()
 		if CJ_Cast("Mangle(Cat Form)") then return end;
 	end
 	
-	if not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) then
-		if CJ_Cast("Faerie Fire (Feral)") then return true end
+	if not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or (CJ_DS("Faerie Fire") < 3 or CJ_DTR("Faerie Fire") < 4) then
+		if CJ_Cast("Faerie Fire (Feral)") then return end;
 	end
 	
 	if CJ_DTR("Mangle") <= 2 and (not CJ_OD("Trauma") and not CJ_OD("Hemorrhage")) then
