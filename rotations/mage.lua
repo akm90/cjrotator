@@ -177,4 +177,11 @@ function CJFireMageRot()
 	
 	if CJ_Cast("Fireball") then return end;
 end
+
+---------------------------------
+-----------Frost-----------------
+---------------------------------
+
+function CJFrostMageRot()
 	
+end

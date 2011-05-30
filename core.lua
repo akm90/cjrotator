@@ -223,10 +223,10 @@ local function OnUpdate(...)
 end
 
 local function OnEvent(self,event,...)
-	if event == "PLAYER_REGEN_ENABLED" then
+	if event == "PLAYER_REGEN_ENABLED" and cj_stopaftercombat then
 		if cj_action then
 			cj_action = false;
-			DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Finished");
+			if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
 		end
 	elseif event == "ADDON_LOADED" then
 		CJCreateFrame()
@@ -263,10 +263,8 @@ local function OnLoad()
 	h:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
 	h:RegisterEvent("CHARACTER_POINTS_CHANGED");
 	h:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
-	h:RegisterEvent("ADDON_LOADED");
-	if STOPAFTERCOMBAT then
-		h:RegisterEvent("PLAYER_REGEN_ENABLED");
-	end
+	h:RegisterEvent("ADDON_LOADED")
+	h:RegisterEvent("PLAYER_REGEN_ENABLED");	
 	h:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(h, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
 	h:SetScript("OnUpdate", OnUpdate);
