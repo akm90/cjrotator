@@ -37,9 +37,8 @@ function CJEnhShamRot()
 	if not CJ_GCD() then return end;
 	if CJ_EnhanceBuffs() then return end;
 	
-	CJ_OffensiveDispel("Purge");
-	
 	if IsSpellInRange("Lava Lash") == 0 and IsSpellInRange("Earth Shock") == 1 then
+		CJ_OffensiveDispel("Purge");
 		if CJ_Cast("Unleash Elements") then return end;
 		
 		if cj_aoemode and not CJ_HD("Flame Shock") then
@@ -70,6 +69,8 @@ function CJEnhShamRot()
 	end
 	
 	if CJ_Totems() then return end;
+	
+	CJ_OffensiveDispel("Purge");
 	
 	if cj_cooldowns then
 		if CJ_Cast("Spirit Wolves") then return end;
@@ -138,13 +139,14 @@ function CJEleShamRot()
 	if CJ_Totems() then return end;
 	
 	
-	CJ_OffensiveDispel("Purge");
 	
 	if UnitAffectingCombat("player") == 1 and CJ_MP("player") < 50 then
 		if CJ_Cast("Thunderstorm") then return end;
 	end		
 	
 	if IsSpellInRange("Lightning Bolt") == 0 then return end;
+	
+	CJ_OffensiveDispel("Purge");
 	
 	if GetUnitSpeed("player") > 0 and not CJ_HB("Spiritwalker's Grace") then
 		if CJ_Cast("Thunderstorm") then return end;
