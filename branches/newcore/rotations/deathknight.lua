@@ -100,3 +100,34 @@ function CJFrostDKRot()
 	if CJ_Cast("Howling Blast") then return end;
 	if CJ_Cast("Horn of Winter") then return end;
 end
+
+---------------------------------
+---------Blood-------------------
+---------------------------------
+local function CJ_BloodBuffs()		
+	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
+		if CJ_Cast("Horn of Winter") then return true end;
+	end
+	
+	if GetShapeshiftForm() ~= 1 then
+		CastShapeshiftForm(1);
+		return;
+	end
+	return false
+end
+
+function CJBloodDKRot()
+	if UnitAffectingCombat("player") == 1 and cj_defensivecooldowns then
+		if CJ_HP("player") < 50 then
+			CJ_Cast("Icebound Fortitude")
+		end
+	end
+	
+	if AmIFacing == "false" then return end;
+	CJ_Interrupt("Mind Freeze");
+	
+	StartAttack("target")
+	
+	if not CJ_GCD() then return end
+	if CJ_FrostBuffs() then return end
+end

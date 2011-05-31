@@ -3,7 +3,6 @@
 local balancefourset = false;
 local feralfourset = false;
 local lastform = nil
-cj_druiddcd = false;
 
 local function CJ_Energy()
 	return UnitPower("player",3);
@@ -44,7 +43,7 @@ end
 local function CJBearRotation()	
 	StartAttack("target");
 	
-	if UnitAffectingCombat("player") == 1 and cj_druiddcd then
+	if UnitAffectingCombat("player") == 1 and cj_defensivecooldowns then
 		if CJ_HP("player") < 10 then
 			CJ_Cast("Frenzied Regeneration");
 		end
