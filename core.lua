@@ -13,6 +13,7 @@ local cjmin = false;
 local frameLoaded = false;
 cj_action = false;
 cj_aoemode = false;
+cj_defensivecooldowns = false
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -207,7 +208,7 @@ function CJClassTogHandler()
 	elseif cj_class == "Druid" then
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
-		cj_druiddcd = CJClassToggle:GetChecked()
+		cj_defensivecooldowns = CJClassToggle:GetChecked()
 	elseif cj_currentRotation == 61 then
 		CJClassToggleText:SetText("Heal Only");
 	else

@@ -317,6 +317,7 @@ function CJ_SelectSpec()
 		cj_currentRotation = 100 + tt;
 	end
 	CJClassTogHandler()
+	if cj_rotationTable[cj_currentRotation] == nil then CJActionButton:Disable(); else CJActionButton:Enable() end
 end
 
 --Offensive Dispels
