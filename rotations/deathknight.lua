@@ -1,7 +1,11 @@
 --Death Knight Rotations
 
 local function CJ_RCD(rune)
-	return select(3,GetRuneCooldown(rune));
+	if GetRuneCooldown(rune) == 0 then 
+		return 0
+	else
+		return select(2,GetRuneCooldown(rune)) - (GetTime() - GetRuneCooldown(rune))
+	end
 end
 
 --1 Blood
@@ -104,6 +108,7 @@ end
 ---------------------------------
 ---------Blood-------------------
 ---------------------------------
+local outbreakcast = false;
 local function CJ_BloodBuffs()		
 	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
 		if CJ_Cast("Horn of Winter") then return true end;
@@ -118,8 +123,16 @@ end
 
 function CJBloodDKRot()
 	if UnitAffectingCombat("player") == 1 and cj_defensivecooldowns then
+		if CJ_HP("player") < 70 then
+			CJ_Cast("Vampiric Blood")
+		end
+		
 		if CJ_HP("player") < 50 then
 			CJ_Cast("Icebound Fortitude")
+		end
+		
+		if CJ_HP("player") < 40 and not CJ_HB("Icebound Fortitude") and UnitPower("player") >= 80 then
+			CJ_Cast("Lichborne")
 		end
 	end
 	
@@ -129,5 +142,73 @@ function CJBloodDKRot()
 	StartAttack("target")
 	
 	if not CJ_GCD() then return end
-	if CJ_FrostBuffs() then return end
+	if CJ_BloodBuffs() then return end
+	
+	if CJ_HB("Lichborne") then
+		if CJ_CastTarget("Death Coil","player") then return end;
+	end
+	
+	if cj_aoemode then
+		if IsSpellInRange("Heart Strike") == 0 and IsSpellInRange("Outbreak") == 1 then
+			if CJ_Cast("Outbreak") then outbreakcast = true return end
+		elseif IsSpellInRange("Outbreak") == 0 then return
+		end
+		
+		if cj_cooldowns then
+			CJ_Cast("Dancing Rune Weapon")
+		end
+		
+		if CJ_Cast("Outbreak") then outbreakcast = true return end;
+		if CJ_HD("Blood Plague") and CJ_HD("Frost Fever") and outbreakcast then
+			if CJ_Cast("Pestilence") then outbreakcast = false return end;
+		end
+		
+		if CJ_Cast("Death Strike") then return end;
+		
+		if ((CJ_RCD(3) > 0 and CJ_RCD(4) > 0) or (CJ_RCD(5) > 0 and CJ_RCD(6) > 0)) then
+			if CJ_Cast("Rune Strike") then return end;
+		end
+		
+		if (CJ_RCD(1) == 0 and CJ_RCD(2) == 0) or (CJ_RCD(1) < 3 and CJ_RCD(2) == 0) or (CJ_RCD(1) == 0 and CJ_RCD(2) < 3) then
+			if CJ_CD("Blood Tap") == 0 then
+				CJ_Cast("Blood Tap")
+				if CJ_Cast("Bone Shield") then return else if CJ_Cast("Icy Touch") then return end end
+			elseif CJ_HP("player") < 90 and CJ_CD("Rune Tap") == 0 then
+				if CJ_Cast("Rune Tap") then return end;
+			else
+				if CJ_Cast("Blood Boil") then return end;
+			end
+		end
+		
+		if CJ_Cast("Horn of Winter") then return end;
+	else
+		if IsSpellInRange("Heart Strike") == 0 and IsSpellInRange("Outbreak") == 1 then
+			if CJ_Cast("Outbreak") then outbreakcast = true return end
+		elseif IsSpellInRange("Outbreak") == 0 then return
+		end
+		
+		if cj_cooldowns then
+			CJ_Cast("Dancing Rune Weapon")
+		end
+		
+		if CJ_Cast("Outbreak") then return end;
+		
+		if CJ_Cast("Death Strike") then return end;
+		if CJ_Cast("Rune Strike") then return end
+		if CJ_HP("player") < 90 then
+			if CJ_Cast("Rune Tap") then return end
+		end
+		
+		if CJ_Cast("Horn of Winter") then return end;
+		
+		if (CJ_RCD(1) == 0 and CJ_RCD(2) == 0) or (CJ_RCD(1) < 3 and CJ_RCD(2) == 0) or (CJ_RCD(1) == 0 and CJ_RCD(2) < 3) then
+			if CJ_Cast("Blood Tap") then
+				if CJ_Cast("Bone Shield") then return else if CJ_Cast("Icy Touch") then return end end
+			elseif CJ_HP("player") < 90 and CJ_CD("Rune Tap") == 0 then
+				if CJ_Cast("Blood Tap") then return end;
+			else
+				if CJ_Cast("Heart Strike") then return end;
+			end
+		end
+	end
 end
