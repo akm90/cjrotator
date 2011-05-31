@@ -10,6 +10,7 @@ rotations\shaman.lua
 rotations\druid.lua
 rotations\deathknight.lua
 rotations\mage.lua
+rotations\warlock.lua
 
 tables.lua
 core.lua

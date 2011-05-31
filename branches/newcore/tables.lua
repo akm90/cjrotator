@@ -9,7 +9,8 @@ cj_rotationTable = {
 [52] = "CJProtPallyRot",
 [53] = "CJRetPallyRot",
 [81] = "CJEleShamRot",
-[82] = "CJEnhShamRot"
+[82] = "CJEnhShamRot",
+[91] = "CJAffLockRot"
 };
 
 cj_interruptBlacklist = {
