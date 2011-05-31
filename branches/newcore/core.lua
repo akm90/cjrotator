@@ -14,6 +14,7 @@ local frameLoaded = false;
 cj_action = false;
 cj_aoemode = false;
 cj_defensivecooldowns = false
+cj_petattacking = false;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -213,6 +214,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()
+	elseif cj_class == "Paladin" then
+		CJClassToggleText:SetText("Defensive Cooldowns")
+		CJClassToggle:Enable()
+		cj_defensivecooldowns = CJClassToggle:GetChecked()
 	elseif cj_currentRotation == 61 then
 		CJClassToggleText:SetText("Heal Only");
 	else
@@ -260,6 +265,10 @@ local function OnEvent(self,event,...)
 				end
 			end				
 		end
+	elseif event == "PET_ATTACK_START" then
+		cj_petattacking = true
+	elseif event == "PET_ATTACK_STOP" then
+		cj_petattacking = false;
 	else
 		CJ_SelectSpec();
 	end
@@ -279,7 +288,9 @@ local function OnLoad()
 	h:RegisterEvent("CHARACTER_POINTS_CHANGED");
 	h:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED");
 	h:RegisterEvent("ADDON_LOADED")
-	h:RegisterEvent("PLAYER_REGEN_ENABLED");	
+	h:RegisterEvent("PLAYER_REGEN_ENABLED");
+	h:RegisterEvent("PET_ATTACK_START");
+	h:RegisterEvent("PET_ATTACK_STOP");
 	h:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(h, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
 	h:SetScript("OnUpdate", OnUpdate);
