@@ -46,7 +46,7 @@ function CJAffLockRot()
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_GCD() then return end;
-	if not CJ_CheckMyCast() then return end;
+	if CJ_Casting() then return end
 	if CJ_AffBuffs() then return end;
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
