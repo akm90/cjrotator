@@ -106,7 +106,10 @@ end
 ------------------
 
 --Cast Spell
-function CJ_Cast(spell)
+function CJ_Cast(spell,arg1,arg2)
+	if spell and arg1 and arg2 then
+		
+
 	local usable,mana = IsUsableSpell(spell)
 	
 	if usable and mana == nil then

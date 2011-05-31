@@ -95,7 +95,7 @@ function CJProtPallyRot()
 	
 	StartAttack("target");
 	
-	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+	if UnitAffectingCombat("player") == 1 and cj_defensivecooldowns then
 		if CJ_HP("player") < 15 and not CJ_HB("Guardian of Ancient Kings") then
 			CJ_Cast("Ardent Defender");
 		end
