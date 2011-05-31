@@ -3,6 +3,7 @@
 local balancefourset = false;
 local feralfourset = false;
 local lastform = nil
+cj_druiddcd = false;
 
 local function CJ_Energy()
 	return UnitPower("player",3);
@@ -43,7 +44,7 @@ end
 local function CJBearRotation()	
 	StartAttack("target");
 	
-	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+	if UnitAffectingCombat("player") == 1 and cj_druiddcd then
 		if CJ_HP("player") < 10 then
 			CJ_Cast("Frenzied Regeneration");
 		end
@@ -72,7 +73,7 @@ local function CJBearRotation()
 		CJ_Cast("Feral Charge(Bear Form)");
 		
 		if not CJ_HD("Faerie Fire") or CJ_DS("Faerie Fire") < 3 and CJ_GCD() then
-			if CJ_Cast("Faerie Fire") then return end;
+			if CJ_Cast("Faerie Fire (Feral)") then return end;
 		end
 		return;
 	elseif IsSpellInRange("Faerie Fire (Feral)") == 0 then return
@@ -144,7 +145,7 @@ local function CJ_KittyBuffs()
 end
 
 local function CJKittyRotation()
-	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+	if UnitAffectingCombat("player") == 1 and cj_druiddcd then
 		if CJ_HP("player") < 70 then
 			CJ_Cast("Barkskin");
 		end
@@ -199,7 +200,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Mangle(Cat Form)") then return end;
 	end
 	
-	if CJ_HB("Stampede") and CJ_BTR("Stampede") < 2 then
+	if CJ_HB("Stampede") and CJ_BTR("Stampede") < 4 then
 		if CJ_Cast("Ravage") then return end
 		if CJ_Cast("Ravage!") then return end
 	end
