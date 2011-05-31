@@ -209,6 +209,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()
+	elseif cj_class == "Death Knight" then
+		CJClassToggleText:SetText("Defensive Cooldowns")
+		CJClassToggle:Enable()
+		cj_defensivecooldowns = CJClassToggle:GetChecked()
 	elseif cj_currentRotation == 61 then
 		CJClassToggleText:SetText("Heal Only");
 	else
