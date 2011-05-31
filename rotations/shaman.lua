@@ -73,7 +73,7 @@ function CJEnhShamRot()
 	CJ_OffensiveDispel("Purge");
 	
 	if cj_cooldowns then
-		if CJ_Cast("Spirit Wolves") then return end;
+		if CJ_Cast("Feral Spirit") then return end;
 	end
 	
 	if cj_aoemode then

@@ -31,7 +31,7 @@ h:SetWidth(1);
 h:SetHeight(1);
 
 local b = CreateFrame("CheckButton", "NAActionButton", nil, "SecureActionButtonTemplate, ActionButtonTemplate");
-if HOLDDOWN then
+if cj_holddown then
 	b:RegisterForClicks("AnyUp", "AnyDown");
 else
 	b:RegisterForClicks("AnyUp");
@@ -129,6 +129,12 @@ local function CJCreateFrame()
 	fg:SetChecked(cj_holddown)
 	fg:SetScript("OnClick",function(self)
 		cj_holddown = self:GetChecked()
+		NAActionButton:UnregisterAllEvents()
+		if cj_holddown then
+			NAActionButton:RegisterForClicks("AnyUp", "AnyDown");
+		else
+			NAActionButton:RegisterForClicks("AnyUp");
+		end
 	end)
 
 	local fh = CreateFrame("CheckButton","CJInterruptsCheck",f,"UICheckButtonTemplate")
@@ -198,6 +204,10 @@ end
 function CJClassTogHandler()
 	if cj_class == "Warrior" then
 		CJClassToggleText:SetText("Use Hamstring")
+	elseif cj_class == "Druid" then
+		CJClassToggleText:SetText("Defensive Cooldowns")
+		CJClassToggle:Enable()
+		cj_druiddcd = CJClassToggle:GetChecked()
 	elseif cj_currentRotation == 61 then
 		CJClassToggleText:SetText("Heal Only");
 	else
@@ -223,8 +233,8 @@ local function OnUpdate(...)
 end
 
 local function OnEvent(self,event,...)
-	if event == "PLAYER_REGEN_ENABLED" and cj_stopaftercombat then
-		if cj_action then
+	if event == "PLAYER_REGEN_ENABLED" then
+		if cj_action and cj_stopaftercombat then
 			cj_action = false;
 			if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
 		end

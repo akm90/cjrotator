@@ -121,6 +121,21 @@ function CJ_Cast(spell)
 	end
 end
 
+function CJ_CastTarget(spell,target)
+	local usable,mana = IsUsableSpell(spell)
+	
+	if usable and mana == nil then
+		if GetSpellCooldown(spell) == 0 then
+			CastSpellByName(spell,target)
+			return true;
+		else
+			return false;
+		end
+	else
+		return false;
+	end
+end
+
 --Spell Cooldown
 function CJ_CD(spell)
 	local start,duration,enable = GetSpellCooldown(spell);
@@ -158,11 +173,11 @@ function CJ_Interrupt(spell)
 		end
 	else
 		if UnitCastingInfo("focus") and select(9,UnitCastingInfo("focus")) == false then
-			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitCastingInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_Cast(spell) else return end;
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitCastingInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_CastTarget(spell,"focus") else return end;
 		end
 		
 		if UnitChannelInfo("focus") and select(8,UnitChannelInfo("focus")) == false then
-			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitChannelInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_Cast(spell) else return end;
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitChannelInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_CastTarget(spell,"focus") else return end;
 		end
 	end
 end
