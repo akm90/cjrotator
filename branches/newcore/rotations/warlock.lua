@@ -21,6 +21,8 @@ function CJAffLockRot()
 	
 	if UnitExists("focus") and UnitCanAttack("player","focus") then
 		hasFocus = true
+	else
+		hasFocus = false;
 	end
 	
 	if AmIFacing == "false" then return end;

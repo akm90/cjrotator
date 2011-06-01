@@ -16,6 +16,7 @@ cj_aoemode = false;
 cj_defensivecooldowns = false
 cj_petattacking = false;
 cj_lifetap = false;
+cj_hamstring = false
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -206,8 +207,10 @@ end
 
 
 function CJClassTogHandler()
-	if cj_class == "Warrior" then
+	if cj_currentRotation = 101 or cj_currentRotation = 102 then
 		CJClassToggleText:SetText("Use Hamstring")
+		CJClassToggle:Enable()
+		cj_hamstring = CJClassToggle:GetChecked()
 	elseif cj_class == "Warlock" then
 		CJClassToggleText:SetText("Use Life Tap")
 		CJClassToggle:Enable()
