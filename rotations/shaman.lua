@@ -28,7 +28,7 @@ function CJEnhShamRot()
 	
 	StartAttack()
 	
-	if cj_cooldowns and UnitAffectingCombat("player") == 1 then
+	if UnitAffectingCombat("player") == 1 then
 		if CJ_HP("player") < 50 then
 			CJ_Cast("Shamanistic Rage");
 		end

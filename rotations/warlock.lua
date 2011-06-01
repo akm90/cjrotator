@@ -25,11 +25,6 @@ local function CJ_AffBuffs()
 	if not CJ_HB("Fel Armor") then
 		if CJ_Cast("Fel Armor") then return true end
 	end
-	
-	if (not UnitExists("pet") or UnitCreatureFamily("pet") ~= "Felhunter") and (GetTime() - lastpetcast) > 15 then
-		lastpetcast = GetTime();
-		if CJ_Cast("Summon Felhunter") then return true end
-	end
 	return false
 end
 
@@ -50,7 +45,7 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if CJ_HB("Soul Swap") then
-		if CJ_CastTarget("Soul Swap Exhale","focus") then return end;
+		if CJ_CastTarget("Soul Swap","focus") then return end;
 	end
 	
 	if GetUnitSpeed("player") > 0 then
@@ -135,4 +130,18 @@ function CJAffLockRot()
 	end
 	
 	if CJ_Cast("Shadow Bolt") then return end
+end
+
+-----------------------------
+---------Destruction---------
+-----------------------------
+local function CJ_DestroBuffs()
+	if not CJ_HB("Fel Armor") then
+		if CJ_Cast("Fel Armor") then return true end
+	end
+	return false
+end
+
+function CJDestLockRot()
+	
 end
