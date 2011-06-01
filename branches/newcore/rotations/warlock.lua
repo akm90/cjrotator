@@ -16,6 +16,7 @@ local lastuacast = 0
 local lastpetcast = 0;
 local lastimmolatecast = 0;
 local lasthauntcast = 0;
+local soulswap = false;
 
 -----------------------------
 ---------Affliction----------
@@ -47,6 +48,11 @@ function CJAffLockRot()
 	if CJ_AffBuffs() then return end;
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
+	if soulswap then
+		if CJ_CastTarget("Soul Swap","focus") then soulswap = false return end
+		
+	end
 	
 	if GetUnitSpeed("player") > 0 then
 		if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
@@ -102,15 +108,11 @@ function CJAffLockRot()
 	end
 	
 	if hasFocus then
-		if CJ_CastTarget("Soul Swap","target") then CJ_CastTarget("Soul Swap Exhale","focus") return end
+		if CJ_CastTarget("Soul Swap","target") then soulswap = true return end
 	end
 	
 	if CJ_HB("Fel Spark") and CJ_DTR("Unstable Affliction") < 8 and CJ_HB("Unstable Affliction") then
 		if CJ_Cast("Fel Flame") then return end;
-	end
-	
-	if cj_cooldowns and not cj_aoemode then
-		if CJ_Cast("Summon Doomguard") then return end;
 	end
 	
 	if CJ_HP("target") < 25 then
