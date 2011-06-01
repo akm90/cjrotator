@@ -290,8 +290,8 @@ function CJDemoLockRot()
 		if CJ_Cast("Bane of Doom") then return end
 	end
 	
-	if not CJ_HD("Immolate") then
-		if CJ_Cast("Immolate") then return end
+	if not CJ_HD("Immolate") and GetTime() - lastimmolatecast > 4 then
+		if CJ_Cast("Immolate") then lastimmolatecast = GetTime() return end
 	end
 	
 	if CJ_DTR("Corruption") < 3 then
