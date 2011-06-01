@@ -49,7 +49,7 @@ function CJAffLockRot()
 		end
 		
 		if hasFocus then
-			if CJ_DTR("Bane of Agony") < 3 then
+			if not CJ_HD("Bane of Agony") then
 				if CJ_Cast("Bane of Agony") then return end;
 			end
 		else
@@ -80,7 +80,7 @@ function CJAffLockRot()
 	end
 	
 	if hasFocus then
-		if CJ_DTR("Bane of Agony") <  3 then
+		if not CJ_HD("Bane of Agony") then
 			if CJ_Cast("Bane of Agony") then return end;
 		end
 	else
@@ -276,6 +276,7 @@ function CJDemoLockRot()
 	
 	if cj_aoemode and PlayerToTarget < 7 then
 		if CJ_Cast("Hellfire") then return end
+		if CJ_Cast("Felstorm") then PetFollow() return end
 	end
 	
 	if cj_aoemode then
