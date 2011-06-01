@@ -28,14 +28,14 @@ local function swapBack()
 end
 
 local function CJ_BearBuffs()
-	if not UnitAffectingCombat("player")==1 and (not CJ_HB("Mark of the Wild") and not CJ_HB("Blessing of Kings")) then
+--[[	if not UnitAffectingCombat("player")==1 and (not CJ_HB("Mark of the Wild") and not CJ_HB("Blessing of Kings")) then
 		if GetShapeshiftForm() ~= 0 then
 			lastForm = GetShapeshiftForm();
 			RunMacroText("/cancelform");
 			return true;
 		end
 		if CJ_Cast("Mark of the Wild") then return true end;
-	end
+	end --]]
 	
 	return false;
 end
@@ -131,14 +131,14 @@ end
 --------Cat Form--------
 ------------------------
 local function CJ_KittyBuffs()
-	if not CJ_HB("Mark of the Wild") then
+--[[	if not CJ_HB("Mark of the Wild") then
 		if GetShapeshiftForm() ~= 0 then
 			lastForm = GetShapeshiftForm();
 			RunMacroText("/cancelform");
 			return true;
 		end
 		if CJ_Cast("Mark of the Wild") then return true end;
-	end
+	end--]]
 	
 	return false;
 end
