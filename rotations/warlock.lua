@@ -1,17 +1,4 @@
 --Warlock Rotations
-local function cj_petspell(name)
-   for i = 1, MAX_SKILLLINE_TABS do
-      local n, _, o, num = GetSpellTabInfo(i);
-      if not n then break; end
-      for s = o + 1, o + num do
-         if (name == GetSpellBookItemName(s,BOOKTYPE_PET)) then
-            return s;
-         end
-      end
-   end
-   return 0;
-end
-
 local lastuacast = 0
 local lastpetcast = 0;
 local lastimmolatecast = 0;
@@ -41,6 +28,10 @@ function CJAffLockRot()
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	if CJ_AffBuffs() then return end;
+	
+	if UnitPower("player") < ((UnitHealthMax("player")*.15)*1.4)  and CJ_HP("player") > 20 and cj_lifetap then
+		if CJ_Cast("Life Tap") then return end
+	end
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
@@ -150,6 +141,10 @@ function CJDestLockRot()
 	if CJ_Casting() then return end
 	if CJ_AffBuffs() then return end;
 	
+	if UnitPower("player") < ((UnitHealthMax("player")*.15)*1.4)  and CJ_HP("player") > 20 and cj_lifetap then
+		if CJ_Cast("Life Tap") then return end
+	end
+	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
@@ -198,6 +193,18 @@ function CJDestLockRot()
 	
 	if CJ_Cast("Conflagrate") then return end
 	
+	if not CJ_HD("Bane of Doom") then
+		if CJ_Cast("Bane of Doom") then return end
+	end
+	
+	if CJ_DTR("Corruption") < 2 then
+		if CJ_Cast("Corruption") then return end;
+	end
+	
+	if PlayerToTarget < 10 then
+		if CJ_Cast("Shadowflame") then return end
+	end
+	
 	if CJ_HB("Empowered Imp") and (CJ_BTR("Empowered Imp") < CJ_BTR("Improved Soul Fire") + .5) then
 		if CJ_Cast("Soul Fire") then return end
 	end
@@ -236,6 +243,10 @@ function CJDemoLockRot()
 	if CJ_Casting() then return end
 	if CJ_DemoBuffs() then return end;
 	
+	if UnitPower("player") < ((UnitHealthMax("player")*.15)*1.4)  and CJ_HP("player") > 20 and cj_lifetap then
+		if CJ_Cast("Life Tap") then return end
+	end
+	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
@@ -261,6 +272,14 @@ function CJDemoLockRot()
 	
 	if cj_cooldowns then
 		if CJ_Cast("Metamorphosis") then return end
+	end
+	
+	if cj_aoemode and PlayerToTarget < 7 then
+		if CJ_Cast("Hellfire") then return end
+	end
+	
+	if (CJ_DTR("Corruption") > 0 and (CJ_DTR("Bane of Agony") > 0 or CJ_DTR("Bane of Doom") > 0)) and cj_cooldowns then
+		CJ_Cast("Demon Soul");
 	end
 	
 	if CJ_BTR("Metamorphosis") > 10 and PlayerToTarget <= 8 then
