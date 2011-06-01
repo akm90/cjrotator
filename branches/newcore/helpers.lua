@@ -150,9 +150,9 @@ end
 
 --Already Casting
 function CJ_Casting()
-	if UnitCastingInfo("player") then
+	if UnitCastingInfo("player") ~= nil then
 		if (select(6,UnitCastingInfo("player")) - 30) - (GetTime()*1000) - select(4,GetNetStats()) < 0 then return false else return true end;
-	elseif UnitChannelInfo("player") then
+	elseif UnitChannelInfo("player") ~= nil then
 		if (select(6,UnitChannelInfo("player")) - 30) - (GetTime()*1000)  - select(4,GetNetStats()) < 0 then return false else return true end;
 	end
 	return false;
