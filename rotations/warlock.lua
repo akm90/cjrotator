@@ -102,7 +102,7 @@ function CJAffLockRot()
 	end
 	
 	if hasFocus then
-		if CJ_CastTarget("Soul Swap","target") then CJ_CastTarget("Soul Swap","focus") return end
+		if CJ_CastTarget("Soul Swap","target") then CJ_CastTarget("Soul Swap: Exhale","focus") return end
 	end
 	
 	if CJ_HB("Fel Spark") and CJ_DTR("Unstable Affliction") < 8 and CJ_HB("Unstable Affliction") then

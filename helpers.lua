@@ -151,9 +151,9 @@ end
 --Already Casting
 function CJ_Casting()
 	if UnitCastingInfo("player") then
-		if (GetTime()*1000) - (select(6,UnitCastingInfo("player")) - 30) + select(4,GetNetStats()) < 0 then return false else return true end;
+		if (GetTime()*1000) - (select(6,UnitCastingInfo("player")) - 30) - select(4,GetNetStats()) < 0 then return false else return true end;
 	elseif UnitChannelInfo("player") then
-		if (GetTime()*1000) - (select(6,UnitChannelInfo("player")) - 30) + select(4,GetNetStats()) < 0 then return false else return true end;
+		if (GetTime()*1000) - (select(6,UnitChannelInfo("player")) - 30) - select(4,GetNetStats()) < 0 then return false else return true end;
 	end
 	return false;
 end
