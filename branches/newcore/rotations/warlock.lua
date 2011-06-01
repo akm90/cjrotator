@@ -40,7 +40,7 @@ function CJAffLockRot()
 	end
 	
 	if UnitAffectingCombat("player") == 1 then
-		if IsPetAttackActive() == false then StartPetAttack() end
+		if IsPetAttackActive() == false then PetStartAttack() end
 	end
 	
 	if AmIFacing == "false" then return end;
