@@ -47,7 +47,7 @@ function CJEnhShamRot()
 			if CJ_Cast("Flame Shock") then return end;
 		end
 		
-		if cj_aoemode and CJ_HB("Flame Shock") then
+		if cj_aoemode and CJ_HD("Flame Shock") then
 			if CJ_Cast("Fire Nova") then return end;
 		end
 		
@@ -82,6 +82,10 @@ function CJEnhShamRot()
 		if CJ_DS("Searing Flames") >= 2 or select(2,GetTotemInfo(1)) == "Fire Elemental Totem" then
 			if CJ_Cast("Lava Lash") then return end;
 		end
+	end
+	
+	if cj_aoemode and CJ_HD("Flame Shock") then
+		if CJ_Cast("Fire Nova") then return end;
 	end
 	
 	if cj_aoemode and not CJ_HD("Flame Shock") then
