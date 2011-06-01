@@ -206,15 +206,15 @@ end
 function CJClassTogHandler()
 	if cj_class == "Warrior" then
 		CJClassToggleText:SetText("Use Hamstring")
-	elseif cj_class == "Druid" then
+	elseif cj_currentRotation == 22 then
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_class == "Death Knight" then
+	elseif cj_currentRotation == 11 then
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_class == "Paladin" then
+	elseif cj_currentRotation == 52 then
 		CJClassToggleText:SetText("Defensive Cooldowns")
 		CJClassToggle:Enable()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()

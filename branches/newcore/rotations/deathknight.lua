@@ -38,7 +38,7 @@ local function CJ_FrostBuffs()
 end
 
 function CJFrostDKRot()
-	if UnitAffectingCombat("player") == 1 and cj_cooldowns then
+	if UnitAffectingCombat("player") == 1 then
 		if CJ_HP("player") < 50 then
 			CJ_Cast("Icebound Fortitude")
 		end

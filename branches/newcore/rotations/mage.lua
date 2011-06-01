@@ -78,7 +78,7 @@ function CJArcMageRot()
 			if CJ_Cast("Arcane Blast") then return end
 		end
 		
-		if CJ_Cast("Arcane Missile") then return end;
+		if CJ_Cast("Arcane Missiles") then return end;
 		if CJ_Cast("Arcane Barrage") then return end;
 	else
 		if cj_cooldowns then
@@ -98,7 +98,7 @@ function CJArcMageRot()
 			if CJ_Cast("Arcane Blast") then return end
 		end
 		
-		if CJ_Cast("Arcane Missile") then return end;
+		if CJ_Cast("Arcane Missiles") then return end;
 		if CJ_Cast("Arcane Barrage") then return end;
 	end
 end
