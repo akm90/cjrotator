@@ -75,7 +75,7 @@ function CJAffLockRot()
 		if CJ_Cast("Corruption") then return end
 	end
 	
-	 if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 4) then
+	 if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 2.5) then
 		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
@@ -89,7 +89,7 @@ function CJAffLockRot()
 		end
 	end
 	
-	if (CJ_DTR("Haunt") - (select(7,GetSpellInfo("Haunt"))/1000)) < 2 and (GetTime() - lasthauntcast > 4) then
+	if (CJ_DTR("Haunt") - (select(7,GetSpellInfo("Haunt"))/1000)) < 2 and (GetTime() - lasthauntcast > 2.5) then
 		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end
 	end
 	
@@ -187,7 +187,7 @@ function CJDestLockRot()
 		if CJ_Cast("Fel Flame") then return end;
 	end
 	
-	if (CJ_DTR("Immolate") - (select(7,GetSpellInfo("Immolate"))/1000)) < 2 and (GetTime() - lastimmolatecast > 4) then
+	if (CJ_DTR("Immolate") - (select(7,GetSpellInfo("Immolate"))/1000)) < 2 and (GetTime() - lastimmolatecast > 2.5) then
 		if CJ_Cast("Imolate") then lastimmolatecast = GetTime() return end
 	end
 	
