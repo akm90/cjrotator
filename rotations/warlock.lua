@@ -50,7 +50,7 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if soulswap then
-		if CJ_CastTarget("Soul Swap","focus") then soulswap = false return end
+		if CJ_CastTarget("Soul Swap: Exhale","focus") then soulswap = false return end
 		
 	end
 	
