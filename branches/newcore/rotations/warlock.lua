@@ -98,7 +98,7 @@ function CJAffLockRot()
 	end
 	
 	if CJ_DTR("Haunt") < 3 and (GetTime() - lasthauntcast > 4) then
-		if CJ_Cast("Haunt") then return end;
+		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end;
 	end
 	
 	if hasFocus then
