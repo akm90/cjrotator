@@ -317,6 +317,9 @@ function CJRetPallyRot()
 	
 	if UnitDebuff("player","Caustic Slime") then return end;
 	
+	if UnitAffectingCombat("player") == 1 and CJ_HP("player") < 70 then
+		CJ_Cast("Divine Protection");
+	end
 	
 	if IsSpellInRange("Crusader Strike") == 1 and cj_cooldowns then
 		CJ_Cast("Guardian of Ancient Kings");
