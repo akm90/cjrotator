@@ -40,10 +40,6 @@ function CJAffLockRot()
 		hasFocus = true
 	end
 	
-	if UnitAffectingCombat("player") == 1 then
-		if IsPetAttackActive() == false then PetAttack() end
-	end
-	
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_GCD() then return end;
@@ -106,7 +102,7 @@ function CJAffLockRot()
 	end
 	
 	if hasFocus then
-		if CJ_Cast("Soul Swap") then CJ_CastTarget("Soul Swap","focus") return end
+		if CJ_CastTarget("Soul Swap","target") then CJ_CastTarget("Soul Swap","focus") return end
 	end
 	
 	if CJ_HB("Fel Spark") and CJ_DTR("Unstable Affliction") < 8 and CJ_HB("Unstable Affliction") then
