@@ -1,5 +1,4 @@
 --Death Knight Rotations
-
 local function CJ_RCD(rune)
 	if GetRuneCooldown(rune) == 0 then 
 		return 0
@@ -22,7 +21,6 @@ local function CJ_NR(rune)
 	
 	return count
 end
-
 ---------------------------------
 ---------Frost-------------------
 ---------------------------------
@@ -195,9 +193,6 @@ function CJBloodDKRot()
 		
 		if CJ_Cast("Death Strike") then return end;
 		if CJ_Cast("Rune Strike") then return end
-		if CJ_HP("player") < 90 then
-			if CJ_Cast("Rune Tap") then return end
-		end
 		
 		if CJ_Cast("Horn of Winter") then return end;
 		
