@@ -52,7 +52,7 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	if GetUnitSpeed("player") > 0 then
-		if not CJ_HB("Curse of the Elements") then
+		if not CJ_HD("Curse of the Elements") then
 			if CJ_Cast("Curse of the Elements") then return end;
 		end
 		
@@ -73,7 +73,7 @@ function CJAffLockRot()
 		if CJ_Cast("Fel Flame") then return end
 	end
 	
-	if not CJ_HB("Curse of the Elements") then
+	if not CJ_HD("Curse of the Elements") then
 		if CJ_Cast("Curse of the Elements") then return end;
 	end
 	
