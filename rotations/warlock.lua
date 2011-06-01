@@ -234,9 +234,30 @@ function CJDemoLockRot()
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
-	if CJ_AffBuffs() then return end;
+	if CJ_DemoBuffs() then return end;
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
+	if GetUnitSpeed("player") > 0 then
+		if CJ_HD("Immolate") and CJ_DTR("Immolate") < 8 then
+			if CJ_Cast("Fel Flame") then return end
+		end
+		
+		if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+			if CJ_Cast("Curse of the Elements") then return end;
+		end
+		
+		if CJ_DTR("Corruption") < 2 then
+			if CJ_Cast("Corruption") then return end;
+		end
+		
+		if not CJ_HD("Bane of Doom") then
+			if CJ_Cast("Bane of Doom") then return end
+		end
+			
+		if CJ_Cast("Fel Flame") then return end
+		return
+	end
 	
 	if cj_cooldowns then
 		if CJ_Cast("Metamorphosis") then return end
@@ -245,4 +266,40 @@ function CJDemoLockRot()
 	if CJ_BTR("Metamorphosis") > 10 and PlayerToTarget <= 8 then
 		if CJ_Cast("Immolation Aura") then return end
 	end
+	
+	if not CJ_HD("Bane of Doom") then
+		if CJ_Cast("Bane of Doom") then return end
+	end
+	
+	if not CJ_HD("Immolate") then
+		if CJ_Cast("Immolate") then return end
+	end
+	
+	if CJ_DTR("Corruption") < 3 then
+		if CJ_Cast("Corruption") then return end
+	end
+	
+	if CJ_HB("Fel Spark") then
+		if CJ_Cast("Fel Flame") then return end
+	end
+	
+	if PlayerToTarget < 10 then
+		if CJ_Cast("Shadowflame") then return end
+	end
+	
+	if CJ_Cast("Hand of Gul'dan") then return end
+	
+	if CJ_HB("Molten Core") then
+		if CJ_Cast("Incinerate") then return end
+	end
+	
+	if cj_cooldowns then
+		if CJ_Cast("Soulburn") then return end
+	end
+	
+	if CJ_HB("Decimation") or CJ_HB("Soulburn") then
+		if CJ_Cast("Soul Fire") then return end
+	end
+	
+	if CJ_Cast("Shadow Bolt") then return end
 end
