@@ -85,7 +85,7 @@ function CJAffLockRot()
 	end
 	
 	 if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 4) then
-		if CJ_Cast("Unstable Affliction") then return end
+		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
 	if hasFocus then
@@ -99,7 +99,7 @@ function CJAffLockRot()
 	end
 	
 	if (CJ_DTR("Haunt") - (select(7,GetSpellInfo("Haunt"))/1000)) < 2 and (GetTime() - lasthauntcast > 4) then
-		if CJ_Cast("Haunt") then return end
+		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end
 	end
 	
 	if hasFocus and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
@@ -144,8 +144,6 @@ local function CJ_DestroBuffs()
 end
 
 function CJDestLockRot()
-	CJ_Interrupt("Spell Lock");
-	
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_GCD() then return end;
@@ -195,7 +193,7 @@ function CJDestLockRot()
 	end
 	
 	if (CJ_DTR("Immolate") - (select(7,GetSpellInfo("Immolate"))/1000)) < 2 and (GetTime() - lastimmolatecast > 4) then
-		if CJ_Cast("Imolate") then return end
+		if CJ_Cast("Imolate") then lastimmolatecast = GetTime() return end
 	end
 	
 	if CJ_Cast("Conflagrate") then return end
@@ -217,4 +215,34 @@ function CJDestLockRot()
 	if CJ_Cast("Shadowburn") then return end
 	
 	if CJ_Cast("Incinerate") then return end
+end
+
+-----------------------------
+---------Demonology----------
+-----------------------------
+local function CJ_DemoBuffs()
+	if not CJ_HB("Fel Armor") then
+		if CJ_Cast("Fel Armor") then return true end
+	end
+	return false
+end
+
+function CJDemoLockRot()
+	CJ_Interrupt("Spell Lock");
+	
+	if AmIFacing == "false" then return end;
+	
+	if not CJ_GCD() then return end;
+	if CJ_Casting() then return end
+	if CJ_AffBuffs() then return end;
+	
+	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
+	if cj_cooldowns then
+		if CJ_Cast("Metamorphosis") then return end
+	end
+	
+	if CJ_BTR("Metamorphosis") > 10 and PlayerToTarget <= 8 then
+		if CJ_Cast("Immolation Aura") then return end
+	end
 end
