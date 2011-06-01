@@ -15,6 +15,7 @@ end
 local lastuacast = 0
 local lastpetcast = 0;
 local lastimmolatecast = 0;
+local lasthauntcast = 0;
 
 -----------------------------
 ---------Affliction----------
