@@ -83,7 +83,7 @@ function CJAffLockRot()
 		if CJ_Cast("Corruption") then return end
 	end
 	
-	if (CJ_DTR("Unstable Affliction") < (select(7,GetSpellInfo("Unstable Affliction")) + 2)) and (GetTime() - lastuacast > 4) then
+	if (CJ_DTR("Unstable Affliction") < 3) and (GetTime() - lastuacast > 4) then
 		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
