@@ -67,7 +67,7 @@ function CJAffLockRot()
 				if CJ_Cast("Bane of Agony") then return end;
 			end
 		else
-			if CJ_DTR("Bane of Doom") < 3 then
+			if not CJ_HD("Bane of Doom") then
 				if CJ_Cast("Bane of Doom") then return end
 			end
 		end
@@ -116,6 +116,10 @@ function CJAffLockRot()
 	
 	if CJ_HP("target") < 25 then
 		if CJ_Cast("Drain Soul") then return end
+	end
+	
+	if PlayerToTarget < 10 then
+		if CJ_Cast("Shadowflame") then return end;
 	end
 	
 	if CJ_HB("Shadow Trance") then
