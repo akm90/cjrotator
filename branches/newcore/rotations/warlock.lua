@@ -278,6 +278,10 @@ function CJDemoLockRot()
 		if CJ_Cast("Hellfire") then return end
 	end
 	
+	if cj_aoemode then
+		if CJ_Cast("Felstorm") then return end
+	end
+	
 	if (CJ_DTR("Corruption") > 0 and (CJ_DTR("Bane of Agony") > 0 or CJ_DTR("Bane of Doom") > 0)) and cj_cooldowns then
 		CJ_Cast("Demon Soul");
 	end
