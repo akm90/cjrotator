@@ -90,6 +90,7 @@ local function CJCreateFrame()
 	_G[fb:GetName().."Text"]:SetText("AoE Mode")
 	fb:SetPoint("TOPLEFT",24,-25);
 	fb:SetScript("OnClick",function(self)
+		cj_lastcall = nil;
 		cj_aoemode = self:GetChecked()
 	end)
 
