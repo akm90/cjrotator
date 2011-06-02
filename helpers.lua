@@ -153,6 +153,7 @@ function CJ_Casting()
 	if UnitCastingInfo("player") ~= nil then
 		if (select(6,UnitCastingInfo("player")) - 30) - (GetTime()*1000) - select(4,GetNetStats()) < 0 then return false else return true end;
 	elseif UnitChannelInfo("player") ~= nil then
+		if UnitChannelInfo("player") == "Drain Soul" then return false end
 		if (select(6,UnitChannelInfo("player")) - 30) - (GetTime()*1000)  - select(4,GetNetStats()) < 0 then return false else return true end;
 	end
 	return false;
