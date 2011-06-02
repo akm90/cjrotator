@@ -37,7 +37,7 @@ function CJAffLockRot()
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
-	if CJ_HB("Soul Swap") and hasFocus then
+	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) then
 		if CJ_CastTarget("Soul Swap","focus") then return end;
 	end
 	
