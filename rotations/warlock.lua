@@ -50,7 +50,7 @@ function CJAffLockRot()
 			if CJ_Cast("Corruption") then return end;
 		end
 		
-		if hasFocus then
+		if hasFocus or not CJ_IsBoss() then
 			if not CJ_HD("Bane of Agony") then
 				if CJ_Cast("Bane of Agony") then return end;
 			end
@@ -81,7 +81,7 @@ function CJAffLockRot()
 		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
-	if hasFocus then
+	if hasFocus or not CJ_IsBoss() then
 		if not CJ_HD("Bane of Agony") then
 			if CJ_Cast("Bane of Agony") then return end;
 		end
