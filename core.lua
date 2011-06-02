@@ -211,6 +211,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Use Hamstring")
 		CJClassToggle:Enable()
 		cj_hamstring = CJClassToggle:GetChecked()
+	elseif cj_currentRotation == 103 then
+		CJClassToggleText:SetText("Defensive Cooldowns")
+		CJClassToggle:Enable()
+		cj_defensivecooldowns = CJClassToggle:GetChecked()
 	elseif cj_class == "Warlock" then
 		CJClassToggleText:SetText("Use Life Tap")
 		CJClassToggle:Enable()
