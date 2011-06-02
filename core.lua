@@ -207,7 +207,7 @@ end
 
 
 function CJClassTogHandler()
-	if cj_currentRotation = 101 or cj_currentRotation = 102 then
+	if cj_currentRotation == 101 or cj_currentRotation == 102 then
 		CJClassToggleText:SetText("Use Hamstring")
 		CJClassToggle:Enable()
 		cj_hamstring = CJClassToggle:GetChecked()
