@@ -107,5 +107,6 @@ cj_bosslist = {
 	[75] = "Gri'lek",
 	[76] = "High Priestess Kilnara",
 	[77] = "Zan'zil",
-	[78] = "Jin'do the Godbreaker"
+	[78] = "Jin'do the Godbreaker",
+	[79] = "Raider's Training Dummy"
 };
