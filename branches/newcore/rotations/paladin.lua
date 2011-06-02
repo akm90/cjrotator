@@ -113,10 +113,7 @@ function CJProtPallyRot()
 		end
 	end		
 	
-	if UnitAffectingCombat("player") == 1 and not cj_aoemode and UnitDetailedThreatSituation("player","target") == nil then
-		CJ_Cast("Hand of Reckoning");
-	end
-	
+	if AmIFacing == "false" then return end
 	if not CJ_GCD() then return end;
 	
 	if CJ_ProtBuffs() then return end;

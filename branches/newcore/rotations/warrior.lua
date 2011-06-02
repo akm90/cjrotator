@@ -70,6 +70,10 @@ function CJFuryWarRot()
 		CJ_Cast("Shattering Throw")
 	end
 	
+	if CJ_HP("player") < 70 then
+		if CJ_Cast("Victory Rush") then return end
+	end
+	
 	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
 		CJ_TGRotation();
 	else
@@ -172,14 +176,14 @@ function CJArmsWarRot()
 	if AmIFacing == "false" then return end
 	CJ_Interrupt("Pummel")
 	
-	if ((not CJ_HD("Rend")) or (CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
-		and UnitPower("player") >= 75 then
+	if (((not CJ_HD("Rend")) or (CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
+		and UnitPower("player") >= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0) then
 		if GetShapeshiftForm() ~= 1 then CastShapeshiftForm(1) end
 	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 then
 		if GetShapeshiftForm() ~= 3 then CastShapeshiftForm(3) end
 	end
 	
-	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Intercept") == 1 then
+	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Charge") == 1 then
 		if PlayerToTarget >=8 and PlayerToTarget <= 25 then
 			if CJ_Cast("Charge") then return end
 		end
@@ -215,6 +219,10 @@ function CJArmsWarRot()
 		end
 		
 		if not CJ_GCD() then return end
+		
+		if CJ_HP("player") < 70 then
+			if CJ_Cast("Victory Rush") then return end
+		end
 		
 		if CJ_IsBoss() and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
 		(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
@@ -260,6 +268,10 @@ function CJArmsWarRot()
 		end
 	elseif GetShapeshiftForm() == 1 then
 		if not CJ_GCD() then return end
+		if CJ_Hero() then
+			if CJ_Cast("Shattering Throw") then return end
+		end
+		
 		if cj_hamstring and not CJ_HD("Hamstring") then
 			if CJ_Cast("Hamstring") then return end
 		end
@@ -278,4 +290,80 @@ function CJArmsWarRot()
 			if CJ_Shout() then return end
 		end
 	end	
+end
+
+--------------------------------
+---------Protection-------------
+--------------------------------
+function CJProtWarRot()
+	if AmIFacing == "false" then return end
+	CJ_Interrupt("Pummel")
+	
+	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Heroic Throw") == 1 then
+		if CJ_Cast("Heroic Throw") then return end
+		if PlayerToTarget >=8 and PlayerToTarget <= 25 then
+			if CJ_Cast("Charge") then CJ_Shout() return end
+		end
+		return
+	end
+	
+	StartAttack()
+	
+	if GetShapeshiftForm() ~= 2 then
+		CastShapeshiftForm(2)
+	end
+	
+	if cj_defensivecooldowns then
+		if CJ_HP("player") < 70 then
+			CJ_Cast("Shield Block")
+		end
+		
+		if CJ_HP("player") < 30 then
+			CJ_Cast("Shield Wall")
+		end
+		
+		if CJ_HP("player") < 10 then
+			CJ_Cast("Enraged Regeneration")
+		end
+	end
+	
+	if cj_cooldowns then
+		CJ_Cast("Berserker Rage")
+	end
+	
+	if not cj_aoemode then
+		if UnitPower("player") > 55 then
+			CJ_Cast("Heroic Strike")
+		end
+	else
+		if UnitPower("player") > 50 then
+			CJ_Cast("Cleave")
+		end
+	end
+	
+	if not CJ_GCD() then return end
+	if AmIFacing == "false" then return end
+	
+	if not CJ_HD("Demoralizing Shout") then
+		if CJ_Cast("Demoralizing Shout") then return end
+	end
+	
+	if not cj_aoemode then
+		if CJ_Cast("Shield Slam") then return end
+		if CJ_DTR("Rend") < 4.5 then
+			if CJ_Cast("Thunderclap") then return end
+		end
+		if CJ_Cast("Revenge") then return end
+		if not CJ_HD("Rend") then
+			if CJ_Cast("Rend") then return end
+		end
+		if CJ_Cast("Devastate") then return end
+	else
+		if not CJ_HD("Rend") then return end
+		if CJ_Cast("Thunderclap") then return end
+		if CJ_Cast("Shockwave") then return end
+		if CJ_Cast("Revenge") then return end
+		if CJ_Cast("Shield Slam") then return end
+		if CJ_Cast("Devastate") then return end
+	else
 end
