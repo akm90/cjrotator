@@ -17,6 +17,8 @@ cj_defensivecooldowns = false
 cj_petattacking = false;
 cj_lifetap = false;
 cj_hamstring = false
+cj_dispersion = false;
+cj_healonly = false
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -233,6 +235,12 @@ function CJClassTogHandler()
 		cj_defensivecooldowns = CJClassToggle:GetChecked()
 	elseif cj_currentRotation == 61 then
 		CJClassToggleText:SetText("Heal Only");
+		CJClassToggle:Enable()
+		cj_healonly = CJClassToggle:GetChecked()
+	elseif cj_currentrotation == 63 then
+		CJClassToggleText:SetText("Use Dispersion");
+		CJClassToggle:Enable()
+		cj_dispersion = CJClassToggle:GetChecked()
 	else
 		CJClassToggleText:SetText("Disabled");
 		CJClassToggle:Disable();

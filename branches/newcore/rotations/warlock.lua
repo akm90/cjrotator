@@ -110,7 +110,7 @@ function CJAffLockRot()
 		if CJ_Cast("Fel Flame") then return end;
 	end
 	
-	if CJ_HP("target") < 25 then
+	if CJ_HP("target") < 25 and (not UnitChannelInfo("player") == "Drain Soul") then
 		if CJ_Cast("Drain Soul") then return end
 	end
 	
