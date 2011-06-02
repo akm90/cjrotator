@@ -95,7 +95,7 @@ function CJAffLockRot()
 		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end
 	end
 	
-	if hasFocus and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
+	if not (UnitGUID("target") == (UnitGUID("focus"))) and hasFocus and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
 		if CJ_CastTarget("Soul Swap","target") then soulswap = true return end
 	end
 	
