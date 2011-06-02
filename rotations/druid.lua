@@ -61,10 +61,6 @@ local function CJBearRotation()
 	
 	CJ_Interrupt("Skull Bash(Bear Form)");
 	
-	if UnitAffectingCombat("player") == 1 and UnitDetailedThreatSituation("player","target") == nil then
-		CJ_Cast("Growl");
-	end
-	
 	if IsSpellInRange("Mangle") == 0 and IsSpellInRange("Faerie Fire (Feral)") == 1 then
 		if cj_cooldowns then
 			CJ_Cast("Enrage")

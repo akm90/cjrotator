@@ -12,7 +12,9 @@ cj_rotationTable = {
 [82] = "CJEnhShamRot",
 [91] = "CJAffLockRot",
 [92] = "CJDemoLockRot",
-[93] = "CJDestLockRot"
+[93] = "CJDestLockRot",
+[101] = "CJArmsWarRot",
+[102]= "CJFuryWarRot"
 };
 
 cj_interruptBlacklist = {
