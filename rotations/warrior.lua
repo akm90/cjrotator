@@ -13,7 +13,7 @@ end
 ------------Fury----------------
 --------------------------------
 function CJFuryWarRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
 	
 	if GetShapeshiftForm("player") ~= 3 then
@@ -173,7 +173,7 @@ end
 ------------Arms----------------
 --------------------------------
 function CJArmsWarRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
 	
 	if (((not CJ_HD("Rend")) or (CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
@@ -296,7 +296,7 @@ end
 ---------Protection-------------
 --------------------------------
 function CJProtWarRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
 	
 	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Heroic Throw") == 1 then
@@ -342,7 +342,7 @@ function CJProtWarRot()
 	end
 	
 	if not CJ_GCD() then return end
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	
 	if not CJ_HD("Demoralizing Shout") then
 		if CJ_Cast("Demoralizing Shout") then return end

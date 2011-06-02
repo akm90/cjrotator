@@ -36,7 +36,7 @@ function CJSpriestRot()
 	
 	if CJ_ShadowBuffs() then return end
 	
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	
 	if CJ_HP("player") < 15 then
 		if CJ_Cast("Dispersion") then return end
@@ -126,7 +126,7 @@ function CJDiscPriestRot()
 	
 	if CJ_DiscBuffs() then return end
 	
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	
 	CJ_OffensiveDispel("Dispel Magic")
 	

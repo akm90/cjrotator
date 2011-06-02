@@ -57,7 +57,7 @@ local function CJBearRotation()
 		end
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	CJ_Interrupt("Skull Bash(Bear Form)");
 	
@@ -152,7 +152,7 @@ local function CJKittyRotation()
 	
 	if not CJ_HB("Prowl") then StartAttack() else StopAttack() end;
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	CJ_Interrupt("Skull Bash(Cat Form)");
 	
@@ -178,7 +178,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Swipe(Cat Form)") then return end;
 	end
 	
-	if AmIBehind == "true" and CJ_HB("Prowl") and not CJ_HB("Stampede") then
+	if AmIBehind == true and CJ_HB("Prowl") and not CJ_HB("Stampede") then
 		if CJ_Cast("Ravage") then return end
 		if CJ_Cast("Ravage!") then return end
 	end
@@ -196,8 +196,8 @@ local function CJKittyRotation()
 	end
 	
 	if CJ_HB("Stampede") and CJ_BTR("Stampede") < 4 then
-		if CJ_Cast("Ravage") then return end
-		if CJ_Cast("Ravage!") then return end
+		CJ_Cast("Ravage")
+		CJ_Cast("Ravage!")
 	end
 	
 	if cj_cooldowns and CJ_Energy() < 50 and not CJ_HB("Tiger's Fury") and CJ_CD("Tiger's Fury")  > 15 then
@@ -229,7 +229,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end;
 	
-	if CJ_HB("Omen of Clarity") and AmIBehind == "true" then
+	if CJ_HB("Omen of Clarity") and AmIBehind == true then
 		if CJ_Cast("Shred(Cat Form)") then return end;
 	end
 	
@@ -245,7 +245,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
 	
-	if CJ_HD("Rip") and CJ_DTR("Rip") <= 4 and CJ_HP("target") > 25 and AmIBehind == "true" then
+	if CJ_HD("Rip") and CJ_DTR("Rip") <= 4 and CJ_HP("target") > 25 and AmIBehind == true then
 		if CJ_Cast("Shred(Cat Form)") then return end;
 	end
 	
@@ -260,7 +260,7 @@ local function CJKittyRotation()
 	
 	if CJ_Energy() < 45 then return end;
 	
-	if AmIBehind == "true" then
+	if AmIBehind == true then
 		if CJ_Cast("Shred(Cat Form)") then return end;
 	else
 		if CJ_Cast("Mangle(Cat Form)") then return end;
@@ -310,7 +310,7 @@ local function CJ_BalanceBuffs()
 end
 
 function CJBalanceDruidRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	if UnitAffectingCombat("player") == 1 and CJ_HP("player") < 50 and cj_cooldowns then
 		CJ_Cast("Barkskin")
 	end

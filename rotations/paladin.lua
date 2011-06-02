@@ -113,7 +113,7 @@ function CJProtPallyRot()
 		end
 	end		
 	
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	if not CJ_GCD() then return end;
 	
 	if CJ_ProtBuffs() then return end;
@@ -348,7 +348,7 @@ function CJRetPallyRot()
 	elseif IsSpellInRange("Judgement") == 0 then return
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if ud then
 		CJRetUndeadRotation()

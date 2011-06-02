@@ -23,7 +23,7 @@ local function CJ_EnhanceBuffs()
 end
 
 function CJEnhShamRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	
 	StartAttack()
