@@ -365,5 +365,5 @@ function CJProtWarRot()
 		if CJ_Cast("Revenge") then return end
 		if CJ_Cast("Shield Slam") then return end
 		if CJ_Cast("Devastate") then return end
-	else
+	end
 end
