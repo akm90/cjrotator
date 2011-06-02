@@ -25,7 +25,7 @@ local function CJ_ArcaneBuffs()
 end
 
 function CJArcMageRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
 	if not CJ_GCD() then return end
@@ -107,7 +107,7 @@ end
 -----------Fire------------------
 ---------------------------------
 function CJFireMageRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
 	if not CJ_GCD() then return end
@@ -183,7 +183,7 @@ end
 ---------------------------------
 
 function CJFrostMageRot()
-	if AmIFacing == "false" then return end
+	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
 	if not CJ_GCD() then return end

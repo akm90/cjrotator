@@ -25,7 +25,7 @@ function CJAffLockRot()
 		hasFocus = false;
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
@@ -110,7 +110,7 @@ function CJAffLockRot()
 		if CJ_Cast("Fel Flame") then return end;
 	end
 	
-	if CJ_HP("target") < 25 and (not UnitChannelInfo("player") == "Drain Soul") then
+	if CJ_HP("target") < 25 then
 		if CJ_Cast("Drain Soul") then return end
 	end
 	
@@ -144,7 +144,7 @@ local function CJ_DestroBuffs()
 end
 
 function CJDestLockRot()
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
@@ -246,7 +246,7 @@ end
 function CJDemoLockRot()
 	CJ_Interrupt("Spell Lock");
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end

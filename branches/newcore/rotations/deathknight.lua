@@ -44,7 +44,7 @@ function CJFrostDKRot()
 		end
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	CJ_Interrupt("Mind Freeze");
 	
 	StartAttack("target")
@@ -134,7 +134,7 @@ function CJBloodDKRot()
 		end
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	CJ_Interrupt("Mind Freeze");
 	
 	StartAttack("target")
