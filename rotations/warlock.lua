@@ -68,6 +68,13 @@ function CJAffLockRot()
 		if CJ_Cast("Curse of the Elements") then return end;
 	end
 	
+	if cj_aoemode then
+		CJ_Cast("Soulburn")
+		if not CJ_HD("Seed of Corruption") then
+			if CJ_Cast("Seed of Corruption") then return end
+		end
+	end
+	
 	if (CJ_DTR("Corruption") > 0 and CJ_DTR("Unstable Affliction") > 0 and CJ_DTR("Haunt") > 0 and 
 	(CJ_DTR("Bane of Agony") > 0 or CJ_DTR("Bane of Doom") > 0)) and cj_cooldowns then
 		CJ_Cast("Demon Soul");
@@ -95,7 +102,7 @@ function CJAffLockRot()
 		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end
 	end
 	
-	if not (UnitGUID("target") == (UnitGUID("focus"))) and hasFocus and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
+	if not (UnitGUID("target") == (UnitGUID("focus")))qqqq and hasFocus and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
 		if CJ_CastTarget("Soul Swap","target") then soulswap = true return end
 	end
 	
