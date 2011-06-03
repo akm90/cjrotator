@@ -13,6 +13,7 @@ rotations\mage.lua
 rotations\warlock.lua
 rotations\warrior.lua
 rotations\priest.lua
+rotations\rogue.lua
 
 tables.lua
 core.lua
