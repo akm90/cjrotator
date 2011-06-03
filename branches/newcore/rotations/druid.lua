@@ -179,8 +179,8 @@ local function CJKittyRotation()
 	end
 	
 	if AmIBehind == true and CJ_HB("Prowl") and not CJ_HB("Stampede") then
-		if CJ_Cast("Ravage") then return end
-		if CJ_Cast("Ravage!") then return end
+		if CJ_Cast("Ravage(Cat Form)") then return end
+		if CJ_Cast("Ravage(Cat Form)!") then return end
 	end
 	
 	if feralfourset and CJ_BS("Strength of the Panther") < 3 then 
@@ -196,8 +196,7 @@ local function CJKittyRotation()
 	end
 	
 	if CJ_HB("Stampede") and CJ_BTR("Stampede") < 4 then
-		CJ_Cast("Ravage")
-		CJ_Cast("Ravage!")
+		CastSpellByName("Ravage(Cat Form)!")
 	end
 	
 	if cj_cooldowns and CJ_Energy() < 50 and not CJ_HB("Tiger's Fury") and CJ_CD("Tiger's Fury")  > 15 then
