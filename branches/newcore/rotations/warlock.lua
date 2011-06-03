@@ -17,7 +17,7 @@ end
 
 function CJAffLockRot()
 	local hasFocus = false
-	CJ_Interrupt("Spell Lock");
+	CJ_PetInterrupt("Spell Lock");
 	
 	if UnitExists("focus") and UnitCanAttack("player","focus") then
 		hasFocus = true
@@ -36,6 +36,8 @@ function CJAffLockRot()
 	end
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
+	
+	CJ_OffensiveDispelPet("Devour Magic");
 	
 	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) then
 		if CJ_CastTarget("Soul Swap","focus") then return end;
@@ -58,6 +60,10 @@ function CJAffLockRot()
 			if not CJ_HD("Bane of Doom") then
 				if CJ_Cast("Bane of Doom") then return end
 			end
+		end
+		
+		if CJ_HB("Shadow Trance") then
+			if CJ_Cast("Shadow Bolt") then return end
 		end
 		
 		if CJ_Cast("Fel Flame") then return end
@@ -248,7 +254,7 @@ local function CJ_DemoBuffs()
 end
 
 function CJDemoLockRot()
-	CJ_Interrupt("Spell Lock");
+	CJ_PetInterrupt("Spell Lock");
 	
 	if AmIFacing == "false" then return end;
 	
@@ -261,7 +267,7 @@ function CJDemoLockRot()
 	end
 	
 	if IsSpellInRange("Fel Flame") == 0 then return end;
-	
+	CJ_OffensiveDispelPet("Devour Magic");
 	if GetUnitSpeed("player") > 0 then
 		if CJ_HD("Immolate") and CJ_DTR("Immolate") < 8 then
 			if CJ_Cast("Fel Flame") then return end
