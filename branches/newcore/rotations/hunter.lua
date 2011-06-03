@@ -15,7 +15,7 @@ function CJMarksHunterRot()
 		if CJ_Cast("Trueshot Aura") then return end
 	end
 	
-	if GetUnitSpeed() > 0 then
+	if GetUnitSpeed("player") > 0 then
 		if GetShapeshiftForm() ~= 2 then
 			CastShapeshiftForm(2)
 		end
@@ -67,7 +67,7 @@ function CJMarksHunterRot()
 		if CJ_Cast("Aimed Shot") then return end
 	end
 	
-	if GetUnitSpeed == 0 then
+	if GetUnitSpeed("player") == 0 then
 		if CJ_CD("Chimera Shot") > 5 or UnitPower("player") >= 80 or CJ_HB("Rapid Fire") or CJ_Hero() or CJ_HP("target") > 80 then
 			if CJ_Cast("Aimed Shot") then return end
 		end
