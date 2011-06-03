@@ -329,7 +329,7 @@ local function OnLoad()
 	h:RegisterEvent("PET_ATTACK_STOP");
 	h:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(h, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
-	SetOverrideBinding(f, true, AOEKEY, "CLICK NAAoEButton:LeftClick");
+	SetOverrideBinding(h, true, AOEKEY, "CLICK NAAoEButton:LeftClick");
 	h:SetScript("OnUpdate", OnUpdate);
 	DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Loaded");
 end
