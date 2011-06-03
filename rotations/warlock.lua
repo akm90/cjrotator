@@ -52,7 +52,7 @@ function CJAffLockRot()
 			if CJ_Cast("Corruption") then return end;
 		end
 		
-		if hasFocus or not CJ_IsBoss() then
+		if hasFocus or not CJ_IsBoss() or (CJ_IsBoss() and UnitHealth("target") < 100000) then
 			if not CJ_HD("Bane of Agony") then
 				if CJ_Cast("Bane of Agony") then return end;
 			end
@@ -70,7 +70,7 @@ function CJAffLockRot()
 		return
 	end
 	
-	if select(1,UnitChannelInfo("player")) == "Drain Soul" and CJ_HP("target") < 2 then return end;
+	if select(1,UnitChannelInfo("player")) == "Drain Soul" and CJ_HP("target") < 3 then return end;
 	
 	if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
 		if CJ_Cast("Curse of the Elements") then return end;
@@ -96,7 +96,7 @@ function CJAffLockRot()
 		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
-	if hasFocus or not CJ_IsBoss() then
+	if hasFocus or not CJ_IsBoss() or (CJ_IsBoss() and UnitHealth("target") < 100000) then
 		if not CJ_HD("Bane of Agony") then
 			if CJ_Cast("Bane of Agony") then return end;
 		end
