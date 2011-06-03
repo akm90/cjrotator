@@ -3,6 +3,7 @@ cj_rotationTable = {
 [12] = "CJFrostDKRot",
 [21] = "CJBalanceDruidRot",
 [22] = "CJFeralDruidRot",
+[32] = "CJMarksHunterRot",
 [41] = "CJArcMageRot",
 [42] = "CJFireMageRot",
 [43] = "CJFrostMageRot",
