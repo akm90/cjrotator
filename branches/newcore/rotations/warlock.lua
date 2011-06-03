@@ -114,7 +114,7 @@ function CJAffLockRot()
 		if CJ_Cast("Drain Soul") then return end
 	end
 	
-	if select(1,UnitChannelInfo("player")) == "Drain Soul") then return end
+	if select(1,UnitChannelInfo("player")) == "Drain Soul" then return end
 	
 	if PlayerToTarget < 10 then
 		if CJ_Cast("Shadowflame") then return end;
