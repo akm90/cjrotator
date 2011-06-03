@@ -3,6 +3,7 @@
 -------------------------------------------
 -- Change your key here.
 local ACTIONKEY = "F";
+local AOEKEY = "G";
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
@@ -46,6 +47,13 @@ b:SetAttribute("downbutton", true);
 
 b:SetAttribute("type", "macro");
 b:SetAttribute("macrotext", "/cjrotator");
+
+local c = CreateFrame("CheckButton","NAAoEButton",nil,"SecureActionButtonTemplate, ActionButtonTemplate");
+c:RegisterForClicks("AnyUp");
+
+c:SetAttribute("downbutton", true);
+c:SetAttribute("type","macro");
+c:SetAttribute("macrotext","/cjaoetoggle");
 
 local function CJCreateFrame()
 	if frameLoaded then return end;
@@ -304,6 +312,11 @@ local function CJToggleOn()
 	if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
 end
 
+local function CJToggleAoE()
+    RunMacroText("/click CJAoECheckbox");
+    if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
+end
+
 
 local function OnLoad()
 	h:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -316,10 +329,13 @@ local function OnLoad()
 	h:RegisterEvent("PET_ATTACK_STOP");
 	h:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(h, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
+	SetOverrideBinding(f, true, AOEKEY, "CLICK NAAoEButton:LeftClick");
 	h:SetScript("OnUpdate", OnUpdate);
 	DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Loaded");
 end
 
 SLASH_CJROTATOR1 = "/cjrotator"
 SlashCmdList["CJROTATOR"] = CJToggleOn;
+SLASH_CJTOGGLE1 = "/cjaoetoggle";
+SlashCmdList["CJTOGGLE"] = CJToggleAoE;
 OnLoad();
