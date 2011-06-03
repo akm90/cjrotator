@@ -184,6 +184,59 @@ function CJ_Interrupt(spell)
 	end
 end
 
+function CJ_PetSpell(spell)
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+		if (select(1,GetPetActionInfo(i))) == spell then
+			CastPetAction(i);
+			return true;
+		end
+	end
+	return false;
+end
+
+function CJ_PetSpellFocus(spell)
+	if not CJ_PetUsable(spell) then return false end;
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+		if (select(1,GetPetActionInfo(i))) == spell then
+			CastPetAction(i,"focus");
+			return true;
+		end
+	end
+	return false;
+end
+
+function CJ_PetUsable(spell)
+	for i=1, NUM_PET_ACTION_SLOTS, 1 do
+		if (select(1,GetPetActionInfo(i))) == spell then
+			if GetPetActionCooldown(i) == 0 then return true else return false end;
+		end
+	end
+	return false;
+end
+
+function CJ_PetInterrupt(spell)
+	if not CJ_PetUsable(spell) then return end;
+	if not cj_interruptmode then return end;
+	--if CJ_CD(spell) ~= 0 then return end;
+	if not UnitExists("focus") or not UnitCanAttack("player","focus") then		
+		if UnitCastingInfo("target") and select(9,UnitCastingInfo("target")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("target")],UnitCastingInfo("target")) and IsSpellInRange(spell,"target") then CJ_PetSpell(spell) else return end;
+		end
+		
+		if UnitChannelInfo("target") and select(8,UnitChannelInfo("target")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("target")],UnitChannelInfo("target")) and IsSpellInRange(spell,"target") then CJ_PetSpell(spell) else return end;
+		end
+	else
+		if UnitCastingInfo("focus") and select(9,UnitCastingInfo("focus")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitCastingInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_PetSpellFocus(spell) else return end;
+		end
+		
+		if UnitChannelInfo("focus") and select(8,UnitChannelInfo("focus")) == false then
+			if not tableContains(cj_interruptBlacklist[UnitName("focus")],UnitChannelInfo("focus")) and IsSpellInRange(spell,"focus") then CJ_PetSpellFocus(spell) else return end;
+		end
+	end
+	return;
+end
 --table.contains helper
 function tableContains(t,element)
 	if t == nil then return false end;
@@ -352,7 +405,21 @@ function CJ_OffensiveDispel(spell)
 	
 	return false;
 end
-
+function CJ_OffensiveDispelPet(spell)
+	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
+	if not cj_purgemode then return false end;
+	if cj_class == "Warlock" then
+		if not CJ_PetUsable(spell) then return false end;
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			if dispelType == "Magic" then
+				return CJ_PetSpell(spell)
+			end
+		end
+	end
+	
+	return false;
+end
 --Global Cooldown Check
 function CJ_GCD()
 	if GetSpellCooldown(61304) == 0 then
