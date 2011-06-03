@@ -35,7 +35,7 @@ function CJ_HB(buff)
 end
 
 function CJ_Hero()
-	if CJ_HasBuff("player","Heroism") or CJ_HasBuff("player","Time Warp") or CJ_HasBuff("player","Ancient Hysteria") or CJ_HasBuff("player","Bloodlust") then
+	if CJ_HB("Heroism") or CJ_HB("Time Warp") or CJ_HB("Ancient Hysteria") or CJ_HB("Bloodlust") then
 		return true;
 	else
 		return false;
