@@ -20,6 +20,9 @@ cj_lifetap = false;
 cj_hamstring = false
 cj_dispersion = false;
 cj_healonly = false
+cj_hatproc = 9999999;
+cj_hatexpect = 0;
+cj_combosaved = 0;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -54,6 +57,8 @@ c:RegisterForClicks("AnyUp");
 c:SetAttribute("downbutton", true);
 c:SetAttribute("type","macro");
 c:SetAttribute("macrotext","/cjaoetoggle");
+
+local hatframe = CreateFrame("frame","CJHaTFrame");
 
 local function CJCreateFrame()
 	if frameLoaded then return end;
@@ -282,7 +287,7 @@ local function OnEvent(self,event,...)
 	elseif event == "ADDON_LOADED" then
 		CJCreateFrame()
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED") then
-		local unit,spell = ...;
+		local unit,spell,rank,_,spellID = ...;
 		if (unit == "player") then
 			if (cj_class == "Shaman") then
 				if spell == "Call of the Elements" or spell == "Call of the Ancestors" then
@@ -294,7 +299,52 @@ local function OnEvent(self,event,...)
 					cj_watertotem = nil;
 					cj_airtotem = nil;
 				end
+			elseif cj_currentRotation == 73 then
+				if ((spellID == 14183) or (spellID == 73981)) and unitID == "player" then
+					cj_hatexpect = 1
+				end
 			end				
+		end
+	elseif (event == "COMBAT_LOG_EVENT_UNFILTERED")then
+		if cj_currentRotation ~= 73 then return end
+		local timestamp, type, hideCaster, sGUID, sName, sFlags, dGUID, dName, dFlags, spellID, spellName, sSchool, dDealt = ...;			
+		if (type=="SPELL_DAMAGE") then
+			if ((spellID == 1752 or spellID == 53 or spellID == 1776 or spellID == 5938 or spellID == 16511) and sName == UnitName("player")) then
+				cj_hatexpect = 1
+			elseif ((spellID == 703 or spellID == 1833 or spellID == 8676) and sName == f.player) then
+				cj_hatexpect = 2
+			end
+		end
+	elseif (event == "UNIT_COMBO_POINTS") then
+		if cj_currentRotation ~= 73 then return end
+		if GetComboPoints("player","target") < cj_combosaved then
+			cj_combosaved = GetComboPoints("player","target");
+		else
+			if cj_hatexpect == 0 then
+				hatframe.wait = hatframe.wait or CreateFrame("Frame")
+				hatframe.wait.timer = 0
+				hatframe.wait:SetScript("OnUpdate", function(self, elapsed, ...)
+					hatframe.wait.timer = hatframe.wait.timer + elapsed*1000
+					if(hatframe.wait.timer >= 500) then
+						if cj_hatexpect >= 1 then
+							cj_hatexpect = 0
+						else
+							if(GetComboPoints("player","target") ~= 0) then	
+								cj_hatproc = GetTime();
+							end
+						end
+						hatframe.wait:SetScript("OnUpdate", nil)
+					else
+						if cj_hatexpect >= 1 then
+							cj_hatexpect = 0
+							f.wait:SetScript("OnUpdate", nil)
+						end
+					end
+				end)
+			else 
+				cj_hatexpect = 0
+			end
+			cj_combosaved = GetComboPoints("player","target")						
 		end
 	elseif event == "PET_ATTACK_START" then
 		cj_petattacking = true
@@ -327,6 +377,8 @@ local function OnLoad()
 	h:RegisterEvent("PLAYER_REGEN_ENABLED");
 	h:RegisterEvent("PET_ATTACK_START");
 	h:RegisterEvent("PET_ATTACK_STOP");
+	h:RegisterEvent("UNIT_COMBO_POINTS");
+	h:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED");
 	h:SetScript("OnEvent", OnEvent);
 	SetOverrideBinding(h, true, ACTIONKEY, "CLICK NAActionButton:LeftClick");
 	SetOverrideBinding(h, true, AOEKEY, "CLICK NAAoEButton:LeftClick");
