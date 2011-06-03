@@ -257,6 +257,8 @@ local function OnUpdate(...)
 		return;
 	end
 	
+	if IsMounted() == 1 then return end
+	
 	if (not UnitExists("target") or not UnitCanAttack("player","target") or UnitIsDead("target")) and 
 	(not UnitExists("focus") or not UnitCanAttack("player","focus") or UnitIsDead("focus")) then return end;
 	
