@@ -64,6 +64,8 @@ function CJAffLockRot()
 		return
 	end
 	
+	if select(1,UnitChannelInfo("player")) == "Drain Soul") and CJ_HP("target") < 2 then return end;
+	
 	if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
 		if CJ_Cast("Curse of the Elements") then return end;
 	end
