@@ -14,6 +14,7 @@ rotations\warlock.lua
 rotations\warrior.lua
 rotations\priest.lua
 rotations\rogue.lua
+rotations\hunter.lua
 
 tables.lua
 core.lua
