@@ -176,7 +176,7 @@ function CJArmsWarRot()
 	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
 	
-	if (((not CJ_HD("Rend")) or (CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
+	if (not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
 		and UnitPower("player") >= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0) then
 		if GetShapeshiftForm() ~= 1 then CastShapeshiftForm(1) end
 	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 then
