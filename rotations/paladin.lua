@@ -65,7 +65,7 @@ local function CJ_ProtBuffs()
 		if CJ_Cast("Seal of Truth") then return true end
 	end
 	
-	if CJ_NextThreat() < 70 and not cj_aoemode and not CJ_HB("Seal of Insight") and CJ_HP("target") < 80 and UnitClassification("target") == "worldboss" then
+	if CJ_NextThreat() < 70 and not cj_aoemode and not CJ_HB("Seal of Insight") and CJ_HP("target") < 80 and CJ_IsBoss() then
 		if CJ_Cast("Seal of Insight") then return true end
 	end
 	
