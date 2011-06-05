@@ -195,7 +195,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Mangle(Cat Form)") then return end;
 	end
 	
-	if CJ_HB("Stampede") and CJ_BTR("Stampede") < 4 then
+	if CJ_HB("Stampede") and (CJ_BTR("Stampede") < 4 or CJ_HB("Tiger's Fury")) then
 		CastSpellByName("Ravage(Cat Form)!")
 	end
 	
