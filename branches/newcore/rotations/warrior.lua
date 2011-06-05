@@ -359,7 +359,8 @@ function CJProtWarRot()
 		end
 		if CJ_Cast("Devastate") then return end
 	else
-		if not CJ_HD("Rend") then return end
+		if CJ_Cast("Rend") then return end
+		if not CJ_HD("Rend") then return end		
 		if CJ_Cast("Thunderclap") then return end
 		if CJ_Cast("Shockwave") then return end
 		if CJ_Cast("Revenge") then return end
