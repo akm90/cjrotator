@@ -116,6 +116,8 @@ function CJFireMageRot()
 	
 	if not CJ_GCD() then return end
 	
+	CJ_OffensiveDispel("Spellsteal")
+	
 	if not CJ_HB("Arcane Brilliance") then
 		if CJ_Cast("Arcane Brilliance") then return true end;
 	end

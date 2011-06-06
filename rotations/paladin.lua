@@ -120,7 +120,7 @@ function CJProtPallyRot()
 	
 	if IsSpellInRange("Crusader Strike") == 0 and IsSpellInRange("Avenger's Shield") == 1 then
 		if cj_cooldowns then
-			if UnitAffectingCombat("player") == nil and UnitClassification("target") == "worldboss" then
+			if UnitAffectingCombat("player") == nil and CJ_IsBoss() then
 				CJ_Cast("Avenging Wrath");
 				if CJ_Cast("Divine Plea") then return end;
 			end
