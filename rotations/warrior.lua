@@ -350,7 +350,7 @@ function CJProtWarRot()
 	
 	if not cj_aoemode then
 		if CJ_Cast("Shield Slam") then return end
-		if CJ_DTR("Rend") < 4.5 then
+		if CJ_HD("Rend") and CJ_DTR("Rend") < 4.5 then
 			if CJ_Cast("Thunderclap") then return end
 		end
 		if CJ_Cast("Revenge") then return end
