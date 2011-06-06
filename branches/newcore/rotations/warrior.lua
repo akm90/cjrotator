@@ -13,7 +13,7 @@ end
 ------------Fury----------------
 --------------------------------
 
-local function CJ_TGRotation()
+function CJ_TGRotation()
 	if cj_cooldowns then
 		if CJ_HP("player") > 50 then
 			CJ_Cast("Recklessness")
@@ -57,7 +57,7 @@ local function CJ_TGRotation()
 	end
 end
 
-local function CJ_SMFRotation()
+function CJ_SMFRotation()
 	if cj_cooldowns then
 		if CJ_HP("player") > 50 then
 			CJ_Cast("Recklessness")
