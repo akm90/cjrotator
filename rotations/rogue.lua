@@ -32,7 +32,7 @@ function CJAssRogueRot()
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if not CJ_GCD() then return end
 	
-	--if CJ_AssassinBuffs() then return end
+	if CJ_AssassinBuffs() then return end
 	
 	if AmIFacing == false then return end
 	
@@ -55,15 +55,22 @@ function CJAssRogueRot()
 		if CJ_Cast("Rupture") then return end
 	end
 	
+	if cj_cooldowns then
+		CJ_Cast("Vendetta");
+	end
+	
 	if CJ_Combo() >= 4 and not CJ_HB("Envenom") then
+		if cj_cooldowns then CJ_Cast("Cold Blood") end
 		if CJ_Cast("Envenom") then return end
 	end
 	
 	if CJ_Combo() >= 4 and UnitPower("player") > 90 then
+		if cj_cooldowns then CJ_Cast("Cold Blood") end
 		if CJ_Cast("Envenom") then return end
 	end
 	
 	if CJ_Combo() >= 2 and CJ_BTR("Slice and Dice") < 3 then
+		if cj_cooldowns and CJ_Combo() >= 4 then CJ_Cast("Cold Blood") end
 		if CJ_Cast("Envenom") then return end
 	end
 	
