@@ -12,74 +12,6 @@ end
 --------------------------------
 ------------Fury----------------
 --------------------------------
-function CJFuryWarRot()
-	if AmIFacing == false then return end
-	CJ_Interrupt("Pummel")
-	
-	if GetShapeshiftForm("player") ~= 3 then
-		CastShapeshiftForm(3)
-	end
-	
-	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Intercept") == 1 then
-		if not CJ_CD("Intercept") == 0 and CJ_CD("Heroic Fury") == 0 then return end
-		if PlayerToTarget <= 8 or PlayerToTarget >= 25 then return end
-		if UnitPower("player") < 10 and CJ_CD("Battle Shout") == 0 then
-			if CJ_Shout() then return end
-		end
-		if CJ_Cast("Intercept") then return end
-		
-		if CJ_CD("Intercept") > 0 then
-			if CJ_Cast("Heroic Fury") then CJ_Cast("Intercept") return end
-		end
-		return
-	end
-	
-	if cj_aoemode and cj_cooldowns then
-		CJ_Cast("Inner Rage")
-	end
-	
-	if cj_aoemode and UnitPower("player") >= 30 then
-		CJ_Cast("Cleave")
-	end
-	
-	StartAttack()
-	
-	if ((UnitPower("player") > 85 and CJ_HP("target") >= 20)) or (CJ_HB("Battle Trance")) or 
-		((CJ_HB("Incite") or CJ_HD("Colossus Smash")) and 
-		((UnitPower("player") >= 50 and CJ_HP("target") >= 20) or (UnitPower("player") >=75 and CJ_HP("target") < 20))) then
-		CJ_Cast("Heroic Strike")
-	end
-	
-	if not CJ_GCD() then return end
-	
-	if cj_hamstring and not CJ_HD("Hamstring") then
-		if CJ_Cast("Hamstring") then return end
-	end
-	
-	if CJ_IsBoss() and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
-	(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
-		if CJ_Cast("Sunder Armor") then return end;
-	end
-	
-	if cj_aoemode and CJ_HP("player") < 50 then
-		CJ_Cast("Enraged Regeneration")
-	end
-	
-	if CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_cooldowns then
-		CastShapeshiftForm(1)
-		CJ_Cast("Shattering Throw")
-	end
-	
-	if CJ_HP("player") < 70 then
-		if CJ_Cast("Victory Rush") then return end
-	end
-	
-	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
-		CJ_TGRotation();
-	else
-		CJ_SMFRotation();
-	end
-end
 
 local function CJ_TGRotation()
 	if cj_cooldowns then
@@ -166,6 +98,76 @@ local function CJ_SMFRotation()
 	
 	if UnitPower("player") < 70 then
 		if CJ_Shout() then return end
+	end
+end
+
+
+function CJFuryWarRot()
+	if AmIFacing == false then return end
+	CJ_Interrupt("Pummel")
+	
+	if GetShapeshiftForm("player") ~= 3 then
+		CastShapeshiftForm(3)
+	end
+	
+	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Intercept") == 1 then
+		if not CJ_CD("Intercept") == 0 and CJ_CD("Heroic Fury") == 0 then return end
+		if PlayerToTarget <= 8 or PlayerToTarget >= 25 then return end
+		if UnitPower("player") < 10 and CJ_CD("Battle Shout") == 0 then
+			if CJ_Shout() then return end
+		end
+		if CJ_Cast("Intercept") then return end
+		
+		if CJ_CD("Intercept") > 0 then
+			if CJ_Cast("Heroic Fury") then CJ_Cast("Intercept") return end
+		end
+		return
+	end
+	
+	if cj_aoemode and cj_cooldowns then
+		CJ_Cast("Inner Rage")
+	end
+	
+	if cj_aoemode and UnitPower("player") >= 30 then
+		CJ_Cast("Cleave")
+	end
+	
+	StartAttack()
+	
+	if ((UnitPower("player") > 85 and CJ_HP("target") >= 20)) or (CJ_HB("Battle Trance")) or 
+		((CJ_HB("Incite") or CJ_HD("Colossus Smash")) and 
+		((UnitPower("player") >= 50 and CJ_HP("target") >= 20) or (UnitPower("player") >=75 and CJ_HP("target") < 20))) then
+		CJ_Cast("Heroic Strike")
+	end
+	
+	if not CJ_GCD() then return end
+	
+	if cj_hamstring and not CJ_HD("Hamstring") then
+		if CJ_Cast("Hamstring") then return end
+	end
+	
+	if CJ_IsBoss() and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
+	(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
+		if CJ_Cast("Sunder Armor") then return end;
+	end
+	
+	if cj_aoemode and CJ_HP("player") < 50 then
+		CJ_Cast("Enraged Regeneration")
+	end
+	
+	if CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_cooldowns then
+		CastShapeshiftForm(1)
+		CJ_Cast("Shattering Throw")
+	end
+	
+	if CJ_HP("player") < 70 then
+		if CJ_Cast("Victory Rush") then return end
+	end
+	
+	if select(5,GetTalentInfo(2,20,false,false,nil))==1 then
+		CJ_TGRotation();
+	else
+		CJ_SMFRotation();
 	end
 end
 
