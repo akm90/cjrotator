@@ -9,19 +9,26 @@ Pack
 Resist
 --]]
 function CJMarksHunterRot()
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
+	CJ_Interrupt("Silencing Shot");
 	
 	if not CJ_HB("Trueshot Aura") then
 		if CJ_Cast("Trueshot Aura") then return end
 	end
 	
-	if GetUnitSpeed("player") > 0 then
-		if GetShapeshiftForm() ~= 2 then
-			CastShapeshiftForm(2)
+	if cj_wildaspect then
+		if not CJ_HB("Aspect of the Wild") then
+			CJ_Cast("Aspect of the Wild")
 		end
 	else
-		if GetShapeshiftForm() ~= 1 then
-			CastShapeshiftForm(1)
+		if GetUnitSpeed("player") > 0 then
+			if not CJ_HB("Aspect of the Fox") then
+				CJ_Cast("Aspect of the Fox");
+			end
+		else
+			if not CJ_HB("Aspect of the Hawk") then
+				CJ_Cast("Aspect of the Hawk")
+			end
 		end
 	end
 	
@@ -30,6 +37,11 @@ function CJMarksHunterRot()
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	
+	CJ_OffensiveDispel("Tranquilizing Shot")
+	
+	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+		if CJ_Cast("Mend Pet") then return end
+	end
 	
 	if not CJ_HD("Hunter's Mark") then
 		if CJ_Cast("Hunter's Mark") then return end
@@ -48,7 +60,7 @@ function CJMarksHunterRot()
 	end
 	
 	if cj_cooldowns then
-		if not CJ_Hero() and CJ_IsBoss() and CJ_HP("target") < 10 then
+		if not CJ_Hero() and CJ_IsBoss() and CJ_HP("target") < 10 and not CJ_HB("Rapid Fire") then
 			CJ_Cast("Rapid Fire");
 		end
 		
@@ -76,4 +88,133 @@ function CJMarksHunterRot()
 	end
 	
 	if CJ_Cast("Steady Shot") then return end;
+end
+
+------------------------
+------Survival----------
+------------------------
+local lastexplosive = false;
+function CJSurvHunterRot()
+	if AmIFacing == false then return end;
+	
+	if cj_wildaspect then
+		if not CJ_HB("Aspect of the Wild") then
+			CJ_Cast("Aspect of the Wild")
+		end
+	else
+		if GetUnitSpeed("player") > 0 then
+			if not CJ_HB("Aspect of the Fox") then
+				CJ_Cast("Aspect of the Fox");
+			end
+		else
+			if not CJ_HB("Aspect of the Hawk") then
+				CJ_Cast("Aspect of the Hawk")
+			end
+		end
+	end
+	
+	StartAttack()
+	
+	if not CJ_GCD() then return end;
+	if CJ_Casting() then return end
+	CJ_OffensiveDispel("Tranquilizing Shot")
+	
+	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+		if CJ_Cast("Mend Pet") then return end
+	end
+	
+	if not CJ_HD("Hunter's Mark") then
+		if CJ_Cast("Hunter's Mark") then lastexplosive = false return end
+	end
+	
+	if cj_aoemode then
+		if CJ_Cast("Multi Shot") then lastexplosive = false return end
+		if CJ_Cast("Cobra Shot") then lastexplosive = false return end
+	end
+	
+	if not CJ_HD("Serpent Sting") then
+		if CJ_Cast("Serpent Sting") then lastexplosive = false return end
+	end
+	
+	if cj_cooldowns and CJ_IsBoss() then
+		CJ_Cast("Rapid Fire")
+	end
+	
+	if not lastexplosive then
+		if CJ_Cast("Explosive Shot") then lastexplosive = true end
+	end
+	
+	if not CJ_HD("Black Arrow") then
+		if CJ_Cast("Black Arrow") then lastexplosive = false return end
+	end
+	
+	if CJ_Cast("Kill Shot") then lastexplosive = false return end
+	
+	if UnitPower("player") >= 70 and not CJ_HB("Lock and Load") then
+		if CJ_Cast("Arcane Shot") then lastexplosive = false return end
+	end
+	
+	if CJ_Cast("Cobra Shot") then lastexplosive = false return end
+end
+
+function CJBMHunterRot()
+	if AmIFacing == false then return end;
+	
+	if cj_wildaspect then
+		if not CJ_HB("Aspect of the Wild") then
+			CJ_Cast("Aspect of the Wild")
+		end
+	else
+		if GetUnitSpeed("player") > 0 then
+			if not CJ_HB("Aspect of the Fox") then
+				CJ_Cast("Aspect of the Fox");
+			end
+		else
+			if not CJ_HB("Aspect of the Hawk") then
+				CJ_Cast("Aspect of the Hawk")
+			end
+		end
+	end
+	
+	StartAttack()
+	
+	if not CJ_GCD() then return end;
+	if CJ_Casting() then return end
+	
+	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+		if CJ_Cast("Mend Pet") then return end
+	end
+	
+	CJ_OffensiveDispel("Tranquilizing Shot")
+	
+	if UnitPower("player") > 60 and CJ_IsBoss() and cj_cooldowns then
+		CJ_Cast("Bestial Wrath")
+	end
+	
+	if cj_aoemode then
+		if CJ_Cast("Multi Shot") then return end
+		if CJ_Cast("Cobra Shot") then return end
+	end
+	
+	if not CJ_HD("Serpent Sting") then
+		if CJ_Cast("Serpent Sting") then return end
+	end
+	
+	if CJ_Cast("Kill Shot") then return end
+	
+	if cj_cooldowns and UnitPower("player") <= 20 then
+		CJ_Cast("Fervor")
+	end
+	
+	local name,_,_,count = UnitBuff("pet","Frenzy");
+	
+	if count == 5 and not CJ_HB("The Beast Within") then
+		if CJ_Cast("Focus Fire") then return end
+	end
+	
+	if UnitPower("player") >= 90 or CJ_HB("The Beast Within") then
+		if CJ_Cast("Arcane Shot") then return end
+	end
+	
+	if CJ_Cast("Cobra Shot") then return end
 end

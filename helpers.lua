@@ -401,6 +401,12 @@ function CJ_OffensiveDispel(spell)
 				return CJ_Cast(spell)
 			end
 		end
+	elseif cj_class == "Hunter" then
+		for i = 1,40 do
+			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
+				return CJ_Cast(spell)
+			end
+		end
 	end
 	
 	return false;
