@@ -178,19 +178,23 @@ function CJEleShamRot()
 		if CJ_Cast("Fire Nova") then return end;
 	end
 	
-	if CJ_BS("Lightning Shield") >= 7 then
-		if CJ_Cast("Earth Shock") then return end;
-	end
-	
 	if cj_aoemode then
 		if CJ_Cast("Chain Lightning") then return end;
 	end
 	
 	if cj_aoemode and not CJ_HD("Flame Shock") then
-		if CJ_Cast("Flame Shock") then return end;
+		if CJ_Cast("Flame Shock") then return end
 	elseif not cj_aoemode then
-		if CJ_Cast("Flame Shock") then return end;
+		if CJ_DTR("Flame Shock") < 3 then
+			if CJ_Cast("Flame Shock") then return end
+		end
 	end
+	
+	if CJ_BS("Lightning Shield") >= 7 then
+		if CJ_Cast("Earth Shock") then return end;
+	end
+	
+	if CJ_Cast("Flame Shock") then return end
 	
 	if CJ_Cast("Lava Burst") then return end;
 	
