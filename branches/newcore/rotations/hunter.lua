@@ -36,6 +36,10 @@ function CJMarksHunterRot()
 	
 	StartAttack()
 	
+	if not IsPetAttackActive() then
+		PetAttack("target")
+	end
+	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	
@@ -117,6 +121,10 @@ function CJSurvHunterRot()
 	
 	StartAttack()
 	
+	if not IsPetAttackActive() then
+		PetAttack("target")
+	end
+	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	CJ_OffensiveDispel("Tranquilizing Shot")
@@ -179,6 +187,10 @@ function CJBMHunterRot()
 	end
 	
 	StartAttack()
+	
+	if not IsPetAttackActive() then
+		PetAttack("target")
+	end
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
