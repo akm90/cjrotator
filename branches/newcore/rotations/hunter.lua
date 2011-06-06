@@ -2,6 +2,8 @@
 ------Marksmanship---
 ---------------------
 local numsteady = 0;
+local lastss = 0
+local lastba = 0
 --[[ Hawk
 Fox
 Cheetah
@@ -51,8 +53,8 @@ function CJMarksHunterRot()
 		if CJ_Cast("Multi Shot") then return end
 	end
 	
-	if CJ_HP("target") <= 80 and not CJ_HD("Serpent Sting") then
-		if CJ_Cast("Serpent Sting") then return end
+	if CJ_HP("target") <= 80 and not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
+		if CJ_Cast("Serpent Sting") then lastss = GetTime() return end
 	end
 	
 	if CJ_HP("target") <= 80 then
@@ -132,8 +134,8 @@ function CJSurvHunterRot()
 		if CJ_Cast("Cobra Shot") then lastexplosive = false return end
 	end
 	
-	if not CJ_HD("Serpent Sting") then
-		if CJ_Cast("Serpent Sting") then lastexplosive = false return end
+	if not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
+		if CJ_Cast("Serpent Sting") then lastss = GetTime() lastexplosive = false return end
 	end
 	
 	if cj_cooldowns and CJ_IsBoss() then
@@ -144,8 +146,8 @@ function CJSurvHunterRot()
 		if CJ_Cast("Explosive Shot") then lastexplosive = true end
 	end
 	
-	if not CJ_HD("Black Arrow") then
-		if CJ_Cast("Black Arrow") then lastexplosive = false return end
+	if not CJ_HD("Black Arrow") and GetTime() - lastba > 3 then
+		if CJ_Cast("Black Arrow") then lastba = GetTime() lastexplosive = false return end
 	end
 	
 	if CJ_Cast("Kill Shot") then lastexplosive = false return end
@@ -196,8 +198,8 @@ function CJBMHunterRot()
 		if CJ_Cast("Cobra Shot") then return end
 	end
 	
-	if not CJ_HD("Serpent Sting") then
-		if CJ_Cast("Serpent Sting") then return end
+	if not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
+		if CJ_Cast("Serpent Sting") then lastss = GetTime() return end
 	end
 	
 	if CJ_Cast("Kill Shot") then return end
