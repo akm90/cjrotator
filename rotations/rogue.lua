@@ -32,7 +32,7 @@ function CJAssRogueRot()
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if not CJ_GCD() then return end
 	
-	if CJ_AssassinBuffs() then return end
+	--if CJ_AssassinBuffs() then return end
 	
 	if AmIFacing == false then return end
 	
