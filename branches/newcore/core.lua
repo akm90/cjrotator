@@ -23,6 +23,7 @@ cj_healonly = false
 cj_hatproc = 9999999;
 cj_hatexpect = 0;
 cj_combosaved = 0;
+cj_wildaspect = false;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -254,6 +255,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Use Dispersion");
 		CJClassToggle:Enable()
 		cj_dispersion = CJClassToggle:GetChecked()
+	elseif cj_class == "Hunter" then
+		CJClassToggleText:SetText("Aspect of the Wild");
+		CJClassToggle:Enable()
+		cj_wildaspect = CJClassToggle:GetChecked()
 	else
 		CJClassToggleText:SetText("Disabled");
 		CJClassToggle:Disable();
