@@ -38,14 +38,14 @@ function CJAssRogueRot()
 	
 	if IsSpellInRange("Eviscerate") == 0 then return end
 	
-	if AmIBehind == false and CJ_HB("Stealth") then return end
-	
 	if AmIBehind == true and CJ_HB("Stealth") then
 		if select(5,GetTalentInfo(1,7,false,false,nil))==1 then
 			if CJ_Cast("Sap") then return end
 		end
 		if CJ_Cast("Garrote") then return end
 	end
+	
+	if CJ_HB("Stealth") then return end
 	
 	if CJ_Combo() >= 1 and not CJ_HB("Slice and Dice") then
 		if CJ_Cast("Slice and Dice") then return end
