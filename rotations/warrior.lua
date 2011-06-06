@@ -155,6 +155,10 @@ function CJFuryWarRot()
 		CJ_Cast("Enraged Regeneration")
 	end
 	
+	if cj_aoemode then
+		if CJ_Cast("Whirlwind") then return end
+	end
+	
 	if CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_cooldowns then
 		CastShapeshiftForm(1)
 		CJ_Cast("Shattering Throw")
