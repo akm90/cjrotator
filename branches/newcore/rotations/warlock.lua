@@ -29,7 +29,7 @@ function CJAffLockRot()
 		hasFocus = false;
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
@@ -158,7 +158,7 @@ local function CJ_DestroBuffs()
 end
 
 function CJDestLockRot()
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not IsPetAttackActive() then
 		PetAttack("target")
@@ -268,7 +268,7 @@ function CJDemoLockRot()
 		PetAttack("target")
 	end
 	
-	if AmIFacing == "false" then return end;
+	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
