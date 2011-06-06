@@ -202,6 +202,12 @@ function CJBMHunterRot()
 	
 	if CJ_Cast("Kill Shot") then return end
 	
+	if cj_cooldowns and not CJ_Hero() and not CJ_HB("The Beast Within") then
+		CJ_Cast("Rapid Fire");
+	end
+	
+	if CJ_Cast("Kill Command") then return end
+	
 	if cj_cooldowns and UnitPower("player") <= 20 then
 		CJ_Cast("Fervor")
 	end
