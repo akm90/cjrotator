@@ -44,7 +44,7 @@ function CJ_TGRotation()
 	
 	if CJ_Cast("Raging Blow") then return end
 	
-	if CJ_HB("Bloodsturge") then
+	if CJ_HB("Bloodsurge") then
 		if CJ_Cast("Slam") then return end
 	end
 	
@@ -82,7 +82,7 @@ function CJ_SMFRotation()
 	
 	if CJ_Cast("Bloodthirst") then return end
 	
-	if CJ_HB("Bloodsturge") then
+	if CJ_HB("Bloodsurge") then
 		if CJ_Cast("Slam") then return end
 	end
 	
