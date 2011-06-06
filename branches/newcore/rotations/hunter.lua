@@ -54,7 +54,7 @@ function CJMarksHunterRot()
 	end
 	
 	if cj_aoemode then
-		if CJ_Cast("Multi Shot") then return end
+		if CJ_Cast("Multi-Shot") then return end
 	end
 	
 	if CJ_HP("target") <= 80 and not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
@@ -138,7 +138,7 @@ function CJSurvHunterRot()
 	end
 	
 	if cj_aoemode then
-		if CJ_Cast("Multi Shot") then lastexplosive = false return end
+		if CJ_Cast("Multi-Shot") then lastexplosive = false return end
 		if CJ_Cast("Cobra Shot") then lastexplosive = false return end
 	end
 	
@@ -206,7 +206,7 @@ function CJBMHunterRot()
 	end
 	
 	if cj_aoemode then
-		if CJ_Cast("Multi Shot") then return end
+		if CJ_Cast("Multi-Shot") then return end
 		if CJ_Cast("Cobra Shot") then return end
 	end
 	
