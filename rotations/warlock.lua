@@ -19,6 +19,10 @@ function CJAffLockRot()
 	local hasFocus = false
 	CJ_PetInterrupt("Spell Lock");
 	
+	if not IsPetAttackActive() then
+		PetAttack("target")
+	end
+	
 	if UnitExists("focus") and UnitCanAttack("player","focus") then
 		hasFocus = true
 	else
@@ -44,7 +48,7 @@ function CJAffLockRot()
 	end
 	
 	if GetUnitSpeed("player") > 0 then
-		if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+		if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
 			if CJ_Cast("Curse of the Elements") then return end;
 		end
 		
@@ -72,7 +76,7 @@ function CJAffLockRot()
 	
 	if select(1,UnitChannelInfo("player")) == "Drain Soul" and CJ_HP("target") < 3 then return end;
 	
-	if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+	if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
 		if CJ_Cast("Curse of the Elements") then return end;
 	end
 	
@@ -156,6 +160,10 @@ end
 function CJDestLockRot()
 	if AmIFacing == "false" then return end;
 	
+	if not IsPetAttackActive() then
+		PetAttack("target")
+	end
+	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	if CJ_AffBuffs() then return end;
@@ -171,7 +179,7 @@ function CJDestLockRot()
 			if CJ_Cast("Fel Flame") then return end
 		end
 		
-		if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+		if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
 			if CJ_Cast("Curse of the Elements") then return end;
 		end
 		
@@ -187,7 +195,7 @@ function CJDestLockRot()
 		return
 	end
 	
-	if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+	if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
 		if CJ_Cast("Curse of the Elements") then return end;
 	end
 	
@@ -256,6 +264,10 @@ end
 function CJDemoLockRot()
 	CJ_PetInterrupt("Spell Lock");
 	
+	if not IsPetAttackActive() and not cj_aoemode then
+		PetAttack("target")
+	end
+	
 	if AmIFacing == "false" then return end;
 	
 	if not CJ_GCD() then return end;
@@ -273,7 +285,7 @@ function CJDemoLockRot()
 			if CJ_Cast("Fel Flame") then return end
 		end
 		
-		if not CJ_HD("Curse of the Elements") and not CJ_HD("Jinx: Curse of the Elements") then
+		if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
 			if CJ_Cast("Curse of the Elements") then return end;
 		end
 		
@@ -287,6 +299,10 @@ function CJDemoLockRot()
 			
 		if CJ_Cast("Fel Flame") then return end
 		return
+	end
+	
+	if not CJ_OD("Curse of the Elements") and not CJ_OD("Jinx: Curse of the Elements") then
+		if CJ_Cast("Curse of the Elements") then return end;
 	end
 	
 	if cj_cooldowns then

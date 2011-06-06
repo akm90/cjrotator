@@ -142,6 +142,10 @@ function CJBloodDKRot()
 	if not CJ_GCD() then return end
 	if CJ_BloodBuffs() then return end
 	
+	if CJ_HB("Crimson Scourge") then
+		if CJ_Cast("Blood Boil") then return end
+	end
+	
 	if CJ_HB("Lichborne") then
 		if CJ_CastTarget("Death Coil","player") then return end;
 	end
