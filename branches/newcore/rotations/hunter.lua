@@ -83,7 +83,7 @@ function CJMarksHunterRot()
 		if CJ_CD("Chimera Shot") > 5 or UnitPower("player") >= 80 or CJ_HB("Rapid Fire") or CJ_Hero() or CJ_HP("target") > 80 then
 			if CJ_Cast("Aimed Shot") then return end
 		end
-	elseif GetShapeshiftForm() == 2 then
+	elseif CJ_HB("Aspect of the Fox") then
 		if CJ_Cast("Steady Shot") then return end
 	end
 	
