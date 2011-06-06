@@ -29,7 +29,7 @@ end
 function CJAssRogueRot()
 	CJ_Interrupt("Kick");
 	
-	if CJ_HB("Stealth") then StopAttack() return else StartAttack() return end
+	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if not CJ_GCD() then return end
 	
 	--if CJ_AssassinBuffs() then return end
@@ -104,7 +104,7 @@ end
 function CJCombatRogueRot()
 	CJ_Interrupt("Kick")
 	
-	if CJ_HB("Stealth") then StopAttack() return else StartAttack() return end
+	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if AmIFacing == false then return end
 	if not CJ_GCD() then return end
 	
@@ -176,7 +176,7 @@ end
 function CJSubRogueRot()
 	CJ_Interrupt("Kick")
 	
-	if CJ_HB("Stealth") then StopAttack() return else StartAttack() return end
+	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if AmIFacing == false then return end
 	if not CJ_GCD() then return end
 	
