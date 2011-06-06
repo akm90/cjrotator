@@ -94,7 +94,11 @@ function CJArcMageRot()
 			if CJ_Cast("Evocation") then return end;
 		end
 		
-		if CJ_SDS("Arcane Blast") < 4 then
+		if CJ_SDS("Arcane Blast") < 4 or (CJ_MP("player") > 40 and CJ_CD("Evocation") == 0) then
+			if CJ_Cast("Arcane Blast") then return end
+		end
+		
+		if CJ_CD("Evocation") < 40 and CJ_MP("player") > 26 then
 			if CJ_Cast("Arcane Blast") then return end
 		end
 		
@@ -201,6 +205,8 @@ function CJFrostMageRot()
 	end
 	
 	if CJ_Casting() then return end;
+	
+	CJ_OffensiveDispel("Spellsteal");
 	if GetItemCount(36799,false,true) == 0 then
 		if UnitAffectingCombat("player") == 0 then
 			if CJ_Cast("Conjure Mana Gem") then return end;
