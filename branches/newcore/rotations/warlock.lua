@@ -39,7 +39,7 @@ function CJAffLockRot()
 	
 	CJ_OffensiveDispelPet("Devour Magic");
 	
-	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) then
+	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) and PlayerToFocus < 40 then
 		if CJ_CastTarget("Soul Swap","focus") then return end;
 	end
 	
