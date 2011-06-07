@@ -61,6 +61,10 @@ function CJFrostDKRot()
 	elseif IsSpellInRange("Outbreak") == 0 then return
 	end
 	
+	if cj_deathstrike and CJ_HP("player") < 40 then
+		if CJ_Cast("Death Strike") then return end
+	end
+	
 	if cj_cooldowns then
 		CJ_Cast("Pillar of Frost");
 	end
