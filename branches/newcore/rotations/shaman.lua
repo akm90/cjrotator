@@ -164,7 +164,7 @@ function CJEleShamRot()
 		if cj_aoemode and not CJ_HD("Flame Shock") then
 			if CJ_Cast("Flame Shock") then return end
 		elseif not cj_aoemode then
-			if CJ_DTR("Flame Shock") < 3 then
+			if CJ_DTR("Flame Shock") <= 6.3 then
 				if CJ_Cast("Flame Shock") then return end
 			end
 		end
@@ -187,7 +187,7 @@ function CJEleShamRot()
 	if cj_aoemode and not CJ_HD("Flame Shock") then
 		if CJ_Cast("Flame Shock") then return end
 	elseif not cj_aoemode then
-		if CJ_DTR("Flame Shock") < 3 then
+		if CJ_DTR("Flame Shock") <= 6.3 then
 			if CJ_Cast("Flame Shock") then return end
 		end
 	end

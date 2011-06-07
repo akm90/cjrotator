@@ -381,6 +381,14 @@ local function CJToggleAoE()
     if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
 end
 
+local function CJToggleShow()
+	if CJRotatorFrame:IsShown() then
+		CJRotatorFrame:Hide()
+	else
+		CJRotatorFrame:Show()
+	end
+end
+
 
 local function OnLoad()
 	h:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -400,6 +408,8 @@ local function OnLoad()
 	DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Loaded");
 end
 
+SLASH_CJHIDE1 = "/cjhide"
+SlashCmdList["CJHIDE"] = CJToggleShow;
 SLASH_CJROTATOR1 = "/cjrotator"
 SlashCmdList["CJROTATOR"] = CJToggleOn;
 SLASH_CJTOGGLE1 = "/cjaoetoggle";
