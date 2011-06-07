@@ -107,7 +107,10 @@ function CJFuryWarRot()
 	CJ_Interrupt("Pummel")
 	
 	if GetShapeshiftForm("player") ~= 3 then
-		CastShapeshiftForm(3)
+		if cj_cooldowns and CJ_Hero() and CJ_CD("Shattering Throw") == 0 then
+		else
+			CastShapeshiftForm(3)
+		end
 	end
 	
 	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Intercept") == 1 then
