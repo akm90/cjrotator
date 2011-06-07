@@ -137,7 +137,7 @@ function CJDiscPriestRot()
 		end
 	end
 	
-	if GetUnitSpeed() > 0 then
+	if GetUnitSpeed("player") > 0 then
 		if not UnitDebuff("targettarget","Weakened Soul") then
 			CJ_CastTarget("Power Word: Shield","targettarget")
 		end

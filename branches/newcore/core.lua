@@ -24,6 +24,7 @@ cj_hatproc = 9999999;
 cj_hatexpect = 0;
 cj_combosaved = 0;
 cj_wildaspect = false;
+cj_deathstrike = false;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -255,6 +256,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Use Dispersion");
 		CJClassToggle:Enable()
 		cj_dispersion = CJClassToggle:GetChecked()
+	elseif cj_currentRotation == 12 then
+		CJClassToggleText:SetText("Death Strike");
+		CJClassToggle:Enable()
+		cj_deathstrike = CJClassToggle:GetChecked()
 	elseif cj_class == "Hunter" then
 		CJClassToggleText:SetText("Aspect of the Wild");
 		CJClassToggle:Enable()
