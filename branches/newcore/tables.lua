@@ -1,6 +1,7 @@
 cj_rotationTable = {
 [11] = "CJBloodDKRot",
 [12] = "CJFrostDKRot",
+[13] = "CJUnholyDKRot",
 [21] = "CJBalanceDruidRot",
 [22] = "CJFeralDruidRot",
 [31] = "CJBMHunterRot",

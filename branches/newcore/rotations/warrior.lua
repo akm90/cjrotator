@@ -127,6 +127,10 @@ function CJFuryWarRot()
 		return
 	end
 	
+	if not CJ_HB("Battle Shout") and not CJ_HB("Commanding Shout") then
+		CJ_Shout()
+	end
+	
 	if cj_aoemode and cj_cooldowns then
 		CJ_Cast("Inner Rage")
 	end
