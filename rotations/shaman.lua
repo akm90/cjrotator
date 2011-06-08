@@ -62,6 +62,9 @@ function CJEnhShamRot()
 				if CJ_Cast("Lightning Bolt") then return end;
 			end
 		end
+		if cj_frostshock then
+			if CJ_Cast("Frost Shock") then return end
+		end
 		
 		if CJ_Cast("Earth Shock") then return end;
 		return;
@@ -109,6 +112,9 @@ function CJEnhShamRot()
 	if CJ_Cast("Unleash Elements") then return end;
 	if CJ_Cast("Stormstrike") then return end;
 	if not CJ_HB("Unleash Flames") then
+		if cj_frostshock then
+			if CJ_Cast("Frost Shock") then return end
+		end
 		if CJ_Cast("Earth Shock") then return end;
 	end
 end
@@ -169,6 +175,10 @@ function CJEleShamRot()
 			end
 		end
 		
+		if cj_frostshock then
+			if CJ_Cast("Frost Shock") then return end
+		end
+		
 		if CJ_BS("Lightning Shield") >= 7 then
 			if CJ_Cast("Earth Shock") then return end;
 		end
@@ -190,6 +200,10 @@ function CJEleShamRot()
 		if CJ_DTR("Flame Shock") <= 6.3 then
 			if CJ_Cast("Flame Shock") then return end
 		end
+	end
+	
+	if cj_frostshock then
+		if CJ_Cast("Frost Shock") then return end
 	end
 	
 	if CJ_BS("Lightning Shield") >= 7 then

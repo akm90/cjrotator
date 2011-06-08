@@ -252,11 +252,9 @@ end
 function CJ_Totems()
 	if cj_lastcall == nil then
 		if cj_aoemode then
-			CJ_Cast("Call of the Ancestors");
-			return true;
+			if CJ_Cast("Call of the Ancestors") then return true end
 		else
-			CJ_Cast("Call of the Elements");
-			return true;
+			if CJ_Cast("Call of the Elements") then return true end	
 		end
 	end
 	
@@ -320,24 +318,22 @@ function CJ_Totems()
 	if countTotem == 0 then 
 		return false;
 	elseif countTotem == 1 then
-		if updateFire then CJ_Cast(cj_firetotem) return true end;
-		if updateWater then CJ_Cast(cj_watertotem) return true end;
-		if updateEarth then CJ_Cast(cj_earthtotem) return true end;
-		if updateAir then CJ_Cast(cj_airtotem) return true end;
+		if updateFire then if CJ_Cast(cj_firetotem) then return true end end;
+		if updateWater then if CJ_Cast(cj_watertotem) then return true end end;
+		if updateEarth then if CJ_Cast(cj_earthtotem) then return true end end;
+		if updateAir then if CJ_Cast(cj_airtotem) then return true end end;
 	else
 		if fireTotem ~= "Fire Elemental Totem" and earthTotem ~= "Earth Elemental Totem" and earthTotem ~= "Earthbind Totem" and waterTotem ~= "Mana Tide Totem" and airTotem ~= "Spirit Link Totem" then
 			if cj_aoemode then
-				CJ_Cast("Call of the Ancestors")
-				return true;
+				if CJ_Cast("Call of the Ancestors") then return true end				
 			else
-				CJ_Cast("Call of the Elements");
-				return true;
+				if CJ_Cast("Call of the Elements") then return true end
 			end
 		else
-			if updateFire then CJ_Cast(cj_firetotem) return true end;
-			if updateWater then CJ_Cast(cj_watertotem) return true end;
-			if updateEarth then CJ_Cast(cj_earthtotem) return true end;
-			if updateAir then CJ_Cast(cj_airtotem) return true end;
+			if updateFire then if CJ_Cast(cj_firetotem) then return true end end;
+			if updateWater then if CJ_Cast(cj_watertotem) then return true end end;
+			if updateEarth then if CJ_Cast(cj_earthtotem) then return true end end;
+			if updateAir then if CJ_Cast(cj_airtotem) then return true end end;
 		end
 	end
 	
