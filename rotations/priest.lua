@@ -137,6 +137,8 @@ function CJDiscPriestRot()
 		end
 	end
 	
+	if IsSpellInRange("Holy Fire") == 0 then return end
+	
 	if GetUnitSpeed("player") > 0 then
 		if not UnitDebuff("targettarget","Weakened Soul") then
 			CJ_CastTarget("Power Word: Shield","targettarget")
@@ -152,6 +154,10 @@ function CJDiscPriestRot()
 			end
 		end
 		return
+	end
+	
+	if cj_aoemode then
+		if CJ_Cast("Mind Sear") then return end
 	end
 	
 	if CJ_Cast("Holy Fire") then return end
@@ -170,7 +176,9 @@ function CJDiscPriestRot()
 		end
 	end
 	
-	if CJ_Cast("Penance") then return end
+	if not cj_healonly then
+		if CJ_Cast("Penance") then return end
+	end
 	
 	if CJ_Cast("Smite") then return end
 	
