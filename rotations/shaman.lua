@@ -202,6 +202,10 @@ function CJEleShamRot()
 		end
 	end
 	
+	if CJ_DTR("Flame Shock") - (select(7,GetSpellInfo("Lava Burst"))/1000) >= .05 then
+		if CJ_Cast("Lava Burst") then return end
+	end
+	
 	if cj_frostshock then
 		if CJ_Cast("Frost Shock") then return end
 	end
@@ -209,8 +213,6 @@ function CJEleShamRot()
 	if CJ_BS("Lightning Shield") >= 7 then
 		if CJ_Cast("Earth Shock") then return end;
 	end
-	
-	if CJ_Cast("Flame Shock") then return end
 	
 	if CJ_Cast("Lava Burst") then return end;
 	
