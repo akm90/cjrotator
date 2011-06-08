@@ -25,6 +25,7 @@ cj_hatexpect = 0;
 cj_combosaved = 0;
 cj_wildaspect = false;
 cj_deathstrike = false;
+cj_frostshock  = false;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -140,7 +141,7 @@ local function CJCreateFrame()
 	local ff = CreateFrame("CheckButton","CJPurgePlayers",f,"UICheckButtonTemplate")
 	_G[ff:GetName().."Text"]:SetText("Purge Players")
 	ff:SetPoint("TOPLEFT",24,-111)
-	ff:SetChecked(cj_purgemode)
+	ff:SetChecked(cj_purgeplayers)
 	ff:SetScript("OnClick",function(self)
 		cj_purgeplayers = self:GetChecked()
 	end)
@@ -264,6 +265,10 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Aspect of the Wild");
 		CJClassToggle:Enable()
 		cj_wildaspect = CJClassToggle:GetChecked()
+	elseif cj_class == "Shaman" then
+		CJClassToggleText:SetText("Frost Shock");
+		CJClassToggle:Enable()
+		cj_frostshock = CJClassToggle:GetChecked()
 	else
 		CJClassToggleText:SetText("Disabled");
 		CJClassToggle:Disable();
