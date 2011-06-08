@@ -271,7 +271,7 @@ function CJClassTogHandler()
 end
 
 local function OnUpdate(...)
-	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
+--	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
 	if not cj_action then return end;
 	if cj_rotationTable[cj_currentRotation] == nil then
 		printf("Your spec is currently not supported!");
