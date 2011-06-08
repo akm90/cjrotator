@@ -21,6 +21,91 @@ local function CJ_NR(rune)
 	
 	return count
 end
+
+---------------------------------
+---------Unholy-------------------
+---------------------------------
+local function CJ_UnholyBuffs()		
+	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
+		if CJ_Cast("Horn of Winter") then return true end;
+	end
+	
+	if GetShapeshiftForm() ~= 3 then
+		CastShapeshiftForm(3);
+		return;
+	end
+	return false
+end
+
+function CJUnholyDKRot()
+	if UnitAffectingCombat("player") == 1 then
+		if CJ_HP("player") < 50 then
+			CJ_Cast("Icebound Fortitude")
+		end
+	end
+	
+	if AmIFacing == false then return end;
+	CJ_Interrupt("Mind Freeze");
+	
+	StartAttack("target")
+	
+	if not CJ_Hero() and cj_cooldowns and CJ_IsBoss() and CJ_HP("target") < 15 then
+		CJ_Cast("Unholy Frenzy")
+	end
+	
+	if not CJ_GCD() then return end
+	if CJ_UnholyBuffs() then return end
+	
+	CJ_Interrupt("Strangulate");
+	
+	if IsSpellInRange("Outbreak") == 1 and IsSpellInRange("Frost Strike") == 0 then 
+		if (CJ_DTR("Frost Fever") <= 2 or CJ_DTR("Blood Plague") <=2) then
+			if CJ_Cast("Outbreak") then return end;
+		end
+	elseif IsSpellInRange("Outbreak") == 0 then return
+	end
+	
+	if cj_deathstrike and CJ_HP("player") < 40 then
+		if CJ_Cast("Death Strike") then return end
+	end
+	
+	if (CJ_DTR("Frost Fever") <= 2 or CJ_DTR("Blood Plague") <=2) then
+		if CJ_Cast("Outbreak") then return end;
+	end
+	
+	if cj_cooldowns then
+		if CJ_HB("Unholy Frenzy") or CJ_Hero() or CJ_IsBoss() and CJ_HP("target") >= 90 then
+			if CJ_Cast("Summon Gargoyle") then return end
+		end
+	end
+	
+	if CJ_NR(4) == 4 or CJ_NR(2) == 2 then
+		if CJ_Cast("Scourge Strike") then return end
+	end
+	
+	if CJ_NR(1) == 2 and CJ_NR(3) == 2 then
+		if CJ_Cast("Festering Strike") then return end
+	end
+	
+	if UnitPower("player") >= 90 or CJ_HB("Sudden Doom") then
+		if CJ_Cast("Death Coil") then return end
+	end
+	
+	if CJ_Cast("Scourge Strike") then return end
+	if CJ_Cast("Festering Strike") then return end
+	if CJ_Cast("Death Coil") then return end
+	
+	if CJ_NR(2) == 0 CJ_NR(4) == 3 then
+		CJ_Cast("Blood Tap")
+	end
+	
+	if cj_cooldowns and CJ_NR(2) == 0 then
+		CJ_Cast("Empower Rune Weapon")
+	end
+	
+	if CJ_Cast("Horn of Winter") then return end
+end
+
 ---------------------------------
 ---------Frost-------------------
 ---------------------------------

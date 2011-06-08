@@ -26,6 +26,10 @@ function CJEnhShamRot()
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	
+	if not cj_interruptmode and not UnitCastingInfo("target") and not UnitChannelInfo("target") then
+		CJ_Cast("Wind Shear");
+	end
+	
 	StartAttack()
 	
 	if UnitAffectingCombat("player") == 1 then
@@ -137,7 +141,12 @@ local function CJ_EleBuffs()
 end
 
 function CJEleShamRot()
+	if AmIFacing == false then return end
 	CJ_Interrupt(is)
+	
+	if not cj_interruptmode and not UnitCastingInfo("target") and not UnitChannelInfo("target") then
+		CJ_Cast("Wind Shear");
+	end
 	
 	if cj_cooldowns and UnitAffectingCombat("player") == 1 then
 		CJ_Cast("Elemental Mastery");
