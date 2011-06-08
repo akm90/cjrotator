@@ -183,13 +183,11 @@ end
 local ud = false
 
 local function CJ_RetBuffs()
-	if (not CJ_HB("Mark of the Wild") and not CJ_HB("Blessing of Kings")) then
-		if CJ_Cast("Blessing of Kings") then return end;
-	elseif not CJ_HB("Blessing of Might") and (CJ_HB("Mark of the Wild") or (CJ_HB("Blessing of Kings") and select(8,UnitBuff("player","Blessing of Kings") ~= "player"))) then
-		if CJ_Cast("Blessing of Might") then return end;
+	if cj_aoemode and not CJ_HB("Seal of Righteousness") then
+		if CJ_Cast("Seal of Righteousness") then return end
 	end
 	
-	if not CJ_HB("Seal of Truth") then
+	if not cj_aoemode and not CJ_HB("Seal of Truth") then
 		if CJ_Cast("Seal of Truth") then return end;
 	end
 	
