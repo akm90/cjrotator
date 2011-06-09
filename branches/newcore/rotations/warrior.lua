@@ -222,14 +222,16 @@ function CJArmsWarRot()
 	
 	StartAttack()
 	
+	if cj_aoemode and (UnitPower("player") > 40 or CJ_HB("Battle Trance") or CJ_HB("Deadly Calm")) then
+		CJ_Cast("Cleave")
+	end
+	
+	if UnitPower("player") > 80 or CJ_HB("Deadly Calm") or CJ_HB("Incite") or CJ_HB("Battle Trance") then
+		CJ_Cast("Heroic Strike")
+	end
+	
 	if GetShapeshiftForm() == 3 then
-		if cj_aoemode and (UnitPower("player") > 40 or CJ_HB("Battle Trance") or CJ_HB("Deadly Calm")) then
-			CJ_Cast("Cleave")
-		end
-		
-		if UnitPower("player") > 80 or CJ_HB("Deadly Calm") or CJ_HB("Incite") or CJ_HB("Battle Trance") then
-			CJ_Cast("Heroic Strike")
-		end
+
 		
 		if not CJ_GCD() then return end
 		
