@@ -230,7 +230,7 @@ function CJBMHunterRot()
 		CJ_Cast("Fervor")
 	end
 	
-	local name,_,_,count = UnitBuff("pet","Frenzy");
+	local name,_,_,count = UnitBuff("pet","Frenzy Effect");
 	
 	if name then	
 		if count == 5 and not CJ_HB("The Beast Within") then
