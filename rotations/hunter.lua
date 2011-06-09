@@ -195,6 +195,10 @@ function CJBMHunterRot()
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	
+	if not CJ_HD("Hunter's Mark") then
+		if CJ_Cast("Hunter's Mark") then return end
+	end
+	
 	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
 	end
