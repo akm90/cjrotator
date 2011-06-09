@@ -95,7 +95,7 @@ function CJUnholyDKRot()
 	if CJ_Cast("Festering Strike") then return end
 	if CJ_Cast("Death Coil") then return end
 	
-	if CJ_NR(2) == 0 CJ_NR(4) == 3 then
+	if CJ_NR(2) == 0 and CJ_NR(4) == 3 then
 		CJ_Cast("Blood Tap")
 	end
 	
