@@ -230,9 +230,9 @@ function CJBMHunterRot()
 		CJ_Cast("Fervor")
 	end
 	
-	local name,_,_,count = UnitBuff("pet","Frenzy Effect");
+	local _,_,_,count = UnitBuff('pet',GetSpellInfo(19615));
 	
-	if name then	
+	if count ~= nil then
 		if count == 5 and not CJ_HB("The Beast Within") then
 			if CJ_Cast("Focus Fire") then return end
 		end
