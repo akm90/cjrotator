@@ -232,8 +232,10 @@ function CJBMHunterRot()
 	
 	local name,_,_,count = UnitBuff("pet","Frenzy");
 	
-	if count == 5 and not CJ_HB("The Beast Within") then
-		if CJ_Cast("Focus Fire") then return end
+	if name then	
+		if count == 5 and not CJ_HB("The Beast Within") then
+			if CJ_Cast("Focus Fire") then return end
+		end
 	end
 	
 	if UnitPower("player") >= 90 or CJ_HB("The Beast Within") then
