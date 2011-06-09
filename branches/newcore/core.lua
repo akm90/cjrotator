@@ -26,6 +26,7 @@ cj_combosaved = 0;
 cj_wildaspect = false;
 cj_deathstrike = false;
 cj_frostshock  = false;
+cj_pickuptotems = nil;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -277,6 +278,15 @@ end
 
 local function OnUpdate(...)
 --	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
+	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 then
+		if UnitAffectingCombat("player") == 1 then 
+			cj_pickuptotems = nil
+		elseif UnitAffectingCombat("player") == 0 then
+			if CJ_Cast("Totemic Recall") then cj_pickuptotems = nil return end
+		end
+	end
+	
+	
 	if not cj_action then return end;
 	if cj_rotationTable[cj_currentRotation] == nil then
 		printf("Your spec is currently not supported!");
@@ -302,6 +312,7 @@ local function OnEvent(self,event,...)
 		if cj_action and cj_stopaftercombat then
 			cj_action = false;
 			if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
+			cjpickuptotems = GetTime();
 		end
 	elseif event == "ADDON_LOADED" then
 		CJCreateFrame()
