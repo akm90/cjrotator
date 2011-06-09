@@ -45,7 +45,7 @@ function CJMarksHunterRot()
 	
 	CJ_OffensiveDispel("Tranquilizing Shot")
 	
-	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+	if UnitExists("pet") and not UnitIsDead("pet") and CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
 	end
 	
