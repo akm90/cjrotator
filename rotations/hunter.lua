@@ -205,7 +205,7 @@ function CJBMHunterRot()
 	
 	CJ_OffensiveDispel("Tranquilizing Shot")
 	
-	if UnitPower("player") > 60 and CJ_IsBoss() and cj_cooldowns then
+	if UnitPower("player") > 60 and cj_cooldowns then
 		CJ_Cast("Bestial Wrath")
 	end
 	
