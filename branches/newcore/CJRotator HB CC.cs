@@ -26,13 +26,31 @@ namespace CJRotatorCC
 		private int currentRotation = 0;
         public override void Combat()
         {
+			List<WoWUnit> addslist = (from unit in ObjectManager.ObjectList
+                                      where unit is WoWUnit
+                                      let u = unit.ToUnit()
+                                      where u.Distance2D < 40
+                                          && !u.Dead && u.Combat && u.IsTargetingMeOrPet && u.Attackable
+                                      select u).ToList();
+		
+			List<string> blargh2 = Lua.GetReturnValues("return cj_aoemode","ashdioahsdas.lua");
+			
+			if (addslist.Count >= 3){
+				if (blargh2[0] != "1"){
+					Lua.DoString("CJAoECheckbox:Click()");
+				}
+			}else{
+				if (blargh2[0] != ""){
+					Lua.DoString("CJAoECheckbox:Click()");
+				}
+			}
+		
 			if (Me.Mounted){
 				Mount.Dismount();
 			}
-			List<string> blargh = Lua.GetReturnValues("return cj_action","ashdioahsdas.lua");
-			if (blargh[0] != "true"){
-				Lua.DoString("cj_action = true");
-			}
+			
+			Lua.DoString("if not cj_action then NAActionButton:Click() end");
+			
 			if (Me.GotTarget && !Me.CurrentTarget.IsAlive)
 			{
 				Me.ClearTarget();
@@ -40,6 +58,10 @@ namespace CJRotatorCC
 			
 			if (!Me.GotTarget && Me.GotAlivePet && Me.Pet.GotTarget){
 				Me.Pet.CurrentTarget.Target();
+			}
+			
+			if (!Me.GotTarget){		  
+				addslist[0].Target();
 			}
 			
             WoWMovement.Face();
@@ -55,14 +77,14 @@ namespace CJRotatorCC
 			}
         }
 		
+		
 		public override void Pull(){
 			if (Me.Mounted){
 				Mount.Dismount();
 			}
-			List<string> blargh = Lua.GetReturnValues("return cj_action","ashdioahsdas.lua");
-			if (blargh[0] != "true"){
-				Lua.DoString("cj_action = true");
-			}
+			
+			Lua.DoString("if not cj_action then NAActionButton:Click() end");
+			
 			if (Me.GotTarget && !Me.CurrentTarget.IsAlive)
 			{
 				Me.ClearTarget();
