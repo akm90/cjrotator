@@ -257,7 +257,7 @@ function CJClassTogHandler()
 		CJClassToggleText:SetText("Use Dispersion");
 		CJClassToggle:Enable()
 		cj_dispersion = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 12 then
+	elseif cj_currentRotation == 12 or cj_currentRotation == 13 then
 		CJClassToggleText:SetText("Death Strike");
 		CJClassToggle:Enable()
 		cj_deathstrike = CJClassToggle:GetChecked()
