@@ -129,7 +129,7 @@ function CJSurvHunterRot()
 	if CJ_Casting() then return end
 	CJ_OffensiveDispel("Tranquilizing Shot")
 	
-	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+	if UnitExists("pet") and not UnitIsDead("pet") and CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
 	end
 	
@@ -199,7 +199,7 @@ function CJBMHunterRot()
 		if CJ_Cast("Hunter's Mark") then return end
 	end
 	
-	if CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
+	if UnitExists("pet") and not UnitIsDead("pet") and CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
 	end
 	

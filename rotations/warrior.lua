@@ -203,6 +203,10 @@ function CJArmsWarRot()
 		return
 	end
 	
+	if not CJ_HB("Battle Shout") and not CJ_HB("Commanding Shout") then
+		CJ_Shout()
+	end
+	
 	if PlayerToTarget <= 25 and PlayerToTarget >= 8 then
 		CJ_Cast("Charge")
 	end
