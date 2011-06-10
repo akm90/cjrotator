@@ -261,7 +261,7 @@ function CJArmsWarRot()
 		
 		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
 			if UnitPower("player")  < 30 then return end
-			CJ_Cast("Sweeping Strikes")
+			CJ_Cast("Sweeping Strike")
 		end
 		
 		if not CJ_HB("Deadly Calm") and UnitPower("player") > 80 and CJ_CD("Deadly Calm") > 15 then
@@ -308,7 +308,7 @@ function CJArmsWarRot()
 			if CJ_Cast("Hamstring") then return end
 		end
 		
-		if cj_aoemode and CJ_CD("Sweeping Strike") == 0 then
+		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
 			if UnitPower("player")  < 30 then return end
 			CJ_Cast("Sweeping Strike")
 		end
