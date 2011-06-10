@@ -231,6 +231,10 @@ function CJArmsWarRot()
 	
 	StartAttack()
 	
+	if cj_aoemode and CJ_HP("player") < 50 then
+		CJ_Cast("Enraged Regeneration")
+	end
+	
 	if cj_aoemode and (UnitPower("player") > 40 or CJ_HB("Battle Trance") or CJ_HB("Deadly Calm")) then
 		CJ_Cast("Cleave")
 	end
@@ -326,6 +330,31 @@ function CJArmsWarRot()
 		end
 		
 		if CJ_Cast("Overpower") then return end
+		
+		if CJ_HP("target") > 20 or UnitPower("player") >= 30 then
+			if CJ_Cast("Mortal Strike") then return end
+		end
+		
+		if CJ_HB("Battle Trance") then
+			if CJ_Cast("Execute") then return end
+		end
+		
+		if CJ_DTR("Colossus Smash") < .5 then
+			if CJ_Cast("Colossus Smash") then return end
+		end
+		
+		if CJ_HB("Deadly Calm") or CJ_HB("Recklessness") then
+			if CJ_Cast("Execute") then return end
+		end
+		
+		if CJ_Cast("Mortal Strike") then return end
+		
+		if CJ_Cast("Execute") then return end
+		
+		if (CJ_CD("Mortal Strike") >= 1.5 and (UnitPower("player") >= 35 or CJ_HB("Deadly Calm") or CJ_HD("Colossus Smash"))) or
+			(CJ_CD("Mortal Strike") >= 1.2 and CJ_DTR("Colossus Smash") > .5 and UnitPower("player") >= 35) then
+			CJ_Cast("Slam")
+		end
 		
 		if UnitPower("player") < 20 then
 			if CJ_Shout() then return end
