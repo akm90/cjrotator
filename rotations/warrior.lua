@@ -240,6 +240,10 @@ function CJArmsWarRot()
 	end
 	
 	if GetShapeshiftForm() == 3 then
+		if UnitPower("player") < 70 and not CJ_HB("Deadly Calm") then
+			CJ_Cast("Berserker Rage")
+		end
+	
 		if not CJ_GCD() then return end
 		
 		if CJ_HP("player") < 70 then
@@ -272,7 +276,11 @@ function CJArmsWarRot()
 			if CJ_Cast("Execute") then return end
 		end
 		
-		if CJ_HB("Deadly Calm") or CJ_HB("Recjlessness") then
+		if CJ_DTR("Colossus Smash") < .5 then
+			if CJ_Cast("Colossus Smash") then return end
+		end
+		
+		if CJ_HB("Deadly Calm") or CJ_HB("Recklessness") then
 			if CJ_Cast("Execute") then return end
 		end
 		
