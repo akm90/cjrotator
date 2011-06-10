@@ -185,16 +185,17 @@ end
 --------------------------------
 ------------Arms----------------
 --------------------------------
+local cj_tclap = 0
 function CJArmsWarRot()
 	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
 	
-	if (not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
-		and UnitPower("player") <= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0) then
+	if ((not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
+		and UnitPower("player") <= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0))  then
 		if CJ_CD("Battle Stance") == 0 then
 			if GetShapeshiftForm() ~= 1 then CastShapeshiftForm(1) end
 		end
-	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 then
+	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 and GetTime() - cj_rend > 1 and not cj_aoemode then
 		if CJ_CD("Berserker Stance") == 0 then
 			if GetShapeshiftForm() ~= 3 then CastShapeshiftForm(3) end
 		end
@@ -239,8 +240,6 @@ function CJArmsWarRot()
 	end
 	
 	if GetShapeshiftForm() == 3 then
-
-		
 		if not CJ_GCD() then return end
 		
 		if CJ_HP("player") < 70 then
@@ -291,12 +290,23 @@ function CJArmsWarRot()
 		end
 	elseif GetShapeshiftForm() == 1 then
 		if not CJ_GCD() then return end
+		
+		
 		if CJ_Hero() then
 			if CJ_Cast("Shattering Throw") then return end
 		end
 		
 		if cj_hamstring and not CJ_HD("Hamstring") then
 			if CJ_Cast("Hamstring") then return end
+		end
+		
+		if cj_aoemode and CJ_CD("Sweeping Strike") == 0 then
+			if UnitPower("player")  < 30 then return end
+			CJ_Cast("Sweeping Strike")
+		end
+		
+		if cj_aoemode and GetTime() - cj_tclap > 15.7 and CJ_HD("Rend") then
+			if CJ_Cast("Thunder Clap") then cj_tclap = GetTime() return end
 		end
 		
 		if CJ_HB("Taste for Blood") then
