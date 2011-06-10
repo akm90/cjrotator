@@ -167,7 +167,7 @@ function CJDestLockRot()
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
-	if CJ_AffBuffs() then return end;
+	if CJ_DestroBuffs() then return end;
 	
 	if UnitPower("player") < ((UnitHealthMax("player")*.15)*1.4)  and CJ_HP("player") > 20 and cj_lifetap then
 		if CJ_Cast("Life Tap") then return end

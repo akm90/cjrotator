@@ -27,6 +27,7 @@ cj_wildaspect = false;
 cj_deathstrike = false;
 cj_frostshock  = false;
 cj_pickuptotems = nil;
+cj_rend = 0;
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -286,7 +287,6 @@ local function OnUpdate(...)
 		end
 	end
 	
-	
 	if not cj_action then return end;
 	if cj_rotationTable[cj_currentRotation] == nil then
 		printf("Your spec is currently not supported!");
@@ -336,7 +336,6 @@ local function OnEvent(self,event,...)
 			end				
 		end
 	elseif (event == "COMBAT_LOG_EVENT_UNFILTERED")then
-		if cj_currentRotation ~= 73 then return end
 		local timestamp, type, hideCaster, sGUID, sName, sFlags, dGUID, dName, dFlags, spellID, spellName, sSchool, dDealt = ...;			
 		if (type=="SPELL_DAMAGE") then
 			if ((spellID == 1752 or spellID == 53 or spellID == 1776 or spellID == 5938 or spellID == 16511) and sName == UnitName("player")) then
@@ -344,6 +343,8 @@ local function OnEvent(self,event,...)
 			elseif ((spellID == 703 or spellID == 1833 or spellID == 8676) and sName == f.player) then
 				cj_hatexpect = 2
 			end
+		elseif type == "SPELL_CAST_SUCCESS" and spellName == "Rend" and sGUID == UnitGUID("player") then
+			cj_rend = GetTime();
 		end
 	elseif (event == "UNIT_COMBO_POINTS") then
 		if cj_currentRotation ~= 73 then return end

@@ -50,10 +50,7 @@ namespace CJRotatorCC
 			}
 			
 			Lua.DoString("if not cj_action then NAActionButton:Click() end");
-			
-			if (Me.GotTarget && !Me.CurrentTarget.GotTarget){
-				Me.ClearTarget();
-			}
+
 			
 			if (Me.GotTarget && !Me.CurrentTarget.IsAlive)
 			{
