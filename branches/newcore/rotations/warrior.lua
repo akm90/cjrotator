@@ -186,16 +186,23 @@ end
 ------------Arms----------------
 --------------------------------
 local cj_tclap = 0
+local bnt = false;
 function CJArmsWarRot()
 	if AmIFacing == false then return end
 	CJ_Interrupt("Pummel")
+	
+	if select(5,GetTalentInfo(2,20,false,false,nil)) > 0 then
+		bnt = true
+	else
+		bnt = false
+	end
 	
 	if ((not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
 		and UnitPower("player") <= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0))  then
 		if CJ_CD("Battle Stance") == 0 then
 			if GetShapeshiftForm() ~= 1 then CastShapeshiftForm(1) end
 		end
-	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 and GetTime() - cj_rend > 1 and not cj_aoemode then
+	elseif (not CJ_HB("Taste for Blood")) and UnitPower("player") < 75 and GetTime() - cj_rend > 1 and not (cj_aoemode and bnt) then
 		if CJ_CD("Berserker Stance") == 0 then
 			if GetShapeshiftForm() ~= 3 then CastShapeshiftForm(3) end
 		end
@@ -317,7 +324,7 @@ function CJArmsWarRot()
 			CJ_Cast("Sweeping Strikes")
 		end
 		
-		if cj_aoemode and GetTime() - cj_tclap > 15.7 and CJ_HD("Rend") then
+		if cj_aoemode and GetTime() - cj_tclap > 15.7 and CJ_HD("Rend") and bnt then
 			if CJ_Cast("Thunder Clap") then cj_tclap = GetTime() return end
 		end
 		
