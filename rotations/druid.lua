@@ -316,7 +316,7 @@ function CJBalanceDruidRot()
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end;
-	if CJ_BalanceBuffs() then return end;
+	--if CJ_BalanceBuffs() then return end;
 	
 	if IsSpellInRange("Wrath") == 0 then return end;
 	
