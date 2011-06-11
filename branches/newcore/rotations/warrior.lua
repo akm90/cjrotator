@@ -335,7 +335,7 @@ function CJArmsWarRot()
 			if CJ_Cast("Overpower") then return end
 		end
 		
-		if not CJ_HD("Rend") then
+		if not CJ_HD("Rend") and UnitName("target") ~= "Amani Protective Ward" and UnitName("target") ~= "Amani Healing Ward" then
 			if CJ_Cast("Rend") then return end
 		end
 		

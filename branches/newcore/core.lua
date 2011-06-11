@@ -402,6 +402,31 @@ local function CJToggleShow()
 	end
 end
 
+function cjhandler(msg,editbox)
+	 local command, rest = msg:match("^(%S*)%s*(.-)$");
+	
+	if command == "hide" then
+		if CJRotatorFrame:IsShown() then
+			CJRotatorFrame:Hide()
+		else
+			CJRotatorFrame:Show()
+		end
+	elseif command == "stopaftercombat" then
+		cj_stopaftercombat = not cj_stopaftercombat;
+		if cj_stopaftercombat then
+			printf("CJR: Stopping After Combat");
+		else
+			printf("CJR: Not Stopping After Combat");
+		end
+	elseif command == "holddown" then
+		cj_holddown = not cj_holddown;
+		if cj_holddown then
+			printf("CJR: Hold Down Enabled");
+		else
+			printf("CJR: Hold Down Disabled");
+		end
+	end
+end
 
 local function OnLoad()
 	h:RegisterEvent("PLAYER_ENTERING_WORLD");
@@ -421,6 +446,9 @@ local function OnLoad()
 	DEFAULT_CHAT_FRAME:AddMessage("CJ Rotator Loaded");
 end
 
+
+SLASH_CJSTUFF1 = "/cjr"
+SlashCmdList["CJSTUFF"] = cjhandler;
 SLASH_CJHIDE1 = "/cjhide"
 SlashCmdList["CJHIDE"] = CJToggleShow;
 SLASH_CJROTATOR1 = "/cjrotator"
