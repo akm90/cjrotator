@@ -336,7 +336,7 @@ local function OnEvent(self,event,...)
 		if (type=="SPELL_DAMAGE") then
 			if ((spellID == 1752 or spellID == 53 or spellID == 1776 or spellID == 5938 or spellID == 16511) and sName == UnitName("player")) then
 				cj_hatexpect = 1
-			elseif ((spellID == 703 or spellID == 1833 or spellID == 8676) and sName == f.player) then
+			elseif ((spellID == 703 or spellID == 1833 or spellID == 8676) and sName == UnitName("player")) then
 				cj_hatexpect = 2
 			end
 		elseif type == "SPELL_CAST_SUCCESS" and spellName == "Rend" and sGUID == UnitGUID("player") then

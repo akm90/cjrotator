@@ -443,6 +443,7 @@ function CJProtWarRot()
 			if CJ_Cast("Rend") then return end
 		end
 		if CJ_Cast("Devastate") then return end
+		if CJ_Cast("Victory Rush") then return end
 		if CJ_Shout() then return end
 	else
 		if not CJ_HD("Rend") then
@@ -453,6 +454,7 @@ function CJProtWarRot()
 		if CJ_Cast("Shockwave") then return end
 		if CJ_Cast("Revenge") then return end
 		if CJ_Cast("Shield Slam") then return end
+		if CJ_Cast("Victory Rush") then return end
 		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	end
