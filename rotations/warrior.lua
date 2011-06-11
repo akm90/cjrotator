@@ -428,10 +428,6 @@ function CJProtWarRot()
 		CJ_Shout()
 	end
 	
-	if not CJ_HD("Demoralizing Shout") then
-		if CJ_Cast("Demoralizing Shout") then return end
-	end
-	
 	if not cj_aoemode then
 		if CJ_Cast("Shield Slam") then return end
 		if CJ_HD("Rend") and CJ_DTR("Rend") < 4.5 then
@@ -442,8 +438,11 @@ function CJProtWarRot()
 		if not CJ_HD("Rend") then
 			if CJ_Cast("Rend") then return end
 		end
-		if CJ_Cast("Devastate") then return end
+		if not CJ_HD("Demoralizing Shout") then
+			if CJ_Cast("Demoralizing Shout") then return end
+		end
 		if CJ_Cast("Victory Rush") then return end
+		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	else
 		if not CJ_HD("Rend") then
@@ -451,6 +450,9 @@ function CJProtWarRot()
 			return
 		end	
 		if CJ_Cast("Thunder Clap") then return end
+		if not CJ_HD("Demoralizing Shout") then
+			if CJ_Cast("Demoralizing Shout") then return end
+		end
 		if CJ_Cast("Shockwave") then return end
 		if CJ_Cast("Revenge") then return end
 		if CJ_Cast("Shield Slam") then return end
