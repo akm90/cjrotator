@@ -433,7 +433,6 @@ function cjhandler(msg,editbox)
 		else
 			printf("CJR: Verbose Off");
 		end
-	elseif command
 	end
 end
 
