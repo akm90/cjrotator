@@ -13,7 +13,7 @@ local function CJ_ArcaneBuffs()
 	end
 	
 	if GetItemCount(36799,false,true) == 0 then
-		if UnitAffectingCombat("player") == 0 then
+		if UnitAffectingCombat("player") == nil then
 			if CJ_Cast("Conjure Mana Gem") then return end;
 		else
 			if CJ_IsBoss() then
@@ -132,7 +132,7 @@ function CJFireMageRot()
 	
 	if CJ_Casting() then return end;
 	if GetItemCount(36799,false,true) == 0 then
-		if UnitAffectingCombat("player") == 0 then
+		if UnitAffectingCombat("player") == nil then
 			if CJ_Cast("Conjure Mana Gem") then return end;
 		else
 			if CJ_IsBoss() then
@@ -210,7 +210,7 @@ function CJFrostMageRot()
 	
 	CJ_OffensiveDispel("Spellsteal");
 	if GetItemCount(36799,false,true) == 0 then
-		if UnitAffectingCombat("player") == 0 then
+		if UnitAffectingCombat("player") == nil then
 			if CJ_Cast("Conjure Mana Gem") then return end;
 		else
 			if CJ_IsBoss() then

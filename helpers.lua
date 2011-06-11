@@ -112,6 +112,9 @@ function CJ_Cast(spell,arg1,arg2)
 	if usable and mana == nil then
 		if GetSpellCooldown(spell) == 0 then
 			CastSpellByName(spell)
+			if cj_verbose then
+				printf("Casting: "..spell);
+			end
 			return true;
 		else
 			return false;

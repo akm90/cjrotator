@@ -280,10 +280,10 @@ end
 
 local function OnUpdate(...)
 --	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
-	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 then
+	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 and cj_class == "Shaman" then
 		if UnitAffectingCombat("player") == 1 then 
 			cj_pickuptotems = nil
-		elseif UnitAffectingCombat("player") == 0 then
+		elseif UnitAffectingCombat("player") == nil then
 			if CJ_Cast("Totemic Recall") then cj_pickuptotems = nil return end
 		end
 	end
@@ -309,8 +309,8 @@ local function OnEvent(self,event,...)
 		if cj_action and cj_stopaftercombat then
 			cj_action = false;
 			if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
-			cjpickuptotems = GetTime();
 		end
+		cj_pickuptotems = GetTime();
 	elseif event == "ADDON_LOADED" then
 		CJCreateFrame()
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED") then
@@ -428,7 +428,7 @@ function cjhandler(msg,editbox)
 		end
 	elseif command == "verbose" then
 		cj_verbose = not cj_verbose;
-		if cj_holddown then
+		if cj_verbose then
 			printf("CJR: Verbose On");
 		else
 			printf("CJR: Verbose Off");
