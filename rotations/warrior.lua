@@ -246,7 +246,7 @@ function CJArmsWarRot()
 		CJ_Cast("Cleave")
 	end
 	
-	if UnitPower("player") > 80 or CJ_HB("Deadly Calm") or CJ_HB("Incite") or CJ_HB("Battle Trance") then
+	if UnitPower("player") > 80 or CJ_HB("Deadly Calm") or (CJ_HB("Incite") and UnitPower("player") > 50) or CJ_HB("Battle Trance") then
 		CJ_Cast("Heroic Strike")
 	end
 	
