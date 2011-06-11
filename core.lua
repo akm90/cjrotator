@@ -71,7 +71,7 @@ local function CJCreateFrame()
 	if frameLoaded then return end;
 	frameLoaded = true
 	local f = CreateFrame("Frame","CJRotatorFrame",UIParent);
-	f:SetSize(230,210)
+	f:SetSize(230,190)
 	f:SetPoint("CENTER",0,0)
 	f:SetMovable(true)
 	f:EnableMouse(true)
@@ -99,7 +99,7 @@ local function CJCreateFrame()
 	local fa = CreateFrame("Button","CJActionButton",f,"UIPanelButtonTemplate","SecureActionButtonTemplate","ActionButtonTemplate")
 	fa:SetText("Enable");
 	fa:SetSize(190,42)
-	fa:SetPoint("TOPLEFT",24,-150)
+	fa:SetPoint("TOPLEFT",24,-130)
 	fa:SetScript("OnMouseDown",function(self)
 		cj_action = not cj_action
 		if cj_action then self:SetText("Disable") else self:SetText("Enable") end
@@ -187,7 +187,7 @@ local function CJCreateFrame()
 	end)
 	
 	local fg = CreateFrame("Button","CJClassDropDown",f,"UIDropDownMenuTemplate")
-	fg:SetPoint("TOPLEFT",10,-111);
+	fg:SetPoint("TOPLEFT",10,-100);
 	fg.noResize = true;
 	UIDropDownMenu_SetWidth(fg,165)
 	CJClassDropDownText:SetText("Class Options");
@@ -342,13 +342,13 @@ function CJ_Minimize()
 		CJActionButton:SetSize(110,23)
 		cjmin = not cjmin;
 	else
-		CJRotatorFrame:SetSize(230,210)
+		CJRotatorFrame:SetSize(230,190)
 		CJAoECheckbox:Show()
 		CJCooldownsCheckbox:Show()
 		CJPurgeCheckbox:Show()
 		CJInterruptsCheck:Show()
 		CJClassDropDown:Show()
-		CJActionButton:SetPoint("TOPLEFT",24,-150)
+		CJActionButton:SetPoint("TOPLEFT",24,-130)
 		CJActionButton:SetSize(190,42)
 		CJMinimizeButton:SetSize(20,20)
 		CJCloseButton:Show()
