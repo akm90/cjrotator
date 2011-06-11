@@ -93,7 +93,7 @@ function CJMarksHunterRot()
 		if CJ_Cast("Steady Shot") then return end
 	end
 	
-	if (UnitPower("player") >= 66 or CJ_CD("Chimera Shot") > 5) and (CJ_HP("target") < 80 and nto CJ_HB("Rapid Fire") and not CJ_Hero() and not CJ_HB("Berserking")) then
+	if (UnitPower("player") >= 66 or CJ_CD("Chimera Shot") > 5) and (CJ_HP("target") < 80 and not CJ_HB("Rapid Fire") and not CJ_Hero() and not CJ_HB("Berserking")) then
 		if CJ_Cast("Arcane Shot") then return end
 	end
 	
