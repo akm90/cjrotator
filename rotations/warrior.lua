@@ -384,6 +384,9 @@ function CJProtWarRot()
 		if CJ_Cast("Heroic Throw") then return end
 		if PlayerToTarget >=8 and PlayerToTarget <= 25 then
 			if CJ_Cast("Charge") then CJ_Shout() return end
+			if CJ_CD("Charge") > 0 and UnitPower("player") > 10 then
+				if CJ_Cast("Intercept") then return end
+			end
 		end
 		return
 	end
