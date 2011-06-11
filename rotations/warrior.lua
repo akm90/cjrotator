@@ -336,7 +336,7 @@ function CJArmsWarRot()
 		end
 		
 		if not CJ_HD("Rend") and UnitName("target") ~= "Amani Protective Ward" and UnitName("target") ~= "Amani Healing Ward" and 
-			UntiName("target") ~= "Corrupted Lightning Totem" then
+			UnitName("target") ~= "Corrupted Lightning Totem" then
 			if CJ_Cast("Rend") then return end
 		end
 		

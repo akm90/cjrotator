@@ -27,6 +27,7 @@ cj_wildaspect = false;
 cj_deathstrike = false;
 cj_frostshock  = false;
 cj_pickuptotems = nil;
+cj_verbose = false;
 cj_rend = 0;
 
 local h = CreateFrame("Frame");
@@ -425,6 +426,14 @@ function cjhandler(msg,editbox)
 		else
 			printf("CJR: Hold Down Disabled");
 		end
+	elseif command == "verbose" then
+		cj_verbose = not cj_verbose;
+		if cj_holddown then
+			printf("CJR: Verbose On");
+		else
+			printf("CJR: Verbose Off");
+		end
+	elseif command
 	end
 end
 
