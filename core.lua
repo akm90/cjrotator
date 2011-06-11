@@ -173,9 +173,17 @@ local function CJCreateFrame()
 	end)
 
 	local fk = CreateFrame("Button","CJMinimizeButton",f,"UIPanelCloseButton")
+	fk:SetSize(20,20)
 	fk:SetPoint("TOPRIGHT",-7,-7)
 	fk:SetScript("OnClick",function(self)
 		CJ_Minimize()
+	end)
+	
+	local fh = CreateFrame("Button","CJCloseButton",f,"UIPanelCloseButton")
+	fh:SetSize(20,20)
+	fh:SetPoint("TOPLEFT",7,-7)
+	fh:SetScript("OnClick",function(self)
+		f:Hide();
 	end)
 	
 	local fg = CreateFrame("Button","CJClassDropDown",f,"UIDropDownMenuTemplate")
@@ -298,6 +306,10 @@ local function CJCreateFrame()
 	fk:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIcon-Minimize-Highlight")
 	fk:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-Minimize-Down")
 
+	fh:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-Maximize-Up")
+	fh:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIcon-Maximize-Highlight")
+	fh:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-Maximize-Down")
+	
 	f:Show();
 end
 
@@ -316,15 +328,16 @@ end
 
 function CJ_Minimize()
 	if not cjmin then
-		CJRotatorFrame:SetSize(230,57)
-		CJMinimizeButton:SetHeight(42)
+		CJRotatorFrame:SetSize(140,40)
+		CJMinimizeButton:SetHeight(23)
 		CJAoECheckbox:Hide()
 		CJCooldownsCheckbox:Hide()
 		CJPurgeCheckbox:Hide()
 		CJInterruptsCheck:Hide()
 		CJClassDropDown:Hide();
-		CJActionButton:SetPoint("TOPLEFT",5,-7)
-		CJActionButton:SetSize(190,42)
+		CJCloseButton:Hide()
+		CJActionButton:SetPoint("TOPLEFT",6,-7)
+		CJActionButton:SetSize(110,23)
 		cjmin = not cjmin;
 	else
 		CJRotatorFrame:SetSize(230,210)
@@ -335,7 +348,8 @@ function CJ_Minimize()
 		CJClassDropDown:Show()
 		CJActionButton:SetPoint("TOPLEFT",24,-150)
 		CJActionButton:SetSize(190,42)
-		CJMinimizeButton:SetHeight(32)
+		CJMinimizeButton:SetSize(20,20)
+		CJCloseButton:Show()
 		cjmin = not cjmin;
 	end
 end
