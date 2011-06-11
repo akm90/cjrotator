@@ -457,16 +457,10 @@ local function CJToggleAoE()
     if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
 end
 
-local function CJToggleShow()
-	if CJRotatorFrame:IsShown() then
-		CJRotatorFrame:Hide()
-	else
-		CJRotatorFrame:Show()
-	end
-end
-
 function cjhandler(msg,editbox)
 	 local command, rest = msg:match("^(%S*)%s*(.-)$");
+	
+	command = string.lower(command)
 	
 	if command == "hide" then
 		if CJRotatorFrame:IsShown() then
@@ -508,6 +502,8 @@ function cjhandler(msg,editbox)
 		else
 			printf("CJR: Purging Players");
 		end
+	else
+		printf("Syntax: /cjr (hide|stopaftercombat|holddown|purgeplayers|verbose)")
 	end
 end
 
@@ -532,8 +528,6 @@ end
 
 SLASH_CJSTUFF1 = "/cjr"
 SlashCmdList["CJSTUFF"] = cjhandler;
-SLASH_CJHIDE1 = "/cjhide"
-SlashCmdList["CJHIDE"] = CJToggleShow;
 SLASH_CJROTATOR1 = "/cjrotator"
 SlashCmdList["CJROTATOR"] = CJToggleOn;
 SLASH_CJTOGGLE1 = "/cjaoetoggle";
