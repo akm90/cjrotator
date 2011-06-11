@@ -190,6 +190,8 @@ local function CJCreateFrame()
 	fg:SetPoint("TOPLEFT",10,-111);
 	fg.noResize = true;
 	UIDropDownMenu_SetWidth(fg,165)
+	CJClassDropDownText:SetText("Class Options");
+	CJClassDropDownText:SetJustifyH("CENTER");
 	fg.initialize = function(self,level)
 		if not level then return end
 		wipe(info)
