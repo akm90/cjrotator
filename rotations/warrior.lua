@@ -310,6 +310,9 @@ function CJArmsWarRot()
 	elseif GetShapeshiftForm() == 1 then
 		if not CJ_GCD() then return end
 		
+		if CJ_HP("player") < 70 then
+			if CJ_Cast("Victory Rush") then return end
+		end
 		
 		if CJ_Hero() then
 			if CJ_Cast("Shattering Throw") then return end

@@ -90,6 +90,9 @@ function CJMarksHunterRot()
 			if CJ_Cast("Aimed Shot") then return end
 		end
 	elseif CJ_HB("Aspect of the Fox") then
+		if UnitPower("player") > 80 then
+			if CJ_Cast("Arcane Shot")
+		end
 		if CJ_Cast("Steady Shot") then return end
 	end
 	
