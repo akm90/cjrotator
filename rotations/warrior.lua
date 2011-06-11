@@ -443,6 +443,9 @@ function CJProtWarRot()
 			if CJ_Cast("Demoralizing Shout") then return end
 		end
 		if CJ_Cast("Victory Rush") then return end
+		if cj_hamstring then
+			if not CJ_HD("Hamstring") then if CJ_Cast("Hamstring") then return end end
+		end
 		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	else
@@ -458,6 +461,9 @@ function CJProtWarRot()
 		if CJ_Cast("Revenge") then return end
 		if CJ_Cast("Shield Slam") then return end
 		if CJ_Cast("Victory Rush") then return end
+		if cj_hamstring then
+			if not CJ_HD("Hamstring") then if CJ_Cast("Hamstring") then return end end
+		end
 		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	end

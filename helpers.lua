@@ -370,7 +370,6 @@ function CJ_SelectSpec()
 	elseif c == "Warrior" then
 		cj_currentRotation = 100 + tt;
 	end
-	CJClassTogHandler()
 	if cj_rotationTable[cj_currentRotation] == nil then CJActionButton:Disable(); else CJActionButton:Enable() end
 end
 

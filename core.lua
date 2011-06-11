@@ -29,6 +29,7 @@ cj_frostshock  = false;
 cj_pickuptotems = nil;
 cj_verbose = false;
 cj_rend = 0;
+local info = {}
 
 local h = CreateFrame("Frame");
 local _G = getfenv();
@@ -70,7 +71,7 @@ local function CJCreateFrame()
 	if frameLoaded then return end;
 	frameLoaded = true
 	local f = CreateFrame("Frame","CJRotatorFrame",UIParent);
-	f:SetSize(296,271)
+	f:SetSize(230,210)
 	f:SetPoint("CENTER",0,0)
 	f:SetMovable(true)
 	f:EnableMouse(true)
@@ -97,8 +98,8 @@ local function CJCreateFrame()
 
 	local fa = CreateFrame("Button","CJActionButton",f,"UIPanelButtonTemplate","SecureActionButtonTemplate","ActionButtonTemplate")
 	fa:SetText("Enable");
-	fa:SetSize(238,42)
-	fa:SetPoint("TOPLEFT",24,-201)
+	fa:SetSize(190,42)
+	fa:SetPoint("TOPLEFT",24,-150)
 	fa:SetScript("OnMouseDown",function(self)
 		cj_action = not cj_action
 		if cj_action then self:SetText("Disable") else self:SetText("Enable") end
@@ -111,7 +112,7 @@ local function CJCreateFrame()
 
 	local fb = CreateFrame("CheckButton","CJAoECheckbox",f,"UICheckButtonTemplate")
 	_G[fb:GetName().."Text"]:SetText("AoE Mode")
-	fb:SetPoint("TOPLEFT",24,-25);
+	fb:SetPoint("TOPLEFT",24,-30);
 	fb:SetScript("OnClick",function(self)
 		cj_lastcall = nil;
 		cj_aoemode = self:GetChecked()
@@ -119,37 +120,37 @@ local function CJCreateFrame()
 
 	local fc = CreateFrame("CheckButton","CJCooldownsCheckbox",f,"UICheckButtonTemplate")
 	_G[fc:GetName().."Text"]:SetText("Cooldowns")
-	fc:SetPoint("TOPLEFT",146,-25);
+	fc:SetPoint("TOPLEFT",115,-30);
 	fc:SetChecked(cj_cooldowns)
 	fc:SetScript("OnClick",function(self)
 		cj_cooldowns = self:GetChecked()
 	end)
 
 	local fd = CreateFrame("CheckButton","CJPurgeCheckbox",f,"UICheckButtonTemplate")
-	_G[fd:GetName().."Text"]:SetText("Offensive Dispel")
+	_G[fd:GetName().."Text"]:SetText("Purge")
 	fd:SetPoint("TOPLEFT",24,-68)
 	fd:SetChecked(cj_purgemode)
 	fd:SetScript("OnClick",function(self)
 		cj_purgemode = self:GetChecked()
 	end)
 
-	local fe = CreateFrame("CheckButton","CJStopAC",f,"UICheckButtonTemplate")
+--[[	local fe = CreateFrame("CheckButton","CJStopAC",f,"UICheckButtonTemplate")
 	_G[fe:GetName().."Text"]:SetText("Stop After Combat")
 	fe:SetPoint("TOPLEFT",146,-68)
 	fe:SetChecked(cj_stopaftercombat)
 	fe:SetScript("OnClick",function(self)
 		cj_stopaftercombat = self:GetChecked()
-	end)
+	end)--]]
 
-	local ff = CreateFrame("CheckButton","CJPurgePlayers",f,"UICheckButtonTemplate")
+--[[	local ff = CreateFrame("CheckButton","CJPurgePlayers",f,"UICheckButtonTemplate")
 	_G[ff:GetName().."Text"]:SetText("Purge Players")
-	ff:SetPoint("TOPLEFT",24,-111)
+	ff:SetPoint("TOPLEFT",146,-68)
 	ff:SetChecked(cj_purgeplayers)
 	ff:SetScript("OnClick",function(self)
 		cj_purgeplayers = self:GetChecked()
-	end)
+	end)--]]
 
-	local fg = CreateFrame("CheckButton","CJHoldDownCheckbox",f,"UICheckButtonTemplate")
+--[[	local fg = CreateFrame("CheckButton","CJHoldDownCheckbox",f,"UICheckButtonTemplate")
 	_G[fg:GetName().."Text"]:SetText("Hold Down")
 	fg:SetPoint("TOPLEFT",146,-111)
 	fg:SetChecked(cj_holddown)
@@ -161,22 +162,14 @@ local function CJCreateFrame()
 		else
 			NAActionButton:RegisterForClicks("AnyUp");
 		end
-	end)
+	end)--]]
 
 	local fh = CreateFrame("CheckButton","CJInterruptsCheck",f,"UICheckButtonTemplate")
 	_G[fh:GetName().."Text"]:SetText("Interrupts")
-	fh:SetPoint("TOPLEFT",24,-153)
+	fh:SetPoint("TOPLEFT",115,-68)
 	fh:SetChecked(cj_interruptmode)
 	fh:SetScript("OnClick",function(self)
 		cj_interruptmode = self:GetChecked()
-	end)
-
-	local fi = CreateFrame("CheckButton","CJClassToggle",f,"UICheckButtonTemplate")
-	_G[fi:GetName().."Text"]:SetText("Class Toggle")
-	fi:SetPoint("TOPLEFT",146,-153)
-	fi:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
-	fi:SetScript("OnClick",function(self)
-		CJClassTogHandler()
 	end)
 
 	local fk = CreateFrame("Button","CJMinimizeButton",f,"UIPanelCloseButton")
@@ -184,7 +177,123 @@ local function CJCreateFrame()
 	fk:SetScript("OnClick",function(self)
 		CJ_Minimize()
 	end)
-
+	
+	local fg = CreateFrame("Button","CJClassDropDown",f,"UIDropDownMenuTemplate")
+	fg:SetPoint("TOPLEFT",10,-111);
+	fg.noResize = true;
+	UIDropDownMenu_SetWidth(fg,165)
+	fg.initialize = function(self,level)
+		if not level then return end
+		wipe(info)
+		if level == 1 then
+			UIDropDownMenu_EnableDropDown(self)
+			if cj_class == "Shaman" then
+				info.text = "Use Frost Shock"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_frostshock = not cj_frostshock end
+				info.checked = cj_frostshock
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 101 or cj_currentRotation == 102 then
+				info.text = "Use Hamstring"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_hamstring = not cj_hamstring end
+				info.checked = cj_hamstring
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 103 then
+				info.text = "Use Hamstring"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_hamstring = not cj_hamstring end
+				info.checked = cj_hamstring
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Use Defensive Cooldowns"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
+				info.checked = cj_defensivecooldowns
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 22 or cj_currentRotation == 11 or cj_currentRotation == 52 then
+				info.text = "Use Defensive Cooldowns"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
+				info.checked = cj_defensivecooldowns
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_class == "Warlock" then
+				info.text = "Use Life Tap"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_lifetap = not cj_lifetap end
+				info.checked = cj_lifetap
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 61 then
+				info.text = "Smite/HF Only"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_healonly = not cj_healonly end
+				info.checked = cj_healonly
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 63 then
+				info.text = "Use Dispersion"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_dispersion = not cj_dispersion end
+				info.checked = cj_dispersion
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 12 or cj_currentRotation == 13 then
+				info.text = "Use Death Strike"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_deathstrike = not cj_deathstrike end
+				info.checked = cj_deathstrike
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_class == "Hunter" then
+				info.text = "Aspect of the Wild"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_wildaspect = not cj_wildaspect end
+				info.checked = cj_wildaspect
+				UIDropDownMenu_AddButton(info,level)
+			else
+				UIDropDownMenu_DisableDropDown(self)
+			end
+		end
+	end
+	
+	
 	fk:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIcon-Minimize-Up")
 	fk:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIcon-Minimize-Highlight")
 	fk:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-Minimize-Down")
@@ -192,89 +301,42 @@ local function CJCreateFrame()
 	f:Show();
 end
 
-
+local info = {};
+function CJClassHelper(self,level)
+	printf("here");
+	if not level then return end
+	wipe(info)
+	if level == 1 then
+		info.isTitle = 1
+		info.text = "Class Options"
+		info.notCheckable = 1
+		UIDropDownMenu_AddButton(info,level)
+	end
+end
 
 function CJ_Minimize()
 	if not cjmin then
-		CJRotatorFrame:SetSize(247,57)
+		CJRotatorFrame:SetSize(230,57)
 		CJMinimizeButton:SetHeight(42)
 		CJAoECheckbox:Hide()
 		CJCooldownsCheckbox:Hide()
 		CJPurgeCheckbox:Hide()
-		CJStopAC:Hide()
-		CJPurgePlayers:Hide()
-		CJHoldDownCheckbox:Hide()
 		CJInterruptsCheck:Hide()
-		CJClassToggle:Hide()
+		CJClassDropDown:Hide();
 		CJActionButton:SetPoint("TOPLEFT",5,-7)
-		CJActionButton:SetSize(210,42)
+		CJActionButton:SetSize(190,42)
 		cjmin = not cjmin;
 	else
-		CJRotatorFrame:SetSize(296,271)
+		CJRotatorFrame:SetSize(230,210)
 		CJAoECheckbox:Show()
 		CJCooldownsCheckbox:Show()
 		CJPurgeCheckbox:Show()
-		CJStopAC:Show()
-		CJPurgePlayers:Show()
-		CJHoldDownCheckbox:Show()
 		CJInterruptsCheck:Show()
-		CJClassToggle:Show()
-		CJActionButton:SetPoint("TOPLEFT",24,-201)
-		CJActionButton:SetSize(238,42)
+		CJClassDropDown:Show()
+		CJActionButton:SetPoint("TOPLEFT",24,-150)
+		CJActionButton:SetSize(190,42)
 		CJMinimizeButton:SetHeight(32)
 		cjmin = not cjmin;
-	end
-end
-
-
-function CJClassTogHandler()
-	if cj_currentRotation == 101 or cj_currentRotation == 102 then
-		CJClassToggleText:SetText("Use Hamstring")
-		CJClassToggle:Enable()
-		cj_hamstring = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 103 then
-		CJClassToggleText:SetText("Defensive Cooldowns")
-		CJClassToggle:Enable()
-		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_class == "Warlock" then
-		CJClassToggleText:SetText("Use Life Tap")
-		CJClassToggle:Enable()
-		cj_lifetap = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 22 then
-		CJClassToggleText:SetText("Defensive Cooldowns")
-		CJClassToggle:Enable()
-		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 11 then
-		CJClassToggleText:SetText("Defensive Cooldowns")
-		CJClassToggle:Enable()
-		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 52 then
-		CJClassToggleText:SetText("Defensive Cooldowns")
-		CJClassToggle:Enable()
-		cj_defensivecooldowns = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 61 then
-		CJClassToggleText:SetText("Heal Only");
-		CJClassToggle:Enable()
-		cj_healonly = CJClassToggle:GetChecked()
-	elseif cj_currentrotation == 63 then
-		CJClassToggleText:SetText("Use Dispersion");
-		CJClassToggle:Enable()
-		cj_dispersion = CJClassToggle:GetChecked()
-	elseif cj_currentRotation == 12 or cj_currentRotation == 13 then
-		CJClassToggleText:SetText("Death Strike");
-		CJClassToggle:Enable()
-		cj_deathstrike = CJClassToggle:GetChecked()
-	elseif cj_class == "Hunter" then
-		CJClassToggleText:SetText("Aspect of the Wild");
-		CJClassToggle:Enable()
-		cj_wildaspect = CJClassToggle:GetChecked()
-	elseif cj_class == "Shaman" then
-		CJClassToggleText:SetText("Frost Shock");
-		CJClassToggle:Enable()
-		cj_frostshock = CJClassToggle:GetChecked()
-	else
-		CJClassToggleText:SetText("Disabled");
-		CJClassToggle:Disable();
 	end
 end
 
@@ -426,12 +488,25 @@ function cjhandler(msg,editbox)
 		else
 			printf("CJR: Hold Down Disabled");
 		end
+		NAActionButton:UnregisterAllEvents()
+		if cj_holddown then
+			NAActionButton:RegisterForClicks("AnyUp", "AnyDown");
+		else
+			NAActionButton:RegisterForClicks("AnyUp");
+		end
 	elseif command == "verbose" then
 		cj_verbose = not cj_verbose;
 		if cj_verbose then
 			printf("CJR: Verbose On");
 		else
 			printf("CJR: Verbose Off");
+		end
+	elseif command == "purgeplayers" then
+		cj_purgeplayers = not cj_purgeplayers;
+		if cj_purgeplayers then
+			printf("CJR: Purging Players");
+		else
+			printf("CJR: Purging Players");
 		end
 	end
 end
