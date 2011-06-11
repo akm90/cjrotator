@@ -71,7 +71,7 @@ local function CJCreateFrame()
 	if frameLoaded then return end;
 	frameLoaded = true
 	local f = CreateFrame("Frame","CJRotatorFrame",UIParent);
-	f:SetSize(230,190)
+	f:SetSize(230,180)
 	f:SetPoint("CENTER",0,0)
 	f:SetMovable(true)
 	f:EnableMouse(true)
@@ -99,7 +99,7 @@ local function CJCreateFrame()
 	local fa = CreateFrame("Button","CJActionButton",f,"UIPanelButtonTemplate","SecureActionButtonTemplate","ActionButtonTemplate")
 	fa:SetText("Enable");
 	fa:SetSize(190,42)
-	fa:SetPoint("TOPLEFT",24,-130)
+	fa:SetPoint("TOPLEFT",24,-120)
 	fa:SetScript("OnMouseDown",function(self)
 		cj_action = not cj_action
 		if cj_action then self:SetText("Disable") else self:SetText("Enable") end
@@ -112,7 +112,7 @@ local function CJCreateFrame()
 
 	local fb = CreateFrame("CheckButton","CJAoECheckbox",f,"UICheckButtonTemplate")
 	_G[fb:GetName().."Text"]:SetText("AoE Mode")
-	fb:SetPoint("TOPLEFT",24,-30);
+	fb:SetPoint("TOPLEFT",24,-20);
 	fb:SetScript("OnClick",function(self)
 		cj_lastcall = nil;
 		cj_aoemode = self:GetChecked()
@@ -120,7 +120,7 @@ local function CJCreateFrame()
 
 	local fc = CreateFrame("CheckButton","CJCooldownsCheckbox",f,"UICheckButtonTemplate")
 	_G[fc:GetName().."Text"]:SetText("Cooldowns")
-	fc:SetPoint("TOPLEFT",115,-30);
+	fc:SetPoint("TOPLEFT",115,-20);
 	fc:SetChecked(cj_cooldowns)
 	fc:SetScript("OnClick",function(self)
 		cj_cooldowns = self:GetChecked()
@@ -128,45 +128,15 @@ local function CJCreateFrame()
 
 	local fd = CreateFrame("CheckButton","CJPurgeCheckbox",f,"UICheckButtonTemplate")
 	_G[fd:GetName().."Text"]:SetText("Purge")
-	fd:SetPoint("TOPLEFT",24,-68)
+	fd:SetPoint("TOPLEFT",24,-58)
 	fd:SetChecked(cj_purgemode)
 	fd:SetScript("OnClick",function(self)
 		cj_purgemode = self:GetChecked()
 	end)
 
---[[	local fe = CreateFrame("CheckButton","CJStopAC",f,"UICheckButtonTemplate")
-	_G[fe:GetName().."Text"]:SetText("Stop After Combat")
-	fe:SetPoint("TOPLEFT",146,-68)
-	fe:SetChecked(cj_stopaftercombat)
-	fe:SetScript("OnClick",function(self)
-		cj_stopaftercombat = self:GetChecked()
-	end)--]]
-
---[[	local ff = CreateFrame("CheckButton","CJPurgePlayers",f,"UICheckButtonTemplate")
-	_G[ff:GetName().."Text"]:SetText("Purge Players")
-	ff:SetPoint("TOPLEFT",146,-68)
-	ff:SetChecked(cj_purgeplayers)
-	ff:SetScript("OnClick",function(self)
-		cj_purgeplayers = self:GetChecked()
-	end)--]]
-
---[[	local fg = CreateFrame("CheckButton","CJHoldDownCheckbox",f,"UICheckButtonTemplate")
-	_G[fg:GetName().."Text"]:SetText("Hold Down")
-	fg:SetPoint("TOPLEFT",146,-111)
-	fg:SetChecked(cj_holddown)
-	fg:SetScript("OnClick",function(self)
-		cj_holddown = self:GetChecked()
-		NAActionButton:UnregisterAllEvents()
-		if cj_holddown then
-			NAActionButton:RegisterForClicks("AnyUp", "AnyDown");
-		else
-			NAActionButton:RegisterForClicks("AnyUp");
-		end
-	end)--]]
-
 	local fh = CreateFrame("CheckButton","CJInterruptsCheck",f,"UICheckButtonTemplate")
 	_G[fh:GetName().."Text"]:SetText("Interrupts")
-	fh:SetPoint("TOPLEFT",115,-68)
+	fh:SetPoint("TOPLEFT",115,-58)
 	fh:SetChecked(cj_interruptmode)
 	fh:SetScript("OnClick",function(self)
 		cj_interruptmode = self:GetChecked()
@@ -187,7 +157,7 @@ local function CJCreateFrame()
 	end)
 	
 	local fg = CreateFrame("Button","CJClassDropDown",f,"UIDropDownMenuTemplate")
-	fg:SetPoint("TOPLEFT",10,-100);
+	fg:SetPoint("TOPLEFT",10,-90);
 	fg.noResize = true;
 	UIDropDownMenu_SetWidth(fg,165)
 	CJClassDropDownText:SetText("Class Options");
@@ -342,13 +312,13 @@ function CJ_Minimize()
 		CJActionButton:SetSize(110,23)
 		cjmin = not cjmin;
 	else
-		CJRotatorFrame:SetSize(230,190)
+		CJRotatorFrame:SetSize(230,180)
 		CJAoECheckbox:Show()
 		CJCooldownsCheckbox:Show()
 		CJPurgeCheckbox:Show()
 		CJInterruptsCheck:Show()
 		CJClassDropDown:Show()
-		CJActionButton:SetPoint("TOPLEFT",24,-130)
+		CJActionButton:SetPoint("TOPLEFT",24,-120)
 		CJActionButton:SetSize(190,42)
 		CJMinimizeButton:SetSize(20,20)
 		CJCloseButton:Show()
@@ -478,7 +448,7 @@ function cjhandler(msg,editbox)
 	
 	command = string.lower(command)
 	
-	if command == "hide" then
+	if command == "show" then
 		if CJRotatorFrame:IsShown() then
 			CJRotatorFrame:Hide()
 		else
@@ -519,7 +489,7 @@ function cjhandler(msg,editbox)
 			printf("CJR: Purging Players");
 		end
 	else
-		printf("Syntax: /cjr (hide|stopaftercombat|holddown|purgeplayers|verbose)")
+		printf("Syntax: /cjr (show|stopaftercombat|holddown|purgeplayers|verbose)")
 	end
 end
 
