@@ -30,6 +30,15 @@ function CJArcMageRot()
 	
 	if not CJ_GCD() then return end
 	if CJ_ArcaneBuffs() then return end
+	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+	
 	if IsSpellInRange("Arcane Blast") == 0 then return end
 	
 	if GetUnitSpeed("player") > 0 then
@@ -116,6 +125,14 @@ function CJFireMageRot()
 	
 	if not CJ_GCD() then return end
 	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+	
 	CJ_OffensiveDispel("Spellsteal")
 	
 	if not CJ_HB("Arcane Brilliance") then
@@ -193,6 +210,14 @@ function CJFrostMageRot()
 	CJ_Interrupt("Counterspell")
 	
 	if not CJ_GCD() then return end
+	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
 	
 	if not CJ_HB("Arcane Brilliance") then
 		if CJ_Cast("Arcane Brilliance") then return true end;
