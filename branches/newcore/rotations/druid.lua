@@ -318,6 +318,14 @@ function CJBalanceDruidRot()
 	if CJ_Casting() then return end;
 	--if CJ_BalanceBuffs() then return end;
 	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+	
 	if IsSpellInRange("Wrath") == 0 then return end;
 	
 	
