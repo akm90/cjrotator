@@ -32,6 +32,7 @@ function CJAssRogueRot()
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if not CJ_GCD() then return end
 	
+	if CJ_OffensiveDispel("Shiv") then return end
 	--if CJ_AssassinBuffs() then return end
 	
 	if AmIFacing == false then return end
@@ -120,6 +121,8 @@ function CJCombatRogueRot()
 	if AmIFacing == false then return end
 	if not CJ_GCD() then return end
 	
+	if CJ_OffensiveDispel("Shiv") then return end
+	
 	if IsSpellInRange("Eviscerate") == 0 then return end
 	
 	if CJ_Combo() >= 1 and not CJ_HB("Slice and Dice") then
@@ -191,6 +194,8 @@ function CJSubRogueRot()
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
 	if AmIFacing == false then return end
 	if not CJ_GCD() then return end
+	
+	if CJ_OffensiveDispel("Shiv") then return end
 	
 	if CJ_HB("Stealth") or CJ_HB("Shadow Dance") and IsSpellInRange("Shadowstep") == 1 then
 		CJ_Cast("Shadowstep")

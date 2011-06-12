@@ -43,7 +43,7 @@ function CJMarksHunterRot()
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
 	
-	CJ_OffensiveDispel("Tranquilizing Shot")
+	if CJ_OffensiveDispel("Tranquilizing Shot") then return end
 	
 	if UnitExists("pet") and not UnitIsDead("pet") and CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
@@ -131,7 +131,7 @@ function CJSurvHunterRot()
 	
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end
-	CJ_OffensiveDispel("Tranquilizing Shot")
+	if CJ_OffensiveDispel("Tranquilizing Shot") then return end
 	
 	if UnitExists("pet") and not UnitIsDead("pet") and CJ_HP("pet") < 30 and not UnitBuff("pet","Mend Pet") then
 		if CJ_Cast("Mend Pet") then return end
@@ -207,7 +207,7 @@ function CJBMHunterRot()
 		if CJ_Cast("Mend Pet") then return end
 	end
 	
-	CJ_OffensiveDispel("Tranquilizing Shot")
+	if CJ_OffensiveDispel("Tranquilizing Shot") then return end
 	
 	if UnitPower("player") > 60 and cj_cooldowns then
 		CJ_Cast("Bestial Wrath")
