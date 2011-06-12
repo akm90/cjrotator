@@ -453,6 +453,18 @@ function CJ_DecurseSelf()
 				end
 			end
 		end
+	elseif cj_class == "Shaman" then
+		for i = 1,40 do
+			if select(5,UnitDebuff("player",i)) == "Curse" then
+				return CJ_CastTarget("Cleanse Spirit","player")
+			end
+			
+			if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
+				if select(5,UnitDebuff("player",i)) == "Magic" then
+					return CJ_CastTarget("Cleanse Spirit","player")
+				end
+			end
+		end
 	end
 end
 
@@ -502,6 +514,18 @@ function CJ_DecurseAll()
 						return CJ_CastTarget("Cleanse",grouptype..i)
 					end
 				end
+			end
+		end
+	elseif cj_class == "Shaman" then
+		for i = 1,count do
+			if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
+				if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+					return CJ_CastTarget("Cleanse Spirit",grouptype..i)
+				end
+			end
+			
+			if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
+				return CJ_CastTarget("Cleanse Spirit",grouptype..i)
 			end
 		end
 	end

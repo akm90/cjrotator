@@ -188,7 +188,7 @@ local function CJCreateFrame()
 		wipe(info)
 		if level == 1 then
 			UIDropDownMenu_EnableDropDown(self)
-			if cj_class == "Shaman" then
+			if cj_currentRotation == 81 or cj_currentRotation == 82 then
 				info.text = "Use Frost Shock"
 				info.keepShownOnClick = 1
 				info.disabled = nil
@@ -197,6 +197,26 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_frostshock = not cj_frostshock end
 				info.checked = cj_frostshock
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 101 or cj_currentRotation == 102 then
 				info.text = "Use Hamstring"
@@ -238,7 +258,57 @@ local function CJCreateFrame()
 				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
 				info.checked = cj_defensivecooldowns
 				UIDropDownMenu_AddButton(info,level)
-			elseif cj_currentRotation == 22 or cj_currentRotation == 11 or cj_currentRotation == 52 then
+			elseif cj_currentRotation == 53 then
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 52 then
+				info.text = "Use Defensive Cooldowns"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
+				info.checked = cj_defensivecooldowns
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 22 or cj_currentRotation == 11 then
 				info.text = "Use Defensive Cooldowns"
 				info.keepShownOnClick = 1
 				info.disabled = nil
