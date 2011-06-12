@@ -86,6 +86,16 @@ local function CJ_ProtBuffs()
 end
 
 function CJProtPallyRot()
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+
+	if AmIFacing == false then return end
+	
 	if CJ_CD("Avenger's Shield") > 0 then
 		CJ_Interrupt(is)
 	else
@@ -113,16 +123,7 @@ function CJProtPallyRot()
 		end
 	end		
 	
-	if AmIFacing == false then return end
-	if not CJ_GCD() then return end;
-	
-	if cj_decurseself then
-		if CJ_DecurseSelf() then return end
-	end
-	
-	if cj_decurseparty then
-		if CJ_DecurseAll() then return end
-	end
+	if not CJ_GCD() then return end;	
 	
 	if CJ_ProtBuffs() then return end;
 	
