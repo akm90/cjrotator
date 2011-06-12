@@ -116,6 +116,14 @@ function CJProtPallyRot()
 	if AmIFacing == false then return end
 	if not CJ_GCD() then return end;
 	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+	
 	if CJ_ProtBuffs() then return end;
 	
 	if IsSpellInRange("Crusader Strike") == 0 and IsSpellInRange("Avenger's Shield") == 1 then
@@ -328,6 +336,14 @@ function CJRetPallyRot()
 	end
 	
 	if not CJ_GCD() then return end;
+	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
 	
 	if CJ_RetBuffs() then return end;
 	
