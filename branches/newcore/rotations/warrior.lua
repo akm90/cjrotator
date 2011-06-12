@@ -6,7 +6,10 @@ local function CJ_Shout()
 	else
 		if CJ_Cast("Battle Shout") then return true end
 	end
-	--if CJ_Cast("Battle Shout") then return true end
+	
+	if not IsUsableAbility("Commanding Shout") then
+		if CJ_Cast("Battle Shout") then return true end
+	end
 end
 
 --------------------------------
@@ -222,7 +225,7 @@ function CJArmsWarRot()
 		return
 	end
 	
-	if not CJ_HB("Battle Shout") and not CJ_HB("Commanding Shout") then
+	if not (CJ_HB("Battle Shout") or CJ_HB("Commanding Shout")) then
 		CJ_Shout()
 	end
 	

@@ -406,9 +406,43 @@ function CJ_OffensiveDispel(spell)
 			end
 		end
 	end
-	
 	return false;
 end
+
+-----------------------
+-----Decurse-----------
+-----------------------
+function CJ_DecurseSelf()
+	if cj_class == "Mage" then
+		for i = 1,40 do
+			if select(5,UnitDebuff("player",i)) == "Curse" then
+				return CJ_CastTarget("Remove Curse","player")
+			end
+		end
+	end
+end
+
+function CJ_DecurseAll()
+	if GetNumPartyMembers() == 0 and GetNumRaidMembers() == 0 then return end
+	local count = 0
+	local grouptype = "raid"
+	count = GetNumRaidMembers()
+	if count == 0 then
+		grouptype = "party"
+		count = GetNumPartyMembers()
+	end
+		
+	if cj_class == "Mage" then
+		for i = 1,count do
+			for j = 1,40 do
+				if UnitDebuff(grouptype..i,j) == "Curse" then
+					return CJ_CastTarget("Remove Curse",grouptype..i)
+				end
+			end
+		end
+	end
+end
+
 function CJ_OffensiveDispelPet(spell)
 	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
 	if not cj_purgemode then return false end;

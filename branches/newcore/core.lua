@@ -19,6 +19,8 @@ cj_defensivecooldowns = false
 cj_petattacking = false;
 cj_verbose = false;
 --Class Specific Variables
+cj_decurseself = false
+cj_decurseparty = false
 
 --Warlocks
 cj_lifetap = false;
@@ -244,6 +246,26 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_lifetap = not cj_lifetap end
 				info.checked = cj_lifetap
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_class == "Mage" then
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 61 then
 				info.text = "Smite/HF Only"
