@@ -36,6 +36,10 @@ function CJSpriestRot()
 	
 	if CJ_ShadowBuffs() then return end
 	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
 	if AmIFacing == false then return end
 	
 	if CJ_HP("player") < 15 then
@@ -125,6 +129,14 @@ function CJDiscPriestRot()
 	if CJ_Casting() then return end
 	
 	if CJ_DiscBuffs() then return end
+	
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
 	
 	if AmIFacing == false then return end
 	

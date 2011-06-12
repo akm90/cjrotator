@@ -7,7 +7,7 @@ local function CJ_Shout()
 		if CJ_Cast("Battle Shout") then return true end
 	end
 	
-	if not IsUsableAbility("Commanding Shout") then
+	if not IsUsableSpell("Commanding Shout") then
 		if CJ_Cast("Battle Shout") then return true end
 	end
 end
@@ -110,7 +110,7 @@ function CJFuryWarRot()
 	CJ_Interrupt("Pummel")
 	
 	if GetShapeshiftForm("player") ~= 3 then
-		if cj_cooldowns and CJ_Hero() and CJ_CD("Shattering Throw") == 0 then
+		if cj_shatter and CJ_Hero() and CJ_CD("Shattering Throw") == 0 then
 		else
 			CastShapeshiftForm(3)
 		end
@@ -152,6 +152,10 @@ function CJFuryWarRot()
 	
 	if not CJ_GCD() then return end
 	
+	if GetShapeshiftForm() == 1 and cj_shatter and CJ_Hero() then
+		if CJ_Cast("Shattering Throw") then return end
+	end		
+	
 	if cj_hamstring and not CJ_HD("Hamstring") then
 		if CJ_Cast("Hamstring") then return end
 	end
@@ -176,7 +180,7 @@ function CJFuryWarRot()
 		if CJ_Cast("Whirlwind") then return end
 	end
 	
-	if CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_cooldowns then
+	if CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_shatter then
 		CastShapeshiftForm(1)
 		CJ_Cast("Shattering Throw")
 	end
@@ -208,7 +212,7 @@ function CJArmsWarRot()
 	end
 	
 	if ((not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
-		and UnitPower("player") <= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0))  then
+		and UnitPower("player") <= 75) or (CJ_Hero() and CJ_CD("Shattering Throw") == 0 and cj_shatter))  then
 		if CJ_CD("Battle Stance") == 0 then
 			if GetShapeshiftForm() ~= 1 then CastShapeshiftForm(1) end
 		end
@@ -338,7 +342,7 @@ function CJArmsWarRot()
 			if CJ_Cast("Victory Rush") then return end
 		end
 		
-		if CJ_Hero() then
+		if CJ_Hero() and cj_shatter then
 			if CJ_Cast("Shattering Throw") then return end
 		end
 		
