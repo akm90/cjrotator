@@ -6,7 +6,7 @@ local function CJ_Shout()
 	else
 		if CJ_Cast("Battle Shout") then return true end
 	end
-	if CJ_Cast("Battle Shout") then return true end
+	--if CJ_Cast("Battle Shout") then return true end
 end
 
 --------------------------------
