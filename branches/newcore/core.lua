@@ -29,6 +29,7 @@ cj_lifetap = false;
 cj_hamstring = false
 cj_sunder = false
 cj_rend = 0;
+cj_shatter = false;
 
 --Priest
 cj_dispersion = false;
@@ -217,6 +218,16 @@ local function CJCreateFrame()
 				info.func = function() cj_sunder = not cj_sunder end
 				info.checked = cj_sunder
 				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Shattering Throw"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_shatter = not cj_shatter end
+				info.checked = cj_shatter
+				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 103 then				
 				info.text = "Use Defensive Cooldowns"
 				info.keepShownOnClick = 1
@@ -277,6 +288,46 @@ local function CJCreateFrame()
 				info.func = function() cj_healonly = not cj_healonly end
 				info.checked = cj_healonly
 				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 62 then
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse All"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseparty = not cj_decurseparty end
+				info.checked = cj_decurseparty
+				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 63 then
 				info.text = "Use Dispersion"
 				info.keepShownOnClick = 1
@@ -286,6 +337,16 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_dispersion = not cj_dispersion end
 				info.checked = cj_dispersion
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Decurse Self"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_decurseself = not cj_decurseself end
+				info.checked = cj_decurseself
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 12 or cj_currentRotation == 13 then
 				info.text = "Use Death Strike"
