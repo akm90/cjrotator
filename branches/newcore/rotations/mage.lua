@@ -25,12 +25,6 @@ local function CJ_ArcaneBuffs()
 end
 
 function CJArcMageRot()
-	if AmIFacing == false then return end
-	CJ_Interrupt("Counterspell")
-	
-	if not CJ_GCD() then return end
-	if CJ_ArcaneBuffs() then return end
-	
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
 	end
@@ -38,6 +32,12 @@ function CJArcMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
+
+	if AmIFacing == false then return end
+	CJ_Interrupt("Counterspell")
+	
+	if not CJ_GCD() then return end
+	if CJ_ArcaneBuffs() then return end
 	
 	if IsSpellInRange("Arcane Blast") == 0 then return end
 	
@@ -120,11 +120,6 @@ end
 -----------Fire------------------
 ---------------------------------
 function CJFireMageRot()
-	if AmIFacing == false then return end
-	CJ_Interrupt("Counterspell")
-	
-	if not CJ_GCD() then return end
-	
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
 	end
@@ -132,6 +127,11 @@ function CJFireMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
+	
+	if AmIFacing == false then return end
+	CJ_Interrupt("Counterspell")
+	
+	if not CJ_GCD() then return end
 	
 	CJ_OffensiveDispel("Spellsteal")
 	
@@ -206,11 +206,6 @@ end
 ---------------------------------
 
 function CJFrostMageRot()
-	if AmIFacing == false then return end
-	CJ_Interrupt("Counterspell")
-	
-	if not CJ_GCD() then return end
-	
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
 	end
@@ -218,6 +213,12 @@ function CJFrostMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
+	
+	if AmIFacing == false then return end
+	CJ_Interrupt("Counterspell")
+	
+	if not CJ_GCD() then return end
+	
 	
 	if not CJ_HB("Arcane Brilliance") then
 		if CJ_Cast("Arcane Brilliance") then return true end;

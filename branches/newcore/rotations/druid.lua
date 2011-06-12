@@ -309,6 +309,14 @@ local function CJ_BalanceBuffs()
 end
 
 function CJBalanceDruidRot()
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+
 	if AmIFacing == false then return end
 	if UnitAffectingCombat("player") == 1 and CJ_HP("player") < 50 and cj_cooldowns then
 		CJ_Cast("Barkskin")
@@ -317,14 +325,6 @@ function CJBalanceDruidRot()
 	if not CJ_GCD() then return end;
 	if CJ_Casting() then return end;
 	--if CJ_BalanceBuffs() then return end;
-	
-	if cj_decurseself then
-		if CJ_DecurseSelf() then return end
-	end
-	
-	if cj_decurseparty then
-		if CJ_DecurseAll() then return end
-	end
 	
 	if IsSpellInRange("Wrath") == 0 then return end;
 	

@@ -169,6 +169,7 @@ function CJSurvHunterRot()
 	end
 	
 	if CJ_Cast("Cobra Shot") then lastexplosive = false return end
+	if CJ_Cast("Steady Shot") then lastexplosive = false return end
 end
 
 function CJBMHunterRot()
@@ -247,4 +248,5 @@ function CJBMHunterRot()
 	end
 	
 	if CJ_Cast("Cobra Shot") then return end
+	if CJ_Cast("Steady Shot") then return end
 end

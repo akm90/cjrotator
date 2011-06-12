@@ -128,7 +128,7 @@ function CJ_CastTarget(spell,target)
 	local usable,mana = IsUsableSpell(spell)
 	
 	if usable and mana == nil then
-		if GetSpellCooldown(spell) == 0 then
+		if GetSpellCooldown(spell) == 0 and IsSpellInRange(spell,target) == 1 then
 			CastSpellByName(spell,target)
 			return true;
 		else

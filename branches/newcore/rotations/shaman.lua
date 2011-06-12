@@ -23,6 +23,14 @@ local function CJ_EnhanceBuffs()
 end
 
 function CJEnhShamRot()
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	
@@ -40,14 +48,6 @@ function CJEnhShamRot()
 	
 	if not CJ_GCD() then return end;
 	if CJ_EnhanceBuffs() then return end;
-	
-	if cj_decurseself then
-		if CJ_DecurseSelf() then return end
-	end
-	
-	if cj_decurseparty then
-		if CJ_DecurseAll() then return end
-	end
 	
 	if IsSpellInRange("Lava Lash") == 0 and IsSpellInRange("Earth Shock") == 1 then
 		CJ_OffensiveDispel("Purge");
@@ -149,6 +149,14 @@ local function CJ_EleBuffs()
 end
 
 function CJEleShamRot()
+	if cj_decurseself then
+		if CJ_DecurseSelf() then return end
+	end
+	
+	if cj_decurseparty then
+		if CJ_DecurseAll() then return end
+	end
+
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	
@@ -164,14 +172,6 @@ function CJEleShamRot()
 	if CJ_EleBuffs() then return end
 	if CJ_Casting() then return end;
 	if CJ_Totems() then return end;
-	
-	if cj_decurseself then
-		if CJ_DecurseSelf() then return end
-	end
-	
-	if cj_decurseparty then
-		if CJ_DecurseAll() then return end
-	end
 	
 	if UnitAffectingCombat("player") == 1 and CJ_MP("player") < 50 then
 		if CJ_Cast("Thunderstorm") then return end;
