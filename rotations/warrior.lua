@@ -153,9 +153,16 @@ function CJFuryWarRot()
 		if CJ_Cast("Hamstring") then return end
 	end
 	
-	if cj_sunder and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
-	(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
-		if CJ_Cast("Sunder Armor") then return end;
+	if cj_sunder then
+		if not (CJ_OD("Faerie Fire") or CJ_OD("Expose Armor")) then
+			if not UnitDebuff("target","Sunder Armor") then
+				if CJ_Cast("Sunder Armor") then return end
+			else
+				if select(4,UnitDebuff("target","Sunder Armor")) < 3 then
+					if CJ_Cast("Sunder Armor") then return end
+				end
+			end
+		end
 	end
 	
 	if cj_aoemode and CJ_HP("player") < 50 then
