@@ -12,23 +12,41 @@ local AOEKEY = "G";
 -----------------------------DO NOT CHANGE ANYTHING BELOW THIS LINE-------------------------------------------
 local cjmin = false;
 local frameLoaded = false;
+
 cj_action = false;
 cj_aoemode = false;
 cj_defensivecooldowns = false
 cj_petattacking = false;
+cj_verbose = false;
+--Class Specific Variables
+
+--Warlocks
 cj_lifetap = false;
+
+--Warriors
 cj_hamstring = false
+cj_sunder = false
+cj_rend = 0;
+
+--Priest
 cj_dispersion = false;
 cj_healonly = false
+
+--Rogues
 cj_hatproc = 9999999;
 cj_hatexpect = 0;
 cj_combosaved = 0;
+
+--Hunters
 cj_wildaspect = false;
+
+--Death Knights
 cj_deathstrike = false;
+
+--Shamans
 cj_frostshock  = false;
 cj_pickuptotems = nil;
-cj_verbose = false;
-cj_rend = 0;
+
 local info = {}
 
 local h = CreateFrame("Frame");
@@ -187,17 +205,17 @@ local function CJCreateFrame()
 				info.func = function() cj_hamstring = not cj_hamstring end
 				info.checked = cj_hamstring
 				UIDropDownMenu_AddButton(info,level)
-			elseif cj_currentRotation == 103 then
-				info.text = "Use Hamstring"
+				
+				info.text = "Use Sunder"
 				info.keepShownOnClick = 1
 				info.disabled = nil
 				info.isTitle = nil
 				info.notCheckable = nil
 				info.minWidth = 165
-				info.func = function() cj_hamstring = not cj_hamstring end
-				info.checked = cj_hamstring
+				info.func = function() cj_sunder = not cj_sunder end
+				info.checked = cj_sunder
 				UIDropDownMenu_AddButton(info,level)
-				
+			elseif cj_currentRotation == 103 then				
 				info.text = "Use Defensive Cooldowns"
 				info.keepShownOnClick = 1
 				info.disabled = nil
