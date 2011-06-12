@@ -660,7 +660,7 @@ function cjhandler(msg,editbox)
 			printf("CJR: Purging Players");
 		end
 	else
-		printf("Syntax: /cjr (show|stopaftercombat|holddown|purgeplayers|verbose)")
+		printf("Syntax: /cjr (show|stopaftercombat||holddown|purgeplayers|verbose)")
 	end
 end
 

@@ -240,5 +240,42 @@ function CJEleShamRot()
 	if CJ_Cast("Lava Burst") then return end;
 	
 	if CJ_Cast("Lightning Bolt") then return end;
-		
+end
+------------------------------------------
+-------------- Restoration----------------
+------------------------------------------
+local function CJ_RestoBuffs()
+	local arg1 = GetWeaponEnchantInfo();
+	
+	if not arg1 then
+		if CJ_Cast("Earthliving Weapon") then return true end
+	end
+	
+	if not CJ_HB("Water Shield") then
+		if CJ_Cast("Water Shield") then return true end;
+	end
+	
+	return false;
+end
+
+local pct = 80
+
+function CJRestoShamRot()
+	CJ_Interrupt(is)
+	
+	if not CJ_GCD() then return end
+	if CJ_RestoBuffs() then return end
+	if CJ_Casting() then return end
+	if CJ_Totems() then return end
+	
+	local count = 0
+	local grouptype = "raid"
+	count = GetNumRaidMembers()
+	if count == 0 then
+		grouptype = "party"
+		count = GetNumPartyMembers()
+	end
+	
+	local numtoheal = 0;
+	
 end
