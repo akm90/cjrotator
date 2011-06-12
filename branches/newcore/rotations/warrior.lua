@@ -153,7 +153,7 @@ function CJFuryWarRot()
 		if CJ_Cast("Hamstring") then return end
 	end
 	
-	if CJ_IsBoss() and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
+	if cj_sunder and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
 	(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
 		if CJ_Cast("Sunder Armor") then return end;
 	end
@@ -261,9 +261,23 @@ function CJArmsWarRot()
 			if CJ_Cast("Victory Rush") then return end
 		end
 		
-		if CJ_IsBoss() and (not (CJ_OD("Faerie Fire") or CJ_OD("Sunder Armor") or CJ_OD("Expose Armor")) or 
-		(CJ_DS("Sunder Armor") < 3 or CJ_DTR("Sunder Armor") < 4)) then
-			if CJ_Cast("Sunder Armor") then return end;
+		if cj_sunder then
+			if not (CJ_OD("Faerie Fire") or CJ_OD("Expose Armor")) then
+				if not UnitDebuff("target","Sunder Armor") then
+					if CJ_Cast("Sunder Armor") then return end
+				else
+					local CSGLYPH = false
+					for i =1,NUM_GLYPH_SLOTS do
+						if select(4,GetGlyphSocketInfo(i)) == 89003 then
+							CSGLYPH = true
+						end
+					end
+					
+					if not CSGLYPH and select(4,UnitDebuff("target","Sunder Armor")) < 3 then
+						if CJ_Cast("Sunder Armor") then return end
+					end
+				end
+			end
 		end
 		
 		if cj_hamstring and not CJ_HD("Hamstring") then
@@ -309,7 +323,7 @@ function CJArmsWarRot()
 		end
 	elseif GetShapeshiftForm() == 1 then
 		if not CJ_GCD() then return end
-		
+				
 		if CJ_HP("player") < 70 then
 			if CJ_Cast("Victory Rush") then return end
 		end
@@ -341,6 +355,25 @@ function CJArmsWarRot()
 		end
 		
 		if CJ_Cast("Overpower") then return end
+		
+		if cj_sunder then
+			if not (CJ_OD("Faerie Fire") or CJ_OD("Expose Armor")) then
+				if not UnitDebuff("target","Sunder Armor") then
+					if CJ_Cast("Sunder Armor") then return end
+				else
+					local CSGLYPH = false
+					for i =1,NUM_GLYPH_SLOTS do
+						if select(4,GetGlyphSocketInfo(i)) == 89003 then
+							CSGLYPH = true
+						end
+					end
+					
+					if not CSGLYPH and select(4,UnitDebuff("target","Sunder Armor")) < 3 then
+						if CJ_Cast("Sunder Armor") then return end
+					end
+				end
+			end
+		end
 		
 		if CJ_HP("target") > 20 or UnitPower("player") >= 30 then
 			if CJ_Cast("Mortal Strike") then return end
@@ -413,6 +446,9 @@ function CJProtWarRot()
 	
 	if cj_cooldowns then
 		CJ_Cast("Berserker Rage")
+		if UnitPower("player") > 70 then
+			CJ_Cast("Inner Rage")
+		end
 	end
 	
 	if not cj_aoemode then
@@ -446,9 +482,6 @@ function CJProtWarRot()
 			if CJ_Cast("Demoralizing Shout") then return end
 		end
 		if CJ_Cast("Victory Rush") then return end
-		if cj_hamstring then
-			if not CJ_HD("Hamstring") then if CJ_Cast("Hamstring") then return end end
-		end
 		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	else
@@ -464,9 +497,6 @@ function CJProtWarRot()
 		if CJ_Cast("Revenge") then return end
 		if CJ_Cast("Shield Slam") then return end
 		if CJ_Cast("Victory Rush") then return end
-		if cj_hamstring then
-			if not CJ_HD("Hamstring") then if CJ_Cast("Hamstring") then return end end
-		end
 		if CJ_Cast("Devastate") then return end
 		if CJ_Shout() then return end
 	end
