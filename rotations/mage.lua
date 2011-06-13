@@ -71,6 +71,10 @@ function CJArcMageRot()
 		
 		if CJ_Cast("Presence of Mind") then CJ_Cast("Arcane Blast") return end;
 		
+		if cj_orbspells then
+			if CJ_Cast("Flame Orb") then return end
+		end
+		
 		if CJ_HP("target") < 15 and CJ_MP("player") > 4 then
 			if CJ_Cast("Arcane Blast") then return end;
 		end
@@ -190,6 +194,10 @@ function CJFireMageRot()
 		if CJ_Cast("Pyroblast!") then return end
 	end
 	
+	if cj_orbspells then
+		if CJ_Cast("Flame Orb") then return end
+	end
+	
 	if CJ_MP("player") <= 38 then
 		if CJ_Cast("Evocation") then return end;
 	end
@@ -255,6 +263,10 @@ function CJFrostMageRot()
 		
 		if CJ_Cast("Ice Lance") then return end;
 		return
+	end
+	
+	if cj_orbspells then
+		if CJ_Cast("Flame Orb") then return end
 	end
 	
 	if CJ_CD("Deep Freeze") > 15 and CJ_CD("Icy Veins") > 30 and cj_cooldowns then
