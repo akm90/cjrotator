@@ -1,6 +1,10 @@
 local function CJ_Shout()
 	if CJ_CD("Battle Shout") > 0 then return false end
 	
+	if cj_commanding then
+		if CJ_Cast("Commanding Shout") then return end
+	end
+	
 	if CJ_HB("Horn of Winter") or CJ_HB("Strength of Earth Totem") or CJ_HB("Roar of Courage") then
 		if CJ_Cast("Commanding Shout") then return true end
 	else

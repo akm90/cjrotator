@@ -8,6 +8,10 @@ local soulswap = false;
 -----------------------------
 ---------Affliction----------
 -----------------------------
+local function AffLockSwillRot()
+	
+end
+
 local function CJ_AffBuffs()
 	if not CJ_HB("Fel Armor") then
 		if CJ_Cast("Fel Armor") then return true end
@@ -29,6 +33,10 @@ function CJAffLockRot()
 		hasFocus = false;
 	end
 	
+	if UnitName("target") == "Maloriak" and (UnitName("focus") ~= "Maloriak" or not UnitExists("focus")) then
+		FocusUnit("target")
+	end
+	
 	if AmIFacing == false then return end;
 	
 	if not CJ_GCD() then return end;
@@ -42,6 +50,10 @@ function CJAffLockRot()
 	if IsSpellInRange("Fel Flame") == 0 then return end;
 	
 	CJ_OffensiveDispelPet("Devour Magic");
+	
+	if UnitName("target") == "Vile Swill" then
+		AffLockSwillRot()
+	end
 	
 	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) and PlayerToFocus < 40 then
 		if CJ_CastTarget("Soul Swap","focus") then return end;
