@@ -35,6 +35,9 @@ cj_shatter = false;
 cj_dispersion = false;
 cj_healonly = false
 
+--Mages
+cj_orbspells = false;
+
 --Rogues
 cj_hatproc = 9999999;
 cj_hatexpect = 0;
@@ -329,6 +332,16 @@ local function CJCreateFrame()
 				info.checked = cj_lifetap
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_class == "Mage" then
+				info.text = "Flame/Frost Orb"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_orbspells = not cj_orbspells end
+				info.checked = cj_orbspells
+				UIDropDownMenu_AddButton(info,level)
+			
 				info.text = "Decurse Self"
 				info.keepShownOnClick = 1
 				info.disabled = nil
