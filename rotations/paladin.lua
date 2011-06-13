@@ -93,7 +93,7 @@ function CJProtPallyRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	
 	if CJ_CD("Avenger's Shield") > 0 then
@@ -315,6 +315,7 @@ local function CJRetUndeadRotation()
 end
 
 function CJRetPallyRot()
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt(is);
 	
 	StartAttack("target")

@@ -2,6 +2,14 @@
 cj_class = "";
 cj_currentRotation = 0;
 
+function CJ_OC()
+	if UnitBuff("target","Power Conversion") or UnitBuff("target","Barrier") or UnitBuff("target","Unstable Shield") or UnitBuff("target","Poison Soaked Shell") then
+		return false
+	else
+		return true
+	end
+end
+
 
 function CJ_IsRaidBoss()
 	if UnitClassification("target") == "worldboss" then return true else return false end
@@ -158,6 +166,9 @@ function CJ_CastTarget(spell,target)
 	if usable and mana == nil then
 		if GetSpellCooldown(spell) == 0 and IsSpellInRange(spell,target) == 1 then
 			CastSpellByName(spell,target)
+			if cj_verbose then
+				printf("Casting "..spell.." at "..UnitName(target))
+			end
 			return true;
 		else
 			return false;

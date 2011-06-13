@@ -27,6 +27,7 @@ local function CJ_AssassinBuffs()
 end
 
 function CJAssRogueRot()
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Kick");
 	
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
@@ -115,6 +116,7 @@ local function CJ_CombatBuffs()
 end
 
 function CJCombatRogueRot()
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Kick")
 	
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
@@ -189,6 +191,7 @@ local function CJ_SubtletyBuffs()
 end
 
 function CJSubRogueRot()
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Kick")
 	
 	if CJ_HB("Stealth") then StopAttack() else StartAttack() end

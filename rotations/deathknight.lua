@@ -43,7 +43,7 @@ function CJUnholyDKRot()
 			CJ_Cast("Icebound Fortitude")
 		end
 	end
-	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	CJ_Interrupt("Mind Freeze");
 	
@@ -128,7 +128,7 @@ function CJFrostDKRot()
 			CJ_Cast("Icebound Fortitude")
 		end
 	end
-	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	CJ_Interrupt("Mind Freeze");
 	
@@ -222,7 +222,7 @@ function CJBloodDKRot()
 			CJ_Cast("Lichborne")
 		end
 	end
-	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	CJ_Interrupt("Mind Freeze");
 	

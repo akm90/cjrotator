@@ -32,7 +32,8 @@ function CJArcMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-
+	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
@@ -131,7 +132,7 @@ function CJFireMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
@@ -221,7 +222,7 @@ function CJFrostMageRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-	
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt("Counterspell")
 	
