@@ -50,6 +50,10 @@ cj_wildaspect = false;
 --Death Knights
 cj_deathstrike = false;
 
+--Druids
+cj_feralcharge = false
+cj_thrash = false;
+
 --Shamans
 cj_frostshock  = false;
 cj_pickuptotems = nil;
@@ -322,7 +326,37 @@ local function CJCreateFrame()
 				info.func = function() cj_decurseparty = not cj_decurseparty end
 				info.checked = cj_decurseparty
 				UIDropDownMenu_AddButton(info,level)
-			elseif cj_currentRotation == 22 or cj_currentRotation == 11 then
+			elseif cj_currentRotation == 22 then
+				info.text = "Use Defensive Cooldowns"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
+				info.checked = cj_defensivecooldowns
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Feral Charge"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_feralcharge = not cj_feralcharge end
+				info.checked = cj_feralcharge
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Single Targ Thrash"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_thrash = not cj_thrash end
+				info.checked = cj_thrash
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 11 then
 				info.text = "Use Defensive Cooldowns"
 				info.keepShownOnClick = 1
 				info.disabled = nil
