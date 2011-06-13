@@ -65,7 +65,9 @@ local function CJBearRotation()
 		if cj_cooldowns then
 			CJ_Cast("Enrage")
 		end
-		CJ_Cast("Feral Charge(Bear Form)");
+		if cj_feralcharge then
+			CJ_Cast("Feral Charge(Bear Form)");
+		end
 		
 		if not CJ_HD("Faerie Fire") or CJ_DS("Faerie Fire") < 3 and CJ_GCD() then
 			if CJ_Cast("Faerie Fire (Feral)") then return end;
@@ -106,7 +108,9 @@ local function CJBearRotation()
 		if CJ_Cast("Lacerate(Bear Form)") then return end;
 	end
 	
-	if CJ_Cast("Thrash(Bear Form)") then return end;
+	if cj_thrash then
+		if CJ_Cast("Thrash(Bear Form)") then return end;
+	end
 	
 	if CJ_HD("Lacerate") and CJ_DTR("Lacerate") < 3 then
 		if CJ_Cast("Lacerate(Bear Form)") then return end;
@@ -157,7 +161,10 @@ local function CJKittyRotation()
 	CJ_Interrupt("Skull Bash(Cat Form)");
 	
 	if IsSpellInRange("Mangle(Cat Form)") == 0 and IsSpellInRange("Feral Charge(Cat Form)") == 1 then
-		if CJ_Cast("Feral Charge(Cat Form)") then return end;
+		if cj_feralcharge then
+			if CJ_Cast("Feral Charge(Cat Form)") then return end;
+		end
+		
 		if not CJ_HB("Prowl") and not CJ_HD("Faerie Fire") then
 			if CJ_Cast("Faerie Fire (Feral)") then return end;
 		end
