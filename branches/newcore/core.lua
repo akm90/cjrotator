@@ -573,9 +573,9 @@ local function OnUpdate(...)
 		return;
 	end
 	
-	if UnitAffectingCombat("player") == 1 and (UnitIsDead("target") or not UnitExists("target")) then
+	--[[if UnitAffectingCombat("player") == 1 and (UnitIsDead("target") or not UnitExists("target")) then
 		RunMacroText("/targetenemy");
-	end
+	end--]]
 	
 	if IsMounted() == 1 then return end
 	
