@@ -29,7 +29,7 @@ end
 
 function CJSpriestRot()
 	CJ_Interrupt("Silence")
-	
+	if CJ_OC() then StopAttack() return end
 	if not CJ_GCD() then return end
 	if CJ_Casting() then return end
 	if CJ_HB("Dispersion") then return end
@@ -125,6 +125,7 @@ local function CJ_DiscBuffs()
 end
 
 function CJDiscPriestRot()
+	if CJ_OC() then StopAttack() return end
 	if not CJ_GCD() then return end
 	if CJ_Casting() then return end
 	

@@ -40,7 +40,7 @@ local function CJ_BearBuffs()
 	return false;
 end
 
-local function CJBearRotation()	
+local function CJBearRotation()
 	StartAttack("target");
 	
 	if UnitAffectingCombat("player") == 1 and cj_defensivecooldowns then
@@ -267,8 +267,7 @@ local function CJKittyRotation()
 end
 
 function CJFeralDruidRot()
-	swapBack()
-	
+	if CJ_OC() then StopAttack() return end
 	if GetShapeshiftForm() == 1 then
 		CJBearRotation()
 	elseif GetShapeshiftForm() == 3 then
@@ -316,7 +315,7 @@ function CJBalanceDruidRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	if UnitAffectingCombat("player") == 1 and CJ_HP("player") < 50 and cj_cooldowns then
 		CJ_Cast("Barkskin")

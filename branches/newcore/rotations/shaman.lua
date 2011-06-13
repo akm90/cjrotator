@@ -23,6 +23,7 @@ local function CJ_EnhanceBuffs()
 end
 
 function CJEnhShamRot()
+
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
 	end
@@ -30,7 +31,7 @@ function CJEnhShamRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	
@@ -156,7 +157,7 @@ function CJEleShamRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
-
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
 	

@@ -4,12 +4,53 @@ local lastpetcast = 0;
 local lastimmolatecast = 0;
 local lasthauntcast = 0;
 local soulswap = false;
-
+local seedcast = false;
 -----------------------------
 ---------Affliction----------
 -----------------------------
 local function AffLockSwillRot()
+	if CJ_HB("Soulburn") and not seedcast then
+		if CJ_Cast("Seed of Corruption") then seedcast = true return end
+	end
+
+	if CJ_DTRF("Corruption") < 2 then
+		if CJ_CastTarget("Corruption","focus") then return end
+	end
 	
+	if not CJ_HDF("Bane of Doom") then
+		if CJ_CastTarget("Bane of Doom","focus") then return end
+	end
+	
+	if (CJ_DTRF("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 2.5) 
+		and GetUnitSpeed("player") == 0 then
+		if CJ_CastTarget("Unstable Affliction","focus") then lastuacast = GetTime() return end
+	end
+	
+	if CJ_CD("Soulburn") == 0 and GetUnitSpeed("player") == 0 then
+		if CJ_Cast("Soulburn") then if CJ_Cast("Seed of Corruption") then seedcast = true return end end
+	end
+	
+	if CJ_DTR("Corruption") < 2 then
+		if CJ_Cast("Corruption") then return end
+	end
+	
+	if not CJ_HD("Bane of Agony") then
+		if CJ_Cast("Bane of Agony") then return end
+	end
+	
+	if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 2.5) 
+		and GetUnitSpeed("player") == 0 then
+		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
+	end
+	
+	if not seedcast then
+		if CJ_Cast("Seed of Corruption") then seedcast = true return end
+	end
+	
+	if seedcast then
+		seedcast = false;
+		RunMacroText("/targetenemy");
+	end
 end
 
 local function CJ_AffBuffs()
@@ -21,13 +62,14 @@ end
 
 function CJAffLockRot()
 	local hasFocus = false
+	if CJ_OC() then StopAttack() return end
 	CJ_PetInterrupt("Spell Lock");
 	
 	if not IsPetAttackActive() then
 		PetAttack("target")
 	end
 	
-	if UnitExists("focus") and UnitCanAttack("player","focus") then
+	if UnitExists("focus") and UnitCanAttack("player","focus") and UnitName("focus") ~= "Maloriak" and UnitGUID("target") ~= UnitGUID("focus") then
 		hasFocus = true
 	else
 		hasFocus = false;
@@ -53,6 +95,7 @@ function CJAffLockRot()
 	
 	if UnitName("target") == "Vile Swill" then
 		AffLockSwillRot()
+		return
 	end
 	
 	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) and PlayerToFocus < 40 then
@@ -171,6 +214,7 @@ local function CJ_DestroBuffs()
 end
 
 function CJDestLockRot()
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	
 	if not IsPetAttackActive() then
@@ -275,6 +319,7 @@ local function CJ_DemoBuffs()
 end
 
 function CJDemoLockRot()
+	if CJ_OC() then StopAttack() return end
 	CJ_PetInterrupt("Spell Lock");
 	
 	if not IsPetAttackActive() and not cj_aoemode then

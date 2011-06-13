@@ -111,6 +111,7 @@ end
 
 function CJFuryWarRot()
 	if AmIFacing == false then return end
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Pummel")
 	
 	if GetShapeshiftForm("player") ~= 3 then
@@ -207,6 +208,7 @@ local cj_tclap = 0
 local bnt = false;
 function CJArmsWarRot()
 	if AmIFacing == false then return end
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Pummel")
 	
 	if select(5,GetTalentInfo(2,20,false,false,nil)) > 0 then
@@ -429,6 +431,7 @@ end
 --------------------------------
 function CJProtWarRot()
 	if AmIFacing == false then return end
+	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Pummel")
 	
 	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Heroic Throw") == 1 then

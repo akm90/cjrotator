@@ -11,6 +11,7 @@ Pack
 Resist
 --]]
 function CJMarksHunterRot()
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	CJ_Interrupt("Silencing Shot");
 	
@@ -105,6 +106,7 @@ end
 ------------------------
 local lastexplosive = false;
 function CJSurvHunterRot()
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	
 	if cj_wildaspect then
@@ -173,6 +175,7 @@ function CJSurvHunterRot()
 end
 
 function CJBMHunterRot()
+	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
 	
 	if cj_wildaspect then
