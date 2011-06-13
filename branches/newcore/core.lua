@@ -515,7 +515,7 @@ local function OnUpdate(...)
 	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 and cj_class == "Shaman" then
 		if UnitAffectingCombat("player") == 1 then 
 			cj_pickuptotems = nil
-		elseif UnitAffectingCombat("player") == nil then
+		elseif UnitAffectingCombat("player") == nil and not CJ_HB("Food") and not CJ_HB("Drink") then
 			if CJ_Cast("Totemic Recall") then cj_pickuptotems = nil return end
 		end
 	end
