@@ -4,9 +4,9 @@ cj_currentRotation = 0;
 
 function CJ_OC()
 	if UnitBuff("target","Power Conversion") or UnitBuff("target","Barrier") or UnitBuff("target","Unstable Shield") or UnitBuff("target","Poison Soaked Shell") then
-		return false
-	else
 		return true
+	else
+		return false
 	end
 end
 
