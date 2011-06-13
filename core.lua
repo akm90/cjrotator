@@ -30,6 +30,7 @@ cj_hamstring = false
 cj_sunder = false
 cj_rend = 0;
 cj_shatter = false;
+cj_commanding = false;
 
 --Priest
 cj_dispersion = false;
@@ -250,6 +251,16 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_shatter = not cj_shatter end
 				info.checked = cj_shatter
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Commanding Shout"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_commanding = not cj_commanding end
+				info.checked = cj_commanding
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 103 then				
 				info.text = "Use Defensive Cooldowns"
@@ -526,6 +537,10 @@ local function OnUpdate(...)
 		cj_action = false;
 		printf("CJ Rotator Finished");
 		return;
+	end
+	
+	if UnitAffectingCombat("player") == 1 and (UnitIsDead("target") or not UnitExists("target")) then
+		RunMacroText("/targetenemy");
 	end
 	
 	if IsMounted() == 1 then return end

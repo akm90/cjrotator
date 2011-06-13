@@ -87,6 +87,34 @@ function CJ_SDS(debuff)
 	return count
 end
 
+-----------------------------
+------Focus Debuffs----------
+-----------------------------
+function CJ_DSF(debuff)
+	local rank = select(2,UnitDebuff("focus",debuff));
+	if not rank then return 0 end
+	local name,_,_,count = UnitDebuff("focus",debuff,rank,"PLAYER");
+	if not name then return 0 end
+	return count;
+end
+
+--Debuff Time Remaining
+function CJ_DTRF(debuff)
+	local rank = select(2,UnitDebuff("focus",debuff));
+	if not rank then return 0 end
+	local name,_,_,_,_,_,expiration = UnitDebuff("focus",debuff,rank,"PLAYER");
+	if not name then return 0 end
+	return (expiration - GetTime());
+end
+
+--Has Debuff
+function CJ_HDF(debuff)
+	local rank = select(2,UnitDebuff("focus",debuff));
+	if not rank then return false end
+	if not UnitDebuff("target",debuff,rank,"PLAYER") then return false else return true end;
+end
+
+
 -------------
 -----HP/MP---
 -------------
