@@ -276,6 +276,16 @@ local function CJCreateFrame()
 				info.func = function() cj_defensivecooldowns = not cj_defensivecooldowns end
 				info.checked = cj_defensivecooldowns
 				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Commanding Shout"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_commanding = not cj_commanding end
+				info.checked = cj_commanding
+				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 53 then
 				info.text = "Decurse Self"
 				info.keepShownOnClick = 1

@@ -100,6 +100,10 @@ function CJArcMageRot()
 			CJ_Cast("Mirror Image")
 		end
 		
+		if cj_orbspells then
+			if CJ_Cast("Flame Orb") then return end
+		end
+		
 		if CJ_HP("target") < 15 and CJ_MP("player") > 4 then
 			if CJ_Cast("Arcane Blast") then return end;
 		end
