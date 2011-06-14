@@ -30,10 +30,10 @@ local function CJ_UnholyBuffs()
 		if CJ_Cast("Horn of Winter") then return true end;
 	end
 	
-	if GetShapeshiftForm() ~= 3 then
+	--[[if GetShapeshiftForm() ~= 3 then
 		CastShapeshiftForm(3);
 		return;
-	end
+	end--]]
 	return false
 end
 
@@ -115,10 +115,10 @@ local function CJ_FrostBuffs()
 		if CJ_Cast("Horn of Winter") then return true end;
 	end
 	
-	if GetShapeshiftForm() ~= 3 then
+--[[	if GetShapeshiftForm() ~= 3 then
 		CastShapeshiftForm(3);
 		return;
-	end
+	end--]]
 	return false
 end
 
@@ -201,10 +201,10 @@ local function CJ_BloodBuffs()
 		if CJ_Cast("Horn of Winter") then return true end;
 	end
 	
-	if GetShapeshiftForm() ~= 1 then
+--[[	if GetShapeshiftForm() ~= 1 then
 		CastShapeshiftForm(1);
 		return;
-	end
+	end--]]
 	return false
 end
 
