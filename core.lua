@@ -96,6 +96,27 @@ c:SetAttribute("macrotext","/cjaoetoggle");
 
 local hatframe = CreateFrame("frame","CJHaTFrame");
 
+local ldb = LibStub:GetLibrary("LibDataBroker-1.1");
+
+local ldbObject = {
+	type = "launcher",
+	text = "CJRotator",
+	icon = "Interface\\ICONS\\spell_nature_bloodlust",
+	label = "CJRotator",
+	OnClick = function(self,button)
+		if CJRotatorFrame:IsShown() then
+			CJRotatorFrame:Hide()
+		else
+			CJRotatorFrame:Show()
+		end
+	end,
+	OnTooltipShow = function(self,button)
+		tooltip:AddLine("CJR Show/Hide");
+	end,
+};
+
+ldb:NewDataObject("CJRLDB",ldbObject);
+LibStub("LibDBIcon-1.0"):Register("CJRLDB",ldbObject,cjrminimapbutton);
 local function CJCreateFrame()
 	if frameLoaded then return end;
 	frameLoaded = true
