@@ -85,7 +85,7 @@ function CJAssRogueRot()
 	end
 	
 	if CJ_Combo() >= 3 and CJ_DTR("Rupture") < 3 then
-		return end
+		return
 	end
 	
 	if CJ_HP("target") < 35 and CJ_Combo() < 5 and AmIBehind == true then
