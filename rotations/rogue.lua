@@ -75,7 +75,7 @@ function CJAssRogueRot()
 		if CJ_Cast("Envenom") then return end
 	end
 	
-	if CJ_Combo() >= 2 and CJ_BTR("Slice and Dice") < 3 then
+	if CJ_Combo() >= 1 and CJ_BTR("Slice and Dice") < 3 then
 		if cj_cooldowns and CJ_Combo() >= 4 then CJ_Cast("Cold Blood") end
 		if CJ_Cast("Envenom") then return end
 	end
