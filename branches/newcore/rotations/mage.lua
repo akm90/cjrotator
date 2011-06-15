@@ -58,13 +58,11 @@ function CJArcMageRot()
 	end
 	
 	if CJ_IsRaidBoss() then
-		if cj_cooldowns then
-			if CJ_HP("target") < 15 then
-				if CJ_CD("Evocaton") < 40 and CJ_SDS("Arcane Blast") == 4 then
-					CJ_Cast("Arcane Power");
-				end
+		if cj_cooldowns then		
+			if (CJ_CD("Evocaton") < 40 and CJ_SDS("Arcane Blast") == 4) or CJ_HP("target") < 15 then
+				CJ_Cast("Arcane Power");
 			end
-
+	
 			if CJ_HB("Arcane Power") or (CJ_CD("Arcane Power") > 20 and CJ_HP("target") > 10) then
 				CJ_Cast("Mirror Image");
 			end
