@@ -111,7 +111,7 @@ local ldbObject = {
 		end
 	end,
 	OnTooltipShow = function(self,button)
-		tooltip:AddLine("CJR Show/Hide");
+		self:AddLine("CJR Show/Hide");
 	end,
 };
 
