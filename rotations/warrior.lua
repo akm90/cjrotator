@@ -204,14 +204,15 @@ end
 --------------------------------
 ------------Arms----------------
 --------------------------------
-local cj_tclap = 0
+cj_tclap = 0
 local bnt = false;
 function CJArmsWarRot()
 	if AmIFacing == false then return end
 	if CJ_OC() then StopAttack() return end
+	local SSGLYPH = false
 	CJ_Interrupt("Pummel")
 	
-	if select(5,GetTalentInfo(2,20,false,false,nil)) > 0 then
+	if select(5,GetTalentInfo(3,3,false,false,nil)) > 0 then
 		bnt = true
 	else
 		bnt = false
@@ -305,7 +306,14 @@ function CJArmsWarRot()
 		end
 		
 		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
-			if UnitPower("player")  < 30 then return end
+			local SSGLYPH = false
+			for i =1,NUM_GLYPH_SLOTS do
+				if select(4,GetGlyphSocketInfo(i)) == 57168 then
+					SSGLYPH = true
+				end
+			end
+			
+			if UnitPower("player") < 30 and not SSGLYPH then return end
 			CJ_Cast("Sweeping Strikes")
 		end
 		
@@ -357,7 +365,14 @@ function CJArmsWarRot()
 		end
 		
 		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
-			if UnitPower("player")  < 30 then return end
+			local SSGLYPH = false
+			for i =1,NUM_GLYPH_SLOTS do
+				if select(4,GetGlyphSocketInfo(i)) == 57168 then
+					SSGLYPH = true
+				end
+			end
+			
+			if UnitPower("player") < 30 and not SSGLYPH then return end
 			CJ_Cast("Sweeping Strikes")
 		end
 		

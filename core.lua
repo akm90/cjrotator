@@ -164,6 +164,7 @@ local function CJCreateFrame()
 	_G[fb:GetName().."Text"]:SetText("AoE Mode")
 	fb:SetPoint("TOPLEFT",24,-20);
 	fb:SetScript("OnClick",function(self)
+		cj_tclap = 0;
 		cj_lastcall = nil;
 		cj_aoemode = self:GetChecked()
 	end)
@@ -624,6 +625,7 @@ local function OnEvent(self,event,...)
 			if cj_action then CJActionButton:SetText("Disable") else CJActionButton:SetText("Enable") end
 		end
 		cj_pickuptotems = GetTime();
+		cj_tclap = 0;
 	elseif event == "ADDON_LOADED" then
 		CJCreateFrame()
 	elseif (event == "UNIT_SPELLCAST_SUCCEEDED") then
@@ -705,6 +707,7 @@ end
 
 local function CJToggleAoE()
     RunMacroText("/click CJAoECheckbox");
+	cj_tclap = 0;
     if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
 end
 
