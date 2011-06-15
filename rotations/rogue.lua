@@ -80,6 +80,14 @@ function CJAssRogueRot()
 		if CJ_Cast("Envenom") then return end
 	end
 	
+	if CJ_Combo() >= 2 and not CJ_HD("Rupture") then
+		if CJ_Cast("Rupture") then return end
+	end
+	
+	if CJ_Combo() >= 3 and CJ_DTR("Rupture") < 3 then
+		return end
+	end
+	
 	if CJ_HP("target") < 35 and CJ_Combo() < 5 and AmIBehind == true then
 		if CJ_Cast("Backstab") then return end
 	end
