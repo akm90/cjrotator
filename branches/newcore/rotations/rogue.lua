@@ -36,6 +36,10 @@ function CJAssRogueRot()
 	if CJ_OffensiveDispel("Shiv") then return end
 	--if CJ_AssassinBuffs() then return end
 	
+	if cj_aoemode and IsSpellInRange("Envenom") == 1 then
+		if CJ_Cast("Fan of Knives") then return end
+	end
+	
 	if AmIFacing == false then return end
 	
 	if IsSpellInRange("Eviscerate") == 0 then return end
@@ -85,7 +89,7 @@ function CJAssRogueRot()
 	end
 	
 	if cj_cooldowns then
-		if CJ_IsBoss() and UnitPower("player") > 50 then
+		if CJ_IsBoss() and UnitPower("player") > 50 and not CJ_HB("Overkill") then
 			if CJ_Cast("Vanish") then return end
 		end
 	end
