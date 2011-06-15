@@ -30,13 +30,13 @@ function CJAssRogueRot()
 	if CJ_OC() then StopAttack() return end
 	CJ_Interrupt("Kick");
 	
-	if CJ_HB("Stealth") then StopAttack() else StartAttack() end
+	if CJ_HB("Stealth") or CJ_HB("Vanish") then StopAttack() else StartAttack() end
 	if not CJ_GCD() then return end
 	
 	if CJ_OffensiveDispel("Shiv") then return end
 	--if CJ_AssassinBuffs() then return end
 	
-	if cj_aoemode and IsSpellInRange("Envenom") == 1 then
+	if cj_aoemode and PlayerToTarget <= 8 then
 		if CJ_Cast("Fan of Knives") then return end
 	end
 	
@@ -44,14 +44,14 @@ function CJAssRogueRot()
 	
 	if IsSpellInRange("Eviscerate") == 0 then return end
 	
-	if AmIBehind == true and CJ_HB("Stealth") then
+	if AmIBehind == true and (CJ_HB("Stealth") or CJ_HB("Vanish")) then
 		if select(5,GetTalentInfo(1,7,false,false,nil))==1 then
 			if CJ_Cast("Sap") then return end
 		end
 		if CJ_Cast("Garrote") then return end
 	end
 	
-	if CJ_HB("Stealth") then return end
+	if CJ_HB("Stealth") or CJ_HB("Vanish") then return end
 	
 	if CJ_Combo() >= 1 and not CJ_HB("Slice and Dice") then
 		if CJ_Cast("Slice and Dice") then return end
