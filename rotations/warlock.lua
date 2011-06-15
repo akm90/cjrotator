@@ -98,7 +98,8 @@ function CJAffLockRot()
 		return
 	end
 	
-	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) and PlayerToFocus < 40 then
+	if CJ_HB("Soul Swap") and hasFocus and not (UnitGUID("target") == UnitGUID("focus")) and PlayerToFocus < 40
+		and not (UnitDebuff("focus","Fear") or UnitDebuff("focus","Banish") or UnitDebuff("focus","Howl of Terror")) then
 		if CJ_CastTarget("Soul Swap","focus") then return end;
 	end
 	
