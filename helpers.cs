@@ -499,5 +499,10 @@ namespace CJR.Helpers
             var hash = new HashSet<string>(auraNames);
             return auras.Any(a => hash.Contains(a.Name));
         }
+		
+		public static bool AoE()
+		{
+			return false;
+		}
 	}
 }

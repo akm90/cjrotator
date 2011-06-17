@@ -29,7 +29,8 @@ namespace CJR
 
 		public override sealed string Name { get { return "CJR"; } }
         public override WoWClass Class { get { return StyxWoW.Me.Class; } }
-
+		public bool AoEMode = false;
+		
         public override Composite CombatBehavior
         {
             get { if (_combatBehavior == null) { Logging.Write("Creating 'Combat' behavior"); _combatBehavior = CreateCombatBehavior(); } return _combatBehavior; }
