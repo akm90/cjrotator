@@ -9,6 +9,8 @@ using CJR.Lists;
 using System.Collections.Generic;
 using Styx;
 using Styx.Helpers;
+using TreeSharp;
+using Action = TreeSharp.Action;
 
 namespace CJR.Helpers
 {
@@ -16,6 +18,10 @@ namespace CJR.Helpers
 	{
 		private static LocalPlayer Me { get { return ObjectManager.Me; } }
         private static readonly List<WoWPetSpell> PetSpells = new List<WoWPetSpell>();
+
+        public delegate WoWUnit UnitSelectionDelegate(object context);
+
+        public delegate bool SimpleBooleanDelegate(object context);
 		
 		public static int Talent(int tree,int talent)
 		{
@@ -223,26 +229,47 @@ namespace CJR.Helpers
 		--------Spell Functions----
 		-------------------------*/
 		//Casts a Spell. 
-		public static bool CastSpell(string SpellName)
-		{
-			if (SpellManager.CanCast(SpellName))
-			{
-                Logging.Write("Casting " + SpellName);
-				CastSpell(SpellName);
-				return true;
-			}else{
-				return false;
-			}
-		}
+
+        public static Composite Cast(string name)
+        {
+            return Cast(name, ret => true);
+        }
+
+        public static Composite Cast(string name, SimpleBooleanDelegate requirements)
+        {
+            return Cast(name, ret => StyxWoW.Me.CurrentTarget, requirements);
+        }
+
+        public static Composite Cast(string name, UnitSelectionDelegate onUnit)
+        {
+            return Cast(name, onUnit, ret => true);
+        }
+
+        public static Composite Cast(string name, UnitSelectionDelegate onUnit, SimpleBooleanDelegate requirements)
+        {
+            return new Decorator(
+                ret =>
+                {
+                    return requirements != null && onUnit != null && requirements(ret) && onUnit(ret) != null && SpellManager.CanCast(name, onUnit(ret), true);
+                },
+                    new Action(
+                        ret =>
+                        {
+                            Logging.Write("[CJR] Casting: " + name);
+                            SpellManager.Cast(name, onUnit(ret));
+                        })
+                );
+        }
+
 		
-		public static bool CastTarget(string SpellName,string target)
+		public static RunStatus CastTarget(string SpellName,string target)
 		{
 			if (SpellManager.CanCast(SpellName))
 			{
 				Lua.DoString("CastSpellByName(\"" + SpellName + "\",\"" + target + "\")");
-				return true;
+                return RunStatus.Success;
 			}else{
-				return false;
+                return RunStatus.Failure;
 			}
 		}
 		
@@ -281,8 +308,9 @@ namespace CJR.Helpers
 					return true;
 				}
 			}
-			
-			if (c[0] != "nil"){
+
+            if (!Equals(c, null))
+            {
 				if (c[0] == "Drain Soul")
 				{
 					return false;
@@ -299,11 +327,11 @@ namespace CJR.Helpers
             return false;
 		}
 		
-		public static bool Interrupt(string SpellName)
+		public static RunStatus Interrupt(string SpellName)
 		{
 			if (!SpellManager.CanCast(SpellName))
 			{
-				return false;
+				return RunStatus.Failure;
 			}
 			List<string> a = Lua.GetReturnValues("return UnitExists(\"focus\")","abc.lua");
 			List<string> b = Lua.GetReturnValues("return UnitCanAttack(\"player\",\"focus\")","abc.lua");
@@ -342,7 +370,7 @@ namespace CJR.Helpers
 				{
 					if (!Lists.InterruptBlacklist.InterruptBlist[name].Contains(d[0]))
 					{
-						return CastSpell(SpellName);
+                        Cast(SpellName);
 					}
 				}
 				
@@ -350,12 +378,12 @@ namespace CJR.Helpers
 				{
 					if (!Lists.InterruptBlacklist.InterruptBlist[name].Contains(e[0]))
 					{
-						return CastSpell(SpellName);
+                        Cast(SpellName);
 					}
 				}
 			}
 			
-			return false;
+			return RunStatus.Failure;
 		}
 		
 		public static bool PetInterrupt(string SpellName)
