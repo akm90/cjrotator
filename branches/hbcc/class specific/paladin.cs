@@ -37,11 +37,10 @@ namespace CJR.Classes
 
                    lib.Cast("Judgement", cjr => targ.Distance > 5),
                    lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && targ.Distance > 5),
-
                    lib.Cast("Inquisition", cjr => (lib.HB("Divine Purpose") || Me.CurrentHolyPower == 3) && !StyxWoW.Me.HasAura("Inquisition")),
                    lib.Cast("Inquisition", cjr => (lib.HB("Divine Purpose") || Me.CurrentHolyPower == 3) && lib.BTR("Inquisition") < 7 && StyxWoW.Me.HasAura("Inquisition")),
-                   lib.Cast("Divine Storm", cjr => lib.Adds.Count(u => u.DistanceSqr < 8*8) > 3 && lib.Talent(3,10) > 1),
-                   lib.Cast("Crusader Strike", cjr => lib.Adds.Count(u => u.DistanceSqr < 8*8) > 3 && lib.Talent(3,10) <= 1),
+                   lib.Cast("Divine Storm", cjr => (lib.AoE() == true)),
+                   lib.Cast("Crusader Strike", cjr => (lib.AoE() == false)),
                    lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && lib.IsUDDemon()),
                    lib.Cast("Hammer of Wrath"),
                    lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && !lib.IsUDDemon()),
@@ -59,7 +58,6 @@ namespace CJR.Classes
 
                    lib.Cast("Seal of Righteousness", cjr => lib.Adds.Count(u => u.DistanceSqr < 8 * 8) >= 3 && !lib.HB("Seal of Righteousness")),
                    lib.Cast("Seal of Truth", cjr => !lib.HB("Seal of Truth"))
-
             );
 		}
 	}
