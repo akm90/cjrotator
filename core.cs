@@ -15,20 +15,32 @@ using Styx.Logic.Pathing;
 using Styx.Logic.Profiles;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
+using TreeSharp;
+using Action = TreeSharp.Action;
 
 using CJR.Classes;
 using CJR.Lists;
 
 namespace CJR
 {
-	class CJR : CombatRoutine
+	class CJRCore : CombatRoutine
 	{
+        private Composite _combatBehavior;
+
 		public override sealed string Name { get { return "CJR"; } }
         public override WoWClass Class { get { return StyxWoW.Me.Class; } }
-		
-		public override void Combat()
-		{
-			Paladin.RetPallyCombat();
-		}
+
+        public override Composite CombatBehavior
+        {
+            get { if (_combatBehavior == null) { Logging.Write("Creating 'Combat' behavior"); _combatBehavior = CreateCombatBehavior(); } return _combatBehavior; }
+        }
+
+        public PrioritySelector CreateCombatBehavior()
+        {
+            return new PrioritySelector(
+                   Paladin.RetPallyCombat()
+             );
+
+        }
 	}
 }
