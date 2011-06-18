@@ -289,7 +289,7 @@ namespace CJR.Helpers
 			
 			if (a[0] == "1" && a[1] == "")
 			{
-				if (CD(SpellName) < .5)
+				if (CD(SpellName) < .25)
 				{
 					return true;
 				}
