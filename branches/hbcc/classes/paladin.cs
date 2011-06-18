@@ -32,6 +32,9 @@ namespace CJR.Classes
 
 			return new PrioritySelector(
 
+                    new Decorator(cjr => targ == null,
+                        new Action(cjr => RunStatus.Success)),
+
 					new Decorator(cjr => targ != null && (lib.GCD() || targ.Distance > (10 + (lib.Talent(3, 3) * 10))),
 						new Action(cjr => RunStatus.Success)),
 					lib.Cast("Judgement", cjr => targ.Distance > 9),
