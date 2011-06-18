@@ -40,9 +40,12 @@ namespace CJR.Classes
 					lib.Cast("Judgement", cjr => targ.Distance > 9),
 					lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && targ.Distance > 5),
 					lib.Cast("Inquisition", cjr => (lib.HB("Divine Purpose") || Me.CurrentHolyPower == 3) && !StyxWoW.Me.HasAura("Inquisition")),
-					lib.Cast("Inquisition", cjr => (lib.HB("Divine Purpose") || Me.CurrentHolyPower == 3) && lib.BTR("Inquisition") < 7 && StyxWoW.Me.HasAura("Inquisition")),
+					lib.Cast("Inquisition", cjr => (lib.HB("Divine Purpose") || Me.CurrentHolyPower == 3) && lib.BTR("Inquisition") < 9 && StyxWoW.Me.HasAura("Inquisition")),
 					new Decorator(cjr => Me.CurrentHolyPower < 3,
 						new PrioritySelector(
+							new Decorator(cjr => lib.CD("Crusader Strike") > 0 && lib.CD("Crusader Strike") < .45,
+								new Action(ret => Thread.Sleep((int) (lib.CD("Crusader Strike") * 1000)))
+							),
 							lib.Cast("Divine Storm", cjr => (lib.AoE() == true && lib.Talent(3,3) == 1)),
 							lib.Cast("Crusader Strike", cjr => (lib.AoE() == false))
 						)
@@ -50,17 +53,7 @@ namespace CJR.Classes
 					lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && lib.IsUDDemon()),
 					lib.Cast("Hammer of Wrath"),
 					lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && !lib.IsUDDemon()),
-					lib.Cast("Templar's Verdict", cjr => Me.CurrentHolyPower == 3),
-					new Decorator(cjr => (Me.CurrentHolyPower <= 2 && lib.HB("Divine Purpose")),
-						new PrioritySelector(
-							new Decorator(cjr => lib.CD("Crusader Strike") > 0 && lib.CD("Crusader Strike") < .3,
-								new Action(ret => Thread.Sleep((int) (lib.CD("Crusader Strike") * 1000)))
-							),
-							lib.Cast("Divine Storm", cjr => (lib.AoE() == true && lib.Talent(3,3) == 1)),
-							lib.Cast("Crusader Strike", cjr => (lib.AoE() == false))
-						)
-					),
-					lib.Cast("Templar's Verdict", cjr => lib.HB("Divine Purpose")),
+					lib.Cast("Templar's Verdict", cjr => Me.CurrentHolyPower == 3 || lib.HB("Divine Purpose")),
 					lib.Cast("Judgement"),
 					lib.Cast("Holy Wrath"),
 					lib.Cast("Consecration", cjr => lib.AoE() == true && Me.ManaPercent > 80)
