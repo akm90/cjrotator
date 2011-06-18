@@ -514,10 +514,10 @@ namespace CJR.Helpers
 
             if (a[0] == "0")
             {
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
 
         public static bool HasAnyAura(this WoWUnit unit, params string[] auraNames)
