@@ -258,7 +258,7 @@ namespace CJR.Helpers
             return new Decorator(
                 ret =>
                 {
-                    return requirements != null && onUnit != null && requirements(ret) && onUnit(ret) != null && SpellManager.CanCast(name, onUnit(ret), true);
+                    return requirements != null && onUnit != null && requirements(ret) && onUnit(ret) != null;
                 },
                     new Action(
                         ret =>
