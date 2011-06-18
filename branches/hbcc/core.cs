@@ -39,7 +39,7 @@ namespace CJR
         public PrioritySelector CreateCombatBehavior()
         {
             return new PrioritySelector(
-                   Paladin.RetPallyCombat()
+                   Shaman.EnhShamanCombat()
              );
 
         }
