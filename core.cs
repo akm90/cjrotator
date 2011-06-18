@@ -26,6 +26,7 @@ namespace CJR
 	class CJRCore : CombatRoutine
 	{
         private Composite _combatBehavior;
+        private Composite _combatBuffBehavior;
 
 		public override sealed string Name { get { return "CJR"; } }
         public override WoWClass Class { get { return StyxWoW.Me.Class; } }
@@ -36,6 +37,11 @@ namespace CJR
             get { if (_combatBehavior == null) { Logging.Write("Creating 'Combat' behavior"); _combatBehavior = CreateCombatBehavior(); } return _combatBehavior; }
         }
 
+        public override Composite CombatBuffBehavior
+        {
+            get { if (_combatBuffBehavior == null) { Logging.Write("Creating 'CombatBuff' behavior"); _combatBuffBehavior = CreateCombatBehavior(); } return _combatBehavior; }
+        }
+
         public PrioritySelector CreateCombatBehavior()
         {
             return new PrioritySelector(
@@ -43,5 +49,13 @@ namespace CJR
              );
 
         }
+
+        public PrioritySelector CreateCombatBuffBehavior()
+        {
+            return new PrioritySelector(
+                Shaman.EnhShamanCombatBuffs()
+            );
+        }
+
 	}
 }

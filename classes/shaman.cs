@@ -36,14 +36,31 @@ namespace CJR.Classes
                 new Decorator(cjr => targ != null && (lib.GCD() || targ.Distance > (10 + (lib.Talent(3, 3) * 10))),
                     new Action(cjr => RunStatus.Success)),
 
+                lib.Cast("Call of the Elements",cjr => lib.NeedsTotems()),
                 lib.Cast("Lava Lash"),
                 lib.Cast("Lightning Bolt", cjr => lib.BS("Maelstrom Weapon") == 5),
                 lib.Cast("Unleash Elements"),
-                lib.Cast("Flame Shock", cjr => !lib.HD("Flame Shock") || lib.DTR("Flame Shock") < 3),
+                lib.Cast("Flame Shock", cjr => !lib.HD("Flame Shock") || lib.DTR(targ,"Flame Shock",true) < 3),
                 lib.Cast("Earth Shock"),
                 lib.Cast("Stormstrike")
             );
         }
+
+        public static Composite EnhShamanCombatBuffs()
+        {
+            return new PrioritySelector(
+                new Decorator(ret => lib.WeaponEnchant(),
+                    new Sequence(
+                        new Action(ret => Lua.DoString("CancelItemTempEnchantment(1)")),
+                        new Action(ret => Lua.DoString("CancelITemTempEnchantment(2)")),
+                        lib.Cast("Windfury Weapon"),
+                        lib.Cast("Flametongue Weapon")
+                    )
+                ),
+                lib.Cast("Lightning Shield",cjr => !lib.HB("Lightning Shield"))
+            );
+        }
+
     
     }
 }
