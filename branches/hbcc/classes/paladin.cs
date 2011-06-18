@@ -55,9 +55,6 @@ namespace CJR.Classes
                     lib.Cast("Hammer of Wrath"),
                     lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && !lib.IsUDDemon()),
                     lib.Cast("Judgement"),
-					new Decorator(cjr => lib.CD("Crusader Strike") < .5 && lib.CD("Crusader Strike") > 0,
-						new Action(ret => Thread.Sleep(100))
-					),
                     lib.Cast("Holy Wrath"),
                     lib.Cast("Consecration", cjr => lib.AoE() == true && Me.ManaPercent > 80)
              );
