@@ -44,6 +44,11 @@ namespace CJR.Helpers
                 return ObjectManager.GetObjectsOfType<WoWUnit>(false, false).Where(p => p.IsHostile && !p.Dead && !p.IsPet && p.DistanceSqr <= 40 * 40).ToList();
             }
         }
+
+        public static List<string> clua(string cmd)
+        {
+            return Lua.GetReturnValues(cmd, "abc.lua");
+        }
         /*-------------------------
         --------Unit Type Check----
         -------------------------*/
@@ -115,6 +120,42 @@ namespace CJR.Helpers
         {
             return Me.HasAnyAura("Heroism", "Time Warp", "Ancient Hysteria", "Bloodlust");
         }
+
+        public static bool WeaponEnchant()
+        {
+
+            List<string> enchants = clua("return GetWeaponEnchantInfo()");
+
+            if (enchants[0] == "" || enchants[0] == "nil")
+            {
+                return true;
+            }
+
+            if ((enchants[3] == "" || enchants[3] == "nil") && !Equals(null,clua("return OffhandHasWeapon()")))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool NeedsTotems()
+        {
+            List<string> totems = clua("return GetTotemInfo(1)");
+
+            if (Equals(totems, null))
+            {
+                return true;
+            }
+
+            if (totems[1] != "Searing Totem")
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         /*-------------------------
         --------Debuff Checks------
@@ -195,6 +236,19 @@ namespace CJR.Helpers
 
             return Convert.ToDouble(c[6]) - Convert.ToDouble(a[0]);
         }
+
+        public static int DTR(this WoWUnit onUnit, string auraName, bool fromMyAura)
+        {
+            WoWAura wantedAura =
+                onUnit.GetAllAuras().Where(a => a.Name == auraName && (fromMyAura ? a.CreatorGuid == StyxWoW.Me.Guid : true)).FirstOrDefault();
+
+            if (wantedAura != null)
+            {
+                return wantedAura.TimeLeft.Seconds;
+            }
+            return 0;
+        }
+
         //Debuff on Self
         public static bool HSD(string BuffName)
         {
