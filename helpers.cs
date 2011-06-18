@@ -264,7 +264,7 @@ namespace CJR.Helpers
                         ret =>
                         {
                             Logging.Write("[CJR] Casting: " + name);
-                            SpellManager.Cast(name, onUnit(ret));
+							Lua.DoString("CastSpellByName(\"" + name + "\")");
                         })
                 );
         }
@@ -289,7 +289,7 @@ namespace CJR.Helpers
 			
 			if (a[0] == "1" && a[1] == "")
 			{
-				if (CD(SpellName) < .25)
+				if (CD(SpellName) < .5)
 				{
 					return true;
 				}
