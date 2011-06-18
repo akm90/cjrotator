@@ -258,7 +258,7 @@ namespace CJR.Helpers
             return new Decorator(
                 ret =>
                 {
-                    return requirements != null && onUnit != null && requirements(ret) && onUnit(ret) != null;
+                    return requirements != null && onUnit != null && requirements(ret) && onUnit(ret) != null && Usable(name);
                 },
                     new Action(
                         ret =>
@@ -283,11 +283,26 @@ namespace CJR.Helpers
             }
         }
 
+		public static bool Usable(string SpellName)
+		{
+			List<string> a = Lua.GetReturnValues("return IsUsableSpell(\"" + SpellName + "\")", "abc.lua");
+			
+			if (a[0] == "1" && a[1] == "")
+			{
+				if (CD(SpellName) == 0)
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
         //Returns Cooldown of the Spell
         public static double CD(string SpellName)
         {
             List<string> a = Lua.GetReturnValues("return GetTime()", "abc.lua");
-            List<string> b = Lua.GetReturnValues("return GetSpellCooldown(" + SpellName + ")", "abc.lua");
+            List<string> b = Lua.GetReturnValues("return GetSpellCooldown(\"" + SpellName + "\")", "abc.lua");
 
             if (Equals(b, null))
             {

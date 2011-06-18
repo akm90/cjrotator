@@ -35,7 +35,7 @@ namespace CJR.Classes
                     new Decorator(cjr => targ == null,
                         new Action(cjr => RunStatus.Success)),
 
-                    new Decorator(cjr => targ != null && (lib.GCD() || targ.Distance > (10 + (lib.Talent(3, 3) * 10))),
+                    new Decorator(cjr => targ != null && (targ.Distance > (10 + (lib.Talent(3, 3) * 10))),
                         new Action(cjr => RunStatus.Success)),
                     lib.Cast("Judgement", cjr => targ.Distance > 9),
                     lib.Cast("Exorcism", cjr => lib.HB("The Art of War") && targ.Distance > 5),
