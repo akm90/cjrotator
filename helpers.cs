@@ -166,7 +166,7 @@ namespace CJR.Helpers
 
             string rank = b[1];
 
-            List<string> c = Lua.GetReturnValues("return UnitDebuff(\"target\",\"" + BuffName + "\"," + rank + ",\"PLAYER\")", "abc.lua");
+            List<string> c = Lua.GetReturnValues("return UnitDebuff(\"target\",\"" + BuffName + "\",\"" + rank + "\",\"PLAYER\")", "abc.lua");
             if (Equals(null, c))
             {
                 return 0;
@@ -187,7 +187,7 @@ namespace CJR.Helpers
 
             string rank = b[1];
 
-            List<string> c = Lua.GetReturnValues("return UnitDebuff(\"target\",\"" + BuffName + "\"," + rank + ",\"PLAYER\")", "abc.lua");
+            List<string> c = Lua.GetReturnValues("return UnitDebuff(\"target\",\"" + BuffName + "\",\"" + rank + "\",\"PLAYER\")", "abc.lua");
             if (Equals(null, c))
             {
                 return 0;
