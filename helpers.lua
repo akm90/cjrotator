@@ -2,6 +2,7 @@
 cj_class = "";
 cj_currentRotation = 0;
 
+--Generic Check for Raid encounters where you need to stop attacks. Returns true if you need to stop, false otherwise
 function CJ_OC()
 	if UnitBuff("target","Power Conversion") or UnitBuff("target","Barrier") or UnitBuff("target","Unstable Shield") or UnitBuff("target","Poison Soaked Shell") then
 		return true
@@ -10,11 +11,12 @@ function CJ_OC()
 	end
 end
 
-
+--Returns true if target is a raid boss, false otherwise
 function CJ_IsRaidBoss()
 	if UnitClassification("target") == "worldboss" then return true else return false end
 end
 
+--Returns true if target is a cataclysm boss mob, false otherwise
 function CJ_IsBoss()
 	if tableContains(cj_bosslist,UnitName("target")) then return true else return false end
 end
@@ -23,25 +25,26 @@ end
 ----Buff Checks----
 -------------------
 
---Buff Stacks
+--Returns number of stacks of the called buff, 0 if none
 function CJ_BS(buff)
 	local name,_,_,count = UnitBuff("player",buff);
 	if not name then return 0 end
 	return count
 end
 
---Buff Time Remaining
+--Returns time remaining on buff, 0 if no buff
 function CJ_BTR(buff)
 	local name,_,_,_,_,_,expiration = UnitBuff("player",buff);
 	if not name then return 0 end
 	return (expiration - GetTime());
 end
 
---Has Buff
+--Returns true if you have buff, else false
 function CJ_HB(buff)
 	if not UnitBuff("player",buff) then return false else return true end;
 end
 
+--Returns True if you have any variation of Heroism, false otherwise
 function CJ_Hero()
 	if CJ_HB("Heroism") or CJ_HB("Time Warp") or CJ_HB("Ancient Hysteria") or CJ_HB("Bloodlust") then
 		return true;
@@ -59,7 +62,7 @@ function CJ_OD(debuff)
 	if not UnitDebuff("target",debuff) then return false else return true end;
 end
 
---Debuff Stacks
+--Returns stacks of debuff on target, 0 if not present (player filtered)
 function CJ_DS(debuff)
 	local rank = select(2,UnitDebuff("target",debuff));
 	if not rank then return 0 end
@@ -68,7 +71,7 @@ function CJ_DS(debuff)
 	return count;
 end
 
---Debuff Time Remaining
+--Returns Time Remaining on debuffs, 0 if not present (player filtered)
 function CJ_DTR(debuff)
 	local rank = select(2,UnitDebuff("target",debuff));
 	if not rank then return 0 end
@@ -77,18 +80,19 @@ function CJ_DTR(debuff)
 	return (expiration - GetTime());
 end
 
---Has Debuff
+--Returns true if target has debuff, false otherwise (player filtered)
 function CJ_HD(debuff)
 	local rank = select(2,UnitDebuff("target",debuff));
 	if not rank then return false end
 	if not UnitDebuff("target",debuff,rank,"PLAYER") then return false else return true end;
 end
 
---Has Debuff Override (For Arcane Blast)
+--Returns true if you have a debuff, false otherwise (really for Arcane Blast)
 function CJ_HSD(debuff)
 	if not UnitDebuff("player",debuff) then return false else return true end;
 end
 
+--Returns stacks of debuff on self (really just for Arcane Blast)
 function CJ_SDS(debuff)
 	local name,_,_,count = UnitDebuff("player",debuff);
 	if not name then return 0 end
@@ -98,6 +102,7 @@ end
 -----------------------------
 ------Focus Debuffs----------
 -----------------------------
+--Returns stacks of debuff on target, 0 if not present (player filtered)
 function CJ_DSF(debuff)
 	local rank = select(2,UnitDebuff("focus",debuff));
 	if not rank then return 0 end
@@ -106,7 +111,7 @@ function CJ_DSF(debuff)
 	return count;
 end
 
---Debuff Time Remaining
+--Returns time remaining on debuff (player filtered)
 function CJ_DTRF(debuff)
 	local rank = select(2,UnitDebuff("focus",debuff));
 	if not rank then return 0 end
@@ -115,7 +120,7 @@ function CJ_DTRF(debuff)
 	return (expiration - GetTime());
 end
 
---Has Debuff
+--Returns true if focus has debuff, false otherwise (player filtered)
 function CJ_HDF(debuff)
 	local rank = select(2,UnitDebuff("focus",debuff));
 	if not rank then return false end
@@ -127,12 +132,12 @@ end
 -----HP/MP---
 -------------
 
---Health Percent
+----Returns Health Percent of Unit
 function CJ_HP(unit)
 	return (((UnitHealth(unit) / UnitHealthMax(unit)) * 100));
 end
 
---Mana Percent
+--Returns Mana Percent of Unit
 function CJ_MP(unit)
 	return (((UnitPower(unit) / UnitPowerMax(unit)) * 100));
 end
@@ -141,8 +146,8 @@ end
 --Spell Functions-
 ------------------
 
---Cast Spell
-function CJ_Cast(spell,arg1,arg2)
+--Cast Spell. Returns true if spell successful, false otherwise
+function CJ_Cast(spell)
 	local usable,mana = IsUsableSpell(spell)
 	
 	if usable and mana == nil then
@@ -160,6 +165,7 @@ function CJ_Cast(spell,arg1,arg2)
 	end
 end
 
+--Casts spell on target. returns true if spell successful, false otherwise
 function CJ_CastTarget(spell,target)
 	local usable,mana = IsUsableSpell(spell)
 	
@@ -178,7 +184,7 @@ function CJ_CastTarget(spell,target)
 	end
 end
 
---Spell Cooldown
+--Returns cooldown of spell in seconds
 function CJ_CD(spell)
 	local start,duration,enable = GetSpellCooldown(spell);
 	if start == nil then return 99999 end
@@ -190,7 +196,7 @@ function CJ_CD(spell)
 	end
 end
 
---Already Casting
+--Casting check with latency
 function CJ_Casting()
 	if UnitCastingInfo("player") ~= nil then
 		if (select(6,UnitCastingInfo("player")) - 30) - (GetTime()*1000) - select(4,GetNetStats()) < 0 then return false else return true end;
@@ -201,7 +207,8 @@ function CJ_Casting()
 	return false;
 end
 
---Interrupt Checks
+--Interrupt Function (casts spell to interrupt)
+-- Focus > Target
 function CJ_Interrupt(spell)
 	if not IsUsableSpell(spell) then return end;
 	if not cj_interruptmode then return end;
@@ -226,6 +233,56 @@ function CJ_Interrupt(spell)
 	end
 end
 
+--Offensive Dispel Handler
+function CJ_OffensiveDispel(spell)
+	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
+	if not cj_purgemode then return false end;
+	if cj_class == "Shaman" then
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			
+			if dispelType == "Magic" then
+				return CJ_Cast(spell)
+			end
+		end
+	elseif cj_class == "Priest" then
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			
+			if dispelType == "Magic" then
+				return CJ_Cast(spell)
+			end
+		end
+	elseif cj_class == "Mage" then
+		for i = 1,40 do
+			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
+				return CJ_Cast(spell)
+			end
+		end
+	elseif cj_class == "Hunter" then
+		for i = 1,40 do
+			if select(5,UnitBuff("target",i)) == "Magic" then
+				return CJ_Cast(spell)
+			end
+			
+			if enrageEffectIDs[select(11,UnitBuff("target",i))] then
+				return CJ_Cast(spell)
+			end
+		end
+	elseif cj_class == "Rogue" then
+		for i = 1,40 do
+			if enrageEffectIDs[select(11,UnitBuff("target",i))] then
+				return CJ_Cast(spell)
+			end
+		end
+	end
+	return false;
+end
+
+----------------------
+------Pet Functions---
+----------------------
+--Casts a pet spell
 function CJ_PetSpell(spell)
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		if (select(1,GetPetActionInfo(i))) == spell then
@@ -236,6 +293,7 @@ function CJ_PetSpell(spell)
 	return false;
 end
 
+--Casts a pet spell at focus
 function CJ_PetSpellFocus(spell)
 	if not CJ_PetUsable(spell) then return false end;
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
@@ -247,6 +305,7 @@ function CJ_PetSpellFocus(spell)
 	return false;
 end
 
+--Returns true if pet spell is usable, false otherwise
 function CJ_PetUsable(spell)
 	for i=1, NUM_PET_ACTION_SLOTS, 1 do
 		if (select(1,GetPetActionInfo(i))) == spell then
@@ -256,6 +315,7 @@ function CJ_PetUsable(spell)
 	return false;
 end
 
+--Interrupts using a pet's action. Returns true if successful, false otherwise
 function CJ_PetInterrupt(spell)
 	if not CJ_PetUsable(spell) then return end;
 	if not cj_interruptmode then return end;
@@ -279,15 +339,22 @@ function CJ_PetInterrupt(spell)
 	end
 	return;
 end
---table.contains helper
-function tableContains(t,element)
-	if t == nil then return false end;
-	for key, value in pairs(t) do
-		if value == element then
-			return true
+
+
+function CJ_OffensiveDispelPet(spell)
+	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
+	if not cj_purgemode then return false end;
+	if cj_class == "Warlock" then
+		if not CJ_PetUsable(spell) then return false end;
+		for i = 1,40 do
+			local _,_,_,_,dispelType = UnitBuff("target",i);
+			if dispelType == "Magic" then
+				return CJ_PetSpell(spell)
+			end
 		end
 	end
-	return false
+	
+	return false;
 end
 
 --Shaman Totem Manager
@@ -382,85 +449,11 @@ function CJ_Totems()
 	return false;
 end
 
-function CJ_SelectSpec()
-	cj_class = UnitClass("player");
-	c = cj_class;
-	printf("Class detected as "..cj_class);
-	local tt = GetPrimaryTalentTree();
-	if tt == nil then cj_action = false; printf("No primary talent tree") return end;
-	if c == "Death Knight" then
-		cj_currentRotation = 10 + tt;
-	elseif c == "Druid" then
-		cj_currentRotation = 20 + tt;
-	elseif c == "Hunter" then
-		cj_currentRotation = 30 + tt;
-	elseif c == "Mage" then
-		cj_currentRotation = 40 + tt;
-	elseif c == "Paladin" then
-		cj_currentRotation = 50 + tt;
-	elseif c == "Priest" then
-		cj_currentRotation = 60 + tt;
-	elseif c == "Rogue" then
-		cj_currentRotation = 70 + tt;
-	elseif c == "Shaman" then
-		cj_currentRotation = 80 + tt;
-	elseif c == "Warlock" then
-		cj_currentRotation = 90 + tt;
-	elseif c == "Warrior" then
-		cj_currentRotation = 100 + tt;
-	end
-	if cj_rotationTable[cj_currentRotation] == nil then CJActionButton:Disable(); else CJActionButton:Enable() end
-end
-
---Offensive Dispels
-function CJ_OffensiveDispel(spell)
-	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
-	if not cj_purgemode then return false end;
-	if cj_class == "Shaman" then
-		for i = 1,40 do
-			local _,_,_,_,dispelType = UnitBuff("target",i);
-			
-			if dispelType == "Magic" then
-				return CJ_Cast(spell)
-			end
-		end
-	elseif cj_class == "Priest" then
-		for i = 1,40 do
-			local _,_,_,_,dispelType = UnitBuff("target",i);
-			
-			if dispelType == "Magic" then
-				return CJ_Cast(spell)
-			end
-		end
-	elseif cj_class == "Mage" then
-		for i = 1,40 do
-			if select(9,UnitAura("target",i)) == 1 or select(9,UnitBuff("target",i)) == 1 then
-				return CJ_Cast(spell)
-			end
-		end
-	elseif cj_class == "Hunter" then
-		for i = 1,40 do
-			if select(5,UnitBuff("target",i)) == "Magic" then
-				return CJ_Cast(spell)
-			end
-			
-			if enrageEffectIDs[select(11,UnitBuff("target",i))] then
-				return CJ_Cast(spell)
-			end
-		end
-	elseif cj_class == "Rogue" then
-		for i = 1,40 do
-			if enrageEffectIDs[select(11,UnitBuff("target",i))] then
-				return CJ_Cast(spell)
-			end
-		end
-	end
-	return false;
-end
 
 -----------------------
 -----Decurse-----------
 -----------------------
+-- Decurses Self, checks for all possible decurse conditions
 function CJ_DecurseSelf()
 	if cj_class == "Mage" then
 		for i = 1,40 do
@@ -533,6 +526,7 @@ function CJ_DecurseSelf()
 	end
 end
 
+--Decurses Party/Raid, checks all conditions
 function CJ_DecurseAll()
 	if GetNumPartyMembers() == 0 and GetNumRaidMembers() == 0 then return end
 	local count = 0
@@ -616,21 +610,10 @@ function CJ_DecurseAll()
 	end
 end
 
-function CJ_OffensiveDispelPet(spell)
-	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
-	if not cj_purgemode then return false end;
-	if cj_class == "Warlock" then
-		if not CJ_PetUsable(spell) then return false end;
-		for i = 1,40 do
-			local _,_,_,_,dispelType = UnitBuff("target",i);
-			if dispelType == "Magic" then
-				return CJ_PetSpell(spell)
-			end
-		end
-	end
-	
-	return false;
-end
+------------------------
+-------Misc Functions---
+------------------------
+
 --Global Cooldown Check
 function CJ_GCD()
 	if GetSpellCooldown(61304) == 0 then
@@ -640,11 +623,54 @@ function CJ_GCD()
 	return false;
 end
 
---print
+--Prints to chat frame
 function printf(message)
 	DEFAULT_CHAT_FRAME:AddMessage(message);
 end
 
+--Returns talents at tree,talent
 function CJ_T(tree,talent)
 	return select(5,GetTalentInfo(tree,talent,false,false,nil))
+end
+
+--Selects your current spec and initializes variables properly
+function CJ_SelectSpec()
+	cj_class = UnitClass("player");
+	c = cj_class;
+	printf("Class detected as "..cj_class);
+	local tt = GetPrimaryTalentTree();
+	if tt == nil then cj_action = false; printf("No primary talent tree") return end;
+	if c == "Death Knight" then
+		cj_currentRotation = 10 + tt;
+	elseif c == "Druid" then
+		cj_currentRotation = 20 + tt;
+	elseif c == "Hunter" then
+		cj_currentRotation = 30 + tt;
+	elseif c == "Mage" then
+		cj_currentRotation = 40 + tt;
+	elseif c == "Paladin" then
+		cj_currentRotation = 50 + tt;
+	elseif c == "Priest" then
+		cj_currentRotation = 60 + tt;
+	elseif c == "Rogue" then
+		cj_currentRotation = 70 + tt;
+	elseif c == "Shaman" then
+		cj_currentRotation = 80 + tt;
+	elseif c == "Warlock" then
+		cj_currentRotation = 90 + tt;
+	elseif c == "Warrior" then
+		cj_currentRotation = 100 + tt;
+	end
+	if cj_rotationTable[cj_currentRotation] == nil then CJActionButton:Disable(); else CJActionButton:Enable() end
+end
+
+--table.contains helper
+function tableContains(t,element)
+	if t == nil then return false end;
+	for key, value in pairs(t) do
+		if value == element then
+			return true
+		end
+	end
+	return false
 end
