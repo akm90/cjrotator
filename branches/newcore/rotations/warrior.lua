@@ -207,6 +207,7 @@ end
 cj_tclap = 0
 local bnt = false;
 function CJArmsWarRot()
+	if CJ_HB("Bladestorm") then return end;
 	if AmIFacing == false then return end
 	if CJ_OC() then StopAttack() return end
 	local SSGLYPH = false
@@ -354,6 +355,10 @@ function CJArmsWarRot()
 				
 		if CJ_HP("player") < 70 then
 			if CJ_Cast("Victory Rush") then return end
+		end
+		
+		if cj_throwdown then
+			if CJ_Cast("Throwdown") then return end
 		end
 		
 		if CJ_Hero() and cj_shatter then

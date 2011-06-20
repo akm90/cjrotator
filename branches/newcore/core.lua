@@ -18,10 +18,13 @@ cj_aoemode = false;
 cj_defensivecooldowns = false
 cj_petattacking = false;
 cj_verbose = false;
-cj_stopmovement = 0;
 --Class Specific Variables
 cj_decurseself = false
 cj_decurseparty = false
+
+if cj_stopmovement == nil then
+	cj_stopmovement = 0;
+end
 
 --Warlocks
 cj_lifetap = false;
@@ -32,6 +35,7 @@ cj_sunder = false
 cj_rend = 0;
 cj_shatter = false;
 cj_commanding = false;
+cj_throwdown = false;
 
 --Priest
 cj_dispersion = false;
@@ -289,6 +293,18 @@ local function CJCreateFrame()
 				info.func = function() cj_commanding = not cj_commanding end
 				info.checked = cj_commanding
 				UIDropDownMenu_AddButton(info,level)
+				
+				if cj_currentRotation == 101 then
+					info.text = "Throwdown"
+					info.keepShownOnClick = 1
+					info.disabled = nil
+					info.isTitle = nil
+					info.notCheckable = nil
+					info.minWidth = 165
+					info.func = function() cj_throwdown = not cj_throwdown end
+					info.checked = cj_throwdown
+					UIDropDownMenu_AddButton(info,level)
+				end
 			elseif cj_currentRotation == 103 then				
 				info.text = "Use Defensive Cooldowns"
 				info.keepShownOnClick = 1

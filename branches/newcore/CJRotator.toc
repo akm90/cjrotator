@@ -1,7 +1,7 @@
 ## Interface: 40100
 ## Title: CJ Rotator
 ## Author: CptJesus
-##SavedVariablesPerCharacter:cj_purgemode,cj_purgeplayers,cj_interruptmode,cj_stopaftercombat,cj_holddown,cj_cooldowns
+##SavedVariablesPerCharacter:cj_purgemode,cj_purgeplayers,cj_interruptmode,cj_stopaftercombat,cj_holddown,cj_cooldowns, cj_stopmovement
 
 helpers.lua
 libs\LibStub.lua
