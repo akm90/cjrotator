@@ -25,7 +25,14 @@ namespace CJRotatorCC
 		private bool initialized = false;
 		private int currentRotation = 0;
         public override void Combat()
-        {
+        {		
+			
+			List<string> blargh = Lua.GetReturnValues("return cj_stopmovement","ashdioahsdas.lua");
+			
+			if (blargh[0] == "1")
+			{
+				return;
+			}
 			List<WoWUnit> addslist = (from unit in ObjectManager.ObjectList
                                       where unit is WoWUnit
                                       let u = unit.ToUnit()
@@ -80,6 +87,13 @@ namespace CJRotatorCC
 		
 		
 		public override void Pull(){
+			
+			List<string> blargh = Lua.GetReturnValues("return cj_stopmovement","ashdioahsdas.lua");
+			
+			if (blargh[0] == "1")
+			{
+				return;
+			}
 			if (Me.Mounted){
 				Mount.Dismount();
 			}
