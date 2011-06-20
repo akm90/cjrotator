@@ -588,6 +588,9 @@ function CJ_Minimize()
 end
 
 local function OnUpdate(...)
+	if StaticPopup_Visible("ADDON_ACTION_FORBIDDEN") then
+		StaticPopup_Hide("ADDON_ACTION_FORBIDDEN")
+	end
 --	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
 	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 and cj_class == "Shaman" then
 		if UnitAffectingCombat("player") == 1 then 
