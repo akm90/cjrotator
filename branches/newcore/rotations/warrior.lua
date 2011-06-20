@@ -377,7 +377,7 @@ function CJArmsWarRot()
 		end
 		
 		if cj_aoemode and GetTime() - cj_tclap > 15.7 and CJ_HD("Rend") and bnt then
-			if CJ_Cast("Thunder Clap") then cj_tclap = GetTime() return end
+			if CJ_Cast("Thunder Clap") then return end
 		end
 		
 		if CJ_HB("Taste for Blood") then

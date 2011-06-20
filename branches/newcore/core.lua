@@ -661,6 +661,8 @@ local function OnEvent(self,event,...)
 			end
 		elseif type == "SPELL_CAST_SUCCESS" and spellName == "Rend" and sGUID == UnitGUID("player") then
 			cj_rend = GetTime();
+		elseif type == "SPELL_CAST_SUCCESS" and spellName == "Thunder Clap" and sGUID == UnitGUID("player") then
+			cj_tclap = GetTime();
 		end
 	elseif (event == "UNIT_COMBO_POINTS") then
 		if cj_currentRotation ~= 73 then return end
