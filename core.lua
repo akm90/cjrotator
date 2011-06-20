@@ -18,6 +18,7 @@ cj_aoemode = false;
 cj_defensivecooldowns = false
 cj_petattacking = false;
 cj_verbose = false;
+cj_stopmovement = 0;
 --Class Specific Variables
 cj_decurseself = false
 cj_decurseparty = false
@@ -588,9 +589,6 @@ function CJ_Minimize()
 end
 
 local function OnUpdate(...)
-	if StaticPopup_Visible("ADDON_ACTION_FORBIDDEN") then
-		StaticPopup_Hide("ADDON_ACTION_FORBIDDEN")
-	end
 --	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
 	if cj_pickuptotems ~= nil and GetTime() - cj_pickuptotems > 3 and cj_class == "Shaman" then
 		if UnitAffectingCombat("player") == 1 then 
@@ -759,8 +757,20 @@ function cjhandler(msg,editbox)
 		else
 			printf("CJR: Purging Players");
 		end
+	elseif command == "stopmovement" then
+		if cj_stopmovement == 1 then
+			cj_stopmovement = 0;
+		else
+			cj_stopmovement = 1;
+		end
+		
+		if cj_stopmovement == 1 then
+			printf("CJR: No Movement");
+		else
+			printf("CJR: Movement");
+		end
 	else
-		printf("Syntax: /cjr (show|stopaftercombat||holddown|purgeplayers|verbose)")
+		printf("Syntax: /cjr (show|stopaftercombat||holddown|purgeplayers|verbose|stopmovement)")
 	end
 end
 
