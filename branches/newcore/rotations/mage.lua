@@ -194,7 +194,7 @@ function CJFireMageRot()
 	end
 	
 	if CJ_HB("Hot Streak") then
-		if CJ_Cast("Pyroblast!") then return end
+		if CJ_Cast("Pyroblast") then return end
 	end
 	
 	if cj_orbspells then
