@@ -127,7 +127,7 @@ namespace CJRotatorCC
 		
 		void MeleeMove()
         {
-            if (Me.CurrentTarget.Distance > 2f){
+            if (Me.CurrentTarget.Distance > 4f){
 				Navigator.MoveTo(WoWMovement.CalculatePointFrom(ObjectManager.Me.CurrentTarget.Location, 2f));
 			}else{
 				WoWMovement.MoveStop();
