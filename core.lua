@@ -605,7 +605,7 @@ function CJ_Minimize()
 end
 
 local function OnUpdate(...)
-	if StaticPopup_Visible("ADDON_ACTION_FORBIDDEN") then
+	if StaticPopup_Visible("ADDON_ACTION_FORBIDDEN") == "StaticPopup1" then
 		StaticPopup_Hide("ADDON_ACTION_FORBIDDON")
 	end
 --	if cj_currentRotation == 0 then CJ_SelectSpec() return end;
