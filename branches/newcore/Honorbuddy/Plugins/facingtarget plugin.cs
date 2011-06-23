@@ -85,31 +85,14 @@ namespace facing
 					Lua.DoString("PlayerToFocus = 999999999"); 
 				}else{
 					WoWUnit focus = null;
-					List<WoWUnit> focuslist = (from unit in ObjectManager.ObjectList
-						  where unit is WoWUnit
-						  let u = unit.ToUnit()
-						  select u).ToList();
 					
-					foreach (WoWUnit a in focuslist)
-					{
-						ulong guid = a.Guid;
-						string temp = BitConverter.ToString(BitConverter.GetBytes(guid).Reverse().ToArray()).Replace("-", "");
-						temp = string.Format("0x{0:X}",temp);
-						if (Equals(temp,abc[0]))
-						{
-							focus = a;
-						}
-						if (!Equals(focus,null))
-						{
-							break;
-						}
-					}
+					ulong guid = ulong.parse(string.Substring(abc[0],2));
+					 
+					focus = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(unit => unit.guid == guid);
 					
 					FR=System.Convert.ToDecimal(focus.Distance) - System.Convert.ToDecimal(focus.CombatReach);
 					Lua.DoString("PlayerToFocus = " + FR);
 				}
-				
-				
 			}
 			else
 			{
