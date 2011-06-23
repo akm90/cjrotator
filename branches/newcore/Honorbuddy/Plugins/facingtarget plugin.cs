@@ -43,6 +43,8 @@ namespace facing
         public override Version Version { get { return new Version(1, 0, 0, 0); } }
         public override string ButtonText { get { return Name; } }
         public override bool WantButton { get { return true; } }
+		public decimal CR;
+		public decimal FR;
 
         LocalPlayer Me = ObjectManager.Me;
 
@@ -74,13 +76,46 @@ namespace facing
 				{
 					Lua.DoString("AmIBehind = false");
 				}
-
-				Lua.DoString("PlayerToTarget = " + Me.CurrentTarget.Distance);
+				CR=System.Convert.ToDecimal(Me.CurrentTarget.Distance) - System.Convert.ToDecimal(Me.CurrentTarget.CombatReach);
+                Lua.DoString("PlayerToTarget = " + CR);
+				
+				List<string> abc = Lua.GetReturnValues("return UnitGUID(\"focus\")");
+				if (abc[0] == "")
+				{
+					Lua.DoString("PlayerToFocus = 999999999"); 
+				}else{
+					WoWUnit focus = null;
+					List<WoWUnit> focuslist = (from unit in ObjectManager.ObjectList
+						  where unit is WoWUnit
+						  let u = unit.ToUnit()
+						  select u).ToList();
+					
+					foreach (WoWUnit a in focuslist)
+					{
+						ulong guid = a.Guid;
+						string temp = BitConverter.ToString(BitConverter.GetBytes(guid).Reverse().ToArray()).Replace("-", "");
+						temp = string.Format("0x{0:X}",temp);
+						if (Equals(temp,abc[0]))
+						{
+							focus = a;
+						}
+						if (!Equals(focus,null))
+						{
+							break;
+						}
+					}
+					
+					FR=System.Convert.ToDecimal(focus.Distance) - System.Convert.ToDecimal(focus.CombatReach);
+					Lua.DoString("PlayerToFocus = " + FR);
+				}
+				
+				
 			}
 			else
 			{
 				Lua.DoString("AmIBehind = false");
 				Lua.DoString("PlayerToTarget = 999999999");
+				Lua.DoString("PlayerToFocus = 999999999");
 			}
         }
 
