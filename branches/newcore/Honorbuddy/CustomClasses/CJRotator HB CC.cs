@@ -127,16 +127,28 @@ namespace CJRotatorCC
 		
 		void MeleeMove()
         {
-            if (Me.CurrentTarget.Distance > 4f){
-				Navigator.MoveTo(WoWMovement.CalculatePointFrom(ObjectManager.Me.CurrentTarget.Location, 2f));
+			float cr = System.Convert.ToSingle(Me.CurrentTarget.CombatReach + 2.8333333);
+			if (cr < 5)
+			{
+				cr = 5;
+			}
+			
+            if (Me.CurrentTarget.Distance > cr){
+				Navigator.MoveTo(WoWMovement.CalculatePointFrom(ObjectManager.Me.CurrentTarget.Location, System.Convert.ToSingle(cr - .25)));
 			}else{
 				WoWMovement.MoveStop();
 			}
         }
 		
 		void RangedMove(){
-			if (Me.CurrentTarget.Distance > 25){
-				Navigator.MoveTo(WoWMovement.CalculatePointFrom(ObjectManager.Me.CurrentTarget.Location, 25f));
+		
+			float cr = System.Convert.ToSingle(Me.CurrentTarget.CombatReach + 2.8333333);
+			if (cr < 5)
+			{
+				cr = 5;
+			}
+			if (Me.CurrentTarget.Distance > cr + 25){
+				Navigator.MoveTo(WoWMovement.CalculatePointFrom(ObjectManager.Me.CurrentTarget.Location, System.Convert.ToSingle(cr + 25f)));
 			}else{
 				WoWMovement.MoveStop();
 			}
@@ -185,6 +197,10 @@ namespace CJRotatorCC
 		
 		public override void Rest()
         {
+			if (!Me.IsAlive)
+			{
+				return;
+			}
             if (Me.HealthPercent < 35)
             {
                 Styx.Logic.Common.Rest.Feed();
