@@ -86,9 +86,9 @@ namespace facing
 				}else{
 					WoWUnit focus = null;
 					
-					ulong guid = ulong.parse(string.Substring(abc[0],2));
+					ulong guid = ulong.Parse(abc[0].Substring(2),System.Globalization.NumberStyles.AllowHexSpecifier);
 					 
-					focus = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(unit => unit.guid == guid);
+					focus = ObjectManager.GetObjectsOfType<WoWUnit>().FirstOrDefault(unit => unit.Guid == guid);
 					
 					FR=System.Convert.ToDecimal(focus.Distance) - System.Convert.ToDecimal(focus.CombatReach);
 					Lua.DoString("PlayerToFocus = " + FR);
