@@ -189,7 +189,7 @@ function CJFireMageRot()
 		CJ_Cast("Combustion");
 	end
 	
-	if not CJ_OD("Shadow and Flames") and CJ_DTR("Critical Mass") < 6 then
+	if not CJ_OD("Shadow and Flame") and CJ_DTR("Critical Mass") < 6 then
 		if CJ_Cast("Scorch") then return end;
 	end
 	
