@@ -1,7 +1,4 @@
 --Druid Rotations
-
-local balancefourset = false;
-local feralfourset = false;
 local lastform = nil
 
 local function CJ_Energy()

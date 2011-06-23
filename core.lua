@@ -58,6 +58,8 @@ cj_deathstrike = false;
 --Druids
 cj_feralcharge = false
 cj_thrash = false;
+feralfourset = false
+balancefourset = false;
 
 --Shamans
 cj_frostshock  = false;
@@ -404,6 +406,26 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_thrash = not cj_thrash end
 				info.checked = cj_thrash
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Four Piece T11"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() feralfourset = not feralfourset end
+				info.checked = feralfourset
+				UIDropDownMenu_AddButton(info,level)
+			elseif cj_currentRotation == 21 then
+				info.text = "Four Piece T11"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() balancefourset = not balancefourset end
+				info.checked = balancefourset
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 11 then
 				info.text = "Use Defensive Cooldowns"
