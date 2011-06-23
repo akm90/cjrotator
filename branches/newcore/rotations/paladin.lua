@@ -221,20 +221,6 @@ local function CJRetNormalRotation()
 		end
 	end
 	
-	if CJ_HolyPower() < 3 then
-		if cj_aoemode and CJ_T(3,10) > 0 then
-			if CJ_Cast("Divine Storm") then return end;
-		else
-			if CJ_Cast("Crusader Strike") then return end;
-		end
-	end
-	
-	if CJ_Cast("Hammer of Wrath") then return end;
-	
-	if CJ_HB("The Art of War") then
-		if CJ_Cast("Exorcism") then return end;
-	end
-	
 	if CJ_HolyPower() == 3 then
 		if CJ_Cast("Templar's Verdict") then return end;
 	end
@@ -255,6 +241,20 @@ local function CJRetNormalRotation()
 		if CJ_Cast("Templar's Verdict") then return end;
 	end
 	
+	if CJ_HolyPower() < 3 then
+		if cj_aoemode and CJ_T(3,10) > 0 then
+			if CJ_Cast("Divine Storm") then return end;
+		else
+			if CJ_Cast("Crusader Strike") then return end;
+		end
+	end
+	
+	if CJ_Cast("Hammer of Wrath") then return end;
+	
+	if CJ_HB("The Art of War") then
+		if CJ_Cast("Exorcism") then return end;
+	end	
+		
 	if CJ_Cast("Judgement") then return end;
 	if CJ_Cast("Holy Wrath") then return end;
 	

@@ -273,7 +273,7 @@ function CJDestLockRot()
 	end
 	
 	if (CJ_DTR("Immolate") - (select(7,GetSpellInfo("Immolate"))/1000)) < 2 and (GetTime() - lastimmolatecast > 2.5) then
-		if CJ_Cast("Imolate") then lastimmolatecast = GetTime() return end
+		if CJ_Cast("Immolate") then lastimmolatecast = GetTime() return end
 	end
 	
 	if CJ_Cast("Conflagrate") then return end
