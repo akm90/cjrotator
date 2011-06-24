@@ -172,7 +172,7 @@ function CJFireMageRot()
 	
 	if IsSpellInRange("Fireball") == 0 then return end
 	if GetUnitSpeed("player") > 0 then
-		if not CJ_HB("Living Bomb") then
+		if not CJ_HD("Living Bomb") then
 			if CJ_Cast("Living Bomb") then return end;
 		end
 		
