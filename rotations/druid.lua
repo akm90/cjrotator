@@ -127,16 +127,18 @@ end
 ------------------------
 --------Cat Form--------
 ------------------------
-local function CJ_KittyBuffs()
---[[	if not CJ_HB("Mark of the Wild") then
-		if GetShapeshiftForm() ~= 0 then
-			lastForm = GetShapeshiftForm();
+function CJ_KittyBuffs()
+	--[[if GetNumPartyMembers() == 0 then
+		if IsUsableSpell("Healing Touch") == 1 and CJ_HB("Predator's Swiftness") == true and CJ_HP("player") < 50 then
 			RunMacroText("/cancelform");
-			return true;
 		end
-		if CJ_Cast("Mark of the Wild") then return true end;
-	end--]]
-	
+		if CJ_HB("Predator's Swiftness") == true and CJ_HB("Cat Form") == false then
+			CastSpellByName("Healing Touch");
+		end
+		if CJ_HB("Predator's Swiftness") == false and CJ_HB("Cat Form") == false then
+			CastShapeshiftForm(3);
+		end
+	end --]]
 	return false;
 end
 
@@ -295,7 +297,7 @@ local function CJ_Lunar()
 	return CJ_HB("Eclipse (Lunar)");
 end
 
-local function CJ_BalanceBuffs()
+function CJ_BalanceBuffs()
 	if not (CJ_HB("Mark of the Wild") or CJ_HB("Blessing of Kings")) then
 		if GetShapeshiftForm() ~= 0 then
 			RunMacroText("/cancelform");

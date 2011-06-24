@@ -27,6 +27,36 @@ cj_rotationTable = {
 [103] = "CJProtWarRot"
 };
 
+cj_buffTable = {
+[11] = "CJBloodDKRot",
+[12] = "CJFrostDKRot",
+[13] = "CJUnholyDKRot",
+[21] = "CJBalanceDruidRot",
+[22] = "CJFeralDruidRot",
+[31] = "CJBMHunterRot",
+[32] = "CJMarksHunterRot",
+[33] = "CJSurvHunterRot",
+[41] = "CJArcMageRot",
+[42] = "CJFireMageRot",
+[43] = "CJFrostMageRot",
+[52] = "CJProtPallyRot",
+[53] = "CJRetPallyRot",
+[61] = "CJDiscPriestRot",
+[63] = "CJSpriestRot",
+[71] = "CJAssRogueRot",
+[72] = "CJCombatRogueRot",
+[73] = "CJSubRogueRot",
+[81] = "CJEleShamRot",
+[82] = "CJEnhShamRot",
+[91] = "CJAffLockRot",
+[92] = "CJDemoLockRot",
+[93] = "CJDestLockRot",
+[101] = "CJArmsWarRot",
+[102] = "CJFuryWarRot",
+[103] = "CJProtWarRot"
+};
+
+
 cj_interruptBlacklist = {
 	["High Priestess Kilnara"] = {[1] = "Shadow Bolt"},
 	["Venomancer Mauri"] = {[1] = "Poison Bolt"},

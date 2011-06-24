@@ -211,12 +211,20 @@ function CJArmsWarRot()
 	if AmIFacing == false then return end
 	if CJ_OC() then StopAttack() return end
 	local SSGLYPH = false
+	local LCGLYPH = 0
 	CJ_Interrupt("Pummel")
 	
 	if select(5,GetTalentInfo(3,3,false,false,nil)) > 0 then
 		bnt = true
 	else
 		bnt = false
+	end
+	
+	LCGLYPH = 0
+	for i =1,NUM_GLYPH_SLOTS do
+		if select(4,GetGlyphSocketInfo(i)) == 58344 then
+			LCGLYPH = 1
+		end
 	end
 	
 	if ((not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
@@ -231,7 +239,7 @@ function CJArmsWarRot()
 	end
 	
 	if IsSpellInRange("Heroic Strike") == 0 and IsSpellInRange("Charge") == 1 then
-		if PlayerToTarget >=8 and PlayerToTarget <= 25 then
+		if PlayerToTarget >=8 and PlayerToTarget <= (25 + (LCGLYPH * 5)) then
 			if CJ_Cast("Charge") then return end
 		end
 		return
@@ -241,7 +249,7 @@ function CJArmsWarRot()
 		CJ_Shout()
 	end
 	
-	if PlayerToTarget <= 25 and PlayerToTarget >= 8 then
+	if PlayerToTarget <= (25 + (LCGLYPH * 5)) and PlayerToTarget >= 8 then
 		CJ_Cast("Charge")
 	end
 	
