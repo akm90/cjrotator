@@ -126,6 +126,7 @@ end
 ---------------------------------
 -----------Fire------------------
 ---------------------------------
+cj_lastscorch = 0;
 function CJFireMageRot()
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
@@ -185,12 +186,16 @@ function CJFireMageRot()
 		CJ_Cast("Mirror Image");
 	end
 	
+	if !CJ_HB("Living Bomb") then
+		if CJ_Cast("Living Bomb") then return end;
+	end
+	
 	if CJ_HD("Living Bomb") and CJ_HD("Pyroblast") and CJ_HD("Ignite") and cj_cooldowns then
 		CJ_Cast("Combustion");
 	end
 	
-	if not CJ_OD("Shadow and Flame") and CJ_DTR("Critical Mass") < 6 then
-		if CJ_Cast("Scorch") then return end;
+	if not CJ_OD("Shadow and Flame") and CJ_DTR("Critical Mass") < 6 and GetTime() - cj_lastscorch > 3 then
+		if CJ_Cast("Scorch") then cj_lastscorch = GetTime() return end;
 	end
 	
 	if CJ_HB("Hot Streak") then
