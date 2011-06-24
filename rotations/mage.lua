@@ -186,7 +186,7 @@ function CJFireMageRot()
 		CJ_Cast("Mirror Image");
 	end
 	
-	if !CJ_HB("Living Bomb") then
+	if not CJ_HB("Living Bomb") then
 		if CJ_Cast("Living Bomb") then return end;
 	end
 	
