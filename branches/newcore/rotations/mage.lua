@@ -43,6 +43,9 @@ function CJArcMageRot()
 	if IsSpellInRange("Arcane Blast") == 0 then return end
 	
 	if GetUnitSpeed("player") > 0 then
+		if cj_aoemode and PlayerToTarget < 8 then
+			if CJ_Cast("Arcane Explosion") then return end
+		end
 		if CJ_Cast("Arcane Barrage") then return end;
 		if CJ_Cast("Fire Blast") then return end;
 		if CJ_Cast("Ice Lance") then return end;
@@ -55,6 +58,10 @@ function CJArcMageRot()
 	
 	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCount(36799,false,true) > 0 and GetItemCooldown(36799) == 0 then
 		UseItemByName(36799);
+	end
+	
+	if cj_aoemode and PlayerToTarget < 8 then
+		if CJ_Cast("Arcane Explosion") then return end
 	end
 	
 	if CJ_IsRaidBoss() then
