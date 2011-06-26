@@ -158,6 +158,12 @@ namespace CJRotatorCC
         {
             get
             {
+				List<string> blargh = Lua.GetReturnValues("return cj_stopmovement","ashdioahsdas.lua");
+			
+				if (blargh[0] == "1")
+				{
+					return false;
+				}
 				if (!initialized){
 					List<string> blah = Lua.GetReturnValues("return cj_currentRotation","basdoajdo.lua");
 					currentRotation = blah[0].ToInt32();

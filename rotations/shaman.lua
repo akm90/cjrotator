@@ -4,7 +4,7 @@ local is = "Wind Shear"
 -------- Enhance -----------------
 ----------------------------------
 
-local function CJ_EnhanceBuffs()
+function CJ_EnhanceBuffs()
 	local arg1,_,_,arg2 = GetWeaponEnchantInfo();
 	
 	if not arg1 then
@@ -135,7 +135,7 @@ end
 ------------------------------------------
 -------------- Elemental -----------------
 ------------------------------------------
-local function CJ_EleBuffs()
+function CJ_EleBuffs()
 	local arg1 = GetWeaponEnchantInfo();
 	
 	if not arg1 then
@@ -245,7 +245,7 @@ end
 ------------------------------------------
 -------------- Restoration----------------
 ------------------------------------------
-local function CJ_RestoBuffs()
+function CJ_RestoBuffs()
 	local arg1 = GetWeaponEnchantInfo();
 	
 	if not arg1 then

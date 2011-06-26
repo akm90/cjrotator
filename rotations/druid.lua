@@ -272,6 +272,10 @@ local function CJKittyRotation()
 	end
 end
 
+function CJ_FeralBuffs()
+	return false;
+end
+
 function CJFeralDruidRot()
 	if CJ_OC() then StopAttack() return end
 	if GetShapeshiftForm() == 1 then
