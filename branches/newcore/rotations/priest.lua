@@ -90,7 +90,7 @@ function CJSpriestRot()
 	end
 	
 	if CJ_MP("player") <= 75 and cj_cooldowns and CJ_DTR("Vampiric Touch") > 5 and CJ_DTR("Devouring Plague") > 5 and CJ_BS("Dark Evangelism") == 5 then
-		CJ_Cast("Dark Archangel")
+		CJ_Cast("Archangel")
 	end
 	
 	if CJ_HP("target") < 25 and CJ_HP("player") > 15 then
