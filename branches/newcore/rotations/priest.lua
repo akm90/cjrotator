@@ -2,7 +2,7 @@ local vtcast = 0
 ---------------------
 ------Shadow---------
 ---------------------
-local function CJ_ShadowBuffs()
+function CJ_ShadowBuffs()
 	if not CJ_HB("Power Word: Fortitude") then
 		if CJ_Cast("Power Word: Fortitude") then return true end
 	end
@@ -108,7 +108,7 @@ end
 ---------------------
 --------Disc---------
 ---------------------
-local function CJ_DiscBuffs()
+function CJ_DiscBuffs()
 	if not CJ_HB("Power Word: Fortitude") then
 		if CJ_Cast("Power Word: Fortitude") then return true end
 	end

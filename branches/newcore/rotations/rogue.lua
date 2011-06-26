@@ -5,8 +5,8 @@ end
 -------------------------------------------
 -----------Assassination-------------------
 -------------------------------------------
-local function CJ_AssassinBuffs()
-	local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
+function CJ_AssassinBuffs()
+	--[[local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
 	
 	if not hasMainHandEnchant then
 		RunMacroText("/use Instant Poison;/use 16");
@@ -21,7 +21,7 @@ local function CJ_AssassinBuffs()
 	if not hasThrownEnchant then
 		RunMacroText("/use Deadly Poison;/use 18");
 		return true;
-	end
+	end--]]
 	
 	return false
 end
@@ -106,8 +106,8 @@ end
 -------------------------------------
 -----------Combat--------------------
 -------------------------------------
-local function CJ_CombatBuffs()
-	local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
+function CJ_CombatBuffs()
+	--[[local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
 	
 	if not hasMainHandEnchant then
 		RunMacroText("/use Instant Poison;/use 16");
@@ -122,7 +122,7 @@ local function CJ_CombatBuffs()
 	if not hasThrownEnchant then
 		RunMacroText("/use Wound Poison;/use 18");
 		return true;
-	end
+	end--]]
 	
 	return false
 end
@@ -181,8 +181,8 @@ end
 -------------------------------------
 -----------Subtelty------------------
 -------------------------------------
-local function CJ_SubtletyBuffs()
-	local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
+function CJ_SubtletyBuffs()
+	--[[local hasMainHandEnchant,_,_, hasOffHandEnchant,_,_,hasThrownEnchant,_,_ = GetWeaponEnchantInfo()
 	
 	if not hasMainHandEnchant then
 		RunMacroText("/use Instant Poison;/use 16");
@@ -197,7 +197,7 @@ local function CJ_SubtletyBuffs()
 	if not hasThrownEnchant then
 		RunMacroText("/use Wound Poison;/use 18");
 		return true;
-	end
+	end--]]
 	
 	return false
 end

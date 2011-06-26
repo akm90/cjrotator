@@ -10,6 +10,11 @@ Cheetah
 Pack
 Resist
 --]]
+
+function CJ_MarksBuffs()
+	return false
+end
+
 function CJMarksHunterRot()
 	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
@@ -105,6 +110,10 @@ end
 ------Survival----------
 ------------------------
 local lastexplosive = false;
+function CJ_SurvBuffs()
+	return false;
+end
+
 function CJSurvHunterRot()
 	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end;
@@ -172,6 +181,14 @@ function CJSurvHunterRot()
 	
 	if CJ_Cast("Cobra Shot") then lastexplosive = false return end
 	if CJ_Cast("Steady Shot") then lastexplosive = false return end
+end
+
+------------------------
+------Beastmaster-------
+------------------------
+
+function CJ_BMBuffs()
+	return false;
 end
 
 function CJBMHunterRot()

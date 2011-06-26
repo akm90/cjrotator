@@ -3,7 +3,7 @@
 -------------------------------------------
 -----------Arcane--------------------------
 -------------------------------------------
-local function CJ_ArcaneBuffs()
+function CJ_ArcaneBuffs()
 	if not CJ_HB("Arcane Brilliance") then
 		if CJ_Cast("Arcane Brilliance") then return true end;
 	end
@@ -90,6 +90,10 @@ function CJArcMageRot()
 			if CJ_Cast("Arcane Blast") then return end
 		end
 		
+		if CJ_HB("Clearcasting") then
+			if CJ_Cast("Arcane Barrage") then return end
+		end
+		
 		if CJ_Cast("Arcane Missiles") then return end;
 		if CJ_Cast("Arcane Barrage") then return end;
 	else
@@ -118,6 +122,10 @@ function CJArcMageRot()
 			if CJ_Cast("Arcane Blast") then return end
 		end
 		
+		if CJ_HB("Clearcasting") then
+			if CJ_Cast("Arcane Barrage") then return end
+		end
+		
 		if CJ_Cast("Arcane Missiles") then return end;
 		if CJ_Cast("Arcane Barrage") then return end;
 	end
@@ -127,6 +135,36 @@ end
 -----------Fire------------------
 ---------------------------------
 cj_lastscorch = 0;
+
+function CJ_FireBuffs()
+
+	if not CJ_HB("Arcane Brilliance") then
+		if CJ_Cast("Arcane Brilliance") then return true end;
+	end
+	
+	if not (CJ_HB("Molten Armor") or CJ_HB("Mage Armor")) then
+		if CJ_Cast("Molten Armor") then return end;
+	end
+	
+	if CJ_HB("Mage Armor") and CJ_MP("player") > 60 then
+		if CJ_Cast("Molten Armor") then return end;
+	end
+	
+	if GetItemCount(36799,false,true) == 0 then
+		if UnitAffectingCombat("player") == nil then
+			if CJ_Cast("Conjure Mana Gem") then return end;
+		else
+			if CJ_IsBoss() then
+				if CJ_Cast("Conjure Mana Gem") then return end;
+			end
+		end
+	end
+	
+	if CJ_MP("player") < 5 and not CJ_HB("Mage Armor") then
+		if CJ_Cast("Mage Armor") then return end
+	end
+end
+
 function CJFireMageRot()
 	if cj_decurseself then
 		if CJ_DecurseSelf() then return end
@@ -141,30 +179,11 @@ function CJFireMageRot()
 	
 	if not CJ_GCD() then return end
 	
-	CJ_OffensiveDispel("Spellsteal")
-	
-	if not CJ_HB("Arcane Brilliance") then
-		if CJ_Cast("Arcane Brilliance") then return true end;
-	end
-	
-	if not (CJ_HB("Molten Armor") or CJ_HB("Mage Armor")) then
-		if CJ_Cast("Molten Armor") then return end;
-	end
-	
-	if CJ_HB("Mage Armor") and CJ_MP("player") > 60 then
-		if CJ_Cast("Molten Armor") then return end;
-	end
-	
+	CJ_OffensiveDispel("Spellsteal")	
+
 	if CJ_Casting() then return end;
-	if GetItemCount(36799,false,true) == 0 then
-		if UnitAffectingCombat("player") == nil then
-			if CJ_Cast("Conjure Mana Gem") then return end;
-		else
-			if CJ_IsBoss() then
-				if CJ_Cast("Conjure Mana Gem") then return end;
-			end
-		end
-	end
+	
+	if CJ_FireMBuffs() then return end;
 	
 	if UnitPowerMax("player") - UnitPower("player") > 12500 and GetItemCount(36799,false,true) > 0 and GetItemCooldown(36799) == 0  then
 		UseItemByName(36799);
@@ -210,16 +229,30 @@ function CJFireMageRot()
 		if CJ_Cast("Evocation") then return end;
 	end
 	
-	if CJ_MP("player") < 5 and not CJ_HB("Mage Armor") then
-		if CJ_Cast("Mage Armor") then return end
-	end
-	
 	if CJ_Cast("Fireball") then return end;
 end
 
 ---------------------------------
 -----------Frost-----------------
 ---------------------------------
+
+function CJ_FrostMBuffs()
+	if not CJ_HB("Arcane Brilliance") then
+		if CJ_Cast("Arcane Brilliance") then return true end;
+	end
+	
+	if not (CJ_HB("Molten Armor") or CJ_HB("Mage Armor")) then
+		if CJ_Cast("Molten Armor") then return true end;
+	end
+	
+	if CJ_HB("Mage Armor") and CJ_MP("player") > 60 then
+		if CJ_Cast("Molten Armor") then return true end;
+	end
+	
+	if CJ_MP("player") < 5 and not CJ_HB("Mage Armor") then
+		if CJ_Cast("Mage Armor") then return true end
+	end
+end
 
 function CJFrostMageRot()
 	if cj_decurseself then
@@ -235,18 +268,7 @@ function CJFrostMageRot()
 	
 	if not CJ_GCD() then return end
 	
-	
-	if not CJ_HB("Arcane Brilliance") then
-		if CJ_Cast("Arcane Brilliance") then return true end;
-	end
-	
-	if not (CJ_HB("Molten Armor") or CJ_HB("Mage Armor")) then
-		if CJ_Cast("Molten Armor") then return end;
-	end
-	
-	if CJ_HB("Mage Armor") and CJ_MP("player") > 60 then
-		if CJ_Cast("Molten Armor") then return end;
-	end
+	if CJ_FrostMBuffs() then return end;	
 	
 	if CJ_Casting() then return end;
 	
@@ -296,10 +318,6 @@ function CJFrostMageRot()
 	
 	if CJ_HB("Fingers of Frost") then
 		if CJ_Cast("Ice Lance") then return end;
-	end
-	
-	if CJ_MP("player") < 5 and not CJ_HB("Mage Armor") then
-		if CJ_Cast("Mage Armor") then return end
 	end
 	
 	if CJ_Cast("Frostbolt") then return end;

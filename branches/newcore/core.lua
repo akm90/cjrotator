@@ -585,19 +585,6 @@ local function CJCreateFrame()
 	f:Show();
 end
 
-local info = {};
-function CJClassHelper(self,level)
-	printf("here");
-	if not level then return end
-	wipe(info)
-	if level == 1 then
-		info.isTitle = 1
-		info.text = "Class Options"
-		info.notCheckable = 1
-		UIDropDownMenu_AddButton(info,level)
-	end
-end
-
 function CJ_Minimize()
 	if not cjmin then
 		CJRotatorFrame:SetSize(140,40)
@@ -645,6 +632,10 @@ local function OnUpdate(...)
 		cj_action = false;
 		printf("CJ Rotator Finished");
 		return;
+	end
+	
+	if CJ_GCD() and not CJ_Casting() and UnitAffectingCombat("player") == 0 then
+		_G[cj_buffTable[cj_currentRotation]]();
 	end
 	
 	--[[if UnitAffectingCombat("player") == 1 and (UnitIsDead("target") or not UnitExists("target")) then

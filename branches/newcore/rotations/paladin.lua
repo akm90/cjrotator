@@ -46,7 +46,7 @@ end
 --------------Protection-------------------
 -------------------------------------------
 
-local function CJ_ProtBuffs()
+function CJ_ProtBuffs()
 	if not CJ_HB("Righteous Fury") then
 		if CJ_Cast("Righteous Fury") then return true end
 	end
@@ -191,7 +191,7 @@ end
 
 local ud = false
 
-local function CJ_RetBuffs()
+function CJ_RetBuffs()
 	if cj_aoemode and not CJ_HB("Seal of Righteousness") then
 		if CJ_Cast("Seal of Righteousness") then return end
 	end

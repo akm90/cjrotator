@@ -53,7 +53,7 @@ local function AffLockSwillRot()
 	end
 end
 
-local function CJ_AffBuffs()
+function CJ_AffBuffs()
 	if not CJ_HB("Fel Armor") then
 		if CJ_Cast("Fel Armor") then return true end
 	end
@@ -166,7 +166,7 @@ function CJAffLockRot()
 		end
 	end
 	
-	if (CJ_DTR("Haunt") - (select(7,GetSpellInfo("Haunt"))/1000)) < 2 and (GetTime() - lasthauntcast > 2.5) then
+	if (CJ_DTR("Haunt") - (select(7,GetSpellInfo("Haunt"))/1000)) < 4 and (GetTime() - lasthauntcast > 2.5) then
 		if CJ_Cast("Haunt") then lasthauntcast = GetTime() return end
 	end
 	
@@ -207,7 +207,7 @@ end
 -----------------------------
 ---------Destruction---------
 -----------------------------
-local function CJ_DestroBuffs()
+function CJ_DestroBuffs()
 	if not CJ_HB("Fel Armor") then
 		if CJ_Cast("Fel Armor") then return true end
 	end
@@ -312,7 +312,7 @@ end
 -----------------------------
 ---------Demonology----------
 -----------------------------
-local function CJ_DemoBuffs()
+function CJ_DemoBuffs()
 	if not CJ_HB("Fel Armor") then
 		if CJ_Cast("Fel Armor") then return true end
 	end

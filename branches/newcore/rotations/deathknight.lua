@@ -25,7 +25,7 @@ end
 ---------------------------------
 ---------Unholy-------------------
 ---------------------------------
-local function CJ_UnholyBuffs()		
+function CJ_UnholyBuffs()		
 	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
 		if CJ_Cast("Horn of Winter") then return true end;
 	end
@@ -110,7 +110,7 @@ end
 ---------Frost-------------------
 ---------------------------------
 
-local function CJ_FrostBuffs()		
+function CJ_FrostBuffs()		
 	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
 		if CJ_Cast("Horn of Winter") then return true end;
 	end
@@ -196,7 +196,7 @@ end
 ---------Blood-------------------
 ---------------------------------
 local outbreakcast = false;
-local function CJ_BloodBuffs()		
+function CJ_BloodBuffs()		
 	if not (CJ_HB("Horn of Winter") or CJ_HB("Battle Shout") or CJ_HB("Strength of Earth Totem")) then
 		if CJ_Cast("Horn of Winter") then return true end;
 	end

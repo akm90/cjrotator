@@ -20,6 +20,10 @@ end
 ------------Fury----------------
 --------------------------------
 
+function CJ_FuryBuffs()
+	return false;
+end
+
 function CJ_TGRotation()
 	if cj_cooldowns then
 		if CJ_HP("player") > 50 then
@@ -204,6 +208,10 @@ end
 --------------------------------
 ------------Arms----------------
 --------------------------------
+function CJ_ArmsBuffs()
+	return false;
+end
+
 cj_tclap = 0
 local bnt = false;
 function CJArmsWarRot()
@@ -457,6 +465,10 @@ end
 --------------------------------
 ---------Protection-------------
 --------------------------------
+function CJ_ProtBuffs()
+	return false;
+end
+
 function CJProtWarRot()
 	if AmIFacing == false then return end
 	if CJ_OC() then StopAttack() return end
