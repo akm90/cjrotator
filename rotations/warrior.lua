@@ -544,6 +544,9 @@ function CJProtWarRot()
 		end
 		if CJ_Cast("Victory Rush") then return end
 		if CJ_Shout() then return end
+		if cj_stshock then
+			if CJ_Cast("Shockwave") then return end
+		end
 		if CJ_Cast("Devastate") then return end
 	else
 		if not CJ_HD("Rend") then

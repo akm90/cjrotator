@@ -152,7 +152,7 @@ function CJAffLockRot()
 		if CJ_Cast("Corruption") then return end
 	end
 	
-	 if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 2.5) then
+	if (CJ_DTR("Unstable Affliction") - (select(7,GetSpellInfo("Unstable Affliction"))/1000)) < 2 and (GetTime() - lastuacast > 2.5) then
 		if CJ_Cast("Unstable Affliction") then lastuacast = GetTime() return end
 	end
 	
@@ -201,7 +201,9 @@ function CJAffLockRot()
 		if CJ_Cast("Soul Fire") then return end
 	end
 	
-	if CJ_Cast("Shadow Bolt") then return end
+	if not UnitCastingInfo("player") then
+		if CJ_Cast("Shadow Bolt") then return end
+	end
 end
 
 -----------------------------

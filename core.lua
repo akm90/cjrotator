@@ -36,6 +36,7 @@ cj_rend = 0;
 cj_shatter = false;
 cj_commanding = false;
 cj_throwdown = false;
+cj_stshock = false
 
 --Priest
 cj_dispersion = false;
@@ -326,6 +327,16 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() cj_commanding = not cj_commanding end
 				info.checked = cj_commanding
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Single Target Shockwave"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_stshock = not cj_stshock end
+				info.checked = cj_stshock
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 53 then
 				info.text = "Decurse Self"
