@@ -150,7 +150,7 @@ function CJFrostDKRot()
 		if CJ_Cast("Death Strike") then return end
 	end
 	
-	if cj_cooldowns then
+	if cj_cooldowns and IsSpellInRange("Frost Strike") == 1 then
 		CJ_Cast("Pillar of Frost");
 	end
 	
@@ -168,6 +168,10 @@ function CJFrostDKRot()
 	
 	if CJ_DTR("Blood Plague") <= 2 then
 		if CJ_Cast("Plague Strike") then return end;
+	end
+	
+	if cj_aoemode then
+		if CJ_Cast("Howling Blast") then return end
 	end
 	
 	if (CJ_NR(2) == 2 and CJ_NR(3) == 2) or CJ_NR(4) == 2 or CJ_HB("Killing Machine") then
