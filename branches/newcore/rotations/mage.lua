@@ -143,7 +143,7 @@ end
 ---------------------------------
 cj_lastscorch = 0;
 
-function CJ_FireBuffs()
+function CJ_FireMBuffs()
 
 	if not CJ_HB("Arcane Brilliance") then
 		if CJ_Cast("Arcane Brilliance") then return true end;
