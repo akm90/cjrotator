@@ -150,26 +150,28 @@ function CJ_FireMBuffs()
 	end
 	
 	if not (CJ_HB("Molten Armor") or CJ_HB("Mage Armor")) then
-		if CJ_Cast("Molten Armor") then return end;
+		if CJ_Cast("Molten Armor") then return true end;
 	end
 	
 	if CJ_HB("Mage Armor") and CJ_MP("player") > 60 then
-		if CJ_Cast("Molten Armor") then return end;
+		if CJ_Cast("Molten Armor") then return true end;
 	end
 	
 	if GetItemCount(36799,false,true) == 0 then
 		if UnitAffectingCombat("player") == nil then
-			if CJ_Cast("Conjure Mana Gem") then return end;
+			if CJ_Cast("Conjure Mana Gem") then return true end;
 		else
 			if CJ_IsBoss() then
-				if CJ_Cast("Conjure Mana Gem") then return end;
+				if CJ_Cast("Conjure Mana Gem") then return true end;
 			end
 		end
 	end
 	
 	if CJ_MP("player") < 5 and not CJ_HB("Mage Armor") then
-		if CJ_Cast("Mage Armor") then return end
+		if CJ_Cast("Mage Armor") then return true end
 	end
+	
+	return false
 end
 
 function CJFireMageRot()
