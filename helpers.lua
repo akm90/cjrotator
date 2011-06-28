@@ -124,7 +124,7 @@ end
 function CJ_HDF(debuff)
 	local rank = select(2,UnitDebuff("focus",debuff));
 	if not rank then return false end
-	if not UnitDebuff("target",debuff,rank,"PLAYER") then return false else return true end;
+	if not UnitDebuff("focus",debuff,rank,"PLAYER") then return false else return true end;
 end
 
 
