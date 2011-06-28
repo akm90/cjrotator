@@ -30,10 +30,6 @@ local function AffLockSwillRot()
 		if CJ_Cast("Soulburn") then if CJ_Cast("Seed of Corruption") then seedcast = true return end end
 	end
 	
-	if CJ_DTR("Corruption") < 2 then
-		if CJ_Cast("Corruption") then return end
-	end
-	
 	if not CJ_HD("Bane of Agony") then
 		if CJ_Cast("Bane of Agony") then return end
 	end
@@ -76,7 +72,7 @@ function CJAffLockRot()
 	end
 	
 	if UnitName("target") == "Maloriak" and (UnitName("focus") ~= "Maloriak" or not UnitExists("focus")) then
-		FocusUnit("target")
+		RunMacroText("/focus");
 	end
 	
 	if AmIFacing == false then return end;
