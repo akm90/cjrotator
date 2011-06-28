@@ -753,7 +753,13 @@ local function CJToggleOn()
 end
 
 local function CJToggleAoE()
-    RunMacroText("/click CJAoECheckbox");
+	if not cj_aoemode then
+		cj_aoemode = 1;
+	else
+		cj_aoemode = false;
+	end
+	
+	CJAoECheckbox:SetChecked(cj_aoemode);
 	cj_tclap = 0;
     if cj_aoemode then printf("CJ Rotator: AoE Mode") else printf("CJ Rotator: Single Target Mode") end
 end
