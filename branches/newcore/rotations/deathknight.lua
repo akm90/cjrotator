@@ -74,7 +74,7 @@ function CJUnholyDKRot()
 	end
 	
 	if cj_cooldowns then
-		if CJ_HB("Unholy Frenzy") or CJ_Hero() or CJ_IsBoss() and CJ_HP("target") >= 90 then
+		if CJ_HB("Unholy Frenzy") or CJ_Hero() or (CJ_IsBoss() and CJ_HP("target") >= 90) then
 			if CJ_Cast("Summon Gargoyle") then return end
 		end
 	end
@@ -182,7 +182,7 @@ function CJFrostDKRot()
 		CJ_Cast("Empower Rune Weapon");
 	end
 	
-	if UnitPower("player") >= 95 then
+	if (CJ_Hero() and UnitPower("player") >= 95) or UnitPower("player") > 90 then
 		if CJ_Cast("Frost Strike") then return end;
 	end
 	

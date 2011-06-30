@@ -88,9 +88,7 @@ function CJEnhShamRot()
 	
 	CJ_OffensiveDispel("Purge");
 	
-	if cj_cooldowns then
-		if CJ_Cast("Feral Spirit") then return end;
-	end
+	if CJ_Cast("Stormstrike") then return end;
 	
 	if cj_aoemode then
 		if CJ_Cast("Lava Lash") then return end;
@@ -98,16 +96,6 @@ function CJEnhShamRot()
 		if CJ_DS("Searing Flames") >= 2 or select(2,GetTotemInfo(1)) == "Fire Elemental Totem" then
 			if CJ_Cast("Lava Lash") then return end;
 		end
-	end
-	
-	if cj_aoemode and CJ_HD("Flame Shock") then
-		if CJ_Cast("Fire Nova") then return end;
-	end
-	
-	if cj_aoemode and not CJ_HD("Flame Shock") then
-		if CJ_Cast("Flame Shock") then return end;
-	elseif not cj_aoemode and CJ_HB("Unleash Flame") then
-		if CJ_Cast("Flame Shock") then return end;
 	end
 	
 	if CJ_BS("Maelstrom Weapon") == 5 then
@@ -123,12 +111,26 @@ function CJEnhShamRot()
 	end
 	
 	if CJ_Cast("Unleash Elements") then return end;
-	if CJ_Cast("Stormstrike") then return end;
+	
+	if cj_aoemode and CJ_HD("Flame Shock") then
+		if CJ_Cast("Fire Nova") then return end;
+	end
+	
+	if cj_aoemode and not CJ_HD("Flame Shock") then
+		if CJ_Cast("Flame Shock") then return end;
+	elseif not cj_aoemode and (CJ_HB("Unleash Flame") or not CJ_HD("Flame Shock")) then
+		if CJ_Cast("Flame Shock") then return end;
+	end
+	
 	if not CJ_HB("Unleash Flames") then
 		if cj_frostshock then
 			if CJ_Cast("Frost Shock") then return end
 		end
 		if CJ_Cast("Earth Shock") then return end;
+	end
+	
+	if cj_cooldowns then
+		if CJ_Cast("Feral Spirit") then return end;
 	end
 end
 
@@ -157,6 +159,7 @@ function CJEleShamRot()
 	if cj_decurseparty then
 		if CJ_DecurseAll() then return end
 	end
+	
 	if CJ_OC() then StopAttack() return end
 	if AmIFacing == false then return end
 	CJ_Interrupt(is)
@@ -181,6 +184,8 @@ function CJEleShamRot()
 	if IsSpellInRange("Lightning Bolt") == 0 then return end;
 	
 	CJ_OffensiveDispel("Purge");
+	
+	if CJ_Totems() then return end;
 	
 	if GetUnitSpeed("player") > 0 and not CJ_HB("Spiritwalker's Grace") then
 		if CJ_Cast("Thunderstorm") then return end;
@@ -209,15 +214,6 @@ function CJEleShamRot()
 		return 
 	end
 	
-	if CJ_Totems() then return end;
-	if cj_aoemode and CJ_HD("Flame Shock") then
-		if CJ_Cast("Fire Nova") then return end;
-	end
-	
-	if cj_aoemode then
-		if CJ_Cast("Chain Lightning") then return end;
-	end
-	
 	if cj_aoemode and not CJ_HD("Flame Shock") then
 		if CJ_Cast("Flame Shock") then return end
 	elseif not cj_aoemode then
@@ -226,19 +222,29 @@ function CJEleShamRot()
 		end
 	end
 	
-	if CJ_DTR("Flame Shock") - (select(7,GetSpellInfo("Lava Burst"))/1000) >= .05 then
+	if CJ_DTR("Flame Shock") - (select(7,GetSpellInfo("Lava Burst"))/1000) >= .25 then
 		if CJ_Cast("Lava Burst") then return end
+	end
+	
+	if CJ_BS("Lightning Shield") == 9 then
+		if CJ_Cast("Earth Shock") then return end
 	end
 	
 	if cj_frostshock then
 		if CJ_Cast("Frost Shock") then return end
 	end
 	
-	if CJ_BS("Lightning Shield") >= 7 then
-		if CJ_Cast("Earth Shock") then return end;
+	if CJ_BS("Lightning Shield") > 6 and CJ_BTR("Flame Shock") > 7 then
+		if CJ_Cast("Earth Shock") then return end
 	end
 	
-	if CJ_Cast("Lava Burst") then return end;
+	if cj_aoemode and CJ_HD("Flame Shock") then
+		if CJ_Cast("Fire Nova") then return end;
+	end
+	
+	if cj_aoemode then
+		if CJ_Cast("Chain Lightning") then return end;
+	end
 	
 	if CJ_Cast("Lightning Bolt") then return end;
 end

@@ -229,10 +229,10 @@ function CJArmsWarRot()
 	end
 	
 	LCGLYPH = 0
-	for i =1,NUM_GLYPH_SLOTS do
-		if select(4,GetGlyphSocketInfo(i)) == 58344 then
-			LCGLYPH = 1
-		end
+	if CJ_Glyph(58344) then
+		LCGLYPH = 1
+	else
+		LCGLYPH = 0
 	end
 	
 	if ((not CJ_HD("Rend")) or (((CJ_HB("Overpower") or CJ_HB("Taste for Blood")) and CJ_CD("Mortal Strike") > 1) 
@@ -269,7 +269,7 @@ function CJArmsWarRot()
 		end
 		
 		if UnitPower("player") < 30 and ((CJ_HP("target") > 20 and CJ_IsRaidBoss()) or 
-		(CJ_HP("target") <= 20 and CJ_IsBoss() and not CJ_HB("Recklessness"))) then
+		(CJ_HP("target") <= 20 and CJ_IsBoss() and CJ_HB("Recklessness"))) then
 			CJ_Cast("Deadly Calm")
 		end
 	end
@@ -284,10 +284,11 @@ function CJArmsWarRot()
 		CJ_Cast("Cleave")
 	end
 	
-	if UnitPower("player") > 80 or CJ_HB("Deadly Calm") or (CJ_HB("Incite") and UnitPower("player") > 50) or CJ_HB("Battle Trance") then
+	if ((UnitPower("player") >= 85 and CJ_HP("target") >= 20) or CJ_HB("Deadly Calm") or ((CJ_HB("Incite") and CJ_HD("Colossus Smash")) and 
+		((UnitPower("player") >=50 and CJ_HP("target") >= 20) or (UnitPower("player") >= 75 and CJ_HP("target") < 20)))) then
 		CJ_Cast("Heroic Strike")
 	end
-	
+
 	if GetShapeshiftForm() == 3 then
 		if UnitPower("player") < 70 and not CJ_HB("Deadly Calm") then
 			CJ_Cast("Berserker Rage")
@@ -304,14 +305,7 @@ function CJArmsWarRot()
 				if not UnitDebuff("target","Sunder Armor") then
 					if CJ_Cast("Sunder Armor") then return end
 				else
-					local CSGLYPH = false
-					for i =1,NUM_GLYPH_SLOTS do
-						if select(4,GetGlyphSocketInfo(i)) == 89003 then
-							CSGLYPH = true
-						end
-					end
-					
-					if not CSGLYPH and select(4,UnitDebuff("target","Sunder Armor")) < 3 then
+					if not CJ_Glyph(89003) and select(4,UnitDebuff("target","Sunder Armor")) < 3 then
 						if CJ_Cast("Sunder Armor") then return end
 					end
 				end
@@ -323,14 +317,7 @@ function CJArmsWarRot()
 		end
 		
 		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
-			local SSGLYPH = false
-			for i =1,NUM_GLYPH_SLOTS do
-				if select(4,GetGlyphSocketInfo(i)) == 57168 then
-					SSGLYPH = true
-				end
-			end
-			
-			if UnitPower("player") < 30 and not SSGLYPH then return end
+			if UnitPower("player") < 30 and not CJ_Glyph(57168) then return end
 			CJ_Cast("Sweeping Strikes")
 		end
 		
@@ -386,14 +373,7 @@ function CJArmsWarRot()
 		end
 		
 		if cj_aoemode and CJ_CD("Sweeping Strikes") == 0 then
-			local SSGLYPH = false
-			for i =1,NUM_GLYPH_SLOTS do
-				if select(4,GetGlyphSocketInfo(i)) == 57168 then
-					SSGLYPH = true
-				end
-			end
-			
-			if UnitPower("player") < 30 and not SSGLYPH then return end
+			if UnitPower("player") < 30 and not CJ_Glyph(57168) then return end
 			CJ_Cast("Sweeping Strikes")
 		end
 		

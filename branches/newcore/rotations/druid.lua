@@ -1,5 +1,6 @@
 --Druid Rotations
 local lastform = nil
+local shredvar = 0;
 
 local function CJ_Energy()
 	return UnitPower("player",3);
@@ -170,7 +171,13 @@ local function CJKittyRotation()
 	elseif IsSpellInRange("Faerie Fire (Feral)") == 0 then return
 	end
 	
-	if CJ_Energy() < 26 then
+	if cj_cooldowns and UnitAffectingCombat("player") == 1 then
+		if CJ_HB("Tiger's Fury") or (CJ_IsBoss() and CJ_HP("target") < 10 and CJ_CD("Tiger's Fury") > 6) then
+			CJ_Cast("Berserk")
+		end
+	end
+	
+	if CJ_Energy() <= 35 then
 		CJ_Cast("Tiger's Fury");
 	end
 	
@@ -189,7 +196,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Ravage(Cat Form)!") then return end
 	end
 	
-	if feralfourset and CJ_BS("Strength of the Panther") < 3 then 
+	if feralfourset and (CJ_BS("Strength of the Panther") < 3 or CJ_BTR("Strength of the Panther") < 3) then 
 		if CJ_Cast("Mangle(Cat Form)") then return end;
 	end
 	
@@ -205,23 +212,27 @@ local function CJKittyRotation()
 		CastSpellByName("Ravage(Cat Form)!")
 	end
 	
-	if cj_cooldowns and CJ_Energy() < 50 and not CJ_HB("Tiger's Fury") and CJ_CD("Tiger's Fury")  > 15 then
-		CJ_Cast("Berserk")
-	end
-	
-	if CJ_HP("target") < 25 and CJ_Combo() >= 1 and CJ_HD("Rip") and CJ_DTR("Rip") < 4 then
+	if CJ_HP("target") <= 25 and CJ_Combo() >= 1 and CJ_HD("Rip") and CJ_DTR("Rip") < 4 then
 		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
 	
-	if CJ_Combo() == 5 and CJ_HD("Rip") and CJ_HP("target") < 25 then
+	if CJ_Combo() == 5 and CJ_HD("Rip") and CJ_HP("target") <= 25 then
 		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
 	
-	if CJ_Combo() == 5 and CJ_DTR("Rip") < 3.5 then
-		if CJ_Cast("Rip(Cat Form)") then return end;
+	if CJ_HD("Rip") and CJ_DTR("Rip") <= 4 and CJ_HP("target") > 25 and AmIBehind == true and CJ_Glyph(56957) and shredvar < 3 then
+		if CJ_Cast("Shred(Cat Form)") then shredvar = shredvar + 1 return end;
 	end
 	
-	if CJ_HB("Tiger's Fury") and not CJ_HD("Rake") then
+	if CJ_Combo() == 5 and CJ_DTR("Rip") < 3.5 and (CJ_HB("Berserk") or CJ_DTR("Rip") <= CJ_CD("Tiger's Fury")) then
+		if CJ_Cast("Rip(Cat Form)") then shredvar = 0 return end;
+	end
+	
+	if CJ_Combo() == 5 and CJ_DTR("Rip") > 5 and CJ_BTR("Savage Roar") >= 3 then
+		if CJ_Cast("Ferocious Bite(Cat Form)") then return end
+	end
+	
+	if CJ_HB("Tiger's Fury") and CJ_DTR("Rake") < 9 then
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end
 	
@@ -229,16 +240,11 @@ local function CJKittyRotation()
 		if CJ_Cast("Rake(Cat Form)") then return end;
 	end
 	
-	
-	if not CJ_HD("Rake") or CJ_DTR("Rake") < 3 then
-		if CJ_Cast("Rake(Cat Form)") then return end;
-	end;
-	
 	if CJ_HB("Omen of Clarity") and AmIBehind == true then
 		if CJ_Cast("Shred(Cat Form)") then return end;
 	end
 	
-	if CJ_Combo() >= 1 and CJ_HD("Rip") and CJ_DTR("Rip") > 8 and CJ_BTR("Savage Roar") < 3 then
+	if CJ_Combo() >= 1 and CJ_BTR("Savage Roar") < 3 then
 		if CJ_Cast("Savage Roar(Cat Form)") then return end;
 	end
 	
@@ -250,10 +256,6 @@ local function CJKittyRotation()
 		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
 	
-	if CJ_HD("Rip") and CJ_DTR("Rip") <= 4 and CJ_HP("target") > 25 and AmIBehind == true then
-		if CJ_Cast("Shred(Cat Form)") then return end;
-	end
-	
 	if CJ_DTR("Rip") > 7 and CJ_Combo() >= 4 then
 		if CJ_Cast("Ferocious Bite(Cat Form)") then return end;
 	end
@@ -262,6 +264,7 @@ local function CJKittyRotation()
 		if CJ_Cast("Ravage") then return end
 		if CJ_Cast("Ravage!") then return end
 	end
+	
 	
 	if CJ_Energy() < 45 then return end;
 	
@@ -343,6 +346,10 @@ function CJBalanceDruidRot()
 			if CJ_Cast("Insect Swarm") then return end;
 		end
 		
+		if CJ_HB("Shooting Stars") then
+			if CJ_Cast("Starsurge") then return end
+		end
+		
 		if CJ_HB("Eclipse (Solar)") then
 			if CJ_Cast("Sunfire") then return end;
 		end
@@ -361,6 +368,10 @@ function CJBalanceDruidRot()
 	
 	if CJ_DTR("Insect Swarm") < 4 then
 		if CJ_Cast("Insect Swarm") then return end;
+	end
+	
+	if cj_starfall and CJ_Lunar() then
+		if CJ_Cast("Starfall") then return end
 	end
 	
 	if CJ_HB("Astral Alignment") then
@@ -394,6 +405,10 @@ function CJBalanceDruidRot()
 	
 	if not ((GetEclipseDirection() == "moon" and CJ_Eclipse() <= -87) or (GetEclipseDirection() == "sun" and CJ_Eclipse() >= 80)) then
 		if CJ_Cast("Starsurge") then return end;
+	end
+	
+	if cj_cooldowns then
+		CJ_Cast("Force of Nature")
 	end
 	
 	if GetEclipseDirection() == "sun" and CJ_Eclipse() < 80 then

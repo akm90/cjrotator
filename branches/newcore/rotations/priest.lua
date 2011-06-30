@@ -102,7 +102,9 @@ function CJSpriestRot()
 	end
 	
 	if CJ_Cast("Mind Blast") then return end
-	if CJ_Cast("Mind Flay") then return end
+	if UnitChannelInfo("player") ~= "Mind Flay" then
+		if CJ_Cast("Mind Flay") then return end
+	end
 end
 
 ---------------------
