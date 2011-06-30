@@ -63,17 +63,21 @@ function CJMarksHunterRot()
 		if CJ_Cast("Multi-Shot") then return end
 	end
 	
-	if CJ_HP("target") <= 80 and not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
+	if cj_aoemode then
+		if CJ_Cast("Steady Shot") then numsteady = numsteady + 1; if numsteady == 2 then numsteady = 0 end return end
+	end
+	
+	if CJ_HP("target") <= 90 and not CJ_HD("Serpent Sting") and GetTime() - lastss > 3 then
 		if CJ_Cast("Serpent Sting") then lastss = GetTime() return end
 	end
 	
-	if CJ_HP("target") <= 80 then
+	if CJ_HP("target") <= 90 then
 		if CJ_Cast("Chimera Shot") then return end
 	end
 	
 	if cj_cooldowns then
-		if not CJ_Hero() and CJ_IsBoss() and CJ_HP("target") < 10 and not CJ_HB("Rapid Fire") then
-			CJ_Cast("Rapid Fire");
+		if CJ_IsBoss() and (not CJ_Hero() or CJ_HP("target") < 10) and not CJ_HB("Rapid Fire") then
+			CJ_Cast("Rapid Fire")
 		end
 		
 		if IsUsableSpell("Rapid Fire") and CJ_CD("Rapid Fire") > 0 and not CJ_HB("Rapid Fire") then
@@ -103,7 +107,7 @@ function CJMarksHunterRot()
 		if CJ_Cast("Arcane Shot") then return end
 	end
 	
-	if CJ_Cast("Steady Shot") then return end;
+	if CJ_Cast("Steady Shot") then numsteady = numsteady + 1; if numsteady == 2 then numsteady = 0 end return end;
 end
 
 ------------------------
@@ -170,7 +174,7 @@ function CJSurvHunterRot()
 	end
 	
 	if not CJ_HD("Black Arrow") and GetTime() - lastba > 3 then
-		if CJ_Cast("Black Arrow") then lastba = GetTime() lastexplosive = false return end
+		if CJ_Cast("Black Arrow") then lastba = GetTime(); lastexplosive = false return end
 	end
 	
 	if CJ_Cast("Kill Shot") then lastexplosive = false return end

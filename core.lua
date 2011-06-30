@@ -59,6 +59,7 @@ cj_deathstrike = false;
 --Druids
 cj_feralcharge = false
 cj_thrash = false;
+cj_starfall = false;
 feralfourset = false
 balancefourset = false;
 
@@ -437,6 +438,16 @@ local function CJCreateFrame()
 				info.minWidth = 165
 				info.func = function() balancefourset = not balancefourset end
 				info.checked = balancefourset
+				UIDropDownMenu_AddButton(info,level)
+				
+				info.text = "Use Starfall"
+				info.keepShownOnClick = 1
+				info.disabled = nil
+				info.isTitle = nil
+				info.notCheckable = nil
+				info.minWidth = 165
+				info.func = function() cj_starfall = not cj_starfall end
+				info.checked = cj_starfall
 				UIDropDownMenu_AddButton(info,level)
 			elseif cj_currentRotation == 11 then
 				info.text = "Use Defensive Cooldowns"

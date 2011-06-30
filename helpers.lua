@@ -202,6 +202,7 @@ function CJ_Casting()
 		if (select(6,UnitCastingInfo("player")) - 30) - (GetTime()*1000) - select(4,GetNetStats()) < 0 then return false else return true end;
 	elseif UnitChannelInfo("player") ~= nil then
 		if UnitChannelInfo("player") == "Drain Soul" then return false end
+		if UnitChannelInfo("player") == "Mind Flay" then return false end
 		if (select(6,UnitChannelInfo("player")) - 30) - (GetTime()*1000)  - select(4,GetNetStats()) < 0 then return false else return true end;
 	end
 	return false;
@@ -622,15 +623,28 @@ function CJ_GCD()
 	
 	return false;
 end
-
+lastmessage = "";
 --Prints to chat frame
 function printf(message)
-	DEFAULT_CHAT_FRAME:AddMessage(message);
+	if message ~= lastmessage then
+		lastmessage = message
+		DEFAULT_CHAT_FRAME:AddMessage(message);
+	end
 end
 
 --Returns talents at tree,talent
 function CJ_T(tree,talent)
 	return select(5,GetTalentInfo(tree,talent,false,false,nil))
+end
+
+function CJ_Glyph(id)
+	for i =1,NUM_GLYPH_SLOTS do
+		if select(4,GetGlyphSocketInfo(i)) == id then
+			return true
+		end
+	end	
+	
+	return false
 end
 
 --Selects your current spec and initializes variables properly
