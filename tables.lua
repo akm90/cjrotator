@@ -71,6 +71,13 @@ cj_interruptBlacklist = {
 	["Stonecore Earthshaper"] = {[1] = "Lava Burst",[2] = "Ground Shock"}
 };
 
+cj_dispelBlacklist = {
+	[1] = "Toxic Torment",
+	[2] = "Burning Blood",
+	[3] = "Frostburn Formula",
+	[4] = "Blackout"
+};
+
 cj_bosslist = {
 	[1] = "Admiral Ripsnarl",
 	[2] = "Altairus",

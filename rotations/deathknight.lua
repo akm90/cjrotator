@@ -186,7 +186,7 @@ function CJFrostDKRot()
 		if CJ_Cast("Frost Strike") then return end;
 	end
 	
-	if CJ_HB("Rime") or (CJ_NR(4) + CJ_NR(2) == 0) then
+	if CJ_HB("Freezing Fog") or (CJ_NR(4) + CJ_NR(2) == 0) then
 		if CJ_Cast("Howling Blast") then return end;
 	end
 	
