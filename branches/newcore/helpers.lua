@@ -458,69 +458,79 @@ end
 function CJ_DecurseSelf()
 	if cj_class == "Mage" then
 		for i = 1,40 do
-			if select(5,UnitDebuff("player",i)) == "Curse" then
-				return CJ_CastTarget("Remove Curse","player")
+			if not tableContains(cj_dispelBlacklist,UnitDebuff("player",i)) then
+				if select(5,UnitDebuff("player",i)) == "Curse" then
+					return CJ_CastTarget("Remove Curse","player")
+				end
 			end
 		end
 	elseif cj_class == "Priest" then
 		for i = 1,40 do
-			if select(5,UnitDebuff("player",i)) == "Magic" then
-				return CJ_CastTarget("Dispel Magic","player")
-			end
-			
-			if select(5,GetTalentInfo(2,14,false,false,nil)) > 0 then
-				if select(5,UnitDebuff("player",i)) == "Poison" then
-					return CJ_CastTarget("Cure Disease","player")
+			if not tableContains(cj_dispelBlacklist,UnitDebuff("player",i)) then
+				if select(5,UnitDebuff("player",i)) == "Magic" then
+					return CJ_CastTarget("Dispel Magic","player")
 				end
-			end
-			
-			if cj_currentRotation == 61 or cj_currentRotation == 62 then
-				if select(5,UnitDebuff("player",i)) == "Disease" then
-					return CJ_CastTarget("Cure Disease","player")
+				
+				if select(5,GetTalentInfo(2,14,false,false,nil)) > 0 then
+					if select(5,UnitDebuff("player",i)) == "Poison" then
+						return CJ_CastTarget("Cure Disease","player")
+					end
+				end
+				
+				if cj_currentRotation == 61 or cj_currentRotation == 62 then
+					if select(5,UnitDebuff("player",i)) == "Disease" then
+						return CJ_CastTarget("Cure Disease","player")
+					end
 				end
 			end
 		end
 	elseif cj_class == "Paladin" then
 		for i = 1,40 do
-			if select(5,UnitDebuff("player",i)) == "Poison" then
-				return CJ_CastTarget("Cleanse","player")
-			end
-			
-			if select(5,UnitDebuff("player",i)) == "Disease" then
-				return CJ_CastTarget("Cleanse","player")
-			end
-			
-			if select(5,GetTalentInfo(1,14,false,false,nil)) > 0 then
-				if select(5,UnitDebuff("player",i)) == "Magic" then
+			if not tableContains(cj_dispelBlacklist,UnitDebuff("player",i)) then
+				if select(5,UnitDebuff("player",i)) == "Poison" then
 					return CJ_CastTarget("Cleanse","player")
+				end
+				
+				if select(5,UnitDebuff("player",i)) == "Disease" then
+					return CJ_CastTarget("Cleanse","player")
+				end
+				
+				if select(5,GetTalentInfo(1,14,false,false,nil)) > 0 then
+					if select(5,UnitDebuff("player",i)) == "Magic" then
+						return CJ_CastTarget("Cleanse","player")
+					end
 				end
 			end
 		end
 	elseif cj_class == "Shaman" then
 		for i = 1,40 do
-			if select(5,UnitDebuff("player",i)) == "Curse" then
-				return CJ_CastTarget("Cleanse Spirit","player")
-			end
-			
-			if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
-				if select(5,UnitDebuff("player",i)) == "Magic" then
+			if not tableContains(cj_dispelBlacklist,UnitDebuff("player",i)) then
+				if select(5,UnitDebuff("player",i)) == "Curse" then
 					return CJ_CastTarget("Cleanse Spirit","player")
+				end
+				
+				if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
+					if select(5,UnitDebuff("player",i)) == "Magic" then
+						return CJ_CastTarget("Cleanse Spirit","player")
+					end
 				end
 			end
 		end
 	elseif cj_class == "Druid" then
 		for i = 1,40 do
-			if select(5,UnitDebuff("player",i)) == "Curse" then
-				return CJ_CastTarget("Remove Corruption","player")
-			end
-			
-			if select(5,UnitDebuff("player",i)) == "Poison" then
-				return CJ_CastTarget("Remove Corruption","player")
-			end
-			
-			if select(5,GetTalentInfo(3,17,false,false,nil)) > 0 then
-				if select(5,UnitDebuff("player",i)) == "Magic" then
+			if not tableContains(cj_dispelBlacklist,UnitDebuff("player",i)) then
+				if select(5,UnitDebuff("player",i)) == "Curse" then
 					return CJ_CastTarget("Remove Corruption","player")
+				end
+				
+				if select(5,UnitDebuff("player",i)) == "Poison" then
+					return CJ_CastTarget("Remove Corruption","player")
+				end
+				
+				if select(5,GetTalentInfo(3,17,false,false,nil)) > 0 then
+					if select(5,UnitDebuff("player",i)) == "Magic" then
+						return CJ_CastTarget("Remove Corruption","player")
+					end
 				end
 			end
 		end
@@ -541,37 +551,43 @@ function CJ_DecurseAll()
 	if cj_class == "Mage" then
 		for i = 1,count do
 			for j = 1,40 do
-				if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
-					return CJ_CastTarget("Remove Curse",grouptype..i)
+				if not tableContains(cj_dispelBlacklist,UnitDebuff(grouptype..i,j)) then
+					if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
+						return CJ_CastTarget("Remove Curse",grouptype..i)
+					end
 				end
 			end
 		end
 	elseif cj_currentRotation == 61 or cj_currentRotation == 62 then
 		for i = 1,count do
 			for j = 1,40 do
-				if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
-					return CJ_CastTarget("Remove Curse",grouptype..i)
-				end
-				
-				if select(5,UnitDebuff(grouptype..i,j)) == "Disease" then
-					return CJ_CastTarget("Cure Disease",grouptype..i)
+				if not tableContains(cj_dispelBlacklist,UnitDebuff(grouptype..i,j)) then
+					if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+						return CJ_CastTarget("Remove Curse",grouptype..i)
+					end
+					
+					if select(5,UnitDebuff(grouptype..i,j)) == "Disease" then
+						return CJ_CastTarget("Cure Disease",grouptype..i)
+					end
 				end
 			end
 		end
 	elseif cj_class == "Paladin" then
 		for i = 1,count do
 			for j = 1,40 do
-				if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
-					return CJ_CastTarget("Remove Corruption",grouptype..i)
-				end
-				
-				if select(5,UnitDebuff(grouptype..i,j)) == "Disease" then
-					return CJ_CastTarget("Remove Corruption",grouptype..i)
-				end
-				
-				if select(5,GetTalentInfo(1,14,false,false,nil)) > 0 then
-					if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
-						return CJ_CastTarget("Cleanse",grouptype..i)
+				if not tableContains(cj_dispelBlacklist,UnitDebuff(grouptype..i,j)) then
+					if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
+						return CJ_CastTarget("Remove Corruption",grouptype..i)
+					end
+					
+					if select(5,UnitDebuff(grouptype..i,j)) == "Disease" then
+						return CJ_CastTarget("Remove Corruption",grouptype..i)
+					end
+					
+					if select(5,GetTalentInfo(1,14,false,false,nil)) > 0 then
+						if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+							return CJ_CastTarget("Cleanse",grouptype..i)
+						end
 					end
 				end
 			end
@@ -579,31 +595,35 @@ function CJ_DecurseAll()
 	elseif cj_class == "Shaman" then
 		for i = 1,count do
 			for j = 1,40 do
-				if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
-					if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+				if not tableContains(cj_dispelBlacklist,UnitDebuff(grouptype..i,j)) then
+					if select(5,GetTalentInfo(3,12,false,false,nil)) > 0 then
+						if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+							return CJ_CastTarget("Cleanse Spirit",grouptype..i)
+						end
+					end
+					
+					if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
 						return CJ_CastTarget("Cleanse Spirit",grouptype..i)
 					end
-				end
-				
-				if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
-					return CJ_CastTarget("Cleanse Spirit",grouptype..i)
 				end
 			end
 		end
 	elseif cj_class == "Druid" then
 		for i =1,count do
 			for j = 1,40 do
-				if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
-					return CJ_CastTarget("Remove Corruption",grouptype..i)
-				end
-				
-				if select(5,UnitDebuff(grouptype..i,j)) == "Poison" then
-					return CJ_CastTarget("Remove Corrruption",grouptype..i)
-				end
-				
-				if select(5,GetTalentInfo(3,17,false,false,nil)) > 0 then
-					if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+				if not tableContains(cj_dispelBlacklist,UnitDebuff(grouptype..i,j)) then
+					if select(5,UnitDebuff(grouptype..i,j)) == "Curse" then
 						return CJ_CastTarget("Remove Corruption",grouptype..i)
+					end
+					
+					if select(5,UnitDebuff(grouptype..i,j)) == "Poison" then
+						return CJ_CastTarget("Remove Corrruption",grouptype..i)
+					end
+					
+					if select(5,GetTalentInfo(3,17,false,false,nil)) > 0 then
+						if select(5,UnitDebuff(grouptype..i,j)) == "Magic" then
+							return CJ_CastTarget("Remove Corruption",grouptype..i)
+						end
 					end
 				end
 			end		
