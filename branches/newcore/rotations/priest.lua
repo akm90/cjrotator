@@ -119,9 +119,9 @@ function CJ_DiscBuffs()
 		if CJ_Cast("Shadow Protection") then return true end
 	end
 	
-	if not CJ_HB("Inner Fire") then
+	--[[if not CJ_HB("Inner Fire") then
 		if CJ_Cast("Inner Fire") then return true end
-	end
+	end--]]
 	
 	return false
 end
@@ -154,7 +154,7 @@ function CJDiscPriestRot()
 	
 	if IsSpellInRange("Holy Fire") == 0 then return end
 	
-	if GetUnitSpeed("player") > 0 then
+	if GetUnitSpeed("player") > 0 and not CJ_HB("Molten Feather") then
 		if not UnitDebuff("targettarget","Weakened Soul") then
 			CJ_CastTarget("Power Word: Shield","targettarget")
 		end

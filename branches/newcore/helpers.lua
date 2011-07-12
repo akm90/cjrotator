@@ -234,6 +234,15 @@ function CJ_Interrupt(spell)
 	end
 end
 
+local CJR_US = GetUnitSpeed;
+function GetUnitSpeed(...)
+	if CJ_HB("Molten Feather") then
+		return 0;
+	else
+		return CJR_US("player");
+	end
+end
+
 --Offensive Dispel Handler
 function CJ_OffensiveDispel(spell)
 	if UnitIsPlayer("target") and not cj_purgeplayers then return false end;
