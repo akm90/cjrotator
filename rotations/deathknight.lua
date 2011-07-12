@@ -162,20 +162,28 @@ function CJFrostDKRot()
 		if CJ_Cast("Outbreak") then return end;
 	end
 	
-	if CJ_DTR("Frost Fever") <= 2 then
-		if CJ_Cast("Howling Blast") then return end;
-	end
-	
-	if CJ_DTR("Blood Plague") <= 2 then
-		if CJ_Cast("Plague Strike") then return end;
-	end
-	
 	if cj_aoemode then
-		if CJ_Cast("Howling Blast") then return end
+		if CJ_HB("Rime") or CJ_NR(3) > 0 or CJ_NR(4) > 0 then
+			if CJ_Cast("Howling Blast") then return end
+		end
+		
+		if CJ_NR(2) == 2 then
+			if CJ_Cast("Plague Strike") then return end
+		end
 	end
 	
-	if (CJ_NR(2) == 2 and CJ_NR(3) == 2) or CJ_NR(4) == 2 or CJ_HB("Killing Machine") then
-		if CJ_Cast("Obliterate") then return end;
+	if not cj_aoemode then
+		if CJ_DTR("Frost Fever") <= 2 then
+			if CJ_Cast("Howling Blast") then return end;
+		end
+		
+		if CJ_DTR("Blood Plague") <= 2 then
+			if CJ_Cast("Plague Strike") then return end;
+		end
+		
+		if (CJ_NR(2) == 2 and CJ_NR(3) == 2) or CJ_NR(4) == 2 or CJ_HB("Killing Machine") then
+			if CJ_Cast("Obliterate") then return end;
+		end
 	end
 	
 	if CJ_HB("Killing Machine") and cj_cooldowns and CJ_HP("target") < 30 then
@@ -190,7 +198,9 @@ function CJFrostDKRot()
 		if CJ_Cast("Howling Blast") then return end;
 	end
 	
-	if CJ_Cast("Obliterate") then return end
+	if not cj_aoemode then
+		if CJ_Cast("Obliterate") then return end
+	end
 	if CJ_Cast("Frost Strike") then return end;
 	if CJ_Cast("Howling Blast") then return end;
 	if CJ_Cast("Horn of Winter") then return end;
