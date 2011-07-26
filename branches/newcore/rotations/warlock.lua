@@ -96,7 +96,6 @@ end
 
 function CJAffLockRot()
 	local hasFocus = false
-	local spiritrot = false
 	if CJ_OC() then StopAttack() return end
 	CJ_PetInterrupt("Spell Lock");
 	
