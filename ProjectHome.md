@@ -1,0 +1,1 @@
+A multi-class DPS rotation bot
